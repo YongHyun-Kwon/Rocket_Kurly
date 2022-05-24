@@ -1,4 +1,4 @@
-package kr.co.rocketkurly.controller;
+package kr.co.rocketkurly.cust.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
-public class ContactController {
+public class CheckoutController {
 
-	@RequestMapping(value = "/contact.do", method = GET)
-	public String contactPage() {
+	@RequestMapping(value = "/checkout.do", method = GET)
+	public String checkoutPage() {
 		
-		return "contact";
+		return "checkout";
 		
-	}// contactPage
+	}// checkoutPage
 	
 }// class
