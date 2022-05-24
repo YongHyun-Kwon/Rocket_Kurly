@@ -105,3 +105,66 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+/* ----------------¿€º∫ CSS---------------------- */
+.customer-line{
+    height:30%;
+}
+
+.customer-info{
+}
+
+.customer-div4{
+    display:inline-block;
+    width:20%
+}
+
+.customer-div3{
+    display:inline-block;
+    width:30.2%
+}
+
+#avatar{
+border-radius: 50%;
+width: 100px;
+margin: 0 auto;}
+
+.avatar-name{
+    text-align : center;
+}
+
+.user-avatar .avatar-name{
+    text-align : center;
+}
+
+
+.user-grid {
+    margin-top:30px;
+    margin-bottom:30px;
+    display:grid;
+    grid-template-columns: 250px 850px;
+
+}
+
+.user-avatar{
+    display:inherit;
+}
+
+.tableDiv{
+	height:500px;
+	overflow:scroll;
+	overflow-x: hidden;
+}
+
+.tableDivSmall{
+	height:300px;
+	overflow:scroll;
+	overflow-x: hidden;
+}
+
+.tableDivBig{
+	height:800px; 
+	overflow:scroll;
+	overflow-x: hidden;
+}
+
