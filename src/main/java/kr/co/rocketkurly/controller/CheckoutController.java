@@ -15,4 +15,11 @@ public class CheckoutController {
 		
 	}// checkoutPage
 	
+	@RequestMapping(value = "/paycomplete.do", method = GET)
+	public String payCompletePage() {
+		
+		return "paycomplete";
+		
+	}// payCompletePage
+	
 }// class

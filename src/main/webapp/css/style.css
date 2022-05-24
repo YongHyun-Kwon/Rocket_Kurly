@@ -47,7 +47,9 @@ h6 {
 	margin: 0;
 	color: #111111;
 	font-weight: 400;
-	font-family: "Cairo", sans-serif;
+	font-family: "Cairo", sans-serif!important;
+	
+	
 }
 
 h1 {
