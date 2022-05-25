@@ -14,8 +14,15 @@
                         <div class="header__top__right">
                             <div class="header__top__right__social">
                             </div>
+                            <div class="header__top__right__language">
+                                <div>-님 안녕하세요</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="mypage.do">마이페이지</a></li>
+                                </ul>
+                            </div>
                             <div class="header__top__right__auth">
-                                <a href="login.do"><i class="fa fa-user"></i> Login</a>
+                                <a href="index.do"><i class="fa fa-user"></i> Logout</a>
                             </div>
                         </div>
                     </div>

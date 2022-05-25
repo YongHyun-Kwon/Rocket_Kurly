@@ -29,6 +29,7 @@
 th{padding: 3px; }
 td{padding: 5px;}
 table{width: 700px;}
+span{font-weight: bold;}
 
 
 		   
@@ -47,44 +48,28 @@ table{width: 700px;}
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-9 order-2">
-                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: 500px">
+                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: 800px">
                         <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-                                <h1 class="mb-4">주문 내역 조회</h1>
-                                <table>
-                                	<tr>
-                                		<th>상품 정보</th>
-                                		<th>주문 일자</th>
-                                		<th>주문 번호</th>
-                                		<th>주문 금액(수량)</th>
-                                		<th>주문 상태</th>
-                                	</tr>
-                                	<tr style="border-top: 1px solid #dfdfdf;">
-                                		<td>바나나</td>
-                                		<td>2022-05-23</td>
-                                		<td>12345</td>
-                                		<td>1500원(1)</td>
-                                		<td>배송중</td>
-                                		<td><a href="write-inquiry.do"><input type="button" value="1:1문의"/></a></td>
-                                	</tr>
-                                	<tr>
-                                	<td>토마호크 스테이크</td>
-                                		<td>2022-05-23</td>
-                                		<td>12346</td>
-                                		<td>30000원(1)</td>
-                                		<td>배송완료</td>
-                                		<td><input type="button" value="1:1문의"/></td>
-                                		<td><a href="write-review.do"><input type="button" value="리뷰쓰기"/></a></td>
-                                	</tr>
-                                	<tr>
-                                	<td>닭강정</td>
-                                		<td>2022-05-24</td>
-                                		<td>12347</td>
-                                		<td>9800원(1)</td>
-                                		<td>배송준비중</td>
-                                		<td><a href="write-inquiry.do"><input type="button" value="1:1문의"/></a></td>
-                                	</tr>
-                                </table>
+                                <h1 class="mb-4">후기 작성</h1>
+                                <div style="width: 700px; border: 1px soild #dfdfdf;"  >
+                                	<label style="font-weight: bold">후기 제목</label>
+                                <div>
+                                <input id="board_title" name="board_title" type="text" placeholder="제목을 입력해주세요" style="width: 500px; border: 1px solid #dfdfdf;"><br/>
+                                </div>
+                                <div style="margin-top: 10px;">
+                                 	<label style="font-weight: bold">사진 첨부 |</label>
+                                	<input type="file">
+                                </div>
+                                <div>
+                                </div>
+                                </div>
+                                <div>
+                                <textarea id="board_content" name="board_content" placeholder="내용을 입력해주세요" style="border: 1px solid #dfdfdf; width:700px; height:500px; margin-top: 10px;"></textarea>
+                                </div>
+                                </div>
+                                <div style="text-align: right;">
+                                <a href="inquiry.do"><input type="button" value="작성하기" ></a>
                                 </div>
                             </div>
                         </div>

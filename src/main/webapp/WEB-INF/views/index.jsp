@@ -33,37 +33,14 @@
     </div>
 
    
-
-	<%@ include file="/WEB-INF/views/include/header.jsp" %>
-
-    <!-- Hero Section Begin -->
+	<!-- 헤더  -->
+   	<%@ include file="/WEB-INF/views/include/header2.jsp" %>
+   	<!-- 메뉴  -->
+   	<%@ include file="/WEB-INF/views/include/menu.jsp" %>
+    
     <section class="hero hero-normal">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>전체 카테고리</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">채소</a></li>
-                            <li><a href="#">과일·견과·쌀</a></li>
-                            <li><a href="#">수산·해산·건어물</a></li>
-                            <li><a href="#">정육·계란</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="검색어를 입력해주세요">
-                                <button type="submit" class="site-btn">검색</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+	 <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
                         <div class="hero__text">
                             <span>FRUIT FRESH</span>
                             <h2>Vegetable <br />100% Organic</h2>
@@ -71,12 +48,8 @@
                             <a href="#" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
-
+                    </div>
+                    </section>
     
 
     <!-- Featured Section Begin -->
