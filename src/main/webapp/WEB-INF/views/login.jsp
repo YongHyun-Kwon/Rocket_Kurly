@@ -10,7 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>login</title>
-
+    
+    <!-- 모달 관련 cdn  -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
@@ -24,6 +30,67 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
+<script type="text/javaScript">
+$(function () {
+	
+	//아이디 찾기
+	$('#idBtn').click(function(e){
+	e.preventDefault();
+	$('#testModal2').modal("show");
+	
+	$('#close').click(function(e){
+	e.preventDefault();
+	$('#testModal2').modal("hide");
+	});
+	
+	$('#sendBtn').click(function(e){
+		e.preventDefault();
+		$('#testModal2').modal("hide");
+		$('#testModal').modal("show");
+	});//sendBtnClick
+	
+	$('#goLogin').click(function(e){
+		e.preventDefault();
+		$('#testModal').modal("hide");
+	});//goLoginClick
+	
+	});//idBtnClick
+	
+	//비밀번호 찾기
+	$('#pwBtn').click(function(e){
+	e.preventDefault();
+	$('#testModal4').modal("show");
+	
+	$('#cancel2').click(function(e){
+	e.preventDefault();
+	$('#testModal4').modal("hide");
+	});
+	
+	$('#search').click(function(e){
+		e.preventDefault();
+		$('#testModal4').modal("hide");
+		$('#getPassword').modal("show");
+	});//searchClick
+	
+	$('#goLogin2').click(function(e){
+		e.preventDefault();
+		$('#getPassword').modal("hide");
+	});//goLoginClick
+	
+	$('#cancel2').click(function(e){
+		e.preventDefault();
+		$('#testModal4').modal("hide");
+	});//cancel2Click
+	
+	});//pwBtnClick
+	
+
+
+
+
+})//ready
+
+</script>
 <style type="text/css">
 #chkBox{
 			width : 15px;
@@ -58,77 +125,14 @@
 			}
 		   
 </style>
-<script type="text/javaScript">
-function moveSign(){
-	alert("클릭!");
-    location.href="http://localhost/rocketkurly/sign.do";
-}
-</script>
+
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
 
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="img/rocketKurly_logo.png" alt=""></a>
-        </div>
-        <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
-        <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
-            </div>
-        </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
-            </ul>
-        </div>
-    </div>
-    <!-- Humberger End -->
-    
+  
     	<%@ include file="/WEB-INF/views/include/header.jsp" %>
     
 
@@ -169,7 +173,7 @@ function moveSign(){
                    		<a href="index.do" class="primary-btn" >로그인</a>
                    		<a href="sign.do" class="primary-btn" >회원가입</a>
                     	 <div style="margin-top: 30px;">
-                    	<a href="#" class="search1">아이디 찾기</a>|<a href="#" class="search2">비밀번호 찾기</a>
+                    	<a href="#" id="idBtn" class="search1">아이디 찾기</a>|<a href="#" class="search2" id="pwBtn">비밀번호 찾기</a>
                     	 </div>
                    		 </div>
                     </div>
@@ -179,6 +183,156 @@ function moveSign(){
         </div>
     </div>
     <!-- Contact Form End -->
+    
+    <!-- 아이디 찾기 모달  -->
+	    <div class="modal fade" id="testModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">아이디 찾기</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="form-group">
+	            <label for="recipient-name" class="col-form-label">이름입력</label>
+	            <input type="text" class="form-control" id="recipient-name" placeholder="가입시 입력하신 이름을 적어주세요.">
+	            <label for="recipient-name" class="col-form-label">E-Mail입력</label>
+	            <input type="text" class="form-control" id="recipient-email" placeholder="가입시 입력하신 이메일을 적어주세요.">
+	            <span style="font-size: 5px; color: #ff0000;">일치하는 이메일이 없습니다.</span>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">닫기</button>
+	        <button type="button" class="btn btn-primary" id="sendBtn">계정 확인하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!--아이디 찾기 모달 끝  -->
+	
+	<!-- 아이디 안내 -->
+<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">회원님의 아이디 입니다.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        아이디 : 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="goLogin">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 아이디 안내  -->
+	
+	<!-- 아이디 틀렸을 때 모달 -->
+<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">정보가 일치하지 않습니다.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        다시 한 번 올바른 정보를 입력해주십시오
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="goLogin">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+		<!-- 아이디 틀렸을때 모달 끝  -->
+
+		<!--비밀번호 찾기 모달  -->
+<div class="modal fade" id="testModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">아이디 입력</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="아이디를 입력해주세요">
+            <span style="font-size: 5px; color: #ff0000;">일치하는 회원이 없습니다.</span>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">가입시 입력하신 이메일을 적어주세요.</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="가입시 입력하신 이메일을 적어주세요.">
+            <span style="font-size: 5px; color: #ff0000;">일치하는 이메일이 없습니다.</span>
+          </div>          
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel2">취소</button>
+        <button type="button" class="btn btn-primary" id="search">찾기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 비밀번호 안내 -->
+<div class="modal fade" id="getPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">회원님의 임시비밀번호 입니다.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        비밀번호 : 
+        <br/>
+        비밀번호를 꼭 변경해주세요!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="goLogin2">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 비밀번호 안내  -->
+
+<!-- 비밀번호 틀렸을 때 모달 -->
+<div class="modal fade" id="testModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">정보가 일치하지 않습니다.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        다시 한 번 올바른 정보를 입력해주십시오
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="goBack">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+		<!-- 비밀번호 틀렸을때 모달 끝  -->
+
 
     <!-- Footer Section Begin -->
     <%@ include file="/WEB-INF/views/include/footer.jsp" %>

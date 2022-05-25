@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 </head>
+<style type="text/css">
+th{padding: 3px; }
+td{padding: 5px;}
+table{width:700px;}
+
+		   
+</style>
 
 <body>
     <!-- Page Preloder -->
@@ -44,6 +51,19 @@
                         <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                                 <h1 class="mb-4">쿠폰 조회</h1>
+                                <table>
+                                	<tr style="border-bottom: 1px solid #dfdfdf;">
+                                		<th>쿠폰 명</th>
+                                		<th>해당 상품</th>
+                                		<th>할인율</th>
+                                	</tr>
+                                	<tr>
+                                		<td>전체 10% 할인</td>
+                                		<td>모든 품목</td>
+                                		<td>10%</td>
+                                	</tr>
+                                	
+                                </table>
                                 </div>
                             </div>
                         </div>

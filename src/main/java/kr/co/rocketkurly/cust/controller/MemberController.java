@@ -65,6 +65,13 @@ public class MemberController {
 		
 	}// review
 	
+	@RequestMapping(value = "/write-review.do", method = {GET, POST})
+	public String writeReviewPage() {
+		
+		return "write-review";
+		
+	}// review
+	
 	@RequestMapping(value = "/favorite.do", method = {GET, POST})
 	public String favoritePage() {
 		
@@ -76,6 +83,13 @@ public class MemberController {
 	public String inquiryPage() {
 		
 		return "inquiry";
+		
+	}// inquiry
+	
+	@RequestMapping(value = "/inquiry-detail.do", method = {GET, POST})
+	public String inquiryDetailPage() {
+		
+		return "inquiry-detail";
 		
 	}// inquiry
 	
