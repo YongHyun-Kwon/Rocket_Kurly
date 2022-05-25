@@ -8,7 +8,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style type="text/css">
-a{text-decoration: none;}
+a{
+   text-decoration: none;
+   color:black;
+}
 		   
 </style>
 <div class="col-md-6 col-lg-3" style="max-width: 13%">
