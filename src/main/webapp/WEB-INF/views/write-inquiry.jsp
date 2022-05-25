@@ -48,17 +48,35 @@ span{font-weight: bold;}
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-9 order-2">
-                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: 500px">
+                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: 800px">
                         <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-                                <h1 class="mb-4">리뷰 작성</h1>
-                                <div style="width: 700px">
-                                <label>제목</label>
-                                <input type="text" placeholder="제목을 입력해주세요." style="display: inline-block;"><br/>
-                                <input type="file" >
+                                <h1 class="mb-4">문의 작성</h1>
+                                <div style="width: 700px; border: 1px soild #dfdfdf;"  >
+                                	<label style="font-weight: bold">문의 제목</label>
+                                <div >
+                                <input id="board_title" name="board_title" type="text" placeholder="제목을 입력해주세요" style="width: 500px; border: 1px solid #dfdfdf; margin-bottom: 30px;">
+                                <div style="float:right; ">
+							    	<select id="category_select" name="category_select" style="width:400px; border: 1px solid #dfdfdf; height: 30px; ">
+							    	<option value="inquiry">문의 유형</option>
+							    	<option value="el">주문/결제/반품/교환문의</option>
+							    	<option value="ho">이벤트/쿠폰 문의</option>
+							    	<option value="fo">상품 문의</option>
+							    	<option value="pe">배송 문의</option>
+							    	<option value="be">상품 누락 문의</option>
+							    	<option value="fu">기타 문의</option>
+							    	</select>
                                 </div>
-                                <textarea></textarea>
-                                <input type="button" value="작성하기" style="display: inline-block;">
+                                </div>
+                                <div>
+                                </div>
+                                </div>
+                                <div>
+                                <textarea id="board_content" name="board_content" placeholder="내용을 입력해주세요" style="border: 1px solid #dfdfdf; width:700px; height:500px; margin-top: 10px;"></textarea>
+                                </div>
+                                </div>
+                                <div style="text-align: right;">
+                                <a href="inquiry.do"><input type="button" value="작성하기" ></a>
                                 </div>
                             </div>
                         </div>

@@ -60,7 +60,7 @@ span{font-weight: bold;}
                                 		<th>답변 여부</th>
                                 	</tr>
                                 	<tr >
-                                		<td>반품 문의</td>
+                                		<td><a href="inquiry-detail.do">반품 문의</a></td>
                                 		<td>주문/결제/반품/교환문의</td>
                                 		<td>2022-05-23</td>
                                 		<td><span>완료</span></td>
@@ -78,7 +78,7 @@ span{font-weight: bold;}
                                 </table>
                                 </div>
                                 <div align="right" style="padding: 5px">
-                                <input type="button" value="문의 작성">
+                               <a href="write-inquiry.do"><input type="button" value="문의 작성"></a>
                                 </div>
                             </div>
                         </div>
