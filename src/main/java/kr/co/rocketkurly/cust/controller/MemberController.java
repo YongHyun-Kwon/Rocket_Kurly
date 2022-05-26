@@ -3,6 +3,8 @@ package kr.co.rocketkurly.cust.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.rocketkurly.cust.domain.MemberDomain;
@@ -25,8 +27,6 @@ public class MemberController {
 	@Autowired(required = false)
 	private MemberService ms;
 	
-	@Inject
-	BCryptPasswordEncoder pwEncoder;
 
 	@RequestMapping(value = "/login.do", method = GET)
 	public String loginPage() {
@@ -36,28 +36,18 @@ public class MemberController {
 	}// loginPage
 	
 	@RequestMapping(value = "/loginProcess.do", method = POST)
-	public ModelAndView loginProcessPage(HttpServletRequest request) {
+	public ModelAndView loginProcessPage(MemberVO mVO, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 		
 		ModelAndView mav = new ModelAndView();
 		
-		MemberDomain md = ms.loginCheck(request.getParameter("id"));
+		MemberDomain md = ms.loginCheck(mVO);
 		
-		if(md == null) {
-			
-			mav.setViewName("login");
-			mav.addObject("msg", "fail");
-		}
-		
-		String inputPass = request.getParameter("pw");
-		
-		boolean pwFlag = pwEncoder.matches(inputPass, md.getPw());
-		
-		
-		if(md != null && pwFlag == true) {
+		if(md != null) {
 			
 			session.setAttribute("custID", md.getMember_id());
+			session.setAttribute("nickname", md.getNickname());
 			mav.setViewName("index");
 			
 		} else {
@@ -65,11 +55,32 @@ public class MemberController {
 			mav.setViewName("login");
 			mav.addObject("msg", "fail");
 			
-		}
+		}// end else
 		
 		return mav;
 		
 	}// loginProcessPage
+	
+	@RequestMapping(value = "/logout.do", method = GET)
+	public String logoutProcess( HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		session.invalidate(); 
+		
+		return "login";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/cust/idCheck.do")
+	public String idCheckProcess(String id) {
+		
+		String checkID = ms.idCheck(id);
+		
+		return checkID;
+		
+	}// idCheckProcess
 	
 	@RequestMapping(value = "/sign.do", method = GET)
 	public String signPage() {
@@ -92,12 +103,6 @@ public class MemberController {
 
 		int cnt = 0;
 		
-		System.out.println(mVO);
-		
-		String inputPass = mVO.getPw();
-		String password = pwEncoder.encode(inputPass);
-		mVO.setPw(password);
-
 		cnt = ms.signUp(mVO);
 		
 		if(cnt == 1) {
