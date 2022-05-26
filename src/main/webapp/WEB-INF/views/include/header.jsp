@@ -14,20 +14,30 @@
                         <div class="header__top__right">
                             <div class="header__top__right__social">
                             </div>
-                            <div class="header__top__right__auth">
                             	<% 
                             	String custID = (String)session.getAttribute("custID");
+                            	String nickname = (String)session.getAttribute("nickname");
                             		if(custID == null){
                             	%>
+                            <div class="header__top__right__auth">
                             	<a href="login.do"><i class="fa fa-user"></i> Login</a>
+                            </div>
                             	<%		
                             		} else {
                             			%>
-                            			 <i class="fa fa-user"></i> <%= custID %>님 안녕하세요
+                            <div class="header__top__right__language">
+                                <div><%= nickname %>님 안녕하세요</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="mypage.do">마이페이지</a></li>
+                                </ul>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="logout.do"><i class="fa fa-user"></i>Logout</a>
+                            </div>
                             			<%
                             		}
                             	%>
-                            </div>
                         </div>
                     </div>
                 </div>

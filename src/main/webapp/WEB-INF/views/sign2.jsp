@@ -45,56 +45,150 @@
 	$(function () {
 		
 	//아이디 정규식
-	var idJ = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+	var idJ = /^[a-z0-9][a-z0-9]{4,19}$/;
 	// 이름 정규식
 	var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
 	// 이메일 검사 정규식
 	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	// 휴대폰 번호 정규식
-	var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+	var phoneJ = /^\d{3}-\d{3,4}-\d{4}$/;
+		// /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 		
-		$("#signup").click(function() {
+		// 아이디 중복 확인
+		$("#c_id").focusout(function(){
 			
-			if($("#c_id").val() == ""){
+			if (!idJ.test($("#c_id").val())) {
+				$("#red1").css({ "display" : "", "color" : "red"});
+				$("#red1").html("5~20자의 영문 소문자, 숫자만 가능합니다.")
+				return;					
+			}// end if
+			
+			$.ajax({
+				url : "http://localhost/rocketkurly/cust/idCheck.do",
+				type : "POST",
+				data :{ 
+					id : $("#c_id").val()
+				},
+				async : true,
+				dataType: 'json',
+				error : function(xhr) {
+					alert(xhr.text + "/" + xhr.status);
+				},
+				success : function( jsonObj ) {
+					
+					if(jsonObj.checkID == "" || jsonObj.checkID == null){
+						$("#red1").css({ "display" : "", "color" : "blue"});
+						$("#red1").html("사용가능한 아이디 입니다.")
+						return;
+					} else {
+						$("#red1").css({ "display" : "", "color" : "red"});
+						$("#red1").html("중복 아이디가 있습니다.")
+						return;
+					}// end else 
+					
+				},
+			})
+			
+		})// focusout
+		
+		
+		// 비밀번호 확인 
+		$("#c_pass2").focusout(function() {
+			
+			if($("#c_pass").val() != $("#c_pass2").val()){
 				
-				alert("ID는 필수 입력 입니다.");
-				$("#c_id").focus();
+				$("#red3").html("비밀번호 확인 문자가 다릅니다.");
+				$("#red3").css({"display" : ""})
+				return
+			} else {
+				$("#red3").html("");
+				$("#red3").css({"display" : "none"})
+			}
+			
+		})// focusout
+		
+		$("#c_email").focusout(function() {
+			
+			 if (!mailJ.test($("#c_email").val())) {
+				$("#red6").html("이메일 양식을 확인해 주세요.");
+				$("#red6").css({"display" : ""})
+				return;
+			 } else {
+				$("#red6").html("");
+				$("#red6").css({"display" : "none"})
+				return;
+			 }//end else
+			
+		})// focusout
+		
+		$("#c_name").focusout(function(){
+			
+			if( !nameJ.test($("#c_name").val())){
+				
+				$("#red5").html("한글 2~4자 이내로 입력해주세요.(특수문자, 공백 불가)");
+				$("#red5").css({"display" : ""})
+				return;
+			} else {
+				$("#red5").html("");
+				$("#red5").css({"display" : "none"})
+			}// end else
+			
+		})// focusout
+		
+		$("#c_tel").focusout(function(){
+		
+			if(!phoneJ.test($("#c_tel").val())){
+					
+				$("#red4").html("휴대폰 번호를 확인해주세요.");
+				$("#red4").css({"display" : ""})
 				return;
 				
-			} else if (idJ.test($("#c_id").val!=true)) {
+			} else {
 				
-				alert("4~12자의 영문, 숫자만 사용 가능합니다.");
-				$("#c_id").focus();
+				$("#red4").html("");
+				$("#red4").css({"display" : "none"})
 				
 			}// end else
 			
-			if($("#c_email").val() == ""){
+		})// focusout
+		
+		
+		
+		
+		$("#signup").click(function() {
+			
+			if($("#c_id").val() == "" || $("#red1").html() == "중복 아이디가 있습니다."
+					|| $("#red1").html() == "5~20자의 영문 소문자, 숫자만 가능합니다." ){
 				
-				alert("Email은 필수 입력 입니다.");
+				alert("ID를 확인해주세요.");
+				$("#c_id").focus();
+				return;
+				
+			}
+			
+			if($("#c_email").val() == "" || $("#red6").html() != ""){
+				
+				alert("이메일을 확인 해주세요.");
 				$("#c_email").focus();
 				return;
 				
-			} else if (mailJ.test($("c_email").val())) {
-				alert("이메일을 확인하세요")
-			}
+			}// end if
 			
-			if($("#c_pass").val() == "" || $("#c_pass2").val() == "" ){
+			if($("#c_pass").val() == "" || $("#c_pass2").val() == "" || $("#red3").html() != ""){
 				
-				alert("비밀번호는 필수 입력 입니다.");
+				alert("비밀번호를 확인해 주세요.");
 				$("#c_pass").focus();
 				return;
 				
-			}
+			}// end if
 			
-			if($("#c_name").val() == ""){
+			if($("#c_name").val() == "" || $("#red5").html() != ""){
 				
-				alert("이름은 필수 입력 입니다.");
+				alert("이름을 확인해 주세요.");
 				$("#c_name").focus();
-				return
+				return;
 				
-			} else if( nameJ.test($("#c_name").val())){
-				alert("이름을 확인하세요.")
-			}
+			}// end if
 			
 			if($("#c_nickname").val() == ""){
 				
@@ -106,14 +200,14 @@
 
 			if(!$('input:radio[name=gender]').is(':checked')){
 				
-				alert("gernder을 선택해주세요.")
+				alert("성별을 선택해주세요.")
 				return;
 				
 			}// end if
 			
-			if($("#c_tel").val()=="" && phoneJ.test($("#c_tel").val())){
+			if($("#c_tel").val()=="" || $("#red4").html() != "" ){
 				
-				alert("휴대폰 번호를 확인해주세요");
+				alert("휴대폰 번호를 확인해주세요.");
 				return;
 				
 			}// end if
@@ -260,31 +354,32 @@
             <div class="col-md-12">
                 <label for="c_companyname" class="text-black">아이디<span class="text-danger">*</span> </label>
                 <input type="text" class="form-control" id="c_id" name="id">
-                <span style="float: right;color: red;font-size: 12px;display: none;" id="red1">중복 아이디가 있습니다.</span>
+                <span style="float: right;color: red;font-size: 12px;display: none;" id="red1"></span>
             </div>
             <div class="col-md-12">
                 <label for="c_companyname" class="text-black">이메일<span class="text-danger">*</span> </label>
                 <input type="text" class="form-control" id="c_email" name="email">
-                <span style="float: right;color: red;font-size: 12px;display: none;" id="red1">중복 이메일이 있습니다.</span>
+                <span style="float: right;color: red;font-size: 12px;display: none;" id="red6"></span>
             </div>
             <div class="col-md-12">
                 <label for="c_companyname" class="text-black">비밀번호<span class="text-danger">*</span> </label>
                 <input type="password" class="form-control" name="pw" id="c_pass" >
-                <span style="float: right;color: red;font-size: 12px;display: none;" id="red2">영문, 숫자 조합 8~16자로 적어주세요.</span>
+                <span style="float: right;color: red;font-size: 12px;display: none;" id="red2">영문, 숫자 조합 4~16자로 적어주세요.</span>
             </div>
             <div class="col-md-12">
                 <label for="c_companyname" class="text-black">비밀번호 확인<span class="text-danger">*</span> </label>
                 <input type="password" class="form-control" name="c_pass2" id="c_pass2" >
-                <span style="float: right;color: red;font-size: 12px;display: none;" id="red3">비밀번호 확인 문자가 다릅니다.</span>
+                <span style="float: right;color: red;font-size: 12px;display: none;" id="red3"></span>
             </div>
             <div class="col-md-12">
                 <label for="c_companyname" class="text-black">이름<span class="text-danger">*</span> </label>
                 <input type="text" class="form-control" name="name"  id="c_name"/>
+                <span style="float: right;color: red;font-size: 12px;display: none;" id="red5"></span>
             </div>
             <div class="col-md-12">
                 <label for="c_companyname" class="text-black">닉네임<span class="text-danger">*</span> </label>
                 <input type="text" class="form-control" name="nickname"  id="c_nickname"/>
-                <span style="float: right;color: red;font-size: 12px; display: none;" id="red4">중복된 닉네임이 있습니다.</span>
+                
             </div>
             <div style="margin: 18px">
                 <label for="c_companyname" class="text-black">성별<span class="text-danger">*</span></label>
@@ -298,13 +393,14 @@
             <div style="text-align: left;margin: 18px">
                 <label class="text-black">휴대폰 번호 <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="c_tel" name="tel">
+            	<span style="float: right;color: red;font-size: 12px; display: none;" id="red4"></span>
             </div>
         </div>
         
         
         <div class="form-group">
             <label for="c_country" class="text-black">주소<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="c_zipcode" name="addr" placeholder="우편번호">
+            <input type="text" class="form-control" id="c_zipcode" name="addr" placeholder="우편번호" readonly="readonly">
             <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i>우편번호 찾기</button>                               
             <input type="text" class="form-control" id="c_address" name="address" placeholder="상세주소 입력">
         </div>

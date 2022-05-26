@@ -66,4 +66,22 @@ public class MemberDAO {
 		
 	}// insertMember
 	
+	public String selectIdCheck(String id) throws PersistenceException {
+		
+		String checkID = "";
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		checkID = ss.selectOne("kr.co.rocketkurly.cust.member.dao.idCheck",id);
+		
+		if( ss!= null ) {
+			
+			ss.close();
+	 
+		}// end if
+		
+		return checkID; 
+		
+	}// idCheck
+	
 }// class

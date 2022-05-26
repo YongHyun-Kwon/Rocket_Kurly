@@ -34,7 +34,7 @@
 
    
 	<!-- 헤더  -->
-   	<%@ include file="/WEB-INF/views/include/header2.jsp" %>
+   	<%@ include file="/WEB-INF/views/include/header.jsp" %>
    	<!-- 메뉴  -->
    	<%@ include file="/WEB-INF/views/include/menu.jsp" %>
     
