@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Ogani Template">
@@ -110,7 +112,7 @@
                    		 <img src="http://localhost/rocketkurly/img/rocketKurly.png">
                    		 </div>
                    		 <div  id="msg">
-                   		 <span>가입을 축하합니다!</span><br/>
+                   		 <span>${ nickname }님 가입을 축하합니다!</span><br/>
                    		 <span style="font-size: 20px;">로그인 후 다양한 서비스를 이용해 보세요.</span><br/>
                    		 </div>
                    		 <a href="login.do" class="primary-btn">로그인</a>

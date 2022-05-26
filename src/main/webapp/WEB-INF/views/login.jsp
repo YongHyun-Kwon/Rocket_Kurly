@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Ogani Template">
@@ -30,8 +32,28 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javaScript">
-$(function () {
+$(function() {
+	
+	$("#login").click(function(){
+		
+		if($("#id").val() == ""){
+			alert("ID는 필수 입력 입니다.");
+			$("#id").focus();
+			return;
+		}// end if
+
+		if($("#pw").val() == ""){
+			alert("Password는 필수 입력 입니다.");
+			$("#pw").focus();
+			return;
+		}// end if
+		
+		$("#custLoginFrm").submit();
+		
+	})// click
 	
 	//아이디 찾기
 	$('#idBtn').click(function(e){
@@ -162,20 +184,24 @@ $(function () {
                     </div>
                 </div>
             </div>
-            <form action="#">
+            <form action="http://localhost/rocketkurly/loginProcess.do" id="custLoginFrm" method="post">
                 <div class="row">
                     <div class="col-lg-6 col-md-6" style="margin:0px auto;">
-                        <input type="text" placeholder="email">
-                        <input type="text" placeholder="password">
+                        <input type="text" id="id" name="id" placeholder="ID">
+                        <input type="password" id="pw" name="pw" placeholder="Password">
+                        <c:if test="${ msg == 'fail' }">
+                        	<div style="color: red;">아이디 비밀번호를 확인해주세요</div>
+                        </c:if>
                         <input type="checkbox" id="chkBox" value="idSave"><span style="font-size: 15px; padding:5px;">아이디 저장</span>
                    		 <br/>
                    		 <div style="text-align: center">
-                   		<a href="index.do" class="primary-btn" >로그인</a>
-                   		<a href="sign.do" class="primary-btn" >회원가입</a>
+                   		<a href="javascript:void(0)" id="login" class="primary-btn" >로그인</a>
+                   		<a href="http://localhost/rocketkurly/sign.do" id="register" class="primary-btn" >회원가입</a>
                     	 <div style="margin-top: 30px;">
-                    	<a href="#" id="idBtn" class="search1">아이디 찾기</a>|<a href="#" class="search2" id="pwBtn">비밀번호 찾기</a>
+                    	<a href="#" class="search1">아이디 찾기</a>|<a href="#" class="search2">비밀번호 찾기</a>
                     	 </div>
                    		 </div>
+                   		 
                     </div>
                     	
                 </div>
