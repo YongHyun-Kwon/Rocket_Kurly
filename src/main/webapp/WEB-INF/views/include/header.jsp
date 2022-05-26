@@ -15,7 +15,18 @@
                             <div class="header__top__right__social">
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="login.do"><i class="fa fa-user"></i> Login</a>
+                            	<% 
+                            	String custID = (String)session.getAttribute("custID");
+                            		if(custID == null){
+                            	%>
+                            	<a href="login.do"><i class="fa fa-user"></i> Login</a>
+                            	<%		
+                            		} else {
+                            			%>
+                            			 <i class="fa fa-user"></i> <%= custID %>님 안녕하세요
+                            			<%
+                            		}
+                            	%>
                             </div>
                         </div>
                     </div>
