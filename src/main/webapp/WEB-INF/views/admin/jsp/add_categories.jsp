@@ -66,9 +66,27 @@
         .buy-now .btn-buy-now{
             box-shadow: none !important;
         }
+        .img {
+	width: 200px;
+	height: 200px;
+	margin-right: 5%;
+	margin-top: 2%;
+}
     </style>
 </head>
-
+<script type="text/javascript">
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById('preview').src = e.target.result;
+		};
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		document.getElementById('preview').src = "";
+	}
+}
+</script>
 
 <body>
 
@@ -97,7 +115,9 @@
                     <div class="mb-3 row">
                         <label style="font-size: 17px;" for="html5-text-input" class="col-md-2 col-form-label">카테고리 이미지</label>
                         <div class="col-md-10">
-                            <input style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                        <img class="img" id="preview" /> <br /> <br /> <input
+																type="file" onchange="readURL(this);" class="btnAttach"
+																name="upImg1" id="upImg1">
                         </div>
                     </div>
                     <button style="margin-top: 30px; float: right;" class="btn btn-dark">카테고리 생성</button>
@@ -109,12 +129,6 @@
                     <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">중분류</label>
                     <div class="mb-3 row">
                         <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">카테고리 명</label>
-                        <div class="col-md-10">
-                            <input style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label style="font-size: 17px;" for="html5-text-input" class="col-md-2 col-form-label">카테고리 이미지</label>
                         <div class="col-md-10">
                             <input style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
