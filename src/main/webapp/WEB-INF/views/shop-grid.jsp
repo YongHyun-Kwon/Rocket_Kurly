@@ -35,38 +35,7 @@
     
    	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-    <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>전체 카테고리</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">채소</a></li>
-                            <li><a href="#">과일·견과·쌀</a></li>
-                            <li><a href="#">수산·해산·건어물</a></li>
-                            <li><a href="#">정육·계란</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="검색어를 입력해주세요">
-                                <button type="submit" class="site-btn">검색</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+    <%@ include file="/WEB-INF/views/include/menu.jsp" %>
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
