@@ -70,7 +70,7 @@ $(function () {
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-9 order-2">
-                    <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="width: 1000px">
                         <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                                 <h1 class="mb-4">계정 관리</h1>
@@ -125,14 +125,14 @@ $(function () {
                                           <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>우편번호</label>
-                                                <input type="password" class="form-control" id="pass" name="pass">
+                                                <input type="text" class="form-control" id="zipcode" name="pass">
                                                 <span style="float: right;color: red;font-size: 12px; width: 340px;" id="red3"></span>
                                             </div>
                                     </div>
                                           <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>배송지</label>
-                                                <input type="password" class="form-control" id="pass" name="pass">
+                                                <input type="text" class="form-control" id="addr" name="pass">
                                                 <span style="float: right;color: red;font-size: 12px; width: 340px;" id="red3"></span>
                                             </div>
                                     </div>
