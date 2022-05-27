@@ -71,6 +71,7 @@
                         <ul>
                             <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
                             <li><a href="shoping-cart.do"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="mypage.do"><i class="fa fa-user"></i></a></li>
                         </ul>
                     </div>
                 </div>
