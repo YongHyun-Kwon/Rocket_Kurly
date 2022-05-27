@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ItemVO {
 	
 	private  String name ,expired ,detail,main_img,c_category_id;
-	private int item_no,price,final_price,sales;	
+	private int item_no,price,sales;	
 	private Date reg_dt	,mod_dt;
 	public String getName() {
 		return name;
@@ -49,12 +49,6 @@ public class ItemVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getFinal_price() {
-		return final_price;
-	}
-	public void setFinal_price(int final_price) {
-		this.final_price = final_price;
-	}
 	public int getSales() {
 		return sales;
 	}
@@ -76,9 +70,13 @@ public class ItemVO {
 	@Override
 	public String toString() {
 		return "ItemVO [name=" + name + ", expired=" + expired + ", detail=" + detail + ", main_img=" + main_img
-				+ ", c_category_id=" + c_category_id + ", item_no=" + item_no + ", price=" + price + ", final_price="
-				+ final_price + ", sales=" + sales + ", reg_dt=" + reg_dt + ", mod_dt=" + mod_dt + "]";
+				+ ", c_category_id=" + c_category_id + ", item_no=" + item_no + ", price=" + price + ", sales=" + sales
+				+ ", reg_dt=" + reg_dt + ", mod_dt=" + mod_dt + "]";
 	}
+	
+	
+
+	
 	
 
 	
