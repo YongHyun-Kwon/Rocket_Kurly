@@ -44,8 +44,9 @@
                         <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                                 <h1 class="mb-4">계정 관리</h1>
-                                <h4 class="text-black"><a href="#">Name</a>님</h4>
-                                <h6 class="text-black"><a href="#">Name</a>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</h6>
+                                <% session.getAttribute(nickname); %>
+                                <h4 class="text-black"><a href="#"><%= nickname %></a>님</h4>
+                                <h6 class="text-black"><a href="#"><%= nickname %></a>님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인합니다.</h6>
                                 <div class="row" style="margin: 0 auto; margin-top:40px">
                                     <h5 class="text-black" style="margin-top:7px; margin-right:10px">비밀번호</h5>
                                     <input type="password" placeholder="내용을 입력해주세요" class="form-control" name="pass" style="width:60%; margin-right:20px ">

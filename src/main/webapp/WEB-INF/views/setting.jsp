@@ -52,6 +52,82 @@ $(function () {
 		
 	});//exitClick
 	
+	// 이메일 검사 정규식
+	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	// 휴대폰 번호 정규식
+	var phoneJ = /^\d{3}-\d{3,4}-\d{4}$/;
+	
+	$('#exit').click(function(e){
+		e.preventDefault();
+		$('#testModal7').modal("show");
+		
+		$('#ok').click(function(e){
+			e.preventDefault();
+			$('#testModal7').modal("hide");
+		});//okClick
+		
+		$('#cancel').click(function(e){
+			e.preventDefault();
+			$('#testModal7').modal("hide");
+		});//okClick
+		
+	});//exitClick
+	
+	// 이메일 양식 확인
+	$("#email").focusout(function() {
+		
+		if( !mailJ.test($("#email").val())) {
+			
+			$("#red1").html("이메일 양식을 확인해 주세요.");
+			$("#red1").css({"display" : ""})
+			return;
+		 } else {
+			$("#red1").html("");
+			$("#red1").css({"display" : "none"})
+			return;
+		 }//end else
+		
+	})// focusout
+	
+	// 휴대폰 양식 확인
+	$("#tel").focusout(function(){
+		
+		if(!phoneJ.test($("#tel").val())){
+				
+			$("#red4").html("휴대폰 번호를 확인해주세요.");
+			$("#red4").css({"display" : ""})
+			return;
+			
+		} else {
+			
+			$("#red4").html("");
+			$("#red4").css({"display" : "none"})
+			
+		}// end else
+		
+	})// focusout
+	
+	// 비밀번호와 비밀번호 확인 값 확인
+	$("#pass2").focusout(function() {
+		
+		if($("#pass").val() != $("#pass2").val()){
+			
+			$("#red5").html("비밀번호 확인 문자가 다릅니다.");
+			$("#red5").css({"display" : ""})
+			return
+		} else {
+			$("#red5").html("");
+			$("#red5").css({"display" : "none"})
+		}
+		
+	})// focusout
+	
+	$("#btn").click(function() {
+		
+		$("#frm").submit();
+		
+	})// click
+	
 	
 })//ready
 </script>
@@ -74,26 +150,27 @@ $(function () {
                         <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                                 <h1 class="mb-4">계정 관리</h1>
+                                <form action="http://localhost/rocketkurly/modifymember.do" method="post" id="frm">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>이메일</label>
-                                            <input type="text" class="form-control" id="id" name="id" >
-                                            <span style="float: right;color: red;font-size: 12px;" id="red1"></span>
+                                            <label>이메일</label> 
+                                            <input type="text" class="form-control" value="${ custData.email }" id="email" name="email" >
+                                            <span style="float: right;color: red;font-size: 12px; display: none;" id="red1" ></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>이름</label>
-                                            <input type="text" class="form-control"  id="nick" name="nick" readonly="readonly">
+                                            <input type="text" class="form-control"  id="nick" name="nick" value="${ custData.name }" readonly="readonly">
                                             <span style="float: right;color: red;font-size: 12px" id="red2"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>닉네임</label>
-                                            <input type="text" class="form-control"  id="nick" name="nick">
-                                            <span style="float: right;color: red;font-size: 12px" id="red2"></span>
+                                            <input type="text" class="form-control" value="${ custData.nickname }"  id="nick" name="nickname">
+                                            <span style="float: right;color: red;font-size: 12px" id="red3"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -102,42 +179,39 @@ $(function () {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>휴대폰 번호</label>
-                                            <input type="text" class="form-control" id="tel" maxlength="11" name="tel"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                                        </div>
+                                            <input type="text" class="form-control" value="${ custData.tel }" id="tel" name="tel"></div>
+                                    		<span style="float: right;color: red;font-size: 12px" id="red4"></span>
                                     </div>
                                     <div class="col-md-6">
                                        
                                     </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>비밀번호 확인</label>
-                                                <input type="password" class="form-control" id="pass2">
-                                                <span style="float: right;color: red;font-size: 12px" id="red4"></span>
+                                                <label>새 비밀번호</label>
+                                                <input type="password" class="form-control" id="pass" name="pw">
                                             </div>
                                         </div>
                                           <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>새 비밀번호</label>
-                                                <input type="password" class="form-control" id="pass" name="pass">
-                                                <span style="float: right;color: red;font-size: 12px; width: 340px;" id="red3"></span>
+                                                <label>비밀번호 확인</label>
+                                                <input type="password" class="form-control" id="pass2" name="pass2">
+                                                <span style="float: right;color: red;font-size: 12px; width: 340px;" id="red5"></span>
                                             </div>
                                     </div>
                                           <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>우편번호</label>
-                                                <input type="text" class="form-control" id="zipcode" name="pass">
-                                                <span style="float: right;color: red;font-size: 12px; width: 340px;" id="red3"></span>
+                                                <input type="text" class="form-control" value="${ custData.addr }" id="zipcode" name="addr">
                                             </div>
                                     </div>
                                           <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>배송지</label>
-                                                <input type="text" class="form-control" id="addr" name="pass">
-                                                <span style="float: right;color: red;font-size: 12px; width: 340px;" id="red3"></span>
+                                                <label>주소</label>
+                                                <input type="text" class="form-control" value="${ custData.address }" id="address" name="address">
                                             </div>
                                     </div>
                                     </div>
-                                  
+                                  </form>
                                 </div>
                                 <div>
                                 <input type="hidden" id="hid" name="hid" value="ok">

@@ -52,18 +52,17 @@ public class MemberService {
 
 	}// loginCheck
 
-
 	public int signUp(MemberVO mVO) {
 
 		int cnt = 0;
 
 		try {
-			
+
 			String inputPass = mVO.getPw();
 			String pass = pwEncoder.encode(inputPass);
-			
+
 			mVO.setPw(pass);
-			
+
 			cnt = mDAO.insertMember(mVO);
 
 		} catch (PersistenceException pe) {
@@ -75,38 +74,77 @@ public class MemberService {
 		return cnt;
 
 	}// signUp
-	
-	public String idCheck(String id) {
-		
-		String checkID = "";
-		 
+
+	public MemberDomain memberInfo(String id) {
+
+		MemberDomain md = null;
+
 		try {
-			
-			checkID = mDAO.selectIdCheck(id);
-			
-			
+
+			md = mDAO.selectLoginCheck(id);
+
 		} catch (PersistenceException pe) {
-			
+
 			pe.printStackTrace();
-			
-		}// end catch
+
+		} // end catch
+
+		return md;
+
+	}// memberInfo
+	
+	public int modifyMember(MemberVO mVO) {
 		
+		int cnt = 0;
+
+		try {
+
+			String inputPass = mVO.getPw();
+			String pass = pwEncoder.encode(inputPass);
+
+			mVO.setPw(pass);
+
+			cnt = mDAO.updateMember(mVO);
+
+		} catch (PersistenceException pe) {
+
+			pe.printStackTrace();
+
+		} // end catch
+
+		return cnt;
+		
+	}// modifyMember
+
+	public String idCheck(String id) {
+
+		String checkID = "";
+
+		try {
+
+			checkID = mDAO.selectIdCheck(id);
+
+		} catch (PersistenceException pe) {
+
+			pe.printStackTrace();
+
+		} // end catch
+
 		JSONObject jsonObj = new JSONObject();
-		
+
 		jsonObj.put("checkID", checkID);
-		
+
 		checkID = jsonObj.toJSONString();
-		
-		
+
 		return checkID;
 	}
 
 	public boolean pwCheck(String inputPw, String custPw) {
-		
+
 		boolean pwFlag = pwEncoder.matches(inputPw, custPw);
-		
+
 		return pwFlag;
-		
+
 	}// pwCheck
-	
+
 }
