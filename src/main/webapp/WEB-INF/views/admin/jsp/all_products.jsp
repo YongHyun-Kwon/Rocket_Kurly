@@ -76,8 +76,7 @@
         .img{
         width: 140px;
         height: 150px;
-        border: 1px solid #333;
-        display: inline-block;
+
         }
         
         .products{
@@ -139,6 +138,8 @@
                     <div>
                             <div>
                                 <div class="img">
+                                <img  class="img"
+                                src="http://localhost/rocketkurly/admin/%EC%8C%80,%EC%9E%A1%EA%B3%A11.jpg">
                                 </div>
                                 <div>
                                     <h6><a href="#">맛있는 사과</a></h6>
@@ -147,136 +148,7 @@
                             </div>
                         </div>
                                         
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
-                    </div>
-                    <div class="products">
-                    <div>
-                            <div>
-                                <div class="img">
-                                </div>
-                                <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                                        
+     
                    
                     <!-- /product -->
                     <div class="card-body">
@@ -329,7 +201,7 @@
                     </div>
                   </div>
                 </div>
-                    </div>
+                   
                 </div>
                 
                 <!-- /상품 전체 조회 -->
