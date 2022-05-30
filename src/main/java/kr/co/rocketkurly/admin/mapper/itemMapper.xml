@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.sist.rocketkurly.admin.dao">
+<mapper namespace="kr.co.rocketkurly.admin.dao">
 	
 	<insert id="enroll" parameterType="ItemVO">
 		insert into item(item_no, name, price, expired, detail, main_img, final_price, sales, c_category_id)
@@ -10,10 +10,35 @@
 		 #{c_category_id})
 	</insert>
 	
-	<select id="selectItem" resultType="String" parameterType="String">
-		select member_id
-		from member
-		where member_id=#{ id }
+	<select id="selectItem" resultType="itemDomain" parameterType="boardVO">
+	select ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+	from ITEM
+	where ITEM_NO between #{StartNum} and #{endNum}
+
+
 	</select>
+	
+<select id="itemCnt" resultType="int" >
+ select count(*) cnt
+ from item
+ </select>
+ 
+<select id="selectKeywordItem" resultType="itemDomain" parameterType="boardVO">
+
+select  filter,ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from(select rownum filter, ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from ITEM
+where  NAME like '%' || #{keyword} || '%'
+order by item_no)
+where filter between #{StartNum} and #{endNum}
+
+</select>
+ 
+<select id="keywordCnt" resultType="int" parameterType="boardVO">
+ select count(*) cnt 
+from ITEM
+where  NAME like '%' || #{keyword} || '%'
+ </select>
+ 
 
 </mapper>
