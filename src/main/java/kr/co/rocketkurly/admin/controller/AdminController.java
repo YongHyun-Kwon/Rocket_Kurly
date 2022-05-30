@@ -43,12 +43,7 @@ public class AdminController {
 		
 	}// allCategories
 	
-	@RequestMapping(value = "/admin/jsp/all_products.do", method = GET)
-	public String allProducts() {
-		
-		return "admin/jsp/all_products";
-		
-	}// allProducts
+
 	
 	@RequestMapping(value = "/admin/jsp/create_coupon.do", method = GET)
 	public String createCoupon() {
