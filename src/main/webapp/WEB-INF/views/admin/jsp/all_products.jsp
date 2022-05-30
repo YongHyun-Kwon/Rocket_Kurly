@@ -1,6 +1,7 @@
 <%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -120,6 +121,7 @@
                 <!-- 상품 전체 조회 -->
                 <div style="padding-left: 50px ;width: 950px;">
                     <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">상품 전체 조회</label>
+                  	<form action="all_products2.do" id="frm">
                     <div class="input-group input-group-merge" style="width: 200px;float: right;">
                         <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                         <input
@@ -128,27 +130,31 @@
                           placeholder="Search..."
                           aria-label="Search..."
                           aria-describedby="basic-addon-search31"
+                          id="keyword"
+                          name="keyword"
+                          
                         />
                       </div>
-                      
+                      </form>
                       <div class="container">
                  
                       <!-- product -->
+                      <c:forEach var="itemData" items="${itemList }">
                     <div class="products">
                     <div>
                             <div>
                                 <div class="img">
                                 <img  class="img"
-                                src="http://localhost/rocketkurly/admin/%EC%8C%80,%EC%9E%A1%EA%B3%A11.jpg">
+                                src="http://localhost/rocketkurly/${itemData.main_img }">
                                 </div>
                                 <div>
-                                    <h6><a href="#">맛있는 사과</a></h6>
-                                    <h5>$30.00</h5>
+                                    <h6><a href="#"><c:out value="${itemData.name}"/></a></h6>
+                                    <h5><c:out value="${itemData.price}"/>원</h5>
                                 </div>
                             </div>
                         </div>
-                                        
-     
+                           </div>             
+     				</c:forEach>
                    
                     <!-- /product -->
                     <div class="card-body">
@@ -157,43 +163,124 @@
                       <div class="demo-inline-spacing">
                         <!-- Basic Pagination -->
                         <nav aria-label="Page navigation">
-                          <ul class="pagination">
+                        
+                            <c:choose>
+                            <c:when test="${empty keyword}">
+                              <ul class="pagination">
+                             <c:if test="${10 lt currentPage}"> 
                             <li class="page-item first">
-                              <a class="page-link" href="javascript:void(0);"
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage-10}"
                                 ><i class="tf-icon bx bx-chevrons-left"></i
                               ></a>
                             </li>
+                            </c:if>
+                            <c:if test="${1 ne currentPage}">
                             <li class="page-item prev">
-                              <a class="page-link" href="javascript:void(0);"
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage-1}"
                                 ><i class="tf-icon bx bx-chevron-left"></i
                               ></a>
                             </li>
+                            </c:if>
+        					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+    
+                         <c:choose>
+         					<c:when test="${i eq currentPage }">
+							
+							<li class="page-item active">
+                              <a class="page-link" href="all_products.do?currentPage=${i}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            </c:when>
+                            <c:otherwise>
+                            
                             <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">1</a>
+                              <a class="page-link" href="all_products.do?currentPage=${i}">
+                              <c:out value="${i}"/>
+                              </a>
                             </li>
-                            <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">2</a>
-                            </li>
-                            <li class="page-item active">
-                              <a class="page-link" href="javascript:void(0);">3</a>
-                            </li>
-                            <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">4</a>
-                            </li>
-                            <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">5</a>
-                            </li>
-                            <li class="page-item next">
-                              <a class="page-link" href="javascript:void(0);"
+                            
+                            </c:otherwise>
+                            </c:choose>
+         				</c:forEach>
+         				<c:if test="${pageCnt gt currentPage}">
+         				  <li class="page-item next">
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage+1}"
                                 ><i class="tf-icon bx bx-chevron-right"></i
                               ></a>
                             </li>
+                            </c:if>
+                           <c:if test="${pageCnt gt currentPage+10}">
                             <li class="page-item last">
-                              <a class="page-link" href="javascript:void(0);"
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage+10}"
                                 ><i class="tf-icon bx bx-chevrons-right"></i
                               ></a>
                             </li>
+                            </c:if>
                           </ul>
+         				</c:when>
+         				 <c:when test="${not empty keyword}">
+         				 <ul class="pagination">
+         				    <c:if test="${10 lt currentPage}"> 
+         				     
+                            <li class="page-item first">
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage-10}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevrons-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                            <c:if test="${1 ne currentPage}">
+                            <li class="page-item prev">
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage-1}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevron-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+         					<c:forEach var="i" begin="${startPage}" end="${endPage }">
+         					<c:choose>
+         					<c:when test="${i eq currentPage }">
+							
+							<li class="page-item active">
+                              <a class="page-link" href="all_products2.do?currentPage=${i}&&keyword=${keyword}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            </c:when>
+                            <c:otherwise>
+                            
+                            <li class="page-item">
+                              <a class="page-link" href="all_products2.do?currentPage=${i}&&keyword=${keyword}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            
+                            </c:otherwise>
+                            </c:choose>
+                            
+         				</c:forEach>
+         				<c:if test="${pageCnt gt currentPage}">
+         				  <li class="page-item next">
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage+1}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevron-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                           <c:if test="${pageCnt gt currentPage+10}">
+                            <li class="page-item last">
+                              <a class="page-link" href="all_products.do?currentPage=${currentPage+10}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevrons-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                          </ul>
+         				</c:when>
+						</c:choose>
+         				<!-- 선택 어케하노.. -->
+                          <!--   <li class="page-item active">
+                              <a class="page-link" href="javascript:void(0);">3</a>
+                            </li> -->
+        
+                        
                         </nav>
                         <!--/ Basic Pagination -->
                       </div>
