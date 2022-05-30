@@ -58,40 +58,80 @@ $(function() {
 	//아이디 찾기
 	$('#idBtn').click(function(e){
 	e.preventDefault();
-	$('#testModal2').modal("show");
+	$('#findIDModal').modal("show");
 	
 	$('#close').click(function(e){
 	e.preventDefault();
-	$('#testModal2').modal("hide");
+	$('#findIDModal').modal("hide");
 	});
 	
 	$('#sendBtn').click(function(e){
 		e.preventDefault();
-		$('#testModal2').modal("hide");
-		$('#testModal').modal("show");
+		
+		if($("#recipient-name").val() == ""){
+			alert("이름을 입력해주세요.");
+			$("#recipient-name").focus();
+			return;
+		}// end if
+		
+		if($("#recipient-email").val() == ""){
+			alert("이메일을 입력해주세요.");
+			$("#recipient-email").focus();
+			return;
+		}// end if
+		
+		findID();
+		
 	});//sendBtnClick
 	
 	$('#goLogin').click(function(e){
-		e.preventDefault();
-		$('#testModal').modal("hide");
+		$('#idFindVerifyModal').modal("hide");
 	});//goLoginClick
+	
+	$('#idFailBtn').click(function() {
+		$('#idFindFailModal').modal("hide");
+	})
 	
 	});//idBtnClick
 	
 	//비밀번호 찾기
 	$('#pwBtn').click(function(e){
 	e.preventDefault();
-	$('#testModal4').modal("show");
+	$('#pwFindModal').modal("show");
 	
 	$('#cancel2').click(function(e){
 	e.preventDefault();
-	$('#testModal4').modal("hide");
+	$('#pwFindModal').modal("hide");
 	});
 	
-	$('#search').click(function(e){
-		e.preventDefault();
-		$('#testModal4').modal("hide");
-		$('#getPassword').modal("show");
+	$('#search').click(function(){
+		
+		if($("#pwRecipient-id").val() == ""){
+			
+			alert("아이디를 입력해주세요.");
+			$("#pwRecipient-id").focus();
+			return;
+			
+		}// end if
+		
+		if($("#pwRecipient-email").val() == ""){
+			
+			alert("이메일을 입력해주세요.");
+			$("#pwRecipient-emai").focus();
+			return;
+			
+		}// end if
+		
+		if($("#pwRecipient-tel").val() == ""){
+			
+			alert("전화번호를 입력해주세요.");
+			$("#pwRecipient-tel").focus();
+			return;
+			
+		}// end if
+		
+		findPW();
+		
 	});//searchClick
 	
 	$('#goLogin2').click(function(e){
@@ -101,7 +141,7 @@ $(function() {
 	
 	$('#cancel2').click(function(e){
 		e.preventDefault();
-		$('#testModal4').modal("hide");
+		$('#pwFindModal').modal("hide");
 	});//cancel2Click
 	
 	});//pwBtnClick
@@ -111,6 +151,87 @@ $(function() {
 
 
 })//ready
+
+function findID(){
+	
+	$.ajax({
+		url : "http://localhost/rocketkurly/idfind.do",
+		type : "POST",
+		data : {
+			name : $("#recipient-name").val(),
+			email : $("#recipient-email").val()
+		},
+		async : true,
+		dataType : 'text',
+		error : function(xhr) {
+			alert(xhr.text + "/" + xhr.status);
+		},
+		success : function( findID ) {
+			
+			if(findID == 'fail'){
+				
+				$('#findIDModal').modal("hide");
+				$('#idFindFailModal').modal("show");
+				$("#recipient-name").val("");
+				$("#recipient-email").val("");
+			
+			} else {
+				
+				$('#findID').html(findID)
+				$('#findIDModal').modal("hide");
+				$('#idFindVerifyModal').modal("show");
+				$("#recipient-name").val("");
+				$("#recipient-email").val("");
+				
+			}// end else
+			
+		},
+		
+	}) // ajax
+	
+}// findID
+
+function findPW(){
+	
+	$.ajax({
+		url : "http://localhost/rocketkurly/pwfind.do",
+		type : "POST",
+		data : {
+			id : $("#pwRecipient-id").val(),
+			email : $("#pwRecipient-email").val(),
+			tel : $("#pwRecipient-tel").val()
+		},
+		async : true,
+		dataType : 'text',
+		error : function(xhr) {
+			alert(xhr.text + "/" + xhr.status);
+		},
+		success : function( changePW ) {
+			
+			if(changePW == 'fail'){
+				
+				$('#pwFindModal').modal("hide");
+				$('#pwFindFailModal').modal("show");
+				$("#pwRecipient-id").val("");
+				$("#pwRecipient-email").val("");
+				$("#pwRecipient-tel").val("");
+			
+			} else {
+				
+				$('#findPW').html(changePW)
+				$('#pwFindModal').modal("hide");
+				$('#getPassword').modal("show");
+				$("#pwRecipient-id").val("");
+				$("#pwRecipient-email").val("");
+				$("#pwRecipient-tel").val("");
+				
+			}// end else
+			
+		},
+		
+	}) // ajax
+	
+}// findPW
 
 </script>
 <style type="text/css">
@@ -198,7 +319,7 @@ $(function() {
                    		<a href="javascript:void(0)" id="login" class="primary-btn" >로그인</a>
                    		<a href="http://localhost/rocketkurly/sign.do" id="register" class="primary-btn" >회원가입</a>
                     	 <div style="margin-top: 30px;">
-                    	<a href="#" class="search1">아이디 찾기</a>|<a href="#" class="search2">비밀번호 찾기</a>
+                    	<a href="#" class="search1" id="idBtn">아이디 찾기</a>|<a href="#" class="search2" id="pwBtn">비밀번호 찾기</a>
                     	 </div>
                    		 </div>
                    		 
@@ -211,7 +332,7 @@ $(function() {
     <!-- Contact Form End -->
     
     <!-- 아이디 찾기 모달  -->
-	    <div class="modal fade" id="testModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	    <div class="modal fade" id="findIDModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -221,13 +342,12 @@ $(function() {
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form action="http://localhost/rocketkurly/idfind.do" id="idFindFrm" method="post">
 	          <div class="form-group">
 	            <label for="recipient-name" class="col-form-label">이름입력</label>
-	            <input type="text" class="form-control" id="recipient-name" placeholder="가입시 입력하신 이름을 적어주세요.">
+	            <input type="text" class="form-control" id="recipient-name" name="id" placeholder="가입시 입력하신 이름을 적어주세요.">
 	            <label for="recipient-name" class="col-form-label">E-Mail입력</label>
-	            <input type="text" class="form-control" id="recipient-email" placeholder="가입시 입력하신 이메일을 적어주세요.">
-	            <span style="font-size: 5px; color: #ff0000;">일치하는 이메일이 없습니다.</span>
+	            <input type="text" class="form-control" id="recipient-email" name="email" placeholder="가입시 입력하신 이메일을 적어주세요.">
 	          </div>
 	        </form>
 	      </div>
@@ -241,7 +361,7 @@ $(function() {
 	<!--아이디 찾기 모달 끝  -->
 	
 	<!-- 아이디 안내 -->
-<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="idFindVerifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -251,7 +371,7 @@ $(function() {
         </button>
       </div>
       <div class="modal-body">
-        아이디 : 
+        아이디 : <span id="findID"></span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="goLogin">확인</button>
@@ -262,7 +382,7 @@ $(function() {
 <!-- 아이디 안내  -->
 	
 	<!-- 아이디 틀렸을 때 모달 -->
-<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="idFindFailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -275,7 +395,7 @@ $(function() {
         다시 한 번 올바른 정보를 입력해주십시오
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="goLogin">확인</button>
+        <button type="button" class="btn btn-primary" id="idFailBtn">확인</button>
       </div>
     </div>
   </div>
@@ -283,7 +403,7 @@ $(function() {
 		<!-- 아이디 틀렸을때 모달 끝  -->
 
 		<!--비밀번호 찾기 모달  -->
-<div class="modal fade" id="testModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="pwFindModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -296,13 +416,15 @@ $(function() {
         <form>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">아이디 입력</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="아이디를 입력해주세요">
-            <span style="font-size: 5px; color: #ff0000;">일치하는 회원이 없습니다.</span>
+            <input type="text" class="form-control" id="pwRecipient-id" name="id" placeholder="아이디를 입력해주세요">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">가입시 입력하신 이메일을 적어주세요.</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="가입시 입력하신 이메일을 적어주세요.">
-            <span style="font-size: 5px; color: #ff0000;">일치하는 이메일이 없습니다.</span>
+            <input type="text" class="form-control" id="pwRecipient-email" name="eamil" placeholder="가입시 입력하신 이메일을 적어주세요.">
+          </div>          
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">가입시 입력하신 휴대번호를 적어주세요.</label>
+            <input type="text" class="form-control" id="pwRecipient-tel" name="tel" placeholder="가입시 입력하신 이메일을 적어주세요.">
           </div>          
 
         </form>
@@ -326,7 +448,7 @@ $(function() {
         </button>
       </div>
       <div class="modal-body">
-        비밀번호 : 
+        비밀번호 : <span id="findPW"></span>
         <br/>
         비밀번호를 꼭 변경해주세요!
       </div>
@@ -339,7 +461,7 @@ $(function() {
 <!-- 비밀번호 안내  -->
 
 <!-- 비밀번호 틀렸을 때 모달 -->
-<div class="modal fade" id="testModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="pwFindFailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

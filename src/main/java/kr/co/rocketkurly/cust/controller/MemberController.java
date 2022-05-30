@@ -64,10 +64,30 @@ public class MemberController {
 
 		session.invalidate();
 
-		return "login";
+		return "redirect:index.do";
 
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/idfind.do", method = POST)
+	public String idFindProcess(MemberVO mVO) {
+		
+		String findID = ms.findID(mVO);
+		
+		return findID;
+		
+	}// idFindProcess
+	
+	@ResponseBody
+	@RequestMapping(value = "/pwfind.do", method = POST)
+	public String pwFindProcess(MemberVO mVO) {
+		
+		String changePW = ms.findPW(mVO);
+		
+		return changePW;
+		
+	}// pwFindProcess
+	
 	@ResponseBody
 	@RequestMapping(value = "/cust/idCheck.do", method = GET)
 	public String idCheckProcess(String id) {

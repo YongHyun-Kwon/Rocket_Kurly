@@ -18,7 +18,7 @@ a{
     <div class="block-38-img">
       <div class="block-38-header">
         <h5 class="block-38-heading h3"style="margin-top: 30px">마이컬리</h5>
-        <h3 class="block-38-heading h4">Name 님</h3>
+        <h3 class="block-38-heading h4">${ sessionScope.nickname } 님</h3>
       <div class="block-38-body">
       <ul>
         <li><a href="mypage.do">개인 정보 변경</a></li>

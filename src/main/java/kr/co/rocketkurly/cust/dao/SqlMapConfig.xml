@@ -23,6 +23,7 @@
   </environments>
   <mappers>
     <mapper resource="kr/co/rocketkurly/cust/mapper/memberMapper.xml"/>
+    <mapper resource="kr/co/rocketkurly/cust/mapper/mypageMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/itemMapper.xml"/>
   </mappers>
 </configuration>

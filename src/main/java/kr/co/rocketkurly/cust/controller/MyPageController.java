@@ -11,18 +11,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.service.MemberService;
+import kr.co.rocketkurly.cust.service.MyPageService;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 
 @Controller
 public class MyPageController {
 
 	@Autowired(required = false)
+	private MyPageService mps;
+	
+	@Autowired(required = false)
 	private MemberService ms;
+	
 
 	@RequestMapping(value = "/mypage.do", method = { GET, POST })
 	public String myPage(HttpServletRequest request, Model model) {
@@ -85,7 +91,7 @@ public class MyPageController {
 		
 		mVO.setId((String) session.getAttribute("custID"));
 		
-		int cnt = ms.modifyMember(mVO);
+		int cnt = mps.modifyMember(mVO);
 		
 		if( cnt == 0 ) {
 			return "redirect:index.do";
@@ -94,6 +100,18 @@ public class MyPageController {
 		return "redirect:setting.do"; 
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/resignmember.do", method = { GET, POST })
+	public String resignMemberProcess(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String msg = mps.resignMember((String) session.getAttribute("custID"));
+		
+		return msg;
+		
+	}// pwFindProcess
 
 	@RequestMapping(value = "/orderhistory.do", method = { GET, POST })
 	public String orderhistoryPage() {
