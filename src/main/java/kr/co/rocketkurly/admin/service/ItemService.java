@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import kr.co.rocketkurly.admin.dao.ItemDAO;
 import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.ItemVO;
+import kr.co.rocketkurly.cust.vo.MemberVO;
 
 @Component
 public class ItemService {
@@ -132,5 +134,19 @@ public class ItemService {
 		int pageScale=16;
 		return pageScale;
 	}
+	
+	public void enrollProduct(ItemVO iVO) {
+		
+		try {
+
+			iDAO.enrollProduct(iVO);
+
+		} catch (PersistenceException pe) {
+
+			pe.printStackTrace();
+
+		} // end catch
+
+	}// enrollProduct
 	
 }
