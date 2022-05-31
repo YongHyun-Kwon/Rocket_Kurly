@@ -1,14 +1,19 @@
 package kr.co.rocketkurly.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.rocketkurly.admin.service.ItemService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.ItemVO;
+import kr.co.rocketkurly.cust.vo.MemberVO;
 
 @Controller
 public class AdminItemController {
@@ -80,6 +85,17 @@ public class AdminItemController {
 		return "admin/jsp/all_products";
 		
 	}// allProducts
+	
+	@RequestMapping(value = "/admin/jsp/enrollProcess.do", method = { GET, POST })
+	public String enrollProcess(@ModelAttribute("admin") ItemVO iVO) {
+
+
+		is.enrollProduct(iVO);
+
+
+		return "/admin/jsp/add_product";
+
+	}
 	
 	
 }

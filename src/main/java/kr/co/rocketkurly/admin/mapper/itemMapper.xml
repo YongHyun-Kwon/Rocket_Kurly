@@ -5,8 +5,8 @@
 <mapper namespace="kr.co.rocketkurly.admin.dao">
 	
 	<insert id="enroll" parameterType="ItemVO">
-		insert into item(item_no, name, price, expired, detail, main_img, final_price, sales, c_category_id)
-		values(#{item_no}, #{ name }, #{ price }, #{ expired }, #{ detail }, #{ main_img }, #{ final_price }, #{ sales },
+		insert into item(item_no, name, price, detail, main_img, sales, c_category_id)
+		values(#{item_no}, #{ name }, #{ price }, #{ detail }, #{ main_img }, #{ sales },
 		 #{c_category_id})
 	</insert>
 	
