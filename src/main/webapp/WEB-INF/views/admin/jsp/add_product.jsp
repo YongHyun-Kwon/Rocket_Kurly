@@ -1,6 +1,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
 	data-theme="theme-default" data-assets-path="../assets/"
 	data-template="vertical-menu-template-free">
@@ -77,8 +79,11 @@
 }
 </style>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 //Tnumbnail function
+$(function () {
+
 function readURL(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
@@ -112,6 +117,20 @@ function readURL2(input) {
 		document.getElementById('preview2').src = "";
 	}
 }
+
+
+
+	$("#add_item").click(function() {
+	$("#checkoutFrm").submit();
+	})
+	
+	
+	
+	
+})//ready
+function categoryChange(e){
+	console.log(${furit}e.value);
+}
 </script>
 
 
@@ -131,51 +150,50 @@ function readURL2(input) {
 					<!-- Content -->
 
 					<!-- 분류 -->
+<form action="http://localhost/rocketkurly/signProcess.do" method="post" id="checkout2Frm" name="checkout2Frm">
 					<div style="padding: 50px; width: 950px">
 						<label
 							style="font-size: 30px; font-weight: bold; padding-bottom: 30px">상품등록</label>
 						<div class="options">
 							<div class="input-group"
 								style="width: 200px; display: flex; margin-right: 50px">
-								<label class="input-group-text" for="inputGroupSelect01">1차
-									분류</label> <select class="form-select" id="inputGroupSelect01">
+								<label class="input-group-text" for="inputGroupSelect01">1차 분류</label> 
+									<select class="form-select" id="inputGroupSelect01" onchange="categoryChange(this)">
 									<option selected>Choose...</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+									<c:forEach var="pcat" items="${selectPCat}">
+										<option value="${pcat}" ><c:out value="${pcat}"/></option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="input-group" style="width: 200px; display: flex;">
-								<label class="input-group-text" for="inputGroupSelect01">2차
-									분류</label> <select class="form-select" id="inputGroupSelect01">
-									<option selected>Choose...</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+								<label class="input-group-text" for="inputGroupSelect01">2차 분류</label> 
+								<select class="form-select" id="subCat">
+										<c:forEach var="ccat" items="${selectCCat}">
+										<option class="subc" value="${ccat}" ><c:out value="${ccat}"/></option>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
 					</div>
 					<!-- /분류 -->
 
-
 					<div style="padding-left: 50px; width: 950px">
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품명</label>
 							<div class="col-md-10">
-								<input class="form-control" type="text"/>
+								<input class="form-control" name="name" type="text"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품 가격</label>
 							<div class="col-md-10">
-								<input class="form-control" type="text"/>
+								<input class="form-control" name="price" type="text"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품 수량</label>
 							<div class="col-md-10">
-								<input class="form-control" type="text"/>
+								<input class="form-control" name="sales" type="text"/>
 							</div>
 						</div>
 						
@@ -183,7 +201,7 @@ function readURL2(input) {
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품 소개</label>
 							<div class="col-md-10">
-								<textarea rows="10" cols="85"></textarea>
+								<textarea rows="10" cols="85" name="detail"></textarea>
 							</div>
 						</div>
 						
@@ -206,10 +224,11 @@ function readURL2(input) {
 													</table>
 												</div>
 											</div>
-											<button style="margin-top: 30px; float: right;" class="btn btn-dark">상품 추가</button>
+											<button style="margin-top: 30px; float: right;" class="btn btn-dark" id="add_item">상품 추가</button>
 	
 
 					</div>
+					</form>
 
 
 					<div class="buy-now">

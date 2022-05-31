@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.cust.dao.MyBatisFramework;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.ItemVO;
 
 
 @Component
@@ -69,5 +70,17 @@ public class ItemDAO {
 		return list;
 	}
 	
+	public void enrollProduct(ItemVO iVO)throws PersistenceException{
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		ss.selectList("kr.co.rocketkurly.admin.dao.enroll",iVO);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+	
+	}
 
 }

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ItemVO {
 	
-	private  String name ,expired ,detail,main_img,c_category_id;
+	private  String name,detail,main_img,c_category_id;
 	private int item_no,price,sales;	
 	private Date reg_dt	,mod_dt;
 	public String getName() {
@@ -13,12 +13,7 @@ public class ItemVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getExpired() {
-		return expired;
-	}
-	public void setExpired(String expired) {
-		this.expired = expired;
-	}
+
 	public String getDetail() {
 		return detail;
 	}
@@ -69,17 +64,10 @@ public class ItemVO {
 	}
 	@Override
 	public String toString() {
-		return "ItemVO [name=" + name + ", expired=" + expired + ", detail=" + detail + ", main_img=" + main_img
+		return "ItemVO [name=" + name + ", detail=" + detail + ", main_img=" + main_img
 				+ ", c_category_id=" + c_category_id + ", item_no=" + item_no + ", price=" + price + ", sales=" + sales
 				+ ", reg_dt=" + reg_dt + ", mod_dt=" + mod_dt + "]";
 	}
 	
-	
-
-	
-	
-
-	
-
 
 }
