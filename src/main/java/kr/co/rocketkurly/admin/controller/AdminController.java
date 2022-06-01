@@ -1,10 +1,12 @@
 package kr.co.rocketkurly.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.co.rocketkurly.cust.vo.CouponVO;
 
 @Controller
 public class AdminController {
@@ -15,7 +17,19 @@ public class AdminController {
 		
 	}// mainPage
 	
+	@RequestMapping(value = "/admin/jsp/add_categories.do", method = GET)
+	public String addCategoriesPage() {
+		System.out.println("123123asdasd");
+		return "admin/jsp/add_categories";
+		
+	}// addCategoriesPage
 	
+	@RequestMapping(value = "/admin/jsp/add_product.do", method = GET)
+	public String addProduct() {
+		
+		return "admin/jsp/add_product";
+		
+	}// addProduct
 	
 	@RequestMapping(value = "/admin/jsp/add_recipe.do", method = GET)
 	public String addRecipe() {
@@ -33,8 +47,8 @@ public class AdminController {
 	
 
 	
-	@RequestMapping(value = "/admin/jsp/create_coupon.do", method = GET)
-	public String createCoupon() {
+	@RequestMapping(value = "/admin/jsp/create_coupon.do", method = { GET,POST })
+	public String createCoupon(CouponVO cVO) {
 		
 		return "admin/jsp/create_coupon";
 		
@@ -60,13 +74,6 @@ public class AdminController {
 		return "admin/jsp/edit_categories";
 		
 	}// editCategories
-	
-	@RequestMapping(value = "/admin/jsp/inquiry.do", method = GET)
-	public String inquiry() {
-		
-		return "admin/jsp/inquiry";
-		
-	}// inquiry
 	
 	@RequestMapping(value = "/admin/jsp/login.do", method = GET)
 	public String login() {

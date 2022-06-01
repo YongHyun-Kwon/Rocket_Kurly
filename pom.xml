@@ -154,8 +154,9 @@
 		    <version>5.0.8.RELEASE</version>
 		</dependency>
 		<!-- Spring security end -->
-		       
+		
 	</dependencies>
+	
     <build>
         <plugins>
             <plugin>
