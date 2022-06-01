@@ -44,7 +44,7 @@ public class AdminCategoriesController {
 		
 		return "admin/jsp/add_product";
 		
-	}// allProducts
+//	}// allProducts
 	
 
 }//class

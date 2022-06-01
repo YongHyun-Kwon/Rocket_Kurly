@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
 	data-theme="theme-default" data-assets-path="../assets/"
 	data-template="vertical-menu-template-free">
@@ -99,8 +100,9 @@ h6 {
 				<div class="content-wrapper">
 					<!-- Content -->
 
-					<!-- 상품 전체 조회 -->
+					<!-- 문의 검색 인풋 -->
 					<div style="padding-left: 50px; width: 1000px;">
+						<form action="inquiry.do" id="frm">
 					<label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">문의 조회</label>
 						<div class="input-group input-group-merge" style="width: 200px;float: right;">
                         <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
@@ -110,12 +112,16 @@ h6 {
                           placeholder="Search..."
                           aria-label="Search..."
                           aria-describedby="basic-addon-search31"
+                          id="keyword"
+                          name="keyword"
                         />
-                      </div>
+                        </div>
+                      </form>
 
+							<!-- 문의 테이블 -->
 						<div class="container">
-
-							<!-- product -->
+						
+						 <c:forEach var="questionData" items="${questionList}"> 
 							<div class="card">
 								<table class="table" style="width: 900px">
 									<thead>
@@ -125,136 +131,144 @@ h6 {
 											<th>문의 유형</th>
 											<th>작성일</th>
 											<th>상태</th>
-											<th>답변 완료일</th>
 											<th>답변 작성</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
 										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
+											<td><c:out value="${questionData.member_id}"/></td>
+											<td><c:out value="${questionData.title}"/></td>
+											<td><c:out value="${questionData.type}"/></td>
+											<td><c:out value="${questionData.reg_dt}"/></td>
+											<td><c:out value="${questionData.answer}"/></td>
 											<td>
 											<button type="button"
                           class="btn-dark"
                           data-bs-toggle="modal"
                           data-bs-target="#basicModal">답변 작성</button></td>
 										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>환불해주세요</td>
-											<td>환불</td>
-											<td>2022.05.18</td>
-											<td>답변 전</td>
-											<td>none</td>
-											<td>
-											<button type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-										
-										
-										
 									</tbody>
 								</table>
 							</div>
+						</c:forEach>
 						</div>
 					</div>
+					<!-- page navigation -->
+					 <nav aria-label="Page navigation">
+                            <c:choose>
+                            <c:when test="${empty keyword}">
+                              <ul class="pagination">
+                             <c:if test="${10 lt currentPage}"> 
+                            <li class="page-item first">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-10}"
+                                ><i class="tf-icon bx bx-chevrons-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                            <c:if test="${1 ne currentPage}">
+                            <li class="page-item prev">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-1}"
+                                ><i class="tf-icon bx bx-chevron-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+        					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+    
+                         <c:choose>
+         					<c:when test="${i eq currentPage }">
+							
+							<li class="page-item active">
+                              <a class="page-link" href="inquiry.do?currentPage=${i}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            </c:when>
+                            <c:otherwise>
+                            
+                            <li class="page-item">
+                              <a class="page-link" href="inquiry.do?currentPage=${i}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            
+                            </c:otherwise>
+                            </c:choose>
+         				</c:forEach>
+         				<c:if test="${pageCnt gt currentPage}">
+         				  <li class="page-item next">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage+1}"
+                                ><i class="tf-icon bx bx-chevron-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                           <c:if test="${pageCnt gt currentPage+10}">
+                            <li class="page-item last">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage+10}"
+                                ><i class="tf-icon bx bx-chevrons-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                          </ul>
+         				</c:when>
+         				 <c:when test="${not empty keyword}">
+         				 <ul class="pagination">
+         				    <c:if test="${10 lt currentPage}"> 
+         				     
+                            <li class="page-item first">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-10}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevrons-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                            <c:if test="${1 ne currentPage}">
+                            <li class="page-item prev">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-1}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevron-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+         					<c:forEach var="i" begin="${startPage}" end="${endPage }">
+         					<c:choose>
+         					<c:when test="${i eq currentPage }">
+							
+							<li class="page-item active">
+                              <a class="page-link" href="inquiry.do?currentPage=${i}&&keyword=${keyword}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            </c:when>
+                            <c:otherwise>
+                            
+                            <li class="page-item">
+                              <a class="page-link" href="inquiry.do?currentPage=${i}&&keyword=${keyword}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            
+                            </c:otherwise>
+                            </c:choose>
+                            
+         				</c:forEach>
+         				<c:if test="${pageCnt gt currentPage}">
+         				  <li class="page-item next">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage+1}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevron-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                           <c:if test="${pageCnt gt currentPage+10}">
+                            <li class="page-item last">
+                              <a class="page-link" href="inquiry.do?currentPage=${currentPage+10}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevrons-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                          </ul>
+         				</c:when>
+						</c:choose>
+                        </nav>
+                        <!--/ Basic Pagination -->
+				
 
 	<!-- modal -->
 	<div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
@@ -306,7 +320,7 @@ h6 {
 
 
 
-					<!-- /상품 전체 조회 -->
+					<!-- /문의 상세조회 -->
 
 
 
@@ -319,7 +333,6 @@ h6 {
 			</div>
 		</div>
 	</div>
-
 
 	<!-- / Content -->
 
