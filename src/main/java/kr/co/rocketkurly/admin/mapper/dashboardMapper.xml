@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.rocketkurly.admin.dashboard.dao">
+	
+	<select id="visitCount" resultType="userHistoryDomain">
+		select * from daily_user_history_view
+	</select>
+
+	<select id="memberRegCount" resultType="memberRegCntDomain">
+		select * from daily_member_reg_cnt_view
+	</select>
+
+	<select id="orderCount" resultType="orderCntDomain">
+		select * from daily_order_count_view
+	</select>
+
+	<select id="questionCount" resultType="questionCntDomain">
+		select * from daily_question_count_view
+	</select>
+
+	<select id="revenue" resultType="revenueDomain">
+		select * from revenue_view
+	</select>
+
+</mapper>

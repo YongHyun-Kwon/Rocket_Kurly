@@ -12,7 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+
+//import com.fasterxml.jackson.core.JsonProcessingException;
 
 import kr.co.rocketkurly.admin.service.CategoriesSevice;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
@@ -22,13 +23,13 @@ public class AdminCategoriesController {
 	@Autowired(required = false)
 	private CategoriesSevice cs;
 	
-	@RequestMapping(value = "/admin/jsp/add_product.do", method = GET)
-	public String selectCategories(Model model , CategoriesVO cVO) throws JsonProcessingException {
-
-		List<CategoriesVO> ccats = cs.selectCCategories();
-		List<String> pcats = cs.selectPCategories();
-		model.addAttribute("selectCCat",cs.selectCCategories());
-		model.addAttribute("selectPCat",cs.selectPCategories());
+//	@RequestMapping(value = "/admin/jsp/add_product.do", method = GET)
+//	public String selectCategories(Model model , CategoriesVO cVO) throws JsonProcessingException {
+//
+//		List<CategoriesVO> ccats = cs.selectCCategories();
+//		List<String> pcats = cs.selectPCategories();
+//		model.addAttribute("selectCCat",cs.selectCCategories());
+//		model.addAttribute("selectPCat",cs.selectPCategories());
 		
 //		Map<String, List<String>> map = new HashMap<String, List<String>>();
 //		for(String pcat : pcats) {
@@ -42,7 +43,7 @@ public class AdminCategoriesController {
 //		
 //		model.addAllAttributes(map);
 		
-		return "admin/jsp/add_product";
+//		return "admin/jsp/add_product";
 		
 //	}// allProducts
 	

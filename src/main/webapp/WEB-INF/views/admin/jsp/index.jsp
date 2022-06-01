@@ -1,6 +1,12 @@
+<%@page import="kr.co.rocketkurly.admin.domain.RevenueDomain"%>
+<%@page import="kr.co.rocketkurly.admin.domain.QuestionCntDomain"%>
+<%@page import="kr.co.rocketkurly.admin.domain.OrderCntDomain"%>
+<%@page import="kr.co.rocketkurly.admin.domain.MemberRegCntDomain"%>
+<%@page import="kr.co.rocketkurly.admin.domain.UserHistoryDomain"%>
 <%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -67,6 +73,301 @@
             box-shadow: none !important;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+    	
+    	  let cardColor, headingColor, axisColor, shadeColor, borderColor;
+
+    	  cardColor = config.colors.white;
+    	  headingColor = config.colors.headingColor;
+    	  axisColor = config.colors.axisColor;
+    	  borderColor = config.colors.borderColor;
+    	  
+    	const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
+        totalRevenueChartOptions = {
+          series: [ 
+            {
+              name: '방문수',
+              data: 
+            	  [	
+            		  <% List<UserHistoryDomain> visitList = (List<UserHistoryDomain>)request.getAttribute("visitList");
+            		  	int visitCount = 0;
+            		  	for(int i = 0; i < visitList.size(); i++){
+            		  		visitCount = visitList.get(i).getVisit_cnt();
+            		  %>	
+            		  <%= visitCount %>,
+            		  <%		
+            		  	}// end for
+            		  %>
+            	  ]
+            },
+          ],
+          chart: {
+            height: 300,
+            stacked: true,
+            type: 'bar',
+            toolbar: { show: false }
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: '50%',
+              borderRadius: 12,
+              startingShape: 'rounded',
+              endingShape: 'rounded'
+            }
+          },
+          colors: [config.colors.primary, config.colors.info],
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: 'smooth',
+            width: 6,
+            lineCap: 'round',
+            colors: [cardColor]
+          },
+          legend: {
+            show: true,
+            horizontalAlign: 'left',
+            position: 'top',
+            markers: {
+              height: 8,
+              width: 8,
+              radius: 12,
+              offsetX: -3
+            },
+            labels: {
+              colors: axisColor
+            },
+            itemMargin: {
+              horizontal: 10
+            }
+          },
+          grid: {
+            borderColor: borderColor,
+            padding: {
+              top: 0,
+              bottom: -8,
+              left: 20,
+              right: 20
+            }
+          },
+          xaxis: {
+            categories: [ 
+            	
+            	<%
+            	String date = "";
+            	for(int i = 0; i < visitList.size(); i++) {
+            	
+            		date = visitList.get(i).getLogind_date();
+				%>
+					'<%= date %>',
+				<%           	
+            	}
+            	%>
+            ],
+            labels: {
+              style: {
+                fontSize: '13px',
+                colors: axisColor
+              }
+            },
+            axisTicks: {
+              show: false
+            },
+            axisBorder: {
+              show: false
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: '13px',
+                colors: axisColor
+              }
+            }
+          },
+          responsive: [
+            {
+              breakpoint: 1700,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '32%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 1580,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '35%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 1440,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '42%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 1300,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '48%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 1200,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '40%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 1040,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 11,
+                    columnWidth: '48%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 991,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '30%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 840,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '35%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 768,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '28%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 640,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '32%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 576,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '37%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 480,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '45%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 420,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '52%'
+                  }
+                }
+              }
+            },
+            {
+              breakpoint: 380,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 10,
+                    columnWidth: '60%'
+                  }
+                }
+              }
+            }
+          ],
+          states: {
+            hover: {
+              filter: {
+                type: 'none'
+              }
+            },
+            active: {
+              filter: {
+                type: 'none'
+              }
+            }
+          }
+        };
+      if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
+        const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
+        totalRevenueChart.render();
+      }
+   })// ready
+    </script>
+
+    
 </head>
 
 
@@ -84,7 +385,7 @@
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
-
+                
                 <div class="row" style="margin-left: 30px">
                     <!-- 방문자 현황 -->
                     <div style="width: 450px; height: 400px;">
@@ -107,60 +408,39 @@
 											<th>일자</th>
 											<th>주문수</th>
 											<th>매출액</th>
-											<th>방문자</th>
 											<th>가입</th>
 											<th>문의</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
-										<tr>
-											<td>2022.05.13</td>
-											<td>10</td>
-											<td>10,000</td>
-											<td>10</td>
-											<td>105</td>
-											<td>10</td>
-										</tr>
-										<tr>
-											<td>2022.05.19</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>200</td>
-											<td>2</td>
-											<td>0</td>
-										</tr>
-										<tr>
-											<td>2022.05.20</td>
-											<td>45</td>
-											<td>450,000</td>
-											<td>45</td>
-											<td>454</td>
-											<td>5</td>
-										</tr>
-										<tr>
-											<td>2022.05.13</td>
-											<td>10</td>
-											<td>10,000</td>
-											<td>10</td>
-											<td>105</td>
-											<td>10</td>
-										</tr>
-										<tr>
-											<td>2022.05.19</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>200</td>
-											<td>2</td>
-											<td>0</td>
-										</tr>
-										<tr>
-											<td>2022.05.20</td>
-											<td>45</td>
-											<td>450,000</td>
-											<td>45</td>
-											<td>454</td>
-											<td>5</td>
-										</tr>
+										<% 
+										List<MemberRegCntDomain> regCntList = (List<MemberRegCntDomain>)request.getAttribute("regCntList");
+										List<OrderCntDomain> orderCntList = (List<OrderCntDomain>)request.getAttribute("orderCntList");
+										List<QuestionCntDomain> questionCntList = (List<QuestionCntDomain>)request.getAttribute("questionCntList");
+										List<RevenueDomain> revenueList = (List<RevenueDomain>)request.getAttribute("revenueList");
+										
+										int regCnt = 0;
+										int orderCnt = 0;
+										int queCnt = 0;
+										int revenu = 0;
+										
+										for(int i = 0; i < visitList.size(); i++){
+											date = visitList.get(i).getLogind_date();
+											regCnt = regCntList.get(i).getReg_cnt();
+											orderCnt = orderCntList.get(i).getOrder_cnt();
+											queCnt = questionCntList.get(i).getQue_cnt();
+											revenu = revenueList.get(i).getRevenue();
+										%>
+											<tr>
+												<td><%= date %></td>
+												<td><%= orderCnt %></td>
+												<td><%= revenu %></td>
+												<td><%= regCnt %></td>
+												<td><%= queCnt %></td>
+											</tr>
+										<%
+										}
+										%>
 									</tbody>
 								</table>
 							</div>
