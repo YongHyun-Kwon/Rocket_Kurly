@@ -4,17 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.rocketkurly.Categorie.dao">
 
-	<select id="selectCCat" resultType="String">
-	select C_CATEGORY_ID
-	from C_CATEGORY
-	<!-- where P_CATEGORY_ID=#{P_CATEGORY_ID} --> 
+	<select id="selectCCat" resultType="CategoriesVO">
+	select c.p_category_id,p.p_category_name,s.c_category_id,s.sub_name
+	from c_category c, sub_category s, p_category p
+	where c.c_category_id = s.c_category_id and p.p_category_id = c.p_category_id
 
 	</select>
 	
-	<select id="selectPCat" resultType="String" >
-	select P_CATEGORY_ID
-	from C_CATEGORY
-	group by P_CATEGORY_ID
+	<select id="selectPCat" resultType="CategoriesVO" >
+	select p_category_id, p_category_name
+	from p_category
 
 	</select>
 

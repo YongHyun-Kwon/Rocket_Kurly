@@ -2,9 +2,25 @@ package kr.co.rocketkurly.cust.vo;
 
 public class CategoriesVO {
 	
-	private String c_category_id, p_category_id;
+	private String c_category_id, p_category_id, p_category_name, sub_name;
 	
 	
+	public String getP_category_name() {
+		return p_category_name;
+	}
+
+	public void setP_category_name(String p_category_name) {
+		this.p_category_name = p_category_name;
+	}
+
+	public String getSub_name() {
+		return sub_name;
+	}
+
+	public void setSub_name(String sub_name) {
+		this.sub_name = sub_name;
+	}
+
 	public String getC_category_id() {
 		return c_category_id;
 	}
@@ -23,8 +39,10 @@ public class CategoriesVO {
 
 	@Override
 	public String toString() {
-		return "CategoriesVO [c_category_id=" + c_category_id + ", p_category_id=" + p_category_id + "]";
+		return "CategoriesVO [c_category_id=" + c_category_id + ", p_category_id=" + p_category_id
+				+ ", p_category_name=" + p_category_name + ", sub_name=" + sub_name + "]";
 	}
+
 	
 	
 
