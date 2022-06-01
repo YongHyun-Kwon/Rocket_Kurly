@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.rocketkurly.admin.service.CategoriesSevice;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
-
+ 
 @Controller
 public class AdminCategoriesController {
 	@Autowired(required = false)
