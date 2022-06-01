@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.dao.CategoriesDAO;
+import kr.co.rocketkurly.admin.dao.ImgDAO;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
+import kr.co.rocketkurly.cust.vo.ImgVO;
 
 @Component
 public class CategoriesSevice {
 	
 	@Autowired(required = false)
 	private CategoriesDAO cDAO;
+	
+	
 
 	public List<CategoriesVO> selectPCategories() {
 		List<CategoriesVO> list= null;
@@ -35,5 +39,6 @@ public class CategoriesSevice {
 		}
 		return list;
 	}
+	
 	
 }

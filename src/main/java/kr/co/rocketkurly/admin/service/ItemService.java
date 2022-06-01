@@ -6,9 +6,11 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.rocketkurly.admin.dao.ImgDAO;
 import kr.co.rocketkurly.admin.dao.ItemDAO;
 import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.ImgVO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 
@@ -17,6 +19,9 @@ public class ItemService {
 
 	@Autowired(required = false)
 	private ItemDAO iDAO;
+	
+	@Autowired(required = false)
+	private ImgDAO imgDAO;
 	
 	
 	public int searchTotalCount() {
@@ -159,5 +164,20 @@ public class ItemService {
 		} // end catch
 
 	}// enrollProduct
+	
+public void enrollImg(ImgVO imgVO) {
+		
+		try {
+
+			imgDAO.enrollImg(imgVO);
+
+		} catch (PersistenceException pe) {
+
+			pe.printStackTrace();
+
+		} // end catch
+
+	}// enrollImg
+	
 	
 }

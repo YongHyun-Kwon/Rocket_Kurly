@@ -121,7 +121,39 @@ function readURL2(input) {
 
 
 	$("#add_item").click(function() {
-	$("#checkoutFrm").submit();
+		if($("#subCat").val() == "Choose..."){
+			alert("카테고리를 선택해주세요.")
+			event.preventDefault();
+			return;
+		}
+		if($("#name").val() == ""){
+			alert("상품명을 입력해주세요.")
+			$("#name").focus();
+			event.preventDefault();
+			return;
+		}
+		if($("#price").val() == ""){
+			alert("가격을 입력해주세요.")
+			$("#price").focus();
+			event.preventDefault();
+			return;
+		}
+		if($("#sales").val() == ""){
+			alert("수량을 입력해주세요.")
+			$("#sales").focus();
+			event.preventDefault();
+			return;
+		}
+		if($("#detail").val() == ""){
+			alert("소개을 입력해주세요.")
+			$("#detail").focus();
+			event.preventDefault();
+			return;
+		}
+		
+		
+	$("#enrollFrm").submit();
+	
 	})
 	
 	
@@ -157,7 +189,7 @@ function categoryChange(e){
 					<!-- Content -->
 
 					<!-- 분류 -->
-<form action="http://localhost/rocketkurly/signProcess.do" method="post" id="checkout2Frm" name="checkout2Frm">
+<form action="http://localhost/rocketkurly/admin/jsp/enrollProcess.do" method="post" id="enrollFrm" name="enrollFrm">
 					<div style="padding: 50px; width: 950px">
 						<label
 							style="font-size: 30px; font-weight: bold; padding-bottom: 30px">상품등록</label>
@@ -174,10 +206,10 @@ function categoryChange(e){
 							</div>
 							<div class="input-group" style="width: 200px; display: flex;">
 								<label class="input-group-text" for="inputGroupSelect01">2차 분류</label> 
-								<select class="form-select" id="subCat">
-										<option selected>Choose...</option>
+								<select class="form-select" id="subCat" name="c_category_id">
+										<option selected >Choose...</option>
 										<c:forEach var="ccat" items="${selectCCat}">
-										<option class="subc ${ccat.p_category_id }" value="${ccat.c_category_id}" style="display:none"><c:out value="${ccat.sub_name}"/></option>
+										<option  class="subc ${ccat.p_category_id }" value="${ccat.c_category_id}" style="display:none"><c:out value="${ccat.sub_name}"/></option>
 									</c:forEach>
 								</select>
 							</div>
@@ -189,19 +221,19 @@ function categoryChange(e){
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품명</label>
 								<div class="col-md-10">
-									<input class="form-control" name="name" type="text"/>
+									<input class="form-control" name="name" id="name" type="text"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품 가격</label>
 							<div class="col-md-10">
-								<input class="form-control" name="price" type="text"/>
+								<input class="form-control" name="price" id="price" type="number"/>
 							</div>
 						</div>
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품 수량</label>
 							<div class="col-md-10">
-								<input class="form-control" name="sales" type="text"/>
+								<input class="form-control" name="sales" id="sales" type="number"/>
 							</div>
 						</div>
 						
@@ -209,7 +241,7 @@ function categoryChange(e){
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품 소개</label>
 							<div class="col-md-10">
-								<textarea rows="10" cols="85" name="detail"></textarea>
+								<textarea rows="10" cols="85" name="detail" id="detail"></textarea>
 							</div>
 						</div>
 						
@@ -217,7 +249,7 @@ function categoryChange(e){
 												<label class="form-label" for="basic-default-company"
 													style="margin-top: 10px;">상품 이미지 추가</label>
 												<div class="input-group">
-													<table style="margin: 0px auto;">
+													<!-- <table style="margin: 0px auto;">
 														<tr>
 															<td><img class="img" id="preview" /> <br /> <br /> <input
 																type="file" onchange="readURL(this);" class="btnAttach"
@@ -229,7 +261,7 @@ function categoryChange(e){
 																type="file" onchange="readURL2(this);" class="btnAttach"
 																name="upImg3" id="upImg3"></td>
 														</tr>
-													</table>
+													</table> -->
 												</div>
 											</div>
 											<button style="margin-top: 30px; float: right;" class="btn btn-dark" id="add_item">상품 추가</button>
