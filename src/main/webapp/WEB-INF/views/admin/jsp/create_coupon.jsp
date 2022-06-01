@@ -19,7 +19,10 @@
     <title>RoketKurly Admin</title>
 
     <meta name="description" content=""/>
-
+	
+	<!-- jquery -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script> 
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/badasaja.ico"/>
 
@@ -51,6 +54,22 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+<script type="text/javascript">
+$(function () {
+	$("#couponBtn").click(function(){
+		
+		if($("#coupon_name").val() == "" || $("#coupon_date").val() == "" || $("#discount").val() == "" || $("#coupon_code").val() == "" ){
+			alert("모든 입력사항을 기재해주세요.");
+		}else{
+		alert("쿠폰이 발행되었습니다.");
+		$("#addCouponFrm").submit();
+		}
+		
+	
+	})//couponBtn
+	
+})//ready
+</script>
 
     <style type="text/css">
 
@@ -89,34 +108,35 @@
 
                 <!-- 중분류 -->
                 <div style="padding-left: 50px ;width: 950px">
+                	<form id="addCouponFrm" action="http://localhost/rocketkurly/admin/jsp/create_coupon.do" method="post">
                     <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">쿠폰 발행</label>
                     <div class="mb-3 row">
                         <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 명</label>
                         <div class="col-md-10">
-                            <input style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="coupon_name" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label style="font-size: 17px;" for="html5-text-input" class="col-md-2 col-form-label">유효기간</label>
                         <div class="col-md-10">
-                            <input style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="coupon_date" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">할인율</label>
                         <div class="col-md-10">
-                            <input style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="discount"  style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 코드</label>
                         <div class="col-md-10">
-                            <input style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="coupon_code"  style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
-                    
 									
-                    <button style="margin-top: 30px;float: right" class="btn btn-dark">쿠폰 발행</button>
+                    <button id="couponBtn" style="margin-top: 30px;float: right" class="btn btn-dark">쿠폰 발행</button>
+                    </form>
                 </div>
                 <!-- /중분류 -->
 
@@ -139,10 +159,7 @@
 <!-- / Content -->
 
 
-<script type="text/javascript">
 
-
-</script>
 
 
 <!-- / Layout wrapper -->

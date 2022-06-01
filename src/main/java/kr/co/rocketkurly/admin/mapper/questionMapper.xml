@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.rocketkurly.admin.dao">
+	
+	<select id="selectQuestion" resultType="QuestionDomain" parameterType="boardVO">
+		select question_no, member_id, order_no, title, type, contents, answer, reg_dt	
+		from question
+		where question_no between #{StartNum} and #{endNum}
+	</select>
+	
+	<select id="questionCnt" resultType="int" >
+		 select count(*) cnt
+		 from question
+ 	</select>
+ 
+	<select id="selectKeywordQuestion" resultType="QuestionDomain" parameterType="boardVO">
+									
+	
+	select  filter, question_no, member_id, order_no, title, type, contents, answer, reg_dt
+	from(select rownum filter, question_no, 
+			member_id, order_no, title, type, contents, answer, reg_dt
+	from question
+	where  title like '%' || #{keyword} || '%' 
+	order by order_no)
+	where filter between #{StartNum} and #{endNum}
+	
+	</select>
+ 
+	<select id="keywordCnt2" resultType="int" parameterType="boardVO">
+		select count(*) cnt 
+		from question
+		where title like '%' || #{keyword} || '%'
+	 </select>
+
+ 
+
+</mapper>
