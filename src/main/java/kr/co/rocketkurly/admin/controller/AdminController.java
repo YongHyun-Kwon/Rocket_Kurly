@@ -57,12 +57,6 @@ public class AdminController {
 		
 	}// addCategoriesPage
 	
-	@RequestMapping(value = "/admin/jsp/add_product.do", method = GET)
-	public String addProduct() {
-		
-		return "admin/jsp/add_product";
-		
-	}// addProduct
 	
 	@RequestMapping(value = "/admin/jsp/add_recipe.do", method = GET)
 	public String addRecipe() {

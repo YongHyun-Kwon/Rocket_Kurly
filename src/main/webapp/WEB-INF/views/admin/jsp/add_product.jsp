@@ -129,7 +129,14 @@ function readURL2(input) {
 	
 })//ready
 function categoryChange(e){
-	console.log(${furit}e.value);
+	var allSubs = document.getElementsByClassName("subc");
+	for(var i = 0; i < allSubs.length ; i++){
+		allSubs[i].style.display = "none";	
+	}
+	var selectedSubs = document.getElementsByClassName(e.value);
+	for(var i = 0; i < selectedSubs.length ; i++){
+		selectedSubs[i].style.display = "";	
+	}
 }
 </script>
 
@@ -161,15 +168,16 @@ function categoryChange(e){
 									<select class="form-select" id="inputGroupSelect01" onchange="categoryChange(this)">
 									<option selected>Choose...</option>
 									<c:forEach var="pcat" items="${selectPCat}">
-										<option value="${pcat}" ><c:out value="${pcat}"/></option>
+										<option value="${pcat.p_category_id}" ><c:out value="${pcat.p_category_name}"/></option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="input-group" style="width: 200px; display: flex;">
 								<label class="input-group-text" for="inputGroupSelect01">2차 분류</label> 
 								<select class="form-select" id="subCat">
+										<option selected>Choose...</option>
 										<c:forEach var="ccat" items="${selectCCat}">
-										<option class="subc" value="${ccat}" ><c:out value="${ccat}"/></option>
+										<option class="subc ${ccat.p_category_id }" value="${ccat.c_category_id}" style="display:none"><c:out value="${ccat.sub_name}"/></option>
 									</c:forEach>
 								</select>
 							</div>
@@ -180,8 +188,8 @@ function categoryChange(e){
 					<div style="padding-left: 50px; width: 950px">
 						<div class="mb-3 row">
 							<label for="html5-text-input" class="col-md-2 col-form-label">상품명</label>
-							<div class="col-md-10">
-								<input class="form-control" name="name" type="text"/>
+								<div class="col-md-10">
+									<input class="form-control" name="name" type="text"/>
 							</div>
 						</div>
 						<div class="mb-3 row">

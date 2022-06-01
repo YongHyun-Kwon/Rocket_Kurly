@@ -15,8 +15,8 @@ public class CategoriesSevice {
 	@Autowired(required = false)
 	private CategoriesDAO cDAO;
 
-	public List<String> selectPCategories() {
-		List<String> list= null;
+	public List<CategoriesVO> selectPCategories() {
+		List<CategoriesVO> list= null;
 		try {
 			list=cDAO.selectPCategories();
 		}catch (PersistenceException e) {
