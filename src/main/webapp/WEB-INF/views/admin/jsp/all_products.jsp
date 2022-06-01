@@ -148,7 +148,7 @@
                                 src="http://localhost/rocketkurly/${itemData.main_img }">
                                 </div>
                                 <div>
-                                    <h6><a href="#"><c:out value="${itemData.name}"/></a></h6>
+                                    <h6><a href="product_detail.do?name=${itemData.name}"><c:out value="${itemData.name}"/></a></h6>
                                     <h5><c:out value="${itemData.price}"/>원</h5>
                                 </div>
                             </div>
@@ -275,11 +275,6 @@
                           </ul>
          				</c:when>
 						</c:choose>
-         				<!-- 선택 어케하노.. -->
-                          <!--   <li class="page-item active">
-                              <a class="page-link" href="javascript:void(0);">3</a>
-                            </li> -->
-        
                         
                         </nav>
                         <!--/ Basic Pagination -->
