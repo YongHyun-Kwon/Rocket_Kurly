@@ -40,5 +40,13 @@ from ITEM
 where  NAME like '%' || #{keyword} || '%'
  </select>
  
+ 
+<select id="selectDetail" resultType="itemDomain" parameterType="String">
+select name ,PRICE, DETAIL, MAIN_IMG, SALES, REG_DT
+from item
+where name=#{name}
+ 
+ 
+ </select>
 
 </mapper>
