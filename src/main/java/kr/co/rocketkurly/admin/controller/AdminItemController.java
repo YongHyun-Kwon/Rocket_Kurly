@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.rocketkurly.admin.service.ItemService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.ImgVO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 
@@ -87,13 +88,14 @@ public class AdminItemController {
 	}// allProducts
 	
 	@RequestMapping(value = "/admin/jsp/enrollProcess.do", method = { GET, POST })
-	public String enrollProcess(@ModelAttribute("admin") ItemVO iVO) {
+	public String enrollProcess(@ModelAttribute("admin") ItemVO iVO, @ModelAttribute("img") ImgVO imgVO) {
 
 
 		is.enrollProduct(iVO);
+		//is.enrollImg(imgVO);
 
 
-		return "/admin/jsp/add_product";
+		return "redirect:/admin/jsp/all_products.do";
 
 	}
 	
