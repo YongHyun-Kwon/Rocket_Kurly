@@ -2,16 +2,49 @@ package kr.co.rocketkurly.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.rocketkurly.admin.domain.MemberRegCntDomain;
+import kr.co.rocketkurly.admin.domain.OrderCntDomain;
+import kr.co.rocketkurly.admin.domain.QuestionCntDomain;
+import kr.co.rocketkurly.admin.domain.RevenueDomain;
+import kr.co.rocketkurly.admin.domain.UserHistoryDomain;
+import kr.co.rocketkurly.admin.service.DashboardService;
 import kr.co.rocketkurly.cust.vo.CouponVO;
 
 @Controller
 public class AdminController {
+	
+	@Autowired(required = false)
+	DashboardService dashService;
+	
 	@RequestMapping(value = "/admin/jsp/index.do", method = RequestMethod.GET)
-	public String mainPage() {
+	public String mainPage(Model model) {
+		
+		List<UserHistoryDomain> visitList = dashService.visitCount();
+		List<MemberRegCntDomain> regCntList = dashService.memberRegCount();
+		List<OrderCntDomain> orderCntList = dashService.orderCount();
+		List<QuestionCntDomain> questionCntList = dashService.questionCount();
+		List<RevenueDomain> revenueList = dashService.revenue();
+		
+		System.out.println(visitList);
+		System.out.println(regCntList);
+		System.out.println(orderCntList);
+		System.out.println(questionCntList);
+		System.out.println(revenueList);
+		
+		model.addAttribute("visitList", visitList);
+		model.addAttribute("regCntList", regCntList);
+		model.addAttribute("orderCntList", orderCntList);
+		model.addAttribute("questionCntList", questionCntList);
+		model.addAttribute("revenueList", revenueList);
 		
 		return "admin/jsp/index";
 		
