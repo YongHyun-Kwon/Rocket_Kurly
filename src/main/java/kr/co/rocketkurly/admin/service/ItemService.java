@@ -62,6 +62,17 @@ public class ItemService {
 		}
 		return list;
 	}
+	public ItemDomain searchDetail(String name) {
+		ItemDomain item= null;
+		try {
+			item=iDAO.selectDetail(name);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return item;
+	}
+	
 	
 	/**
 	 * @param bVO 
