@@ -17,6 +17,7 @@ import kr.co.rocketkurly.admin.domain.OrderCntDomain;
 import kr.co.rocketkurly.admin.domain.QuestionCntDomain;
 import kr.co.rocketkurly.admin.domain.RevenueDomain;
 import kr.co.rocketkurly.admin.domain.UserHistoryDomain;
+import kr.co.rocketkurly.admin.service.CouponService;
 import kr.co.rocketkurly.admin.service.DashboardService;
 import kr.co.rocketkurly.cust.vo.CouponVO;
 
@@ -25,6 +26,9 @@ public class AdminController {
 	
 	@Autowired(required = false)
 	DashboardService dashService;
+	
+	@Autowired(required = false)
+	CouponService cs;
 	
 	@RequestMapping(value = "/admin/jsp/index.do", method = RequestMethod.GET)
 	public String mainPage(Model model) {
@@ -72,7 +76,9 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "/admin/jsp/create_coupon.do", method = { GET,POST })
-	public String createCoupon(CouponVO cVO) {
+	public String createCoupon(Model model, CouponVO cVO) {
+		
+		cs.addCoupon(cVO);
 		
 		return "admin/jsp/create_coupon";
 		

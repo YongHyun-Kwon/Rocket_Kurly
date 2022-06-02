@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.dao.QuestionDAO;
+import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 
@@ -131,6 +132,22 @@ public class QuestionService {
 	public int pageScale() {
 		int pageScale=16;
 		return pageScale;
+	}
+	
+	/**
+	 * 문의 상세 조회
+	 * @param name
+	 * @return
+	 */
+	public QuestionDomain selectOneQ(int num) {
+		QuestionDomain qDomain = null;
+		try {
+			qDomain=qDAO.searchOneQ(num);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return qDomain;
 	}
 	
 }

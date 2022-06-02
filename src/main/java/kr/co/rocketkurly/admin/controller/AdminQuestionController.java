@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.rocketkurly.admin.service.QuestionService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.QuestionVO;
 
 @Controller
 public class AdminQuestionController {
@@ -73,11 +74,20 @@ public class AdminQuestionController {
 		model.addAttribute("questionList", qs.searchQuestion(bVO));
 		model.addAttribute("startPage", bVO.getStartPage());
 		model.addAttribute("endPage", bVO.getEndPage());
-		model.addAttribute("keyword", bVO.getKeyword());
+		model.addAttribute("keyword2", bVO.getKeyword());
 		model.addAttribute("currentPage", bVO.getCurrentPage());
 
 		return "admin/jsp/inquiry";
 
-	}// filterQuestions
+		}//filterQuestions
+	
+		@RequestMapping(value = "/admin/jsp/inquiry3.do", method = GET)
+		public String selectOneQuestion(Model model , QuestionVO qVO) {
+			model.addAttribute("questionData",qs.selectOneQ(qVO.getQuestion_no()));
+			
+			return "admin/jsp/inquiry";
+			
+		}// selectOneQuestion
+		
+	}// class
 
-}

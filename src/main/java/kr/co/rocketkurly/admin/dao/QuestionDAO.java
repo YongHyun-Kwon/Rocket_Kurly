@@ -6,6 +6,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
+import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.dao.MyBatisFramework;
 import kr.co.rocketkurly.cust.vo.BoardVO;
@@ -69,5 +70,24 @@ public class QuestionDAO {
 		return list;
 	}
 	
+	/**
+	 * 상품 상세 조회
+	 * @param name
+	 * @return
+	 * @throws PersistenceException
+	 */
+	public QuestionDomain searchOneQ(int num)throws PersistenceException{
+		QuestionDomain qDomain = null;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		qDomain=ss.selectOne("kr.co.rocketkurly.admin.dao.selectOneQuestion",num);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+		return qDomain;
+	}
 
 }

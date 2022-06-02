@@ -1,18 +1,14 @@
 package kr.co.rocketkurly.admin.service;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.dao.CouponDAO;
-import kr.co.rocketkurly.admin.domain.CouponDomain;
-import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.vo.CouponVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 
@@ -27,59 +23,38 @@ public class CouponService {
 	 * @param cVO
 	 * @return
 	 */
-	public int addCoupon(CouponVO cVO) {
-		List<MemberVO> mVOList = null;
-		int cnt =0;
+	public void addCoupon(CouponVO cVO) {
+		List<String>list = null;
+		String coupon_no = "";
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd"); 
+		String today = simpleDateFormat.format(date);
 		
+		int seq = cDAO.selectMaxCouponNo() + 1;
 		
 		try {
-
-			String coupon_no = cVO.getCoupon_no();
-			String coupon_name = cVO.getCoupon_name();
-			Date e_date = cVO.getE_date();
-			int discount = cVO.getDiscount();
 			
+			list = cDAO.selectAllMember();
+			
+			for(String id: list){
+				
+				// 쿠폰번호 생성
+				//C+YYYY+MM+DD+5자리 시퀀스
+				cVO.setCoupon_no(coupon_no.concat("C").concat(today).concat(String.format("%05d", seq++)));
+				
+				cVO.setMember_id(id);
 
-			cnt = cDAO.insertCoupon(mVOList);
-
+				cDAO.insertCoupon(cVO);
+				
+			}//end for
+				
+			
+			
 		} catch (PersistenceException pe) {
-
 			pe.printStackTrace();
 
 		} // end catch
 		
-		
-		return cnt;
 	}//addCoupon
-	
-	/**
-	 * 사용자 아이디 값 리스트로 저장 
-	 * @param cVO
-	 * @return
-	 */
-	public List<MemberVO> selectAllMember(){
-		List<MemberVO> mVOList = null;
-		
-		List<String> listId=new ArrayList<String>();
-		
-		MemberVO memVO = null;
-		
-		if( memVO.getId() != null ) {
-			
-			  for(MemberVO mVO : mVOList ){ 
-				  listId.add(mVO.getId()); 
-			  }//end for
-		}//end if
-		
-		
-		
-		try {
-			//listId값 어떻게 받을지 강구해볼 것
-			//mVOList=cDAO.insertCoupon(listId);
-		}catch( PersistenceException pe) {
-			pe.printStackTrace();
-		}//end catch
-		
-		return mVOList;
-	}//insertCoupon
+
 }//class

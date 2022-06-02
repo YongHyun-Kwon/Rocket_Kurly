@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ogani | Template</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -25,6 +26,77 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
+<style type="text/css">
+.list{
+	border: 1px solid #dfdfdf;
+	width: 850px; 
+	height: 151px; 
+	margin: 0px auto; 
+	margin-bottom: 10px;"
+	box-sizing: border-box;
+	word-break: break-all;
+	}
+.title{
+	padding-bottom: 23px;
+    font-weight: 700;
+    font-size: 28px;
+    color: #333;
+    line-height: 35px;
+    letter-spacing: -1px;
+    text-align: center;
+    
+	  }
+.list_on{
+		margin-top: 23px;
+		word-break: break-all;
+		margin: 0px auto;
+		}
+.list ul{
+	list-style-type: none;
+	padding: 0;
+    margin: 0;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+	}
+
+.list_on li{
+	float: left;
+    width: 263px;
+    padding: 16px 44px 0 39px;
+    font-weight: 400;
+    letter-spacing: 0;
+    word-break: break-all;
+    
+}
+.list_on a{
+	text-decoration: none;
+	overflow: hidden;
+    float: left;
+    max-width: 180px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #333;
+    letter-spacing: -1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    background-color: transparent;
+	}
+a:hover{
+		 font-weight: 700;
+		 color:#7fad39;
+		 }
+</style>
+<script type="text/javaScript">
+$(function () {
+	
+		    
+		  
+})//ready
+</script>
 
 <body>
     <!-- Page Preloder -->
@@ -56,27 +128,26 @@
 
     <!-- Product Section Begin -->
     <section class="product spad">
+    
+    <!--중분류 카테고리 -->
+    <h3 class="title">채소</h3>
+    <div class="list">
+    	<ul class="list_on">
+    		<li><a href="#">친환경</a></li>
+    		<li><a href="#">고구마·감자·당근</a></li>
+    		<li><a href="#">시금치·쌈채소·나물</a></li>
+    		<li><a href="#">브로콜리·파프리카·양배추</a></li>
+    		<li><a href="#">양파·대파·마늘·배추</a></li>
+    		<li><a href="#">오이·호박·고추</a></li>
+    		<li><a href="#">냉동·이색·간편채소</a></li>
+    		<li><a href="#">콩나물·버섯</a></li>
+    	</ul>
+    </div>
+    <!--중분류 카테고리 끝  -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5">
-                    <div class="sidebar">
-                        <div class="sidebar__item">
-                            <h4>전체 카테고리</h4>
-                            <ul>
-	                            <li><a href="#">채소</a></li>
-	                            <li><a href="#">과일·견과·쌀</a></li>
-	                            <li><a href="#">수산·해산·건어물</a></li>
-	                            <li><a href="#">정육·계란</a></li>
-                            </ul>
-                        </div>
-                       
-                       
-                        
-                        
-                    </div>
-                </div>
-                <div class="col-lg-9 col-md-7">
-                    <div class="filter__item">
+                <div class="col-lg-9 col-md-7" style="margin: 0px auto;">
+                    <div class="filter__item" style="border: 0px;">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
@@ -87,8 +158,6 @@
                                     </select>
                                 </div>
                             </div>
-                            
-                            
                         </div>
                     </div>
                     <div class="row">
@@ -272,7 +341,8 @@
         </div>
     </section>
     <!-- Product Section End -->
-
+    
+                
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
     <!-- Js Plugins -->
