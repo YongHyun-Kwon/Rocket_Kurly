@@ -36,7 +36,7 @@ $(function () {
 		            })
 		      
 		    });
-		    $('.p-category > li').mouseleave(function(){
+		    $('#p-category > li').click(function(){
 		        let menu_i = $(this).index();
 
 		      

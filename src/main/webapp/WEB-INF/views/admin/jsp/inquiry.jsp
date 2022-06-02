@@ -112,8 +112,8 @@ h6 {
                           placeholder="Search..."
                           aria-label="Search..."
                           aria-describedby="basic-addon-search31"
-                          id="keyword"
-                          name="keyword"
+                          id="keyword2"
+                          name="keyword2"
                         />
                         </div>
                       </form>
@@ -142,7 +142,7 @@ h6 {
 											<td><c:out value="${questionData.reg_dt}"/></td>
 											<td><c:out value="${questionData.answer}"/></td>
 											<td>
-											<button type="button"
+											<button id="answerBtn" type="button"
                           class="btn-dark"
                           data-bs-toggle="modal"
                           data-bs-target="#basicModal">답변 작성</button></td>
@@ -338,7 +338,29 @@ h6 {
 
 
 	<script type="text/javascript">
+$(function () {
+	
+	$("writeBtn").click(function(){
 		
+	
+		$.ajax({
+			url : "http://localhost/rocketkurly/admin/jsp/inquiry.do",
+			type : "GET",
+			data :{ 
+				
+				},
+			async : true,
+			dataType: 'text',
+			
+			error : function(xhr) {
+				alert(xhr.text + "/" + xhr.status);
+			},
+			success : function( jsonObj ) {
+				
+			}
+		})//ajax
+	})//click
+})// ready
 	</script>
 
 

@@ -58,7 +58,7 @@
 $(function () {
 	$("#couponBtn").click(function(){
 		
-		if($("#coupon_name").val() == "" || $("#coupon_date").val() == "" || $("#discount").val() == "" || $("#coupon_code").val() == "" ){
+		if($("#coupon_name").val() == "" || $("#coupon_date").val() == "" || $("#discount").val() == "" || $("#coupon_no").val() == "" ){
 			alert("모든 입력사항을 기재해주세요.");
 		}else{
 		alert("쿠폰이 발행되었습니다.");
@@ -113,25 +113,25 @@ $(function () {
                     <div class="mb-3 row">
                         <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 명</label>
                         <div class="col-md-10">
-                            <input id="coupon_name" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="coupon_name" name="coupon_name" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label style="font-size: 17px;" for="html5-text-input" class="col-md-2 col-form-label">유효기간</label>
                         <div class="col-md-10">
-                            <input id="coupon_date" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="coupon_date" name="e_date" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">할인율</label>
                         <div class="col-md-10">
-                            <input id="discount"  style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="discount" name="discount"  style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 코드</label>
                         <div class="col-md-10">
-                            <input id="coupon_code"  style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+                            <input id="coupon_no" name="coupon_no" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
                         </div>
                     </div>
 									

@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.cust.dao.MyBatisFramework;
+import kr.co.rocketkurly.cust.domain.MemberDomain;
+import kr.co.rocketkurly.cust.vo.CouponVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 
 
@@ -20,32 +22,56 @@ public class CouponDAO {
 	 * @return
 	 * @throws PersistenceException
 	 */
-	public int insertCoupon(List<MemberVO> mVOList) throws PersistenceException {
-
-		
-		int cnt = 0;
+	public void insertCoupon(CouponVO cVO) throws PersistenceException {
 
 		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
 
-		cnt = ss.insert("kr.co.rocketkurly.admin.dao.insertCoupon", mVOList);
-
-		if (cnt == 1) {
-
-			ss.commit();
-
-		} // end if
-
+		ss.selectList("kr.co.rocketkurly.admin.dao.insertCoupon", cVO);
+		
+	
 		if (ss != null) {
 
 			ss.close();
 
 		} // end if
+		
+		
 
-		return cnt;
+	}// insertCoupon
+	
+	/**
+	 * 모든 회원의 아이디 조회
+	 * @return
+	 */
+	public List<String> selectAllMember(){
+		List<String> list = null;
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		list = ss.selectList("kr.co.rocketkurly.admin.dao.selectAllmember");
+		
+		if(ss!=null) {
+			ss.close();
+		}
+		
+		return list;
+	}//selectAllMember
 
-	}// insertMember
-
-
+	/**
+	 * 쿠폰 번호의 최대값 조회
+	 * @return
+	 */
+	public int selectMaxCouponNo(){
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		int maxSeq = ss.selectOne("kr.co.rocketkurly.admin.dao.selectMaxCouponNo");
+		
+		if(ss!=null) {
+			ss.close();
+		}
+		
+		return maxSeq;
+	}//selectMaxCouponNo
 	
 
-}
+}//class

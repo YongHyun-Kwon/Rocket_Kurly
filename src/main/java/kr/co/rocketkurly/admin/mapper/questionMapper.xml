@@ -34,6 +34,11 @@
 		where title like '%' || #{keyword} || '%'
 	 </select>
 
- 
+ 	
+ 	<select id="selectOneQuestion" resultType="QuestionDomain" parameterType="int">
+ 		select  question_no, member_id, order_no, title, type, contents, answer, reg_dt
+ 		from question
+ 		where question_no = #{question_no}
+ 	</select>
 
 </mapper>
