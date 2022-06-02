@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.dao.DashBoardDAO;
 import kr.co.rocketkurly.admin.domain.MemberRegCntDomain;
+import kr.co.rocketkurly.admin.domain.NoticeDomain;
 import kr.co.rocketkurly.admin.domain.OrderCntDomain;
 import kr.co.rocketkurly.admin.domain.QuestionCntDomain;
 import kr.co.rocketkurly.admin.domain.RevenueDomain;
 import kr.co.rocketkurly.admin.domain.UserHistoryDomain;
+import kr.co.rocketkurly.admin.vo.InquiryVO;
 
 @Component
 public class DashboardService {
@@ -88,5 +90,47 @@ public class DashboardService {
 		return list;
 		
 	}// revenue
+	
+	public int salesInquiry(InquiryVO iVO) {
+		
+		int revenue = 0;
+		
+		try {
+			revenue = dashDAO.selectSalesInquiry(iVO);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}// end catch
+		
+		return revenue;
+		
+	}// salesInquiry
+	
+	public int salesVolumeInquiry(InquiryVO iVO) {
+		
+		int salesVolume = 0;
+		
+		try {
+			salesVolume = dashDAO.selectSalesVolumeInquiry(iVO);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}// end catch
+		
+		return salesVolume;
+		
+	}// salesVolumeInquiry
+	
+	public List<NoticeDomain> notice() {
+		
+		List<NoticeDomain> noticeList = null;
+		
+		try {
+			noticeList = dashDAO.selectNotice();
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}// end catch
+		
+		return noticeList;
+		
+	}// notice
 	
 }// class

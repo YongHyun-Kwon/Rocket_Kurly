@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.rocketkurly.admin.domain.MemberRegCntDomain;
+import kr.co.rocketkurly.admin.domain.NoticeDomain;
 import kr.co.rocketkurly.admin.domain.OrderCntDomain;
 import kr.co.rocketkurly.admin.domain.QuestionCntDomain;
 import kr.co.rocketkurly.admin.domain.RevenueDomain;
@@ -33,18 +34,14 @@ public class AdminController {
 		List<OrderCntDomain> orderCntList = dashService.orderCount();
 		List<QuestionCntDomain> questionCntList = dashService.questionCount();
 		List<RevenueDomain> revenueList = dashService.revenue();
-		
-		System.out.println(visitList);
-		System.out.println(regCntList);
-		System.out.println(orderCntList);
-		System.out.println(questionCntList);
-		System.out.println(revenueList);
+		List<NoticeDomain> noticeList = dashService.notice();
 		
 		model.addAttribute("visitList", visitList);
 		model.addAttribute("regCntList", regCntList);
 		model.addAttribute("orderCntList", orderCntList);
 		model.addAttribute("questionCntList", questionCntList);
 		model.addAttribute("revenueList", revenueList);
+		model.addAttribute("noticeList", noticeList);
 		
 		return "admin/jsp/index";
 		

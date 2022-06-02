@@ -161,7 +161,7 @@
             	
             	<%
             	String date = "";
-            	for(int i = 0; i < visitList.size(); i++) {
+            	for(int i = 0; i < visitList.size() ; i++) {
             	
             		date = visitList.get(i).getLogind_date();
 				%>
@@ -364,7 +364,73 @@
         const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
         totalRevenueChart.render();
       }
-   })// ready
+      
+      $("#rvBtn").click(function() {
+    	  
+    	  if($("#rStartDate").val() == ""){
+    		  alert("시작일을 선택해주세요");
+    		  return;
+    	  }// end if
+    	  
+    	  if($("#rEndDate").val() == ""){
+    		  alert("종료일을 선택해주세요");
+    		  return;
+    	  }// end if
+    	  
+    	  $.ajax({
+    		  url : "http://localhost/rocketkurly/admin/jsp/revenue.do",
+    		  type : "GET",
+    		  data : {
+    			  stdate: $("#rStartDate").val(),
+    			  eddate: $("#rEndDate").val()
+    		  },
+    		  async : true,
+    		  dataType : "text",
+    		  error : function(xhr) {
+    			  alert(xhr.text + "/" + xhr.status);
+    		  },
+    		  success : function( revenue ) {
+    			  
+    			  $("#revenue").html(revenue + "원");
+    		  },
+    		  
+    	  }) // ajax
+    	  
+      })// click
+      
+      $("#svBtn").click(function() {
+    	  if($("#sStartDate").val() == ""){
+    		  alert("시작일을 선택해주세요");
+    	  }// end if
+    	  
+    	  if($("#sEndDate").val() == ""){
+    		  alert("종료일을 선택해주세요");
+    	  }// end if
+    	  
+    	  $.ajax({
+    		  url : "http://localhost/rocketkurly/admin/jsp/salesvolume.do",
+    		  type : "GET",
+    		  data : {
+    			  stdate: $("#sStartDate").val(),
+    			  eddate: $("#sEndDate").val()
+    		  },
+    		  async : true,
+    		  dataType : "text",
+    		  error : function(xhr) {
+    			  alert(xhr.text + "/" + xhr.status);
+    		  },
+    		  success : function( salesVolume ) {
+    			  
+    			  $("#salesVolume").html(salesVolume + "개");
+    			  
+    		  },
+    		  
+    	  })// ajax
+    	  
+      })// click
+      
+   });// ready
+   
     </script>
 
     
@@ -402,6 +468,7 @@
                     <div style="width: 600px ;margin-left: 30px; height: 400px">
                         <div class="card">
 							<div class="table-responsive text-nowrap">
+							<h5 class="card-header m-0 me-2 pb-3">일자별 요약</h5>
 								<table class="table">
 									<thead>
 										<tr>
@@ -449,51 +516,44 @@
                     <!--/ 일자별 요약 -->
                 </div>
 
-                <div class="row" style="margin: 40px">
+                <div class="row" style="margin: 20px">
                     <!-- 매출 조회 -->
-                    <div class="card mb-4" style="width: 500px; height: 400px;">
+                    <div class="card mb-4" style="width: 500px; height: 730px;">
                         <div class="col-md-8" style="width: 450px">
                             <h5 class="card-header m-0 me-2 pb-3">매츨 조회</h5>
                             <div style="padding: 20px">
-                                <select id="largeSelect" class="form-select form-select-lg">
-                                    <option>월 매출액</option>
-                                    <option value="1">년 매출액</option>
-                                    <option value="2">일 매출액</option>
-                                </select>
+                            	<label>매출 조회</label><br/> 
+                               <label style="margin-top: 15px;">시작일</label><input class="form-control" id="rStartDate" type="date" id="html5-date-input"/>
+                               <label style="margin-top: 10px;">종료일</label><input class="form-control" id="rEndDate" type="date" id="html5-date-input" style="margin-top: 10px;"/>
                                 <div class="input-group" style="margin-top: 20px">
-                                    <span style="width: 400px" class="input-group-text" id="basic-addon14">0원</span>
+                                    <span style="width: 400px" id="revenue" class="input-group-text" >0원</span>
                                 </div>
-                                <select  class="form-select form-select-lg" style="margin-top: 40px">
-                                    <option>월 판매수량</option>
-                                    <option value="1">년 판매수량</option>
-                                    <option value="2">일 판매수량</option>
-                                </select>
-                                <div class="input-group" style="margin-top: 20px">
-                                    <span style="width: 400px" class="input-group-text" >0개</span>
+                                <button type="button" id="rvBtn" class="btn btn-info" style="margin-top: 15px;">매출액 조회</button>
+                            </div>
+                            <div style="padding: 20px">
+                            	<label>주문수량 조회</label><br/>
+                                <label style="margin-top: 15px;">시작일</label><input class="form-control" id="sStartDate" type="date" id="html5-date-input" />
+                                <label style="margin-top: 10px;">종료일</label><input class="form-control" id="sEndDate" type="date" id="html5-date-input" style="margin-top: 10px;"/>
+                                <div class="input-group" style="margin-top: 15px">
+                                    <span style="width: 400px" id="salesVolume" class="input-group-text" >0개</span>
                                 </div>
-
+                                <button type="button" id="svBtn" class="btn btn-info" style="margin-top: 15px;">주문량 조회</button>
                             </div>
                         </div>
                     </div>
                     <!--/매출 조회-->
 
                     <!-- 공지사항 -->
-                    <div class="card mb-4" style="width: 500px; height: 400px; margin-left: 20px">
+                    <div class="card mb-4" style="width: 500px; height: 730px; margin-left: 20px">
                         <div class="col-md-8" style="width: 450px;">
                             <h5 class="card-header m-0 me-2 pb-3">공지사항</h5>
-                            <div style="padding-left: 20px; display: flex; margin-bottom: 30px">
-                                <img style="width: 70px ;border-radius: 50%;margin-right: 20px" src="../assets/img/avatars/1.png">
-                                <span style="width: 300px" class="input-group-text" >택배발송</span>
-                            </div>
-                            <div style="padding-left: 20px; display: flex; margin-bottom: 30px">
-                                <img style="width: 70px ;border-radius: 50%;margin-right: 20px" src="../assets/img/avatars/1.png">
-                                <span style="width: 300px" class="input-group-text" >주문공지</span>
-                            </div>
-                            <div style="padding-left: 20px; display: flex; margin-bottom: 30px">
-                                <img style="width: 70px ;border-radius: 50%;margin-right: 20px" src="../assets/img/avatars/1.png">
-                                <span style="width: 300px" class="input-group-text" >배송언제와요</span>
-                            </div>
-
+							<c:forEach var="notice" items="${ noticeList }" begin="0" end="7" step="1">
+	                            <div style="margin-left: 20px; margin-bottom: 8px">
+	                               	<input type="text" class="form-control" readonly="readonly" style="width: 450px; background-color: #ffffff" value="${ notice.notice_main }">
+	                                <span style="margin-top: 10px; font-size: 10px;">${ notice.sign_date }</span>
+	                            </div>
+							</c:forEach>                           
+						
                             <button style="float: right" class="btn-dark">전송</button>
 
                         </div>

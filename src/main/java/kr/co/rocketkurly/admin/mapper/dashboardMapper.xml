@@ -23,5 +23,25 @@
 	<select id="revenue" resultType="revenueDomain">
 		select * from revenue_view
 	</select>
+	
+	<select id="salesInquiry" resultType="int">
+		 select nvl(sum(price), 0)
+		 from ordering
+		 where to_char(order_date,'yyyy-mm-dd') BETWEEN #{ stdate } AND #{ eddate }
+	</select>
+	
+	<select id="salesVolume" resultType="int">
+		 select nvl(count(*), 0)
+		 from ordering
+	     where to_char(order_date,'yyyy-mm-dd') BETWEEN #{ stdate } AND #{ eddate }
+	</select>
+	
+	<select id="notice" resultType="noticeDomain">
+		<![CDATA[
+		select notice_num, notice_main, to_char(sign_date, 'yyyy-mm-dd') sign_date
+		from (select * from announcement)
+		where rownum <= 8 order by sign_date desc
+		]]>
+	</select>
 
 </mapper>

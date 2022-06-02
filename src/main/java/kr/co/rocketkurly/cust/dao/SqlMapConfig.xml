@@ -20,6 +20,7 @@
 	<typeAlias type="kr.co.rocketkurly.admin.domain.QuestionCntDomain" alias="questionCntDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.RevenueDomain" alias="revenueDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.UserHistoryDomain" alias="userHistoryDomain"/>
+	<typeAlias type="kr.co.rocketkurly.admin.domain.NoticeDomain" alias="noticeDomain"/>
 	
 </typeAliases>
   <environments default="development">
