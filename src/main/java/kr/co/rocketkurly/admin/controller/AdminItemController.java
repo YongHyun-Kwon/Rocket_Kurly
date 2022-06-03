@@ -101,7 +101,8 @@ public class AdminItemController {
 	
 	@RequestMapping(value = "/admin/jsp/product_detail.do", method = GET)
 	public String detail(Model model , ItemVO iVO) {
-		model.addAttribute("productData",is.searchDetail(iVO.getName()));
+		
+		model.addAttribute("productData",is.searchDetail(iVO.getItem_no()));
 		return "admin/jsp/product_detail";
 		
 	}// allProducts

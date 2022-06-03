@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 좌우로 가기 바꿀필요있음 (뭔가 이상함) -->
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -148,7 +149,7 @@
                                 src="http://localhost/rocketkurly/${itemData.main_img }">
                                 </div>
                                 <div>
-                                    <h6><a href="product_detail.do?name=${itemData.name}"><c:out value="${itemData.name}"/></a></h6>
+                                    <h6><a href="product_detail.do?item_no=${itemData.item_no}"><c:out value="${itemData.name}"/></a></h6>
                                     <h5><c:out value="${itemData.price}"/>원</h5>
                                 </div>
                             </div>

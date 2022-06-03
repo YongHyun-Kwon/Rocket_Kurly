@@ -83,12 +83,12 @@ public class ItemDAO {
 	
 	}
 	
-	public ItemDomain selectDetail(String name)throws PersistenceException{
+	public ItemDomain selectDetail(int num)throws PersistenceException{
 		ItemDomain item = null;
 		//MyBatis handler 얻기
 		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
 		//쿼리문실행
-		item=ss.selectOne("kr.co.rocketkurly.admin.dao.selectDetail",name);
+		item=ss.selectOne("kr.co.rocketkurly.admin.dao.selectDetail",num);
 		//MyBatis handler 종로
 		
 		if(ss!=null) {

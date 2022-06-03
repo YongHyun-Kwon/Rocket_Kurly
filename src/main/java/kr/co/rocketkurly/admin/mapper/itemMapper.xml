@@ -16,7 +16,6 @@
 	from ITEM
 	where ITEM_NO between #{StartNum} and #{endNum}
 
-
 	</select>
 	
 <select id="itemCnt" resultType="int" >
@@ -42,12 +41,29 @@ where  NAME like '%' || #{keyword} || '%'
  </select>
  
  
-<select id="selectDetail" resultType="itemDomain" parameterType="String">
-select name ,PRICE, DETAIL, MAIN_IMG, SALES, REG_DT
+<select id="selectDetail" resultType="itemDomain" parameterType="int">
+select ITEM_NO,name ,PRICE, DETAIL, MAIN_IMG, SALES, REG_DT
 from item
-where name=#{name}
+where ITEM_NO=#{ITEM_NO}
  
+ </select>
  
+ <select id="selectUserItem" resultType="itemDomain" parameterType="boardVO">
+select  filter,ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from(select rownum filter, ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from ITEM
+where  C_CATEGORY_ID like '%' || #{keyword} || '%'
+order by item_no)
+where filter between #{StartNum} and #{endNum}
+ </select>
+  
+ <select id="selectItemDetailCategory" resultType="itemDomain" parameterType="boardVO">
+select  filter,ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from(select rownum filter, ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from ITEM
+where  C_CATEGORY_ID = #{keyword}
+order by item_no)
+where filter between #{StartNum} and #{endNum}
  </select>
 
 </mapper>

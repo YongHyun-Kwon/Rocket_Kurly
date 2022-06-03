@@ -143,7 +143,7 @@
         </div>
         
     </section>
-    <a href="shoping-cart.do" class="primary-btn">뒤로가기</a>
+    <a href="javascript:history.back()" class="primary-btn">뒤로가기</a>
  </div>
                 
                 

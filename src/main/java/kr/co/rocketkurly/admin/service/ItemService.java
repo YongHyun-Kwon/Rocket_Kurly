@@ -67,10 +67,10 @@ public class ItemService {
 		}
 		return list;
 	}
-	public ItemDomain searchDetail(String name) {
+	public ItemDomain searchDetail(int num) {
 		ItemDomain item= null;
 		try {
-			item=iDAO.selectDetail(name);
+			item=iDAO.selectDetail(num);
 		}catch (PersistenceException e) {
 			
 			e.printStackTrace();			
@@ -148,6 +148,10 @@ public class ItemService {
 	 */
 	public int pageScale() {
 		int pageScale=16;
+		return pageScale;
+	}
+	public int userPageScale() {
+		int pageScale=12;
 		return pageScale;
 	}
 	
