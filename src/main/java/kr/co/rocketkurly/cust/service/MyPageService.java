@@ -1,5 +1,7 @@
 package kr.co.rocketkurly.cust.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -7,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import kr.co.rocketkurly.admin.domain.CouponDomain;
+import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.dao.MyPageDAO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 
@@ -48,6 +52,11 @@ public class MyPageService {
 
 	}// modifyMember
 	
+	/**
+	 * È¸¿øÅ»Åð Service method
+	 * @param id
+	 * @return
+	 */
 	public String resignMember(String id) {
 		
 		int cnt = 0;
@@ -72,5 +81,44 @@ public class MyPageService {
 		return msg;
 		
 	}// modifyMember
+	
+	/**
+	 * 1:1 ¹®ÀÇ Á¶È¸ Service method
+	 * @param id
+	 * @return
+	 */
+	public List<QuestionDomain> inquiry(String id) {
+		
+		List<QuestionDomain> list = null;
+		
+		try {
+			list = myDAO.selectQuestion(id);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}// end catch
+		
+		return list;
+		
+	}// inquiry
+	
+	/**
+	 * ÄíÆùÁ¶È¸ Service method
+	 * @param id
+	 * @return
+	 */
+	public List<CouponDomain> coupon(String id) {
+		
+		List<CouponDomain> list = null;
+		
+		try {
+			list = myDAO.selectCoupon(id);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}// end catch
+			
+		
+		return list;
+		
+	}// coupon
 
 }

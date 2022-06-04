@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -53,16 +54,27 @@ table{width:700px;}
                                 <h1 class="mb-4">쿠폰 조회</h1>
                                 <table>
                                 	<tr style="border-bottom: 1px solid #dfdfdf;">
+                                		<th>쿠폰 번호</th>
                                 		<th>쿠폰 명</th>
-                                		<th>해당 상품</th>
+                                		<th>유효 기간</th>
                                 		<th>할인율</th>
                                 	</tr>
-                                	<tr>
-                                		<td>전체 10% 할인</td>
-                                		<td>모든 품목</td>
-                                		<td>10%</td>
-                                	</tr>
-                                	
+                                	<c:if test="${ empty couponList }">
+                                		<tr>
+                                			<td colspan="4">보유하고 계신 쿠폰이 없습니다.</td>
+                                		</tr>
+                                	</c:if>
+                                	<c:if test="${ not empty couponList }">
+                                		<c:forEach var="coupon" items="${ couponList }">
+                                		  	<tr>
+	                                			<td><c:out value="${ coupon.coupon_no }"/></td>
+	                                			<td><c:out value="${ coupon.coupon_name }"/></td>
+	                                			<td><fmt:formatDate value="${ coupon.p_date }" pattern="yyyy-MM-dd"/>
+	                                				~ <fmt:formatDate value="${ coupon.e_date }" pattern="yyyy-MM-dd"/></td>
+	                                			<td><c:out value="${ coupon.discount }"/> %</td> 
+                                			</tr>
+                                		</c:forEach>
+                                	</c:if>
                                 </table>
                                 </div>
                             </div>

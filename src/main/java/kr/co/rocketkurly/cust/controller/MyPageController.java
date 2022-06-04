@@ -3,6 +3,8 @@ package kr.co.rocketkurly.cust.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.rocketkurly.admin.domain.CouponDomain;
+import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.service.MemberService;
 import kr.co.rocketkurly.cust.service.MyPageService;
@@ -142,8 +146,14 @@ public class MyPageController {
 	}// favorite
 
 	@RequestMapping(value = "/inquiry.do", method = { GET, POST })
-	public String inquiryPage() {
+	public String inquiryPage(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
 
+		List<QuestionDomain> inquiryList = mps.inquiry((String) session.getAttribute("custID"));
+		
+		model.addAttribute("inquiryList", inquiryList);
+		
 		return "inquiry";
 
 	}// inquiry
@@ -156,8 +166,14 @@ public class MyPageController {
 	}// inquiry
 
 	@RequestMapping(value = "/coupon.do", method = { GET, POST })
-	public String couponPage() {
+	public String couponPage(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
 
+		List<CouponDomain> couponList = mps.coupon((String) session.getAttribute("custID"));
+		
+		model.addAttribute("couponList", couponList);
+		
 		return "coupon";
 
 	}// inquiry

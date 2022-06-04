@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -59,22 +60,24 @@ span{font-weight: bold;}
                                 		<th>작성일자</th>
                                 		<th>답변 여부</th>
                                 	</tr>
-                                	<tr >
-                                		<td><a href="inquiry-detail.do">반품 문의</a></td>
-                                		<td>주문/결제/반품/교환문의</td>
-                                		<td>2022-05-23</td>
-                                		<td><span>완료</span></td>
-                                	</tr>
-                                	<tr>
-                                		<td>상품 교환 문의</td>
-                                		<td>주문/결제/반품/교환문의</td>
-                                		<td>2022-05-24</td>
-                                	</tr>
-                                	<tr >
-                                		<td>기타 문의</td>
-                                		<td>기타 문의</td>
-                                		<td>2022-05-25</td>
-                                	</tr>
+                                	<c:if test="${ empty inquiryList }">
+                                		<tr>
+                                			<td colspan="4">작성하신 문의가 없습니다.</td>
+                                		</tr>
+                                	</c:if>
+                                	<c:if test="${ not empty inquiryList }">
+                                		<c:forEach var="inquiry" items="${ inquiryList }">
+                                			<tr>
+                                				<td><a href="inquiry-detail.do?qno=${ inqury.question_no }"><c:out value="${ inquiry.title }"/></a></td>
+                                				<td><c:out value="${ inquiry.type }"/></td>
+                                				<td><fmt:formatDate value="${ inquiry.reg_dt }" pattern="yyyy-MM-dd"/>
+                                				<c:if test="${ empty inquiry.answer }">
+                                					<td>답변 미완료</td>
+                                				</c:if>
+                                				<td>완료</td>
+                                			</tr>
+                                		</c:forEach>
+                                	</c:if>
                                 </table>
                                 </div>
                                 <div align="right" style="padding: 5px">

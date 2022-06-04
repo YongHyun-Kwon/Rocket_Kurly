@@ -41,6 +41,13 @@
 		where member_id=#{ id }
 
 	</update>
-
+	
+	<select id="inquiry" resultType="questionDomain" parameterType="String">
+		select * from question where member_id = #{ id }
+	</select>	
+	
+	<select id="coupon" resultType="couponDomain" parameterType="String">
+		select * from cupon where member_id = #{ id }	
+	</select>
 
 </mapper>

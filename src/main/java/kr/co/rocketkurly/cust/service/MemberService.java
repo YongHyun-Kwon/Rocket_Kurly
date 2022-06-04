@@ -39,8 +39,9 @@ public class MemberService {
 		try {
 
 			md = mDAO.selectLoginCheck(mVO.getId());
-			pwFlag = pwCheck(mVO.getPw(), md.getPw());
-
+			if (md != null) {
+				pwFlag = pwCheck(mVO.getPw(), md.getPw());
+			}
 		} catch (PersistenceException pe) {
 
 			pe.printStackTrace();
@@ -52,11 +53,10 @@ public class MemberService {
 			md = null;
 
 		} else {
-			
+
 			cnt = mDAO.insertUserHistory(md.getMember_id());
 
-		}// end else
-		
+		} // end else
 
 		return md;
 
@@ -83,68 +83,69 @@ public class MemberService {
 		} // end catch
 
 		if (findID == null) {
-			
+
 			findID = "fail";
-			
+
 		} // end else
-		
+
 		return findID;
 
 	}// findID
-	
+
 	/**
 	 * 비밀번호 찾기 service method
+	 * 
 	 * @param mVO
 	 * @return
 	 */
 	public String findPW(MemberVO mVO) {
-		
+
 		String id = "";
 		String pw = "fail";
-		
+
 		try {
-			
+
 			id = mDAO.selectFindPW(mVO);
-			
+
 		} catch (PersistenceException pe) {
-			
+
 			pe.printStackTrace();
-			
+
 		} // end catch
-		
+
 		if (id != null) {
-			
+
 			pw = modifyPW(mVO);
-			
+
 		} // end if
-		
+
 		return pw;
-		
+
 	}// findID
-	
+
 	/**
 	 * 비밀번호 변경 service method
+	 * 
 	 * @param mVO
 	 * @return
 	 */
 	public String modifyPW(MemberVO mVO) {
-		
+
 		String pw = "";
 		String cipher = "";
-		
-		
+
 		try {
-			
+
 			pw = tempPassword(16);
 			cipher = pwEncoder.encode(pw);
 			mVO.setPw(cipher);
-			
+
 			mDAO.updatePW(mVO);
-			
-		} catch( PersistenceException pe ) {
+
+		} catch (PersistenceException pe) {
 			pe.printStackTrace();
 		}
-		
+
 		return pw;
 	}
 
@@ -244,35 +245,33 @@ public class MemberService {
 		return pwFlag;
 
 	}// pwCheck
-	
+
 	/**
 	 * 임시비밀번호 생성 method
+	 * 
 	 * @param leng
 	 * @return
 	 */
-	public static String tempPassword(int length){
+	public static String tempPassword(int length) {
 		int index = 0;
-		char[] charArr = new char[] {
-				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-				'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-				'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-		};
+		char[] charArr = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+				'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a',
+				'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+				'w', 'x', 'y', 'z' };
 
 		StringBuffer password = new StringBuffer();
 		Random random = new Random();
 
-		for (int i = 0; i < length ; i++) {
+		for (int i = 0; i < length; i++) {
 			double rd = random.nextDouble();
 			index = (int) (charArr.length * rd);
-			
+
 			password.append(charArr[index]);
-			
-		}// end for
-		
-		return password.toString(); 
-		
-	}// tempPassword	
+
+		} // end for
+
+		return password.toString();
+
+	}// tempPassword
 
 }
