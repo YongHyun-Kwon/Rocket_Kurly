@@ -14,6 +14,7 @@
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.CouponVO" alias="CouponVO"/>
 	
 	<typeAlias type="kr.co.rocketkurly.admin.domain.ItemDomain" alias="itemDomain"/>
+	<typeAlias type="kr.co.rocketkurly.cust.domain.MemberDomain" alias="MemberDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.QuestionDomain" alias="questionDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.MemberRegCntDomain" alias="memberRegCntDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.OrderCntDomain" alias="orderCntDomain"/>
@@ -38,6 +39,7 @@
     <mapper resource="kr/co/rocketkurly/cust/mapper/mypageMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/itemMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/imgMapper.xml"/>
+    <mapper resource="kr/co/rocketkurly/admin/mapper/memberMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/categoriesMapper.xml"/>
      <mapper resource="kr/co/rocketkurly/admin/mapper/questionMapper.xml"/>
      <mapper resource="kr/co/rocketkurly/admin/mapper/couponMapper.xml"/>

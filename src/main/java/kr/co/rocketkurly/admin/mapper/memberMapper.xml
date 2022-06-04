@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.rocketkurly.admin.dao">
+	
+	<select id="selectMember" resultType="MemberDomain" parameterType="MemberVO">
+	select filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT	
+	from (select rownum filter, MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT
+	from MEMBER
+	order by MEMBER_ID)
+	where filter between #{StartNum} and #{endNum}
+
+
+	</select>
+	
+	<select id="memberCnt" resultType="int" >
+	 select count(*) cnt
+	 from member
+	 </select>
+	 
+	<select id="selectKeywordMember" resultType="MemberDomain" parameterType="MemberVO">
+
+	select  filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT
+	from(select rownum filter, MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT
+	from MEMBER
+	where  MEMBER_ID like '%' || #{keyword} || '%'
+	order by MEMBER_ID)
+	where filter between #{StartNum} and #{endNum}
+
+	</select> 
+	
+	
+	<select id="keywordMCnt" resultType="int" parameterType="MemberVO">
+	 select count(*) cnt 
+	from MEMBER
+	where  MEMBER_ID like '%' || #{keyword} || '%'
+	 </select>
+	
+	<select id="selectMDetail" resultType="MemberDomain" parameterType="String">
+	select member_id,email,pw,name,nickname,tel,addr,address,status,reg_dt,mod_dt
+	from member
+	where member_id=#{member_id}
+ 	</select>
+ 	
+ 	<update id="editStatus" parameterType="MemberDomain">
+		update member
+		set status=#{status}
+		where member_id=#{member_id}
+	</update>
+	
+	
+ 
+</mapper>

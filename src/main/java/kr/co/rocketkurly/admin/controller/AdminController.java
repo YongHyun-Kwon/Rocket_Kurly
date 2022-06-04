@@ -88,12 +88,12 @@ public class AdminController {
 		
 	}// customerGrade
 	
-	@RequestMapping(value = "/admin/jsp/customer.do", method = GET)
-	public String customer() {
-		
-		return "admin/jsp/customer";
-		
-	}// customer
+//	@RequestMapping(value = "/admin/jsp/customer1.do", method = GET)
+//	public String customer() {
+//		
+//		return "admin/jsp/customer";
+//		
+//	}// customer
 	
 	@RequestMapping(value = "/admin/jsp/edit_categories.do", method = GET)
 	public String editCategories() {

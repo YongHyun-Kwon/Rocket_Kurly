@@ -2,10 +2,29 @@ package kr.co.rocketkurly.cust.domain;
 
 public class MemberDomain {
 
-	private String member_id, pw, nickname, name, email, tel, addr, address;
+	private String member_id, pw, nickname, name, email, tel, addr, address, status, reg_dt;
 
 	public MemberDomain() {
 
+	}
+	
+
+	public String getReg_dt() {
+		return reg_dt;
+	}
+
+
+	public void setReg_dt(String reg_dt) {
+		this.reg_dt = reg_dt;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getMember_id() {
@@ -72,10 +91,15 @@ public class MemberDomain {
 		this.address = address;
 	}
 
+
 	@Override
 	public String toString() {
 		return "MemberDomain [member_id=" + member_id + ", pw=" + pw + ", nickname=" + nickname + ", name=" + name
-				+ ", email=" + email + ", tel=" + tel + ", addr=" + addr + ", address=" + address + "]";
+				+ ", email=" + email + ", tel=" + tel + ", addr=" + addr + ", address=" + address + ", status=" + status
+				+ ", reg_dt=" + reg_dt + "]";
 	}
+
+
+	
 
 }

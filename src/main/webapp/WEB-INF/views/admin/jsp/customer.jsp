@@ -1,6 +1,8 @@
 <%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -85,6 +87,23 @@
         }
     </style>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	$("#editStatus").click(function() {
+		
+		$("#editStatusFrm").submit();
+			alert("회원상태가 변경되었습니다.");
+			
+		})
+		 if (self.name != 'reload') {
+	         self.name = 'reload';
+	         self.location.reload(true);
+	     }
+	     else self.name = ''; 
+
+})//ready
+</script>
 
 
 <body>
@@ -126,89 +145,19 @@
 										<tr>
 											<th>id</th>
 											<th>닉네임</th>
-											<th>방문수</th>
 											<th>구매 금액</th>
 											<th>회원 상태</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
+									<c:forEach var="mem" items="${memberList}">
 										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
+											<td><a href="customer.do?member_id=${mem.member_id}"><c:out value="${mem.member_id}"/></a></td>
+											<td><c:out value="${mem.nickname}"/></td>
+											<td><c:out value="3000원"/></td>
+											<td><c:out value="${mem.status}"/></td>
 										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
-										<tr>
-											<td>test</td>
-											<td>테스트</td>
-											<td>100회</td>
-											<td>10,000</td>
-											<td>정상</td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -220,39 +169,32 @@
                                 <h5 class="card-header" style="height:30px; display: inline-block">회원 상세 정보</h5>
                             </div>
                         <!-- /Search -->
-                        <div style="width: 800px;margin-top: ">
-                            <div>
-                                <img src="../assets/img/avatars/1.png"/ style="border-radius: 50%;width: 100px;margin: 20px">
-                                    <span class="app-brand-text demo fw-bolder ms-2" id="customer_nickcname">닉네임</span>
-                                </a>
-                            </div>
-                            <div>
-                                <div class="customer-line" style="display: flex;;margin: 10px">
-                                    <div class="customer-info">아이디 : </div>
-                                    <div class="customer-info">이름 : </div>
-                                    <div class="customer-info">나이 : </div>
-                                    <div class="customer-info">이메일 : </div>
-                                    <div class="customer-info">가입일 : </div>
+                       <div style="width: 800px;">
+                                <div class="customer-lin" style="display: inline-block ;margin: 10px;width: 250px">
+                                    <div class="customer-info">닉네임 : ${memberData.nickname }</div>
+                                    <div class="customer-info">아이디 : ${memberData.member_id }</div>
+                                    <div class="customer-info">이름 : ${memberData.name }</div>
+                                    <div class="customer-info">이메일 : ${memberData.email }</div>
+                                    <div class="customer-info">가입일 : ${memberData.reg_dt }</div>
                                 </div>
-                                <div class="customer-line" style="display: flex;;margin: 10px">
-                                    <div class="customer-info">거주지 : </div>
-                                    <div class="customer-info">전화번호 : </div>
+                                <div class="customer-line" style="float:right; ;padding-right:100px;width: 500px">
+                                    <div class="customer-info">우편번호 : ${memberData.addr }</div>
+                                    <div class="customer-info">주소 : ${memberData.address }</div>
+                                    <div class="customer-info">전화번호 : ${memberData.tel }</div>
                                     <div class="customer-info">구매금액 : </div>
                                     <div class="customer-info">방문 수 : </div>
-                                    <div style="float: right;margin: 10px"><span class="customer-info">계정 상태</span>
-                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" id="ustatus" data-bs-toggle="dropdown" style="margin-left: 10px; padding:0px" >정상계정</button>
-                                         <input type="hidden" name="ust" id="ust"/>
-                                        <ul class="dropdown-menu">
-                                            <li class="ustatus"><a class="dropdown-item" href="javascript:void(0);">정상계정</a></li>
-                                            <li class="ustatus"><a class="dropdown-item" href="javascript:void(0);">휴면계정</a></li>
-                                            <li class="ustatus"><a class="dropdown-item" href="javascript:void(0);">정지계정</a></li>
-                                            <li class="ustatus"><a class="dropdown-item" href="javascript:void(0);">탈퇴계정</a></li>
-                                        </ul></div>
-                                </div>
-                            </div>
+                                    <div class="customer-info">회원상태 : ${memberData.status }</div>
+                                    <form action="http://localhost/rocketkurly/admin/jsp/customer.do?member_id=${memberData.member_id}" method="post" id="editStatusFrm" name="editStatusFrm">
+									<select name="status" style="width: 150px;display: inline-block;"  class="form-select" id="status">
+									<option selected>상태 변경</option>
+										<option value="활동"><c:out value="활동"/></option>
+										<option value="휴면" ><c:out value="휴면"/></option>
+										<option value="탈퇴" ><c:out value="탈퇴"/></option>
+								</select>
+								<button style="margin-left:20px ;display: inline-block; ;" class="btn btn-dark" id="editStatus" name="editStatus">상태 변경</button>
+								</form>
                         </div>
                     </div>
-                   
                       
                       
                  
@@ -262,43 +204,119 @@
                       <div class="demo-inline-spacing">
                         <!-- Basic Pagination -->
                         <nav aria-label="Page navigation">
-                          <ul class="pagination">
+                        
+                            <c:choose>
+                            <c:when test="${empty keyword}">
+                              <ul class="pagination">
+                             <c:if test="${10 lt currentPage}"> 
                             <li class="page-item first">
-                              <a class="page-link" href="javascript:void(0);"
+                              <a class="page-link" href="customer.do?currentPage=${currentPage-10}"
                                 ><i class="tf-icon bx bx-chevrons-left"></i
                               ></a>
                             </li>
+                            </c:if>
+                            <c:if test="${1 ne currentPage}">
                             <li class="page-item prev">
-                              <a class="page-link" href="javascript:void(0);"
+                              <a class="page-link" href="customer.do?currentPage=${currentPage-1}"
                                 ><i class="tf-icon bx bx-chevron-left"></i
                               ></a>
                             </li>
+                            </c:if>
+        					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+    
+                         <c:choose>
+         					<c:when test="${i eq currentPage }">
+							
+							<li class="page-item active">
+                              <a class="page-link" href="customer.do?currentPage=${i}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            </c:when>
+                            <c:otherwise>
+                            
                             <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">1</a>
+                              <a class="page-link" href="customer.do?currentPage=${i}">
+                              <c:out value="${i}"/>
+                              </a>
                             </li>
-                            <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">2</a>
-                            </li>
-                            <li class="page-item active">
-                              <a class="page-link" href="javascript:void(0);">3</a>
-                            </li>
-                            <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">4</a>
-                            </li>
-                            <li class="page-item">
-                              <a class="page-link" href="javascript:void(0);">5</a>
-                            </li>
-                            <li class="page-item next">
-                              <a class="page-link" href="javascript:void(0);"
+                            
+                            </c:otherwise>
+                            </c:choose>
+         				</c:forEach>
+         				<c:if test="${pageCnt gt currentPage}">
+         				  <li class="page-item next">
+                              <a class="page-link" href="customer.do?currentPage=${currentPage+1}"
                                 ><i class="tf-icon bx bx-chevron-right"></i
                               ></a>
                             </li>
+                            </c:if>
+                           <c:if test="${pageCnt gt currentPage+10}">
                             <li class="page-item last">
-                              <a class="page-link" href="javascript:void(0);"
+                              <a class="page-link" href="customer.do?currentPage=${currentPage+10}"
                                 ><i class="tf-icon bx bx-chevrons-right"></i
                               ></a>
                             </li>
+                            </c:if>
                           </ul>
+         				</c:when>
+         				 <c:when test="${not empty keyword}">
+         				 <ul class="pagination">
+         				    <c:if test="${10 lt currentPage}"> 
+         				     
+                            <li class="page-item first">
+                              <a class="page-link" href="customer.do?currentPage=${currentPage-10}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevrons-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                            <c:if test="${1 ne currentPage}">
+                            <li class="page-item prev">
+                              <a class="page-link" href="customer.do?currentPage=${currentPage-1}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevron-left"></i
+                              ></a>
+                            </li>
+                            </c:if>
+         					<c:forEach var="i" begin="${startPage}" end="${endPage }">
+         					<c:choose>
+         					<c:when test="${i eq currentPage }">
+							
+							<li class="page-item active">
+                              <a class="page-link" href="customer2.do?currentPage=${i}&&keyword=${keyword}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            </c:when>
+                            <c:otherwise>
+                            
+                            <li class="page-item">
+                              <a class="page-link" href="customer2.do?currentPage=${i}&&keyword=${keyword}">
+                              <c:out value="${i}"/>
+                              </a>
+                            </li>
+                            
+                            </c:otherwise>
+                            </c:choose>
+                            
+         				</c:forEach>
+         				<c:if test="${pageCnt gt currentPage}">
+         				  <li class="page-item next">
+                              <a class="page-link" href="customer.do?currentPage=${currentPage+1}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevron-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                           <c:if test="${pageCnt gt currentPage+10}">
+                            <li class="page-item last">
+                              <a class="page-link" href="customer.do?currentPage=${currentPage+10}&&keyword=${keyword}"
+                                ><i class="tf-icon bx bx-chevrons-right"></i
+                              ></a>
+                            </li>
+                            </c:if>
+                          </ul>
+         				</c:when>
+						</c:choose>
+                        
                         </nav>
                         <!--/ Basic Pagination -->
                       </div>
