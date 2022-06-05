@@ -10,6 +10,7 @@ import kr.co.rocketkurly.admin.dao.ImgDAO;
 import kr.co.rocketkurly.admin.dao.ItemDAO;
 import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.CategoriesVO;
 import kr.co.rocketkurly.cust.vo.ImgVO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
@@ -34,6 +35,19 @@ public class ItemService {
 		}
 		return totalCnt;
 	}
+	
+	public int searchCategoryCount(String c_category_id) {
+		int totalCnt=0;
+		try {
+		totalCnt=iDAO.selectCategoryCount(c_category_id);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return totalCnt;
+	}
+	
+	
 	public int searchKeywordCount(BoardVO bVo) {
 		int totalCnt=0;
 		try {
@@ -50,6 +64,16 @@ public class ItemService {
 		List<ItemDomain> list= null;
 		try {
 			list=iDAO.selectItem(bVO);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return list;
+	}
+	public List<ItemDomain> searchUserItem(BoardVO bVO) {
+		List<ItemDomain> list= null;
+		try {
+			list=iDAO.selectUserItem(bVO);
 		}catch (PersistenceException e) {
 			
 			e.printStackTrace();			
