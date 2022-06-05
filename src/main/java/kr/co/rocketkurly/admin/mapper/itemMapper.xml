@@ -11,17 +11,50 @@
 		 #{c_category_id})
 	</insert>
 	
-	<select id="selectItem" resultType="itemDomain" parameterType="boardVO">
-	select ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
-	from ITEM
-	where ITEM_NO between #{StartNum} and #{endNum}
-
-	</select>
+<select id="selectItem" resultType="itemDomain" parameterType="boardVO">
+select ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from ITEM
+where ITEM_NO between #{StartNum} and #{endNum}
+</select>
+	
 	
 <select id="itemCnt" resultType="int" >
  select count(*) cnt
  from item
  </select>
+<select id="categoryCnt" parameterType="String" resultType="int" >
+select count(*) cnt
+from item
+where C_CATEGORY_ID =#{C_CATEGORY_ID}
+ </select>
+<select id="categoryFullCnt" parameterType="String" resultType="int" >
+select count(*) cnt
+from item
+where C_CATEGORY_ID like '%' || #{c_category_id} || '%'
+ </select>
+
+<select id="CategoryFullItem" resultType="itemDomain" parameterType="boardVO">
+
+  select  filter,ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from(select rownum filter, ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES,C_CATEGORY_ID
+from ITEM
+where C_CATEGORY_ID like '%'|| #{current_category} ||'%'
+order by item_no)
+where filter between #{StartNum} and #{endNum}
+
+</select>
+<select id="CategoryItem" resultType="itemDomain" parameterType="boardVO">
+
+  select  filter,ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
+from(select rownum filter, ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES,C_CATEGORY_ID
+from ITEM
+where C_CATEGORY_ID = #{current_category} 
+order by item_no)
+where filter between #{StartNum} and #{endNum}
+
+</select>
+ 
+ 
  
 <select id="selectKeywordItem" resultType="itemDomain" parameterType="boardVO">
 
@@ -33,6 +66,8 @@ order by item_no)
 where filter between #{StartNum} and #{endNum}
 
 </select>
+
+
  
 <select id="keywordCnt" resultType="int" parameterType="boardVO">
  select count(*) cnt 

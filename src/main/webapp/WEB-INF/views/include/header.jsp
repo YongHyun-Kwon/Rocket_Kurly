@@ -54,7 +54,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="index.do">홈</a></li>
-                            <li><a href="shop-grid.do">상품</a></li>
+                            <li><a href="shop-grid.do?p_category_id=vegatable&&c_category_id=ve0&&current_category=ve0">상품</a></li>
                                 <!-- <ul class="header__menu__dropdown">
                                     <li><a href="shop-details.do">Shop Details</a></li>
                                     <li><a href="shoping-cart.do">Shoping Cart</a></li>

@@ -17,4 +17,16 @@
 
 	</select>
 
+	<select id="selectCategory" parameterType="String" resultType="CategoriesDomain" >
+   select c.c_category_id, LISTAGG(s.sub_name,',') WITHIN GROUP(ORDER BY c.c_category_id) AS sub_name
+   from p_category p
+   inner join c_category c
+   on p.p_category_id = c.p_category_id
+   inner join sub_category s
+   on c.c_category_id = s.c_category_id
+   where p.p_category_id = #{p_category_id}
+   GROUP BY c.c_category_id
+
+	</select>
+
 </mapper>

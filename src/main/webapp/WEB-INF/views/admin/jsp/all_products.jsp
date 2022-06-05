@@ -146,7 +146,7 @@
                             <div>
                                 <div class="img">
                                 <img  class="img"
-                                src="http://localhost/rocketkurly/${itemData.main_img }">
+                                src="http://localhost/rocketkurly/item/${itemData.main_img }">
                                 </div>
                                 <div>
                                     <h6><a href="product_detail.do?item_no=${itemData.item_no}"><c:out value="${itemData.name}"/></a></h6>
