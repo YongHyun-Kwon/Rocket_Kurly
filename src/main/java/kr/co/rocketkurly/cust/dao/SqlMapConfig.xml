@@ -15,6 +15,8 @@
 	 
 	 
 	<typeAlias type="kr.co.rocketkurly.admin.domain.CategoriesDomain" alias="CategoriesDomain"/>
+	<typeAlias type="kr.co.rocketkurly.admin.domain.PCategoriesDomain" alias="PCategoriesDomain"/>
+	<typeAlias type="kr.co.rocketkurly.admin.domain.CCategoriesDomain" alias="CCategoriesDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.ItemDomain" alias="itemDomain"/>
 	<typeAlias type="kr.co.rocketkurly.cust.domain.MemberDomain" alias="MemberDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.QuestionDomain" alias="questionDomain"/>

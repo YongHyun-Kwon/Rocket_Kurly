@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.dao.CategoriesDAO;
 import kr.co.rocketkurly.admin.dao.ImgDAO;
+import kr.co.rocketkurly.admin.domain.CCategoriesDomain;
 import kr.co.rocketkurly.admin.domain.CategoriesDomain;
+import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
 import kr.co.rocketkurly.cust.vo.ImgVO;
 
@@ -30,6 +32,29 @@ public class CategoriesSevice {
 		}
 		return list;
 	}
+	
+	public List<PCategoriesDomain> selectPCategoriesAll() {
+		List<PCategoriesDomain> list= null;
+		try {
+			list=cDAO.selectPCategoriesAll();
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return list;
+	}
+	
+	public List<CCategoriesDomain> selectCCategoriesAll(String p_category_id) {
+		List<CCategoriesDomain> pcat= null;
+		try {
+			pcat=cDAO.selectCCategoriesAll(p_category_id);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return pcat;
+	}
+	
 	public List<CategoriesVO> selectCCategories() {
 		List<CategoriesVO> list= null;
 		try {

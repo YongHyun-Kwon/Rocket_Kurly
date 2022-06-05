@@ -66,12 +66,6 @@ public class AdminController {
 		
 	}// addRecipe
 	
-	@RequestMapping(value = "/admin/jsp/all_categories.do", method = GET)
-	public String allCategories() {
-		
-		return "admin/jsp/all_categories";
-		
-	}// allCategories
 	
 
 	

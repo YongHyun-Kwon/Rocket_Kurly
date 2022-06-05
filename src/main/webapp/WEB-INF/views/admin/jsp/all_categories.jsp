@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr"
 	data-theme="theme-default" data-assets-path="../assets/"
 	data-template="vertical-menu-template-free">
@@ -91,30 +92,21 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th>대분류 번호</th>
-											<th>카테고리명</th>
-											<th>등록일</th>
+											<th>카테고리 ID</th>
+											<th>카테고리 이름</th>
+											<th>카테고리 이미지</th>
+											<th>수정일</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
+										<c:forEach var="pcat" items="${selectPCatAll}">
 										<tr>
-											<td>1</td>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>고기</strong></td>
-											<td>2022.05.13</td>
+											<td><a href="all_categories.do?p_category_id=${pcat.p_category_id}"><c:out value="${pcat.p_category_id}"/></a></td>
+											<td><c:out value="${pcat.p_category_name}"/></td>
+											<td><img src="<c:out value="${pcat.p_icon}"/>"> </td>
+											<td><c:out value="${pcat.p_update_date}"/></td>
 										</tr>
-										<tr>
-											<td>2</td>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>채소</strong></td>
-											<td>2022.05.19</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>과일</strong></td>
-											<td>2022.05.20</td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -131,34 +123,21 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th>중분류 번호</th>
-											<th>대분류 명</th>
-											<th>카테고리명</th>
-											<th>등록일</th>
+											<th>카테고리 ID</th>
+											<th>카테고리 이름</th>
+											<th>부모 카테고리</th>
+											<th>수정일</th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
+										<c:forEach var="ccat" items="${selectCCatAll}">
 										<tr>
-											<td>1</td>
-											<td>고기</td>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>돼지고기</strong></td>
-											<td>2022.05.13</td>
+											<td><c:out value="${ccat.c_category_id}"/></td>
+											<td><c:out value="${ccat.sub_name}"/></td>
+											<td><c:out value="${ccat.p_category_name}"/></td>
+											<td><c:out value="${ccat.c_update_date}"/></td>
 										</tr>
-										<tr>
-											<td>2</td>
-											<td>고기</td>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>소고기</strong></td>
-											<td>2022.05.19</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>고기</td>
-											<td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-												<strong>닭고기</strong></td>
-											<td>2022.05.20</td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>
