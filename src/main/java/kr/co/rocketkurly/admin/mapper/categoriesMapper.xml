@@ -42,5 +42,24 @@
 	where c.c_category_id = s.c_category_id and p.p_category_id = c.p_category_id and p.p_category_id = #{p_category_id}
 
 	</select>
+	
+	<insert id="enrollPcat" parameterType="PCategoriesDomain">
+
+		insert into p_category(p_category_id, p_category_name, p_icon)
+		values(#{p_category_id}, #{p_category_name}, 'p_icon')
+	</insert>
+	
+	<insert id="enrollCcat" parameterType="CCategoriesDomain">
+	{call
+	declare
+	begin
+		insert into c_category(c_category_id, p_category_id)
+		values(#{c_category_id}, #{p_category_id});
+
+		insert into sub_category(c_category_id, sub_id, sub_name)
+		values(#{c_category_id}, #{sub_id}, #{sub_id});
+	end
+	}
+	</insert>
 
 </mapper>

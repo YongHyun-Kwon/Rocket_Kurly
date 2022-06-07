@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,7 +14,9 @@ import kr.co.rocketkurly.admin.domain.CCategoriesDomain;
 import kr.co.rocketkurly.admin.domain.CategoriesDomain;
 import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.admin.service.CategoriesSevice;
-import kr.co.rocketkurly.cust.vo.CategoriesVO; 
+import kr.co.rocketkurly.cust.vo.CategoriesVO;
+import kr.co.rocketkurly.cust.vo.ImgVO;
+import kr.co.rocketkurly.cust.vo.ItemVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -34,6 +37,17 @@ public class AdminCategoriesController {
 		
 	}// selectCategories
 	
+	@RequestMapping(value = "/admin/jsp/add_categories.do", method = {GET,POST})
+	public String addCategories(Model model , CategoriesVO cVO){
+		
+		model.addAttribute("selectCCat",cs.selectCCategories());
+		model.addAttribute("selectPCat",cs.selectPCategories());
+		
+		
+		return "admin/jsp/add_categories";
+		
+	}// selectCategories
+	
 	@RequestMapping(value = "/admin/jsp/all_categories.do", method = {GET,POST})
 	public String selectAllCategories(Model model , PCategoriesDomain pcVO, CCategoriesDomain ccVO){
 		
@@ -45,6 +59,24 @@ public class AdminCategoriesController {
 		
 	}// selectAllCategories
 	
+	@RequestMapping(value = "/admin/jsp/enrollPCategory.do", method = { GET, POST })
+	public String enrollPCat(@ModelAttribute("admin") PCategoriesDomain pVO) {
+
+
+		cs.enrollPCat(pVO);
+
+		return "redirect:/admin/jsp/add_categories.do";
+
+	}
 	
+	@RequestMapping(value = "/admin/jsp/enrollCCategory.do", method = { GET, POST })
+	public String enrollCCat(@ModelAttribute("admin") CCategoriesDomain cVO) {
+		
+		
+		cs.enrollCCat(cVO);
+		
+		return "redirect:/admin/jsp/add_categories.do";
+		
+	}
 
 }//class
