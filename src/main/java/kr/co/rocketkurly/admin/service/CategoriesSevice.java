@@ -13,6 +13,7 @@ import kr.co.rocketkurly.admin.domain.CategoriesDomain;
 import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
 import kr.co.rocketkurly.cust.vo.ImgVO;
+import kr.co.rocketkurly.cust.vo.ItemVO;
 
 @Component
 public class CategoriesSevice {
@@ -76,5 +77,33 @@ public class CategoriesSevice {
 		return list;
 	}
 	
+public void enrollPCat(PCategoriesDomain pVO) {
+		
+		try {
+
+			cDAO.enrollPCat(pVO);
+
+		} catch (PersistenceException pe) {
+
+			pe.printStackTrace();
+
+		} // end catch
+
+	}// enrollProduct
+	
+public void enrollCCat(CCategoriesDomain cVO) {
+	
+	try {
+		
+		cDAO.enrollCCat(cVO);
+		
+	} catch (PersistenceException pe) {
+		
+		pe.printStackTrace();
+		
+	} // end catch
+	
+}// enrollProduct
+
 	
 }

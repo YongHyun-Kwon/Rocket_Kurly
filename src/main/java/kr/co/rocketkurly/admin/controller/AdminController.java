@@ -51,13 +51,6 @@ public class AdminController {
 		
 	}// mainPage
 	
-	@RequestMapping(value = "/admin/jsp/add_categories.do", method = GET)
-	public String addCategoriesPage() {
-		System.out.println("123123asdasd");
-		return "admin/jsp/add_categories";
-		
-	}// addCategoriesPage
-	
 	
 	@RequestMapping(value = "/admin/jsp/add_recipe.do", method = GET)
 	public String addRecipe() {

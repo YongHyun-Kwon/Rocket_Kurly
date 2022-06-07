@@ -12,6 +12,7 @@ import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.cust.dao.MyBatisFramework;
 import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
+import kr.co.rocketkurly.cust.vo.ItemVO;
 
 @Component
 public class CategoriesDAO {
@@ -86,6 +87,32 @@ public class CategoriesDAO {
 			ss.close();
 		}
 		return list;
+	}
+	
+	public void enrollPCat(PCategoriesDomain pVO)throws PersistenceException{
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		ss.selectList("kr.co.rocketkurly.Categorie.dao.enrollPcat",pVO);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+	
+	}
+	
+	public void enrollCCat(CCategoriesDomain cVO)throws PersistenceException{
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		ss.selectList("kr.co.rocketkurly.Categorie.dao.enrollCcat",cVO);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+		
 	}
 
 }
