@@ -178,7 +178,7 @@ $(function () {
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="shop-details.do">${item.name }</a></h6>
+                                    <h6><a href="shop-details.do?current_category=${currentCategory}&&item_no=${item.item_no}">${item.name }</a></h6>
                                     <h5>${item.price}원</h5>
                                 </div>
                             </div>
