@@ -1,5 +1,8 @@
 package kr.co.rocketkurly.cust.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,12 +11,7 @@ import kr.co.rocketkurly.admin.service.CategoriesSevice;
 import kr.co.rocketkurly.admin.service.ItemService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.co.rocketkurly.cust.vo.ItemVO;
 
 @Controller
 public class ShopController {
@@ -25,9 +23,9 @@ public class ShopController {
 	private CategoriesSevice cs;
 	
 	@RequestMapping(value = "/shop-details.do", method = GET)
-	public String shopDetailsPage(Model model,BoardVO bVO) {
-		
-		
+	public String shopDetailsPage(Model model,BoardVO bVO, ItemVO iVO) {
+		System.out.println(bVO.getCurrent_category());
+		model.addAttribute("productData",is.searchDetail(iVO.getItem_no()));
 		
 		return "shop-details";
 		
