@@ -28,18 +28,23 @@ public class ShoppingCartController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/shopingOne.do", method = GET ,produces = "application/json;charset=UTF-8")
-	public String OneCartPage(CartVO cVO) {
+	@RequestMapping(value = "/addCart.do", method = GET ,produces = "application/json;charset=UTF-8")
+	public String addCartPage(CartVO cVO) {
 		String data="장바구니에 담기가 실패했습니다.";
 		int cnt=0;
-		cVO.getQuantity();
-		cnt=ss.addOneCart(cVO);
+		
+		if(cVO.getQuantity()==0) {			
+			cnt=ss.addOneCart(cVO);
+		}else {
+			cnt=ss.addMultiCart(cVO);
+		}
 		
 		if(cnt==1) {
 			data="장바구니에 추가되었습니다.";
 		}
 		return data;
 	}// shoppingCartPage
+	
 	
 	
 	

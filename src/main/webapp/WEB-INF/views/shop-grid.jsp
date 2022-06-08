@@ -98,7 +98,7 @@ $(function () {
 })//ready
 function clw(item) {
 	$.ajax({
-		url : "http://localhost/rocketkurly/shopingOne.do",
+		url : "http://localhost/rocketkurly/addCart.do",
 		type : "GET",
 		data : {
 			 item_no : item,

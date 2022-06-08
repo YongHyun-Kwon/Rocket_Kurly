@@ -48,7 +48,35 @@
 			})// click
 			
 		})
+function add() {
+	if($("#qu").val()==0){
+		
+		alert("수량은 0개일 수 가없습니다.")
+		return
+	}
+	$.ajax({
+		url : "http://localhost/rocketkurly/addCart.do",
+		type : "GET",
+		data : {
+			 item_no : $("input[name=itemNo]").val(),
+			 member_id : '<c:out value="${custID}"/>',
+			 quantity : $("#qu").val()
+		},
+		async : true,
+		dataType : 'text',
+		error : function(xhr) {
+			alert(xhr.text + "/" + xhr.status);
+		},
+		success : function( data ) {
+			alert(data)
+			
+		},
+		
+	}) // ajax
 	
+			
+}
+		
 	</script>
 </head>
 
@@ -110,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="shoping-cart.do" class="primary-btn">장바구니에 넣기</a>
+                        <a href="javascript:add()" class="primary-btn">장바구니에 넣기</a>
                         <a href="javascript:void(0)" id="order" class="primary-btn">구매</a>
                         <!-- <a href="#" class="primary-btn">취소</a> -->
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>

@@ -27,8 +27,7 @@ public class ShoppingService {
 				
 			}else {
 				cVO.setCart_no(sd.selectCartBody(cVO.getMember_id()));
-				cnt=sd.insertOneCart(cVO);
-				
+				cnt=sd.insertCart(cVO);
 			}
 
 		} catch (PersistenceException pe) {
@@ -39,6 +38,31 @@ public class ShoppingService {
 
 		return cnt;
 
+	}// modifyMember
+	
+	public int addMultiCart(CartVO cVO) {
+		
+		int cnt=0;
+		
+		try {
+			cnt=sd.confirm(cVO.getMember_id());
+			
+			if(cnt==0) {
+				cnt=sd.insertNewCart(cVO);
+				
+			}else {
+				cVO.setCart_no(sd.selectCartBody(cVO.getMember_id()));
+				cnt=sd.insertCart(cVO);
+			}
+			
+		} catch (PersistenceException pe) {
+			
+			pe.printStackTrace();
+			
+		} // end catch
+		
+		return cnt;
+		
 	}// modifyMember
 	
 	
