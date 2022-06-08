@@ -40,19 +40,6 @@ public class ShoppingCartController {
 		}
 		return data;
 	}// shoppingCartPage
-	@ResponseBody
-	@RequestMapping(value = "/shopingOne.do", method = GET ,produces = "application/json;charset=UTF-8")
-	public String multiCartPage(CartVO cVO) {
-		String data="장바구니에 담기가 실패했습니다.";
-		int cnt=0;
-		cVO.getQuantity();
-		cnt=ss.addOneCart(cVO);
-		
-		if(cnt==1) {
-			data="장바구니에 추가되었습니다.";
-		}
-		return data;
-	}// shoppingCartPage
 	
 	
 	
