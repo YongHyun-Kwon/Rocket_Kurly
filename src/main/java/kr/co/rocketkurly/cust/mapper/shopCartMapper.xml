@@ -22,7 +22,7 @@ insert into CART(CART_NO, QUANTITY, ITEM_NO, MEMBER_ID)
 values(PRO3.CART_NO.NEXTVAL,#{quantity},#{item_no},#{member_id})
 </insert>
 
-<insert id="insertOneCart" parameterType="CartVO">
+<insert id="insertCart" parameterType="CartVO">
 insert into CART(CART_NO, QUANTITY, ITEM_NO, MEMBER_ID)
 values(#{cart_no},#{quantity},#{item_no},#{member_id})
 </insert>

@@ -83,13 +83,13 @@ public class ShoppingDAO {
 	
 	
 
-	public int insertOneCart(CartVO cVO) throws PersistenceException {
+	public int insertCart(CartVO cVO) throws PersistenceException {
 		
 		int cnt = 0;
 		
 		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
 		
-		cnt = ss.insert("kr.co.rocketkurly.cust.Shopping.dao.insertOneCart", cVO);
+		cnt = ss.insert("kr.co.rocketkurly.cust.Shopping.dao.insertCart", cVO);
 		
 		if (cnt == 1) {
 			
