@@ -71,13 +71,13 @@ public class MemberDAO {
 	 * @return
 	 * @throws PersistenceException
 	 */
-	public String selectFindID(MemberVO mVO) throws PersistenceException {
+	public MemberDomain selectFindID(MemberVO mVO) throws PersistenceException {
 		
-		String id = "";
+		MemberDomain md = null;
 		
 		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
 		
-		id = ss.selectOne("kr.co.rocketkurly.cust.member.dao.findID", mVO);
+		md = ss.selectOne("kr.co.rocketkurly.cust.member.dao.findID", mVO);
 		
 		if( ss != null ) {
 			
@@ -85,7 +85,7 @@ public class MemberDAO {
 			
 		}// end if
 		
-		return id;
+		return md;
 		
 	}// selectID
 	
@@ -95,13 +95,13 @@ public class MemberDAO {
 	 * @return
 	 * @throws PersistenceException
 	 */
-	public String selectFindPW(MemberVO mVO) throws PersistenceException {
+	public MemberDomain selectFindPW(MemberVO mVO) throws PersistenceException {
 		
-		String id = "";
+		MemberDomain md = null;
 		
 		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
 		
-		id = ss.selectOne("kr.co.rocketkurly.cust.member.dao.findPW", mVO);
+		md = ss.selectOne("kr.co.rocketkurly.cust.member.dao.findPW", mVO);
 		
 		if( ss != null ) {
 			
@@ -109,7 +109,7 @@ public class MemberDAO {
 			
 		}// end if
 		
-		return id;
+		return md;
 		
 	}// selectPW
 	

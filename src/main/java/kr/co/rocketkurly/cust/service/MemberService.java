@@ -35,12 +35,14 @@ public class MemberService {
 		MemberDomain md = null;
 		int cnt = 0;
 		boolean pwFlag = false;
+		boolean resignFlag = false;
 
 		try {
 
 			md = mDAO.selectLoginCheck(mVO.getId());
 			if (md != null) {
 				pwFlag = pwCheck(mVO.getPw(), md.getPw());
+				resignFlag = resignCheck(md.getStatus());
 			}
 		} catch (PersistenceException pe) {
 
@@ -48,7 +50,7 @@ public class MemberService {
 
 		} // end catch
 
-		if (!pwFlag) {
+		if (!pwFlag || resignFlag) {
 
 			md = null;
 
@@ -70,23 +72,27 @@ public class MemberService {
 	 */
 	public String findID(MemberVO mVO) {
 
-		String findID = "";
+		MemberDomain md = null;
+		String findID = "fail";
+		boolean resignFlag = false;
 
 		try {
 
-			findID = mDAO.selectFindID(mVO);
-
+			md = mDAO.selectFindID(mVO);
+			
+			if (md != null) {
+				resignFlag = resignCheck(md.getStatus());
+			}//end if
+			
 		} catch (PersistenceException pe) {
 
 			pe.printStackTrace();
 
 		} // end catch
 
-		if (findID == null) {
-
-			findID = "fail";
-
-		} // end else
+		if (!resignFlag && md != null) {
+			findID = md.getMember_id();
+		}// end if
 
 		return findID;
 
@@ -99,13 +105,17 @@ public class MemberService {
 	 * @return
 	 */
 	public String findPW(MemberVO mVO) {
-
-		String id = "";
+		
+		MemberDomain md = null;
 		String pw = "fail";
+		boolean resignFlag = false;
 
 		try {
 
-			id = mDAO.selectFindPW(mVO);
+			md = mDAO.selectFindPW(mVO);
+			if( md != null ) {
+				resignFlag = resignCheck(md.getStatus());
+			}// end if
 
 		} catch (PersistenceException pe) {
 
@@ -113,8 +123,8 @@ public class MemberService {
 
 		} // end catch
 
-		if (id != null) {
-
+		if (!resignFlag) {
+			
 			pw = modifyPW(mVO);
 
 		} // end if
@@ -245,6 +255,20 @@ public class MemberService {
 		return pwFlag;
 
 	}// pwCheck
+
+	public boolean resignCheck(String status) {
+
+		boolean flag = false;
+
+		if (status.equals("Å»Åð")) {
+
+			flag = true;
+
+		} // end if
+
+		return flag;
+
+	}// resignCheck
 
 	/**
 	 * ÀÓ½Ãºñ¹Ð¹øÈ£ »ý¼º method

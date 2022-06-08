@@ -120,5 +120,41 @@ public class MyPageDAO {
 		return list;
 		
 	}// selectCoupon
+	
+	public int selectQuestionTotal(String id) throws PersistenceException {
+		
+		int totalCnt = 0;
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		totalCnt = ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.inquiryTotal", id);
+		
+		if( ss!= null ) {
+			
+			ss.close();
+			
+		}// end if
+		
+		return totalCnt;
+		
+	}// selectQuestionTotal
+	
+	public int selectCouponTotal(String id) throws PersistenceException {
+		
+		int totalCnt = 0;
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		totalCnt = ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.couponTotal", id);
+		
+		if( ss!= null ) {
+			
+			ss.close();
+			
+		}// end if
+		
+		return totalCnt;
+		
+	}// selectQuestionTotal
 
 }

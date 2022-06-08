@@ -24,6 +24,32 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    
+    <!-- jQuery CDN -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			
+			var price = ${ productData.price}
+			$("#total").html(price);
+			$("input[name=total]").val(price);
+			
+			$("#pre").click(function(){
+				
+				var total = price * $("#qu").val();
+				
+				$("#total").html(total);
+				$("input[name=total]").val(total);
+			})
+			
+			
+			$("#order").click(function() {
+				$("#frm").submit();	
+			})// click
+			
+		})
+	
+	</script>
 </head>
 
 <body>
@@ -62,6 +88,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
+                	<form action="checkout.do" method="post" id="frm">
                     <div class="product__details__text">
                         <h3>${productData.name }</h3>
                         <div class="product__details__rating">
@@ -72,21 +99,27 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
+                        <input type="hidden" value="${ productData.item_no }" name="itemNo"/>
+                        <input type="hidden" value="${ productData.name }" name="itemName"/>
                         <div class="product__details__price">${productData.price}원</div>
                         <p>${productData.detail }</p>
                         <div class="product__details__quantity">
-                            <div class="quantity">
+                            <div class="quantity" id="pre">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" value="1" id="qu" name="quantity">
                                 </div>
                             </div>
                         </div>
                         <a href="shoping-cart.do" class="primary-btn">장바구니에 넣기</a>
-                        <a href="checkout.do" class="primary-btn">구매</a>
+                        <a href="javascript:void(0)" id="order" class="primary-btn">구매</a>
                         <!-- <a href="#" class="primary-btn">취소</a> -->
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                     
+                     	<div>
+                     		총 금액 : <span id="total"></span>원
+                     		<input type="hidden" name="total"/>
+                     	</div>
                     </div>
+                    </form>
                 </div>
 <!--                 <div class="col-lg-12">
                     <div class="product__details__tab">

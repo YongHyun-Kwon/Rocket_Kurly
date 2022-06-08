@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.rocketkurly.cust.member.dao">
 
-	<select id="loginCheck"	resultType="kr.co.rocketkurly.cust.domain.MemberDomain" parameterType="MemberVO">
-		select member_id, pw, nickname, name, email, tel, addr, address
+	<select id="loginCheck"	resultType="memberDomain" parameterType="MemberVO">
+		select member_id, pw, nickname, name, email, tel, status, addr, address
 		from member
 		where member_id=#{ id }
 	</select>
@@ -15,14 +15,14 @@
 		values(#{ id }, sysdate)
 	</insert>
 	
-	<select id="findID" resultType="String" parameterType="MemberVO">
-		select member_id
+	<select id="findID" resultType="memberDomain" parameterType="MemberVO">
+		select member_id, status
 		from member
 		where name=#{ name } and email=#{ email }
 	</select>
 
-	<select id="findPW" resultType="String" parameterType="MemberVO">
-		select member_id
+	<select id="findPW" resultType="memberDomain" parameterType="MemberVO">
+		select member_id, status
 		from member
 		where member_id=#{ id } and email=#{ email } and tel=#{ tel }
 	</select>

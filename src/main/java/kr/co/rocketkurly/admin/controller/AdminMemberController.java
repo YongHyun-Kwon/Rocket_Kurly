@@ -42,12 +42,6 @@ public class AdminMemberController {
 		//시작 , 끝 페이지 계산
 		bVO=ams.calcStartEndPage(bVO, totalScale,pageCnt );
 		
-		System.out.println(totalCnt);
-		System.out.println(pageCnt);
-		System.out.println(totalCnt);
-		System.out.println(startNum);
-		System.out.println(endNum);
-		System.out.println(totalScale);
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
 		

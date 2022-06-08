@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.rocketkurly.admin.domain.CouponDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
@@ -29,10 +27,9 @@ public class MyPageController {
 
 	@Autowired(required = false)
 	private MyPageService mps;
-	
+
 	@Autowired(required = false)
 	private MemberService ms;
-	
 
 	@RequestMapping(value = "/mypage.do", method = { GET, POST })
 	public String myPage(HttpServletRequest request, Model model) {
@@ -79,11 +76,11 @@ public class MyPageController {
 	public String settingPage(Model model, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
-		
+
 		MemberDomain md = ms.memberInfo((String) session.getAttribute("custID"));
 
 		model.addAttribute("custData", md);
-		
+
 		return "setting";
 
 	}// settingPage
@@ -92,29 +89,29 @@ public class MyPageController {
 	public String settingProcessPage(MemberVO mVO, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
-		
+
 		mVO.setId((String) session.getAttribute("custID"));
-		
+
 		int cnt = mps.modifyMember(mVO);
-		
-		if( cnt == 0 ) {
+
+		if (cnt == 0) {
 			return "redirect:index.do";
 		}
-		
-		return "redirect:setting.do"; 
-		
+
+		return "redirect:setting.do";
+
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/resignmember.do", method = { GET, POST })
 	public String resignMemberProcess(HttpServletRequest request) {
-		
+
 		HttpSession session = request.getSession();
-		
+
 		String msg = mps.resignMember((String) session.getAttribute("custID"));
-		
+
 		return msg;
-		
+
 	}// pwFindProcess
 
 	@RequestMapping(value = "/orderhistory.do", method = { GET, POST })
@@ -147,13 +144,14 @@ public class MyPageController {
 
 	@RequestMapping(value = "/inquiry.do", method = { GET, POST })
 	public String inquiryPage(Model model, HttpServletRequest request) {
-		
+
 		HttpSession session = request.getSession();
 
-		List<QuestionDomain> inquiryList = mps.inquiry((String) session.getAttribute("custID"));
-		
+		String id = (String) session.getAttribute("custID");
+
+		List<QuestionDomain> inquiryList = mps.inquiry(id);
 		model.addAttribute("inquiryList", inquiryList);
-		
+
 		return "inquiry";
 
 	}// inquiry
@@ -167,13 +165,15 @@ public class MyPageController {
 
 	@RequestMapping(value = "/coupon.do", method = { GET, POST })
 	public String couponPage(Model model, HttpServletRequest request) {
-		
+
 		HttpSession session = request.getSession();
 
-		List<CouponDomain> couponList = mps.coupon((String) session.getAttribute("custID"));
-		
+		String id = (String) session.getAttribute("custID");
+
+		List<CouponDomain> couponList = mps.coupon(id);
+
 		model.addAttribute("couponList", couponList);
-		
+
 		return "coupon";
 
 	}// inquiry

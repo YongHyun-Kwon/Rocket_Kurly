@@ -79,7 +79,7 @@ span{font-weight: bold;}
                                 		</c:forEach>
                                 	</c:if>
                                 </table>
-                                </div>
+                               </div>
                                 <div align="right" style="padding: 5px">
                                <a href="write-inquiry.do"><input type="button" value="문의 작성"></a>
                                 </div>

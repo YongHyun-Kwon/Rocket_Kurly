@@ -82,7 +82,12 @@ public void modifyStatus(MemberDomain mVO) {
 		
 		try {
 			
-			amDAO.updateStatus(mVO);
+			if( mVO.getStatus() != null ) {
+				
+				amDAO.updateStatus(mVO);
+
+			}// end if
+			
 			
 		} catch( PersistenceException pe ) {
 			pe.printStackTrace();

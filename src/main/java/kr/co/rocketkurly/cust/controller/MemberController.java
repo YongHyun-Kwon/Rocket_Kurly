@@ -68,7 +68,7 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/idfind.do", method = POST)
+	@RequestMapping(value = "/idfind.do", method = { GET, POST })
 	public String idFindProcess(MemberVO mVO) {
 		
 		String findID = ms.findID(mVO);

@@ -49,5 +49,13 @@
 	<select id="coupon" resultType="couponDomain" parameterType="String">
 		select * from cupon where member_id = #{ id }	
 	</select>
+	
+	<select id="inquiryTotal" resultType="int" parameterType="String">
+		select count(*)question_total from question where member_id = #{ id }
+	</select>
+	
+	<select id="couponTotal" resultType="int" parameterType="String">
+		select count(*)cunpon_total from cupon where member_id = #{ id }
+	</select>
 
 </mapper>

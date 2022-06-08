@@ -1,3 +1,4 @@
+<%@page import="kr.co.rocketkurly.cust.vo.PayVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -116,18 +117,28 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>주문</h4>
-                                <div class="checkout__order__products">상품 <span>총액</span></div>
-                                <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                <div class="checkout__order__products">상품<span>총액</span></div>
+                                 <ul>
+                                 	
+                                 	<c:forEach var="payItem" items="${ payItem }">
+                                    	<li>${ payItem.itemName } / ${ payItem.quantity }EA <span>${ payItem.total } 원</span></li>
+                              			 <c:set var="subTotal" value="${ subTotal + payItem.total }" />
+                              		</c:forEach>
                                 </ul>
-                                <div class="checkout__order__subtotal">소계 <span>$750.99</span></div>
+                               
+                                <div class="checkout__order__subtotal">소계 <span><c:out value="${ subTotal }"/> 원</span></div>
+                                <div class="shoping__discount">
+                            <h5>할인 쿠폰</h5>
+                                <select>
+                                	<c:forEach var="coupon" items="${ couponList }">
+                                	<option value=${ coupon.discount }><c:out value="${ coupon.coupon_name }"/>/<c:out value="${ coupon.coupon_no }"/> </option>
+                                	</c:forEach>
+                                </select>
+                                <button type="button" class="site-btn">쿠폰 적용</button>
+                        </div>
                                 <div class="checkout__order__subtotal">쿠폰 할인<span>-$750.99</span></div>
-                                <div class="checkout__order__total">총 금액 <span>$750.99</span></div>
+                                <div class="checkout__order__total">총 금액 <span></span></div>
                                    
-                               
-                               
                                 <a href="payment.do" class="site-btn">결제하기</a>
                             </div>
                         </div>
