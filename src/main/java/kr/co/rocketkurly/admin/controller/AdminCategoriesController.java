@@ -37,6 +37,27 @@ public class AdminCategoriesController {
 		
 	}// selectCategories
 	
+	@RequestMapping(value = "/admin/jsp/edit_categories.do", method = {POST})
+	public String selectEditCategories(Model model , PCategoriesDomain pVO){
+		
+		model.addAttribute("selectPCat",cs.selectPCategories());
+		model.addAttribute("selectCCat",cs.selectCCategories());
+		cs.modifyPcat(pVO);
+		return "admin/jsp/edit_categories";
+		
+	}// selectCategories
+	
+	@RequestMapping(value = "/admin/jsp/edit_categories_C.do", method = {POST})
+	public String selectEditCCategories(Model model , CCategoriesDomain ccVO){
+		
+		model.addAttribute("selectPCat",cs.selectPCategories());
+		model.addAttribute("selectCCat",cs.selectCCategories());
+		cs.modifyCcat(ccVO);
+		
+		return "admin/jsp/edit_categories";
+		
+	}// selectCategories
+	
 	@RequestMapping(value = "/admin/jsp/add_categories.do", method = {GET,POST})
 	public String addCategories(Model model , CategoriesVO cVO){
 		

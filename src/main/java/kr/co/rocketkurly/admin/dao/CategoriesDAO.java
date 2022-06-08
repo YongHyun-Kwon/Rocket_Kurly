@@ -114,5 +114,30 @@ public class CategoriesDAO {
 		}
 		
 	}
+	
+	public void editPCat(PCategoriesDomain pVO)throws PersistenceException{
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		ss.selectList("kr.co.rocketkurly.Categorie.dao.editPcatName",pVO);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+	}
+		
+		public void editCCat(CCategoriesDomain cVO)throws PersistenceException{
+			//MyBatis handler 얻기
+			SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+			//쿼리문실행
+			ss.selectList("kr.co.rocketkurly.Categorie.dao.editCcatName",cVO);
+			//MyBatis handler 종로
+			
+			if(ss!=null) {
+				ss.close();
+			}
+			
+	}
 
 }
