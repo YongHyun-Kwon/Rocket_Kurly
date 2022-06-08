@@ -11,6 +11,7 @@ import kr.co.rocketkurly.admin.dao.ImgDAO;
 import kr.co.rocketkurly.admin.domain.CCategoriesDomain;
 import kr.co.rocketkurly.admin.domain.CategoriesDomain;
 import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
+import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
 import kr.co.rocketkurly.cust.vo.ImgVO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
@@ -104,6 +105,30 @@ public void enrollCCat(CCategoriesDomain cVO) {
 	} // end catch
 	
 }// enrollProduct
+
+public void modifyPcat(PCategoriesDomain pVO) {
+	
+	try {
+	
+		cDAO.editPCat(pVO);
+		
+	} catch( PersistenceException pe ) {
+		pe.printStackTrace();
+	}
+	
+}
+
+public void modifyCcat(CCategoriesDomain cVO) {
+	
+	try {
+		
+		cDAO.editCCat(cVO);
+		
+	} catch( PersistenceException pe ) {
+		pe.printStackTrace();
+	}
+	
+}
 
 	
 }

@@ -2,7 +2,15 @@ package kr.co.rocketkurly.admin.domain;
 
 public class PCategoriesDomain {
 	
-	private String p_category_id,p_icon,p_category_name,p_create_date,p_update_date;
+	private String p_category_id,p_icon,p_category_name,p_create_date,p_update_date,p_category_name_before;
+
+	public String getP_category_name_before() {
+		return p_category_name_before;
+	}
+
+	public void setP_category_name_before(String p_category_name_before) {
+		this.p_category_name_before = p_category_name_before;
+	}
 
 	public String getP_category_id() {
 		return p_category_id;

@@ -85,12 +85,6 @@ public class AdminController {
 //		
 //	}// customer
 	
-	@RequestMapping(value = "/admin/jsp/edit_categories.do", method = GET)
-	public String editCategories() {
-		
-		return "admin/jsp/edit_categories";
-		
-	}// editCategories
 	
 	@RequestMapping(value = "/admin/jsp/login.do", method = GET)
 	public String login() {

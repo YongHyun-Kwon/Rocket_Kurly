@@ -61,5 +61,17 @@
 	end
 	}
 	</insert>
+	
+	<update id="editPcatName" parameterType="PCategoriesDomain">
+		update p_category
+		set p_category_name=#{p_category_name}
+		where p_category_name=#{p_category_name_before}
+	</update>
+	
+	<update id="editCcatName" parameterType="CCategoriesDomain">
+		update sub_category
+		set sub_name=#{c_category_name}, sub_id=#{c_category_name}
+		where sub_name=#{subCat}
+	</update>
 
 </mapper>
