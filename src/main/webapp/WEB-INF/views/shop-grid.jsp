@@ -96,6 +96,27 @@ $(function () {
 		    
 		  
 })//ready
+function clw(item) {
+	$.ajax({
+		url : "http://localhost/rocketkurly/shopingOne.do",
+		type : "GET",
+		data : {
+			 item_no : item,
+			 member_id : $("#hid").val()
+		},
+		async : true,
+		dataType : 'text',
+		error : function(xhr) {
+			alert(xhr.text + "/" + xhr.status);
+		},
+		success : function( data ) {
+			alert(data)
+			
+		},
+		
+	}) // ajax
+}
+
 </script>
 
 <body>
@@ -150,6 +171,9 @@ $(function () {
     		</c:forEach>
     	</ul>
     </div>
+    <c:if test="${not empty custID}">
+    <input type="hidden" value="${custID}" id="hid"> 
+    </c:if>
     <!--중분류 카테고리 끝  -->
         <div class="container">
             <div class="row">
@@ -173,8 +197,11 @@ $(function () {
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="http://localhost/rocketkurly/item/${item.main_img }">
                                     <ul class="product__item__pic__hover">
+                                        <c:if test="${not empty custID}">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="javascript:clw(${item.item_no})"><i class="fa fa-shopping-cart"></i></a></li>  
+                                        <input type="hidden" value="${custID}" id="${item.item_no}">                                     
+                                        </c:if>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

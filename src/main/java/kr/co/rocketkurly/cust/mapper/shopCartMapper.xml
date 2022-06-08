@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.rocketkurly.cust.Shopping.dao">
+
+<select id="confirm" parameterType="String" resultType="int">
+ select count(member_id) cnt
+ from CART
+ where MEMBER_ID=#{member_id}
+</select>
+
+<select id="selectCartBody" parameterType="String" resultType="int">
+ select CART_NO 
+ from CART
+ where MEMBER_ID=#{member_id}
+ group by CART_NO
+</select>
+
+<insert id="insertNewCart" parameterType="CartVO">
+insert into CART(CART_NO, QUANTITY, ITEM_NO, MEMBER_ID)
+values(PRO3.CART_NO.NEXTVAL,#{quantity},#{item_no},#{member_id})
+</insert>
+
+<insert id="insertOneCart" parameterType="CartVO">
+insert into CART(CART_NO, QUANTITY, ITEM_NO, MEMBER_ID)
+values(#{cart_no},#{quantity},#{item_no},#{member_id})
+</insert>
+
+</mapper>

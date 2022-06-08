@@ -24,7 +24,6 @@ public class ShopController {
 	
 	@RequestMapping(value = "/shop-details.do", method = GET)
 	public String shopDetailsPage(Model model,BoardVO bVO, ItemVO iVO) {
-		System.out.println(bVO.getCurrent_category());
 		model.addAttribute("productData",is.searchDetail(iVO.getItem_no()));
 		
 		return "shop-details";
