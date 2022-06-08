@@ -12,6 +12,7 @@
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.QuestionVO" alias="QuestionVO"/>
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.CategoriesVO" alias="CategoriesVO"/>
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.CouponVO" alias="CouponVO"/>
+	 <typeAlias type="kr.co.rocketkurly.cust.vo.CartVO" alias="CartVO"/>
 	 
 	 
 	<typeAlias type="kr.co.rocketkurly.admin.domain.CategoriesDomain" alias="CategoriesDomain"/>
@@ -43,6 +44,8 @@
   <mappers>
     <mapper resource="kr/co/rocketkurly/cust/mapper/memberMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/cust/mapper/mypageMapper.xml"/>
+    <mapper resource="kr/co/rocketkurly/cust/mapper/shopCartMapper.xml"/>
+	
     <mapper resource="kr/co/rocketkurly/admin/mapper/itemMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/imgMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/memberMapper.xml"/>
