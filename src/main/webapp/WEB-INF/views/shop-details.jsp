@@ -30,7 +30,9 @@
 	<script type="text/javascript">
 		$(function() {
 			
-			var price = ${ productData.price}
+			var price = ${ productData.price }
+			var id = "${ custID }"
+			
 			$("#total").html(price);
 			$("input[name=total]").val(price);
 			
@@ -44,6 +46,12 @@
 			
 			
 			$("#order").click(function() {
+				
+				if(id == ""){
+					alert("로그인 후 이용 가능합니다.");
+					return;
+				}// end if
+				
 				$("#frm").submit();	
 			})// click
 			

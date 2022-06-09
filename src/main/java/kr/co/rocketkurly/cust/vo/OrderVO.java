@@ -2,7 +2,7 @@ package kr.co.rocketkurly.cust.vo;
 
 import java.util.Arrays;
 
-public class PayVO {
+public class OrderVO {
 
 	String itemName[];
 	int itemNo[], total[], quantity[];

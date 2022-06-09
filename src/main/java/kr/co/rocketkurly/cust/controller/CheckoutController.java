@@ -15,9 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.rocketkurly.admin.domain.CouponDomain;
+import kr.co.rocketkurly.cust.domain.MemberDomain;
+import kr.co.rocketkurly.cust.service.MemberService;
 import kr.co.rocketkurly.cust.service.MyPageService;
-import kr.co.rocketkurly.cust.vo.PayTempVO;
-import kr.co.rocketkurly.cust.vo.PayVO; 
+import kr.co.rocketkurly.cust.vo.OrderTempVO;
+import kr.co.rocketkurly.cust.vo.OrderVO;
+import kr.co.rocketkurly.cust.vo.RecipientVO; 
 
 @Controller
 public class CheckoutController {
@@ -25,37 +28,78 @@ public class CheckoutController {
 	@Autowired(required = false)
 	private MyPageService mps;
 
+	@Autowired(required = false)
+	private MemberService ms;
+
 	@RequestMapping(value = "/checkout.do", method = { GET, POST })
-	public String checkoutPage(Model model, PayVO pVO, HttpServletRequest request) { 
-		List<PayTempVO> list = new ArrayList<PayTempVO>();
+	public String checkoutPage(Model model, OrderVO oVO, HttpServletRequest request) { 
 		
-		PayTempVO ptVO = null;
-		for(int i = 0; i < pVO.getItemNo().length ; i++) {
+		List<OrderTempVO> list = new ArrayList<OrderTempVO>(); 
+		
+		OrderTempVO otVO = null; 
+		for(int i = 0; i < oVO.getItemNo().length ; i++) {
 			
-			ptVO = new PayTempVO();
-			ptVO.setItemNo(pVO.getItemNo()[i]);
-			ptVO.setItemName(pVO.getItemName()[i]);
-			ptVO.setTotal(pVO.getTotal()[i]);
-			ptVO.setQuantity(pVO.getQuantity()[i]);
-			list.add(ptVO);
+			otVO = new OrderTempVO();
+			otVO.setItemNo(oVO.getItemNo()[i]);
+			otVO.setItemName(oVO.getItemName()[i]);
+			otVO.setTotal(oVO.getTotal()[i]);
+			otVO.setQuantity(oVO.getQuantity()[i]);
+			list.add(otVO);
 			
 		}// end for
 		
 		HttpSession session = request.getSession();
 
 		String id = (String) session.getAttribute("custID");
+		
+		if( id != null ) {
+			
+			MemberDomain md = ms.memberInfo(id);
+			List<CouponDomain> couponList = mps.coupon(id);
+			model.addAttribute("memberInfo", md);
+			model.addAttribute("couponList", couponList);
 
-		List<CouponDomain> couponList = mps.coupon(id);
+		} else {
+			
+			return "index";
+			
+		}// end else
 
-		model.addAttribute("couponList", couponList);
 		model.addAttribute("payItem", list);
 		 
 		return "checkout";
 		
 	}// checkoutPage
 	
+	
+	@RequestMapping(value = "/orderpro.do", method = POST)
+	public String orderProcess(OrderVO oVO, RecipientVO rVO) {
+		
+		List<OrderTempVO> list = new ArrayList<OrderTempVO>(); 
+		
+		OrderTempVO otVO = null; 
+		for(int i = 0; i < oVO.getItemNo().length ; i++) {
+			
+			otVO = new OrderTempVO();
+			otVO.setItemNo(oVO.getItemNo()[i]);
+			otVO.setItemName(oVO.getItemName()[i]);
+			otVO.setTotal(oVO.getTotal()[i]);
+			otVO.setQuantity(oVO.getQuantity()[i]);
+			list.add(otVO);
+			
+		}// end for
+		
+		
+		return "";
+		
+	}// orderProcess
+	 
+	
 	@RequestMapping(value = "/payment.do", method = GET)
-	public String paymentPage() {
+	public String paymentPage(OrderVO oVO, RecipientVO rVO) {
+		
+		System.out.println(oVO);
+		System.out.println(rVO);
 		
 		return "payment";
 		

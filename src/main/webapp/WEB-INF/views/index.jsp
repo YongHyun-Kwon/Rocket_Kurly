@@ -24,9 +24,19 @@
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <script type="text/javascript">
+ 	// 뒤로 가기 방지
+    window.history.forward();
+
+    function noBack() {
+
+    	window.history.forward();
+
+    }// noBack
+    </script>
 </head>
 
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>

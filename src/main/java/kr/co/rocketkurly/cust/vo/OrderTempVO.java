@@ -1,6 +1,6 @@
 package kr.co.rocketkurly.cust.vo;
 
-public class PayTempVO {
+public class OrderTempVO {
 
 	String itemName;
 	int itemNo, total, quantity;

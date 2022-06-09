@@ -35,6 +35,15 @@
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javaScript">
+// 뒤로 가기 방지
+window.history.forward();
+
+function noBack() {
+
+	window.history.forward();
+
+}// noBack
+
 $(function() {
 	
 	$("#login").click(function(){
@@ -233,6 +242,7 @@ function findPW(){
 	
 }// findPW
 
+
 </script>
 <style type="text/css">
 #chkBox{
@@ -269,7 +279,7 @@ function findPW(){
 		   
 </style>
 
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
