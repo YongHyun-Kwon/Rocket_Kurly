@@ -71,6 +71,16 @@ public class AdminController {
 		
 	}// createCoupon
 	
+	@RequestMapping(value = "/admin/jsp/createProcess.do", method = { GET,POST })
+	public String createProcess(Model model, CouponVO cVO) {
+		
+		
+		cs.addCoupon(cVO);
+		
+		return "/admin/jsp/create_coupon";
+		
+	}// createProcess
+	
 	@RequestMapping(value = "/admin/jsp/customer_grade.do", method = GET)
 	public String customerGrade() {
 		

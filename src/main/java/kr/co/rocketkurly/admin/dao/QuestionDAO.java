@@ -10,6 +10,7 @@ import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.dao.MyBatisFramework;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.QuestionVO;
 
 
 @Component
@@ -64,10 +65,12 @@ public class QuestionDAO {
 		list=ss.selectList("kr.co.rocketkurly.admin.dao.selectKeywordQuestion",bVO);
 		//MyBatis handler 종료
 		
+		
 		if(ss!=null) {
 			ss.close();
 		}
 		return list;
+		
 	}
 	
 	/**
@@ -84,10 +87,36 @@ public class QuestionDAO {
 		qDomain=ss.selectOne("kr.co.rocketkurly.admin.dao.selectOneQuestion",num);
 		//MyBatis handler 종로
 		
-		if(ss!=null) {
+		if(ss != null) {
 			ss.close();
 		}
 		return qDomain;
 	}
-
+	
+	public int updateAnswer(QuestionVO qVO)throws PersistenceException{
+		
+		int cnt = 0;
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		try {
+			
+			cnt = ss.update("kr.co.rocketkurly.admin.dao.updateQuestionAnswer", qVO);
+			//MyBatis handler 종로
+			
+			if(cnt == 1) {
+				ss.commit();
+			}//end if
+		
+		}
+		
+		finally{
+			
+			if(ss != null) {
+				ss.close();
+		}
+		
+		}//end finally
+		return cnt;
+	}//updateAnswer
 }

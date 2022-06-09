@@ -19,6 +19,10 @@
     			text-align: left!important;
     			left: -15px!important;
 			  }
+a:hover {
+    font-weight: 700;
+    color: #7fad39;
+}
 </style>
 <script type="text/javaScript">
 
@@ -35,7 +39,8 @@ $(function () {
 		                display:'block'
 		            })
 		      
-		    });
+		    });//mouseenter
+		
 		    $('#p-category > li').click(function(){
 		        let menu_i = $(this).index();
 
@@ -45,19 +50,21 @@ $(function () {
 
 		            })
 		      
-		    })//
+		    })//click
 		    
-		    $('.c-category').mouseenter(function(){
+		     $('.c-category').mouseenter(function(){
 		        $('.c-category').eq($(this).index()).css({
 		            display:'block'
 		        })
-		    })
+		    
+		     })//mouseenter
+		    
 		    $('.hero__categories__all').click(function(){
 		        $('.c-category').css({
 		            display:'none'
 
 		        })
-		    })
+		    })//click
 		
 })//ready
 </script>
@@ -72,7 +79,7 @@ $(function () {
                             <span>전체 카테고리</span>
                         </div>
                         <ul id="p-category">
-                            <li><a href="shop-details.do" id="C_category_id">채소</a></li>
+                            <li><a href="#" id="vegi" >채소</a></li>
                             <li><a href="#" id="crops">과일·견과·쌀</a></li>
                             <li><a href="#" id="seafood">수산·해산·건어물</a></li>
                             <li><a href="#" id="livestock">정육·계란</a></li>

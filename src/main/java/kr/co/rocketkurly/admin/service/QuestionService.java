@@ -10,6 +10,7 @@ import kr.co.rocketkurly.admin.dao.QuestionDAO;
 import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
+import kr.co.rocketkurly.cust.vo.QuestionVO;
 
 @Component
 public class QuestionService {
@@ -148,6 +149,19 @@ public class QuestionService {
 			e.printStackTrace();			
 		}
 		return qDomain;
-	}
+	}//selectOneQ
+	
+	public int updateAnswer(QuestionVO qVO) {
+		int cnt = 0;
+		
+		try {
+		cnt = qDAO.updateAnswer(qVO);
+		}catch(PersistenceException pe) {
+			
+			pe.printStackTrace();
+		}
+		
+		return cnt;
+	}//updateOneAnswer
 	
 }
