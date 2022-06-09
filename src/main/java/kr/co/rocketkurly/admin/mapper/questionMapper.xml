@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.rocketkurly.admin.dao">
 	
-	<select id="selectQuestion" resultType="QuestionDomain" parameterType="boardVO">
+	<select id="selectQuestion" resultType="questionDomain" parameterType="boardVO">
 		select question_no, member_id, order_no, title, type, contents, answer, reg_dt	
 		from question
 		where question_no between #{StartNum} and #{endNum}
@@ -15,7 +15,7 @@
 		 from question
  	</select>
  
-	<select id="selectKeywordQuestion" resultType="QuestionDomain" parameterType="boardVO">
+	<select id="selectKeywordQuestion" resultType="questionDomain" parameterType="boardVO">
 									
 	
 	select  filter, question_no, member_id, order_no, title, type, contents, answer, reg_dt
@@ -35,10 +35,16 @@
 	 </select>
 
  	
- 	<select id="selectOneQuestion" resultType="QuestionDomain" parameterType="int">
+ 	<select id="selectOneQuestion" resultType="questionDomain" parameterType="int">
  		select  question_no, member_id, order_no, title, type, contents, answer, reg_dt
  		from question
  		where question_no = #{question_no}
  	</select>
+ 	
+ 	<update id="updateQuestionAnswer" parameterType="QuestionVO">
+ 	   UPDATE QUESTION 
+       SET ANSWER = #{answer} 
+       WHERE QUESTION_NO = #{question_no}
+ 	</update>
 
 </mapper>

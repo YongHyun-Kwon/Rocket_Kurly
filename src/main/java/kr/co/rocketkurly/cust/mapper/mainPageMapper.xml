@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.rocketkurly.cust.mainpage.dao">
+
+	<select id="recommend"	resultType="itemVO" >
+		<![CDATA[
+		SELECT  A.*
+		FROM ( SELECT ROW_NUMBER() OVER(ORDER BY REG_DT DESC) RNUM,
+								 ITEM_NO,
+							 	 NAME,
+								 PRICE,
+								 DETAIL,
+								 MAIN_IMG,
+								 SALES,
+								 REG_DT,
+								 MOD_DT,
+								 C_CATEGORY_ID
+					 FROM ITEM ) A
+		WHERE A.RNUM <= 8
+		ORDER BY DBMS_RANDOM.VALUE
+		]]>
+	</select>
+	
+	<select id="lowestPrice" resultType="itemVO" >
+		<![CDATA[
+		SELECT  A.*
+		FROM ( SELECT ROW_NUMBER() OVER(ORDER BY PRICE) RNUM,
+								 ITEM_NO,
+							 	 NAME,
+								 PRICE,
+								 DETAIL,
+								 MAIN_IMG,
+								 SALES,
+								 REG_DT,
+								 MOD_DT,
+								 C_CATEGORY_ID
+					 FROM ITEM ) A
+		WHERE A.RNUM <= 8
+		]]>
+	</select>
+	
+	<select id="hotItem" resultType="itemVO" >
+		
+		select 
+		from item
+		where 
+		
+	</select>
+	
+
+</mapper>

@@ -2,17 +2,25 @@ package kr.co.rocketkurly.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.text.SimpleDateFormat;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.admin.service.QuestionService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
 
 @Controller
 public class AdminQuestionController {
+	
 	@Autowired(required = false)
 	private QuestionService qs;
 	
@@ -70,6 +78,7 @@ public class AdminQuestionController {
 
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
+		
 
 		model.addAttribute("questionList", qs.searchQuestion(bVO));
 		model.addAttribute("startPage", bVO.getStartPage());
@@ -77,17 +86,55 @@ public class AdminQuestionController {
 		model.addAttribute("keyword2", bVO.getKeyword());
 		model.addAttribute("currentPage", bVO.getCurrentPage());
 
+		System.out.println(bVO.getKeyword());
 		return "admin/jsp/inquiry";
 
 		}//filterQuestions
 	
-		@RequestMapping(value = "/admin/jsp/inquiry3.do", method = GET)
+		@ResponseBody
+		@SuppressWarnings({"unchecked"})
+		@RequestMapping(value = "/admin/jsp/inquiry3.do", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
 		public String selectOneQuestion(Model model , QuestionVO qVO) {
-			model.addAttribute("questionData",qs.selectOneQ(qVO.getQuestion_no()));
 			
-			return "admin/jsp/inquiry";
+			String json = "";
+			JSONObject jsonObj = new JSONObject();
+			
+			QuestionDomain qd = qs.selectOneQ(qVO.getQuestion_no());
+			
+			SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+			String reg_dt = dt.format(qd.getReg_dt());
+			
+			jsonObj.put("questionNo", qd.getQuestion_no());
+			jsonObj.put("questionTitle", qd.getTitle());
+			jsonObj.put("questionWriter", qd.getMember_id());
+			jsonObj.put("questionType", qd.getType());
+			jsonObj.put("questionContents", qd.getContents());
+			jsonObj.put("questionAnswer", qd.getAnswer());
+			jsonObj.put("questionDate", reg_dt);
+			
+			json = jsonObj.toJSONString();
+			
+			return json;
 			
 		}// selectOneQuestion
 		
+		@ResponseBody
+		@SuppressWarnings({"unchecked"})
+		@RequestMapping(value = "/admin/jsp/inquiryAnswer.do", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+		public String updateQuestionAnswer (Model model, QuestionVO qVO) {
+			
+			String json = "";
+			JSONObject jsonObj = new JSONObject();
+			
+			int cnt = qs.updateAnswer(qVO);
+			
+			if(1 == cnt) {
+				jsonObj.put("status", "1");
+			}
+			
+			json = jsonObj.toJSONString();
+			
+			return json;
+		}
 	}// class
 

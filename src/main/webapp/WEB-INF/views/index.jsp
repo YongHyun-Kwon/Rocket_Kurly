@@ -50,15 +50,80 @@
                     </div>
                     </div>
                     </section>
-    
-
-    <!-- Featured Section Begin -->
+    <!-- 이 상품 어때요 section //최근 등록된 상품 중 8개 랜덤 나열
+     -->
     <section class="featured spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Best</h2>
+                        <h2>이 상품 어때요?</h2>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="row featured__filter">
+               <c:forEach var="recommendList" items="${recommendList}" >
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="item/${recommendList.main_img}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="shop-details.do?item_no=${recommendList.item_no}">${recommendList.name}</a></h6>
+                            <h5>${recommendList.price}원</h5>
+                        </div>
+                    </div>
+                </div>
+               </c:forEach>
+            </div>
+        </div>
+    </section>
+    <!-- 이 상품 어때요 section -->
+    
+    <!-- 놓치면 후회 할 가격 section //최저가 순 나열 -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>놓치면 후회 할 가격</h2>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="row featured__filter">
+            	<c:forEach var="lowestList" items="${lowestList}">
+	                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+	                    <div class="featured__item">
+	                        <div class="featured__item__pic set-bg" data-setbg="item/${lowestList.main_img}">
+	                            <ul class="featured__item__pic__hover">
+	                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
+	                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
+	                            </ul>
+	                        </div>
+	                        <div class="featured__item__text">
+	                            <h6><a href="shop-details.do?item_no=${lowestList.item_no}">${lowestList.name}</a></h6>
+	                            <h5>${lowestList.price}원</h5>
+	                        </div>
+	                    </div>
+	                </div>
+            	</c:forEach>
+            </div>
+        </div>
+    </section>
+    <!-- 놓치면 후회 할 가격 section -->
+    
+    <!-- 가장 핫한 상품 section //주문 수 나열 -->
+     <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>가장 핫한 상품</h2>
                     </div>
                    
                 </div>
@@ -179,7 +244,9 @@
             </div>
         </div>
     </section>
-    <!-- Featured Section End -->
+    
+    <!-- 가장 핫한 상품 section -->
+    
 
     
 

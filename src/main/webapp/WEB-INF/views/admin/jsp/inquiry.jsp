@@ -13,7 +13,7 @@
 <title>RoketKurly Admin</title>
 
 <meta name="description" content="" />
-
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
 	href="../assets/img/favicon/badasaja.ico" />
@@ -49,6 +49,76 @@
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="../assets/js/config.js"></script>
+
+<script type="text/javascript">
+$(function () {
+	
+	
+	$("[name=answerBtn]").click(function(){
+		
+		var qFrm = $("#qFrm").serialize();
+		var btnId = $(this).attr("id");
+		
+		var idx = btnId.substr(9, btnId.length);
+		
+		$("#question_no").attr("value", $("input#qNo"+idx).val());
+		
+		$.ajax({
+			url : "http://localhost/rocketkurly/admin/jsp/inquiry3.do",
+			type : "POST",
+			data : {"question_no" : $("#question_no").val()},
+			dataType: 'json',
+			success : function( jsonObj ) {
+				
+				
+				$("#title").html(jsonObj.questionTitle);
+				$("#writerId").html(jsonObj.questionWriter);
+				$("#contents").html(jsonObj.questionContents);
+				$("#answer").val(jsonObj.questionAnswer);
+				$("#date").html(jsonObj.questionDate);
+				$("#type").html(jsonObj.questionType);
+			},
+			error : function(xhr) {
+				alert(xhr.text + "/" + xhr.status);
+				console.log(xhr);
+			}
+		});//ajax
+		
+	});//answerBtnClick
+	
+	$("#saveBtn").click(function(){
+		
+		if($("#answer").val() == ""){
+			alert("답변을 입력해주세요.");
+			$("#answer").focus();
+			event.preventDefault();
+			return;
+		}
+		
+		$.ajax({
+			url : "http://localhost/rocketkurly/admin/jsp/inquiryAnswer.do",
+			type : "POST",
+			data : {"answer" : $("#answer").val(),
+					"question_no" : $("#question_no").val()},
+			dataType: 'json',
+			success : function( jsonObj ) {
+				
+				if(1 == jsonObj.status){
+					alert("답변 작성이 완료되었습니다.");
+					$("#closeBtn").click();
+				}
+				
+			},
+			error : function(xhr) {
+				alert(xhr.text + "/" + xhr.status);
+				console.log(xhr);
+			}
+		});//ajax
+	
+	})//saveBtnclick
+	
+})// ready
+	</script>
 
 <style type="text/css">
 
@@ -86,7 +156,9 @@ h6 {
 
 
 <body>
+<%
 
+%>
 
 	<%@ include file="nav.jsp"%>
 
@@ -120,58 +192,55 @@ h6 {
 
 							<!-- 문의 테이블 -->
 						<div class="container">
-						
-						 <c:forEach var="questionData" items="${questionList}"> 
-							<div class="card">
-								<table class="table" style="width: 900px">
-									<thead>
-										<tr>
-											<th>id</th>
-											<th>제목</th>
-											<th>문의 유형</th>
-											<th>작성일</th>
-											<th>상태</th>
-											<th>답변 작성</th>
-										</tr>
-									</thead>
-									<tbody class="table-border-bottom-0">
-										<tr>
-											<td><c:out value="${questionData.member_id}"/></td>
-											<td><c:out value="${questionData.title}"/></td>
-											<td><c:out value="${questionData.type}"/></td>
-											<td><c:out value="${questionData.reg_dt}"/></td>
-											<td><c:out value="${questionData.answer}"/></td>
-											<td>
-											<button id="answerBtn" type="button"
-                          class="btn-dark"
-                          data-bs-toggle="modal"
-                          data-bs-target="#basicModal">답변 작성</button></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</c:forEach>
+							
+									<div class="card">
+									<form id="qFrm" name="qFrm" method="post" >
+										<table class="table" style="width: 900px">
+											<thead>
+												<tr>
+													<th>id</th>
+													<th>제목</th>
+													<th>문의 유형</th>
+													<th>작성일</th>
+													<th>상태</th>
+													<th>답변 작성</th>
+												</tr>
+											</thead>
+							 	<c:forEach var="questionData" items="${questionList}" varStatus="i"> 
+							 		<input type="hidden" id="question_no" name="question_no" value=""/>
+									<input type="hidden" id="qNo${i.index}" value="${questionData.question_no}"/>
+											<tbody class="table-border-bottom-0">
+												<tr>
+													<td><c:out value="${questionData.member_id}"/></td>
+													<td><c:out value="${questionData.title}"/></td>
+													<td><c:out value="${questionData.type}"/></td>
+													<td><c:out value="${questionData.reg_dt}"/></td>
+													<td><c:out value="${null eq questionData.answer ? '미답변' : '답변완료'}"/></td>
+													<td>
+													<button id="answerBtn${i.index}" name="answerBtn" type="button" class="btn-dark" data-bs-toggle="modal" data-bs-target="#basicModal">답변 작성</button></td>
+												</tr>
+											</tbody>
+								</c:forEach>
+										</table>
+									</form>
+									</div>
 						</div>
 					</div>
 					<!-- page navigation -->
 					 <nav aria-label="Page navigation">
                             <c:choose>
-                            <c:when test="${empty keyword}">
-                              <ul class="pagination">
-                             <c:if test="${10 lt currentPage}"> 
-                            <li class="page-item first">
-                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-10}"
-                                ><i class="tf-icon bx bx-chevrons-left"></i
-                              ></a>
-                            </li>
-                            </c:if>
-                            <c:if test="${1 ne currentPage}">
-                            <li class="page-item prev">
-                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-1}"
-                                ><i class="tf-icon bx bx-chevron-left"></i
-                              ></a>
-                            </li>
-                            </c:if>
+	                            <c:when test="${empty keyword}">
+	                                <ul class="pagination">
+	                             <c:if test="${10 lt currentPage}"> 
+		                            <li class="page-item first">
+		                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-10}"><i class="tf-icon bx bx-chevrons-left"></i></a>
+		                            </li>
+	                            </c:if>
+	                            <c:if test="${1 ne currentPage}">
+		                            <li class="page-item prev">
+		                              <a class="page-link" href="inquiry.do?currentPage=${currentPage-1}"><i class="tf-icon bx bx-chevron-left"></i></a>
+		                            </li>
+	                            </c:if>
         					<c:forEach var="i" begin="${startPage}" end="${endPage}">
     
                          <c:choose>
@@ -286,42 +355,42 @@ h6 {
                               <div class="modal-body">
                                 <div class="row">
                                   <div class="col mb-3">
-                                    <label for="nameBasic" class="form-label">제목 : </label>
+                                 
+                                    <label for="nameBasic" class="form-label">제목 : &nbsp<span id="title"></span> </label>
                                   </div>
                                 </div>
                                 <div class="row g-2">
                                   <div class="col mb-0">
-                                    <label for="emailBasic" class="form-label">작성자 : </label>
+                                    <label for="emailBasic" class="form-label">작성자 : &nbsp<span id="writerId"></span></label>
                                   </div>
                                   <div class="col mb-0">
-                                    <label for="dobBasic" class="form-label">문의 유형 : </label>
+                                    <label for="dobBasic" class="form-label">문의 유형 : &nbsp<span id="type"></span></label>
                                   </div>
                                   <div class="col mb-0">
-                                    <label for="dobBasic" class="form-label">작성 일 : </label>
+                                    <label for="dobBasic" class="form-label">작성 일 : &nbsp<span id="date"></span></label>
                                   </div>
-                                    <label for="dobBasic" class="form-label">문의 내용 : </label>
+                                    <label for="dobBasic" class="form-label">문의 내용 :</label>
                                   <div style="width: 520px;height: 300px;border: 1px solid #333">
+                                  <span id="contents"></span>
                                   </div>
+                                <form id="aFrm" name="aFrm" method="post">
                                 <h5 class="modal-title" id="exampleModalLabel1">답변 작성</h5>
-                                <textarea rows="20" cols="30"></textarea>
+                                <textarea id="answer" rows="20" style="width:515px;"></textarea>
+                                </form>
                                 </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" id="closeBtn">
                                   닫기
                                 </button>
-                                <button type="button" class="btn btn-dark">답변 저장</button>
+                                <button type="button" class="btn btn-dark" id="saveBtn">답변 저장</button>
                               </div>
                             </div>
                           </div>
                         </div>
                        <!-- /modal -->
 
-
-
-
 					<!-- /문의 상세조회 -->
-
 
 
 					<div class="buy-now">
@@ -337,31 +406,7 @@ h6 {
 	<!-- / Content -->
 
 
-	<script type="text/javascript">
-$(function () {
 	
-	$("writeBtn").click(function(){
-		
-	
-		$.ajax({
-			url : "http://localhost/rocketkurly/admin/jsp/inquiry.do",
-			type : "GET",
-			data :{ 
-				
-				},
-			async : true,
-			dataType: 'text',
-			
-			error : function(xhr) {
-				alert(xhr.text + "/" + xhr.status);
-			},
-			success : function( jsonObj ) {
-				
-			}
-		})//ajax
-	})//click
-})// ready
-	</script>
 
 
 	<!-- / Layout wrapper -->
