@@ -7,8 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.domain.CouponDomain;
+import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
+import kr.co.rocketkurly.admin.vo.InquiryVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
+import kr.co.rocketkurly.cust.vo.QuestionVO;
 
 @Component
 public class MyPageDAO {
@@ -156,5 +159,20 @@ public class MyPageDAO {
 		return totalCnt;
 		
 	}// selectQuestionTotal
+	
+	
+	public void writeInquiry(QuestionVO qVO)throws PersistenceException{
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		ss.selectList("kr.co.rocketkurly.cust.mypage.dao.write_inquiry",qVO);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+	
+	}
+	
 
 }
