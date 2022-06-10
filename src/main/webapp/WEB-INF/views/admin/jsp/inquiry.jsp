@@ -174,7 +174,7 @@ h6 {
 
 					<!-- 문의 검색 인풋 -->
 					<div style="padding-left: 50px; width: 1000px;">
-						<form action="inquiry.do" id="frm">
+						<form action="inquiry2.do" id="frm">
 					<label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">문의 조회</label>
 						<div class="input-group input-group-merge" style="width: 200px;float: right;">
                         <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
@@ -184,8 +184,8 @@ h6 {
                           placeholder="Search..."
                           aria-label="Search..."
                           aria-describedby="basic-addon-search31"
-                          id="keyword2"
-                          name="keyword2"
+                          id="keyword"
+                          name="keyword"
                         />
                         </div>
                       </form>

@@ -55,7 +55,7 @@ span{font-weight: bold;}
                                 <div style="width: 700px; border: 1px soild #dfdfdf;"  >
                                 	<label style="font-weight: bold">문의 제목</label>
                                 <div >
-                                <input id="board_title" name="board_title" type="text" placeholder="제목 자리입니다." style="width: 500px; border: 0px" readonly="readonly">
+                                <input id="board_title" name="board_title" type="text" value="제목" style="width: 500px; border: 0px" readonly="readonly">
                                 <div>
 							    	<label style="font-weight: bold; margin-top: 10px" >문의 유형</label>
 							    	 상품/반품/결제/환불 문의

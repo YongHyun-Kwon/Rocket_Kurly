@@ -52,7 +52,7 @@ public class AdminQuestionController {
 		model.addAttribute("endPage", bVO.getEndPage());
 		model.addAttribute("currentPage", bVO.getCurrentPage());
 		model.addAttribute("pageCnt", pageCnt);
-
+		
 		return "admin/jsp/inquiry";
 
 	}// allQuestions
@@ -72,6 +72,7 @@ public class AdminQuestionController {
 		int endNum = qs.endNum(startNum, pageScale);
 		// 토탈 스케일
 		int totalScale = qs.numScale();
+		
 		// 제일 마지막 페이지 계산
 		// 시작 , 끝 페이지 계산
 		bVO = qs.calcStartEndPage(bVO, totalScale, pageCnt);
@@ -79,14 +80,12 @@ public class AdminQuestionController {
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
 		
-
-		model.addAttribute("questionList", qs.searchQuestion(bVO));
+		
+		model.addAttribute("questionList", qs.searchKeyword(bVO));
 		model.addAttribute("startPage", bVO.getStartPage());
 		model.addAttribute("endPage", bVO.getEndPage());
-		model.addAttribute("keyword2", bVO.getKeyword());
+		model.addAttribute("keyword", bVO.getKeyword());
 		model.addAttribute("currentPage", bVO.getCurrentPage());
-
-		System.out.println(bVO.getKeyword());
 		return "admin/jsp/inquiry";
 
 		}//filterQuestions

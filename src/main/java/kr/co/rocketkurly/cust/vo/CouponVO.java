@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class CouponVO {
 
-	private String coupon_no,	 member_id, coupon_name;	
+	private String coupon_no, member_id, coupon_name;	
 	private int discount;
 	private Date p_date,	e_date;
 	public String getCoupon_no() {

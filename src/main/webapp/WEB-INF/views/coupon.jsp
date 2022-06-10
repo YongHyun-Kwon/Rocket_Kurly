@@ -48,7 +48,7 @@ table{width:700px;}
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-9 order-2">
-                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: 500px">
+                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: auto">
                         <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                                 <h1 class="mb-4">쿠폰 조회</h1>

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.dao.QuestionDAO;
-import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
@@ -42,9 +41,13 @@ public class QuestionService {
 
 	
 	public List<QuestionDomain> searchQuestion(BoardVO bVO) {
-		List<QuestionDomain> list= null;
+		
+		List<QuestionDomain> list = null;
+		
 		try {
-			list=qDAO.selectQuestion(bVO);
+			
+			list = qDAO.selectQuestion(bVO);
+			
 		}catch (PersistenceException e) {
 			
 			e.printStackTrace();			
@@ -53,9 +56,13 @@ public class QuestionService {
 	}
 	
 	public List<QuestionDomain> searchKeyword(BoardVO bVO) {
+		
 		List<QuestionDomain> list= null;
+		
 		try {
+			
 			list=qDAO.selectKeyword(bVO);
+			
 		}catch (PersistenceException e) {
 			
 			e.printStackTrace();			

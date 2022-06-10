@@ -24,9 +24,12 @@ public class CouponService {
 	 * @return
 	 */
 	public void addCoupon(CouponVO cVO) {
-		List<String>list = null;
+		
+		List<String> list = null;
 		String coupon_no = "";
+		
 		Date date = new Date();
+		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd"); 
 		String today = simpleDateFormat.format(date);
 		
