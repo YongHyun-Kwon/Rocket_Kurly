@@ -1,3 +1,5 @@
+<%@page import="kr.co.rocketkurly.admin.dao.OrderDAO"%>
+<%@page import="kr.co.rocketkurly.admin.domain.OrderDomain"%>
 <%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -85,15 +87,49 @@
         .customer-info{
         margin: 10px
         }
+        
+        div.table{
+        	display: table;
+        	background-color: transparent !important;
+        }
+        form.tr{
+        	display: table_row;
+        }
+        div.tr{
+        	display: table_row;
+        	font-weight: bold;
+        }
+        span.td{
+        	display: table-cell;
+        	width: 150px;
+        	text-align: center;
+        }
+        span.tdr{
+        	display: table-cell;
+        	width:200px;
+        	text-align: center;
+        }
+        
+        
     </style>
+    
+    <%
+    
+	String order_no = request.getParameter("order_no");    
+    
+    
+    %>
 </head>
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function () {
-	$("#editStatus").click(function() {
+	$("#edit_status${order.order_no}").click(function() {
 		
-		$("#editStatusFrm").submit();
-			alert("회원상태가 변경되었습니다.");
+		$("#order_${order.order_no}").submit();
+			alert("상태가 변경되었습니다.");
 			
 		})
 		 if (self.name != 'reload') {
@@ -103,6 +139,13 @@ $(function () {
 	     else self.name = ''; 
 
 })//ready
+
+function editStatus(orderNo){
+	var formId = "order_"+orderNo;
+	document.getElementById(formId).submit();
+}
+
+
 </script>
 
 
@@ -122,8 +165,8 @@ $(function () {
                 <!-- Content -->
 
                 <!-- 상품 전체 조회 -->
-                <div style="padding-left: 50px ;width: 950px;">
-                    <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">회원 조회</label>
+                <div style="padding-left: 50px ;width: 1100px;">
+                    <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">주문 조회</label>
                     <div class="input-group input-group-merge" style="width: 200px;float: right;">
                         <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                         <input
@@ -132,8 +175,6 @@ $(function () {
                           placeholder="Search..."
                           aria-label="Search..."
                           aria-describedby="basic-addon-search31"
-                          id="keyword"
-                          name="keyword"
                         />
                       </div>
                       
@@ -141,63 +182,38 @@ $(function () {
                       
                       
                       <div class="card">
-							<div>
-								<table class="table" style="width: 800px">
-									<thead>
-										<tr>
-											<th>id</th>
-											<th>닉네임</th>
-											<th>구매 금액</th>
-											<th>회원 상태</th>
-										</tr>
-									</thead>
-									<tbody class="table-border-bottom-0">
-									<c:forEach var="mem" items="${memberList}">
-										<tr>
-											<td><a href="customer.do?member_id=${mem.member_id}"><c:out value="${mem.member_id}"/></a></td>
-											<td><c:out value="${mem.nickname}"/></td>
-											<td><c:out value="3000원"/></td>
-											<td><c:out value="${mem.status}"/></td>
-										</tr>
+							<div class="table" style="width: 1000px">
+										<div class="tr">
+											<span class="td">주문 번호</span>
+											<span class="td">회원 명</span>
+											<span class="td">가격</span>
+											<span class="tdr">요청 사항</span>
+											<span class="td">주문 상태</span>
+											<span class="td">주문일</span>
+											<span class="td">상태 선택</span>
+											<span class="td">상태 변경</span>
+										</div>
+									<c:forEach var="order" items="${orderList}">
+								<form class="tr" action="http://localhost/rocketkurly/admin/jsp/order_status.do?order_no=${order.order_no}" method="post" id="order_${order.order_no}" name="editStat">
+											<span class="td"><c:out value="${order.order_no}"/></span>
+											<span class="td"><c:out value="${order.member_id}"/></span>
+											<span class="td"><c:out value="${order.price}"/></span>
+											<span class="tdr"><c:out value="${order.request}"/></span>
+											<span class="td" ><c:out value="${order.order_state}"/></span>
+											<span class="td"><c:out value="${order.order_date}"/></span>
+											<span class="td">
+											<select class="form-select" id="order_state" name="order_state">
+											<option value="결제"><c:out value="결제"/></option>
+											<option value="배송중"><c:out value="배송중"/></option>
+											<option value="배송완료"><c:out value="배송완료"/></option>
+											</select>
+											</span>
+											<span class="td"><a href="#void" id="edit_status${order.order_no}" onclick="editStatus('${order.order_no}')">상태변경</a></span>
+								</form>
 									</c:forEach>
-									</tbody>
-								</table>
 							</div>
 						</div>
 						<!-- 회원 상세 조회 -->
-                      <div class="card" style="margin-top: 30px;height: 400px">
-                        <!-- Search -->
-                            <div>
-                                <h5 class="card-header" style="height:30px; display: inline-block">회원 상세 정보</h5>
-                            </div>
-                        <!-- /Search -->
-                       <div style="width: 800px;">
-                                <div class="customer-lin" style="display: inline-block ;margin: 10px;width: 250px">
-                                    <div class="customer-info">닉네임 : ${memberData.nickname }</div>
-                                    <div class="customer-info">아이디 : ${memberData.member_id }</div>
-                                    <div class="customer-info">이름 : ${memberData.name }</div>
-                                    <div class="customer-info">이메일 : ${memberData.email }</div>
-                                    <div class="customer-info">가입일 : ${memberData.reg_dt }</div>
-                                </div>
-                                <div class="customer-line" style="float:right; ;padding-right:100px;width: 500px">
-                                    <div class="customer-info">우편번호 : ${memberData.addr }</div>
-                                    <div class="customer-info">주소 : ${memberData.address }</div>
-                                    <div class="customer-info">전화번호 : ${memberData.tel }</div>
-                                    <div class="customer-info">구매금액 : </div>
-                                    <div class="customer-info">방문 수 : </div>
-                                    <div class="customer-info">회원상태 : ${memberData.status }</div>
-                                    <form action="http://localhost/rocketkurly/admin/jsp/customer.do?member_id=${memberData.member_id}" method="post" id="editStatusFrm" name="editStatusFrm">
-									<select name="status" style="width: 150px;display: inline-block;"  class="form-select" id="status">
-									<option selected>상태 변경</option>
-										<option value="활동"><c:out value="활동"/></option>
-										<option value="휴면" ><c:out value="휴면"/></option>
-										<option value="탈퇴" ><c:out value="탈퇴"/></option>
-								</select>
-								<button style="margin-left:20px ;display: inline-block; ;" class="btn btn-dark" id="editStatus" name="editStatus">상태 변경</button>
-								</form>
-                        </div>
-                    </div>
-                      
                       
                  
                     <div class="card-body">

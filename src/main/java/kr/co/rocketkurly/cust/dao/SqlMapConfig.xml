@@ -16,6 +16,7 @@
 	 
 	 
 	<typeAlias type="kr.co.rocketkurly.admin.domain.CategoriesDomain" alias="CategoriesDomain"/>
+	<typeAlias type="kr.co.rocketkurly.admin.domain.OrderDomain" alias="OrderDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.PCategoriesDomain" alias="PCategoriesDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.CCategoriesDomain" alias="CCategoriesDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.ItemDomain" alias="itemDomain"/>
@@ -48,6 +49,7 @@
 	 <mapper resource="kr/co/rocketkurly/cust/mapper/mainPageMapper.xml"/>
 	 
     <mapper resource="kr/co/rocketkurly/admin/mapper/itemMapper.xml"/>
+    <mapper resource="kr/co/rocketkurly/admin/mapper/orderMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/imgMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/memberMapper.xml"/>
     <mapper resource="kr/co/rocketkurly/admin/mapper/categoriesMapper.xml"/>

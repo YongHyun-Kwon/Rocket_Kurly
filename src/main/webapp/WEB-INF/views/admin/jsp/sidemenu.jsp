@@ -169,6 +169,11 @@
         </a>
       </li>
       <li class="menu-item">
+        <a href="order_status.do" class="menu-link">
+          <div data-i18n="Without menu">주문 조회</div>
+        </a>
+      </li>
+      <li class="menu-item">
         <a href="customer_grade.do" class="menu-link">
           <div data-i18n="Without navbar">등급 관리</div>
         </a>

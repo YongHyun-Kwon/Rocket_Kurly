@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.rocketkurly.Order.dao">
+
+	<select id="selectOrder" resultType="OrderDomain">
+	select	order_no, price, request, order_state, order_date, member_id
+	from	ordering
+	order by order_no desc
+	</select>
+	
+	<update id="editOrderStat" parameterType="OrderDomain">
+		update ordering
+		set order_state=#{order_state}
+		where order_no=#{order_no}
+	</update>
+	
+	<select id="orderCnt" resultType="int" >
+	 select count(*) cnt
+	 from ordering
+	 </select>
+	 
+	<select id="selectKeywordOrder" resultType="OrderDomain" parameterType="OrderDomain">
+
+	select  filter, ORDER_NO, PRICE, REQUEST, ORDER_STATE, ORDER_DATE, ORDER_FLAG, MEMBER_ID
+	from(select rownum filter, ORDER_NO, PRICE, REQUEST, ORDER_STATE, ORDER_DATE, ORDER_FLAG, MEMBER_ID	
+	from ordering
+	where  MEMBER_ID like '%' || #{keyword} || '%'
+	order by MEMBER_ID)
+	where filter between #{StartNum} and #{endNum}
+
+	</select> 
+	
+	
+	<select id="keywordOCnt" resultType="int" parameterType="OrderDomain">
+	 select count(*) cnt 
+	from ordering
+	where  MEMBER_ID like '%' || #{keyword} || '%'
+	 </select>
+	
+
+</mapper>

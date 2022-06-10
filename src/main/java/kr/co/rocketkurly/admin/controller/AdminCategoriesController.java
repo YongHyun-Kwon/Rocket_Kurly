@@ -37,7 +37,7 @@ public class AdminCategoriesController {
 		
 	}// selectCategories
 	
-	@RequestMapping(value = "/admin/jsp/edit_categories.do", method = {POST})
+	@RequestMapping(value = "/admin/jsp/edit_categories.do", method = {GET,POST})
 	public String selectEditCategories(Model model , PCategoriesDomain pVO){
 		
 		model.addAttribute("selectPCat",cs.selectPCategories());
@@ -47,7 +47,7 @@ public class AdminCategoriesController {
 		
 	}// selectCategories
 	
-	@RequestMapping(value = "/admin/jsp/edit_categories_C.do", method = {POST})
+	@RequestMapping(value = "/admin/jsp/edit_categories_C.do", method = {GET,POST})
 	public String selectEditCCategories(Model model , CCategoriesDomain ccVO){
 		
 		model.addAttribute("selectPCat",cs.selectPCategories());

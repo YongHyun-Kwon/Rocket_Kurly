@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.co.rocketkurly.admin.domain.MemberRegCntDomain;
 import kr.co.rocketkurly.admin.domain.NoticeDomain;
 import kr.co.rocketkurly.admin.domain.OrderCntDomain;
+import kr.co.rocketkurly.admin.domain.OrderDomain;
 import kr.co.rocketkurly.admin.domain.QuestionCntDomain;
 import kr.co.rocketkurly.admin.domain.RevenueDomain;
 import kr.co.rocketkurly.admin.domain.UserHistoryDomain;
 import kr.co.rocketkurly.admin.service.CouponService;
 import kr.co.rocketkurly.admin.service.DashboardService;
+import kr.co.rocketkurly.admin.service.OrderService;
+import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.CouponVO;
 
 @Controller
@@ -29,6 +32,9 @@ public class AdminController {
 	
 	@Autowired(required = false)
 	CouponService cs;
+	
+	@Autowired(required = false)
+	private OrderService os;
 	
 	@RequestMapping(value = "/admin/jsp/index.do", method = RequestMethod.GET)
 	public String mainPage(Model model) {
@@ -52,12 +58,82 @@ public class AdminController {
 	}// mainPage
 	
 	
+	@RequestMapping(value = "/admin/jsp/order_status.do", method = {GET,POST})
+	public String selectOrder(Model model, OrderDomain oVO, BoardVO bVO) {
+		
+		//전체 레코드의 수
+				int totalCnt=os.searchTotalCount();
+				//2. 한화면에 보여줄 게시물의 수
+				int pageScale = os.pageScale();
+				//3. 총 페이지 수
+				int pageCnt = os.pageCnt(totalCnt, pageScale);
+				//4. 시작번호
+				int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
+				//5. 끝번호
+				int endNum = os.endNum(startNum, pageScale);
+				//토탈 스케일
+				int totalScale =os.numScale(); 
+				//제일 마지막 페이지 계산
+				//시작 , 끝 페이지 계산
+				bVO=os.calcStartEndPage(bVO, totalScale,pageCnt );
+				
+				bVO.setStartNum(startNum);
+				bVO.setEndNum(endNum);
+				
+				model.addAttribute("orderList",os.searchMember(bVO));
+				model.addAttribute("startPage",bVO.getStartPage());
+				model.addAttribute("endPage",bVO.getEndPage());
+				model.addAttribute("currentPage",bVO.getCurrentPage());
+				model.addAttribute("pageCnt",pageCnt);
+				/* model.addAttribute("orderList",os.selectOrder()); */
+		model.addAttribute("order_no",oVO.getOrder_no());
+		os.modifyOrderStat(oVO);
+		return "admin/jsp/order_status";
+		
+	}// selectOrder
+	
+	
 	@RequestMapping(value = "/admin/jsp/add_recipe.do", method = GET)
 	public String addRecipe() {
 		
 		return "admin/jsp/add_recipe";
 		
 	}// addRecipe
+	
+	
+	@RequestMapping(value = "/admin/jsp/order_status1.do", method = GET)
+	public String filterOrder(Model model , BoardVO bVO) {
+		
+		//전체 레코드의 수
+		int totalCnt=os.searchKeywordCount(bVO);
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = os.pageScale();
+		//3. 총 페이지 수
+		int pageCnt = os.pageCnt(totalCnt, pageScale);
+		//4. 시작번호
+		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = os.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =os.numScale(); 
+		//제일 마지막 페이지 계산
+		//시작 , 끝 페이지 계산
+		bVO=os.calcStartEndPage(bVO, totalScale,pageCnt);
+		
+		
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+		
+		model.addAttribute("orderList",os.searchKeyword(bVO));
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("keyword",bVO.getKeyword());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+		
+		return "admin/jsp/order_status";
+		
+	}// filterMember 
+	
 	
 	
 
