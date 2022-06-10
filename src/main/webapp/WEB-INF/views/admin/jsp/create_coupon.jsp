@@ -55,15 +55,20 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
 <script type="text/javascript">
+
 $(function () {
 	$("#couponBtn").click(function(){
+		
+		alert("click1");
 		
 		if($("#coupon_name").val() == "" || $("#coupon_date").val() == "" || $("#discount").val() == "" || $("#coupon_no").val() == "" ){
 			alert("모든 입력사항을 기재해주세요.");
 			return;
 		}else{
-			alert("쿠폰이 발행되었습니다.");
+			alert($("#coupon_name").val());
 			$("#addCouponFrm").submit();
+			
+			alert("쿠폰이 발행되었습니다.");
 		}
 		
 	
@@ -110,33 +115,32 @@ $(function () {
                 <!-- 중분류 -->
                 <div style="padding-left: 50px ;width: 950px">
                 	<form id="addCouponFrm" action="http://localhost/rocketkurly/admin/jsp/createProcess.do" method="post">
-                    <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">쿠폰 발행</label>
-                    <div class="mb-3 row">
-                        <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 명</label>
-                        <div class="col-md-10">
-                            <input id="coupon_name" name="coupon_name" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label style="font-size: 17px;" for="html5-text-input" class="col-md-2 col-form-label">유효기간</label>
-                        <div class="col-md-10">
-                            <input id="coupon_date" name="e_date" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">할인율</label>
-                        <div class="col-md-10">
-                            <input id="discount" name="discount"  style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 코드</label>
-                        <div class="col-md-10">
-                            <input id="coupon_no" name="coupon_no" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
-                        </div>
-                    </div>
-									
-                    <input type="button" id="couponBtn" value="쿠폰 발행" style="margin-top: 30px;float: right" class="btn btn-dark">
+                    	<label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">쿠폰 발행</label>
+	                    <div class="mb-3 row">
+	                        <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 명</label>
+	                        <div class="col-md-10">
+	                            <input id="coupon_name" name="coupon_name" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+	                        </div>
+	                    </div>
+	                    <div class="mb-3 row">
+	                        <label style="font-size: 17px;" for="html5-text-input" class="col-md-2 col-form-label">유효기간</label>
+	                        <div class="col-md-10">
+	                            <input id="coupon_date" name="e_date" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+	                        </div>
+	                    </div>
+	                    <div class="mb-3 row">
+	                        <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">할인율</label>
+	                        <div class="col-md-10">
+	                            <input id="discount" name="discount"  style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+	                        </div>
+	                    </div>
+	                    <div class="mb-3 row">
+	                        <label style="font-size: 20px;" for="html5-text-input" class="col-md-2 col-form-label">쿠폰 코드</label>
+	                        <div class="col-md-10">
+	                            <input id="coupon_no" name="coupon_no" style="width: 300px; margin-top: 3px" class="form-control" type="text"  />
+	                        </div>
+	                    </div>
+                    	<input type="button" id="couponBtn" value="쿠폰 발행" style="margin-top: 30px;float: right" class="btn btn-dark">
                     </form>
                 </div>
                 <!-- /중분류 -->

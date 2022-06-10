@@ -64,9 +64,6 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/jsp/create_coupon.do", method = { GET,POST })
 	public String createCoupon(Model model, CouponVO cVO) {
-		
-		cs.addCoupon(cVO);
-		
 		return "admin/jsp/create_coupon";
 		
 	}// createCoupon
@@ -74,10 +71,9 @@ public class AdminController {
 	@RequestMapping(value = "/admin/jsp/createProcess.do", method = { GET,POST })
 	public String createProcess(Model model, CouponVO cVO) {
 		
-		
 		cs.addCoupon(cVO);
 		
-		return "/admin/jsp/create_coupon";
+		return "redirect:create_coupon.do";
 		
 	}// createProcess
 	

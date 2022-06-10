@@ -6,7 +6,6 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
-import kr.co.rocketkurly.admin.domain.ItemDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.cust.dao.MyBatisFramework;
 import kr.co.rocketkurly.cust.vo.BoardVO;
@@ -46,11 +45,15 @@ public class QuestionDAO {
 	}
 	
 	public List<QuestionDomain> selectQuestion(BoardVO bVO)throws PersistenceException{
+		
 		List<QuestionDomain> list = null;
+		
 		//MyBatis handler 얻기
 		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
 		//쿼리문실행
 		list=ss.selectList("kr.co.rocketkurly.admin.dao.selectQuestion",bVO);
+		
 		//MyBatis handler 종로
 		if(ss!=null) {
 			ss.close();
@@ -65,7 +68,6 @@ public class QuestionDAO {
 		list=ss.selectList("kr.co.rocketkurly.admin.dao.selectKeywordQuestion",bVO);
 		//MyBatis handler 종료
 		
-		
 		if(ss!=null) {
 			ss.close();
 		}
@@ -74,7 +76,7 @@ public class QuestionDAO {
 	}
 	
 	/**
-	 * 상품 상세 조회
+	 * 문의 상세 조회
 	 * @param name
 	 * @return
 	 * @throws PersistenceException
