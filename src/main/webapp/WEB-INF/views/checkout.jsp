@@ -1,4 +1,4 @@
-<%@page import="kr.co.rocketkurly.cust.vo.OrderVO"%>
+<%@page import="kr.co.rocketkurly.cust.vo.OrderItemVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -49,8 +49,8 @@
 			
 			discount = subTotal * discount;  
 			
-			$("#discount").html(discount + " 원");
-			$("#total").html(subTotal - discount + " 원")
+			$("#discount").html(Math.floor(discount) + " 원");
+			$("#total").html(Math.floor(subTotal - discount) + " 원")
 			
 			$("#cn").val($("#coupon option:selected").text().split("/", 1));
 			
@@ -95,6 +95,7 @@
 			//alert($("#cn").val());
 			
 			$("#tt").val($("#total").html().split("원", 1))
+			$("#id").val("${ custID }");
 			$("#frm").submit();
 			
 		})// click
@@ -186,7 +187,7 @@
             </div>
             <div class="checkout__form">
                 <h4>구매자 정보</h4>
-                <form action="payment.do" id="frm">
+                <form action="orderpro.do" id="frm" method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
@@ -270,6 +271,7 @@
                                    
                                 <input type="hidden" id="cn" name="couponNo">
                                 <input type="hidden" id="tt" name="price">
+                                <input type="hidden" id="id" name="id">
                                    
                                 <a href="javascript:void(0)" id="payment" class="site-btn">결제하기</a>
                             </div>

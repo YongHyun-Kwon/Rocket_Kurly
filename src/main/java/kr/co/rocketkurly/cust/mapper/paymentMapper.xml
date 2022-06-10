@@ -2,8 +2,34 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.rocketkurly.cust.member.dao">
+<mapper namespace="kr.co.rocketkurly.cust.payment.dao">
 
-	<insert id="ordering" parameterType="OrderVO">
+	<insert id="ordering" parameterType="orderingVO">
+		insert into ordering(order_no, price, order_date, member_id)
+			values(PRO3.ORDER_NO.NEXTVAL, #{ price }, sysdate, #{ id })
 	</insert>
+	
+	<select id="orderNo" resultType="int">
+		select PRO3.ORDER_NO.CURRVAL from dual 
+	</select>
+	
+	<insert id="orderItem" parameterType="java.util.List">
+			<foreach collection="list" item="orderItem" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			into orderitem(orderitem_no, order_no, item_no, quantity)
+				values
+				(
+				  PRO3.ORDERITEM_NO.NEXTVAL, #{ orderItem.orderNo }, #{ orderItem.itemNo }, #{ orderItem.quantity }
+				)
+			</foreach> 
+	</insert>
+	
+	<insert id="recipient" parameterType="orderingVO">
+		insert into recipient(order_no, name, email, tel, addr, detail_addr)
+			values(#{ orderNo }, #{ name }, #{ email }, #{ tel }, #{ zipcode }, #{ address })
+	</insert>
+	
+	<delete id="usingCoupon" parameterType="String">
+		delete from cupon where coupon_no = #{ couponNo }
+	</delete>
+	
 </mapper>

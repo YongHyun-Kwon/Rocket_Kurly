@@ -1,9 +1,9 @@
 package kr.co.rocketkurly.cust.vo;
 
-public class OrderTempVO {
+public class OrderItemTempVO {
 
-	String itemName;
-	int itemNo, total, quantity;
+	private String itemName;
+	private int itemNo, total, quantity, orderNo;
 
 	public String getItemName() {
 		return itemName;
@@ -35,6 +35,14 @@ public class OrderTempVO {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
 	@Override

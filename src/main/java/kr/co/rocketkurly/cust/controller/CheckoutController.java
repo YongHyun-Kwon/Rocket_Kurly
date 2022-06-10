@@ -18,9 +18,10 @@ import kr.co.rocketkurly.admin.domain.CouponDomain;
 import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.service.MemberService;
 import kr.co.rocketkurly.cust.service.MyPageService;
-import kr.co.rocketkurly.cust.vo.OrderTempVO;
-import kr.co.rocketkurly.cust.vo.OrderVO;
-import kr.co.rocketkurly.cust.vo.RecipientVO; 
+import kr.co.rocketkurly.cust.service.PaymentService;
+import kr.co.rocketkurly.cust.vo.OrderItemTempVO;
+import kr.co.rocketkurly.cust.vo.OrderItemVO;
+import kr.co.rocketkurly.cust.vo.OrderingVO; 
 
 @Controller
 public class CheckoutController {
@@ -30,16 +31,19 @@ public class CheckoutController {
 
 	@Autowired(required = false)
 	private MemberService ms;
+	
+	@Autowired(required = false)
+	private PaymentService ps;
 
 	@RequestMapping(value = "/checkout.do", method = { GET, POST })
-	public String checkoutPage(Model model, OrderVO oVO, HttpServletRequest request) { 
+	public String checkoutPage(Model model, OrderItemVO oVO, HttpServletRequest request) { 
 		
-		List<OrderTempVO> list = new ArrayList<OrderTempVO>(); 
+		List<OrderItemTempVO> list = new ArrayList<OrderItemTempVO>(); 
 		
-		OrderTempVO otVO = null; 
+		OrderItemTempVO otVO = null; 
 		for(int i = 0; i < oVO.getItemNo().length ; i++) {
 			
-			otVO = new OrderTempVO();
+			otVO = new OrderItemTempVO();
 			otVO.setItemNo(oVO.getItemNo()[i]);
 			otVO.setItemName(oVO.getItemName()[i]);
 			otVO.setTotal(oVO.getTotal()[i]);
@@ -73,35 +77,17 @@ public class CheckoutController {
 	
 	
 	@RequestMapping(value = "/orderpro.do", method = POST)
-	public String orderProcess(OrderVO oVO, RecipientVO rVO) {
+	public String orderProcess(OrderItemVO oiVO, OrderingVO orVO) {
 		
-		List<OrderTempVO> list = new ArrayList<OrderTempVO>(); 
+		int orderFlag = ps.ordering(orVO, oiVO);
 		
-		OrderTempVO otVO = null; 
-		for(int i = 0; i < oVO.getItemNo().length ; i++) {
-			
-			otVO = new OrderTempVO();
-			otVO.setItemNo(oVO.getItemNo()[i]);
-			otVO.setItemName(oVO.getItemName()[i]);
-			otVO.setTotal(oVO.getTotal()[i]);
-			otVO.setQuantity(oVO.getQuantity()[i]);
-			list.add(otVO);
-			
-		}// end for
-		
-		
-		
-		
-		return "";
+		return "redirect:payment.do";
 		
 	}// orderProcess
 	 
 	
 	@RequestMapping(value = "/payment.do", method = GET)
-	public String paymentPage(OrderVO oVO, RecipientVO rVO) {
-		
-		System.out.println(oVO);
-		System.out.println(rVO);
+	public String paymentPage(OrderItemVO oVO, OrderingVO rVO) {
 		
 		return "payment";
 		

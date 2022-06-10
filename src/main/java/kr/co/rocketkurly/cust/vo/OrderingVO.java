@@ -1,11 +1,9 @@
 package kr.co.rocketkurly.cust.vo;
 
-import java.util.Arrays;
+public class OrderingVO {
 
-public class RecipientVO {
-
-	private String flag, name, email, tel, zipcode, address, couponNo;
-	private int price;
+	private String flag, id, name, email, tel, zipcode, address, couponNo;
+	private int price, orderNo;
 
 	public String getFlag() {
 		return flag;
@@ -13,6 +11,14 @@ public class RecipientVO {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -70,11 +76,20 @@ public class RecipientVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
 
 	@Override
 	public String toString() {
-		return "RecipientVO [flag=" + flag + ", name=" + name + ", email=" + email + ", tel=" + tel + ", zipcode="
-				+ zipcode + ", address=" + address + ", couponNo=" + couponNo + ", price=" + price + "]";
+		return "OrderingVO [flag=" + flag + ", id=" + id + ", name=" + name + ", email=" + email + ", tel=" + tel
+				+ ", zipcode=" + zipcode + ", address=" + address + ", couponNo=" + couponNo + ", price=" + price
+				+ ", orderNo=" + orderNo + "]";
 	}
 
 }
