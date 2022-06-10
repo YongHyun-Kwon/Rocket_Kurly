@@ -27,4 +27,10 @@ insert into CART(CART_NO, QUANTITY, ITEM_NO, MEMBER_ID)
 values(#{cart_no},#{quantity},#{item_no},#{member_id})
 </insert>
 
+<select id="selectCart" parameterType="CartVO" resultType="CartDomain">
+select i.ITEM_NO, i.NAME, i.PRICE, i.MAIN_IMG,c.QUANTITY,i.PRICE*c.QUANTITY priceSum
+from ITEM i , cart c
+where (i.ITEM_NO=c.item_no)and c.member_id=#{member_id} and c.cart_no=#{cart_no}
+</select>
+
 </mapper>

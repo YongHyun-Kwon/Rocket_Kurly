@@ -1,9 +1,12 @@
 package kr.co.rocketkurly.cust.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
+import kr.co.rocketkurly.cust.domain.CartDomain;
 import kr.co.rocketkurly.cust.vo.CartVO;
 
 @Component
@@ -24,6 +27,7 @@ public class ShoppingDAO {
 		
 		return rowCnt;
 	}
+
 	
 	
 	/**
@@ -106,6 +110,22 @@ public class ShoppingDAO {
 		return cnt;
 		
 	}// insertNewCart
+	
+	
+	public List<CartDomain> selectCart(CartVO cVO) throws PersistenceException {
+		List<CartDomain> list=null;
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		list = ss.selectList("kr.co.rocketkurly.cust.Shopping.dao.selectCart",cVO);
+		
+		if (ss != null) {
+			
+			ss.close();
+			
+		} // end if
+		
+		return list;
+	}//selectCart
 	
 	
 }
