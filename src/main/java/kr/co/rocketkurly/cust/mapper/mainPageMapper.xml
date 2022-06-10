@@ -42,11 +42,13 @@
 	</select>
 	
 	<select id="hotItem" resultType="itemVO" >
-		
-		select 
-		from item
-		where 
-		
+		<![CDATA[
+		SELECT ORD.ITEM_NO,I.NAME, I.PRICE, I.MAIN_IMG
+		FROM ORDERITEM ORD, ITEM I
+		WHERE ORD.ITEM_NO=I.ITEM_NO AND ROWNUM <=8
+		GROUP BY ORD.ITEM_NO, I.NAME, I.PRICE, I.MAIN_IMG
+		ORDER BY SUM(ORD.QUANTITY)DESC
+		]]>
 	</select>
 	
 

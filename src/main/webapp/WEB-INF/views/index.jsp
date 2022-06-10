@@ -52,10 +52,10 @@
         <div class="container">
 	 <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <span>로켓 컬리</span>
+                            <h2>100% 친환경<br/>제품 보러가기</h2>
+                            <p>신선식품을 합리적 가격으로 빠르게 만나보세요 </p>
+                            <a href="http://localhost/rocketkurly/shop-grid.do?c_category_id=ve1&&p_category_id=vegatable&&current_category=ve1" class="primary-btn">둘러보기</a>
                         </div>
                     </div>
                     </div>
@@ -139,118 +139,22 @@
                 </div>
             </div>
             <div class="row featured__filter">
+             <c:forEach var="hotList" items="${hotList}" >
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
+                        <div class="featured__item__pic set-bg" data-setbg="item/${hotList.main_img}">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
+                            <h6><a href="shop-details.do?item_no=${hotList.item_no}">${hotList.name}</a></h6>
+                            <h5>${hotList.price}원</h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="shop-details.do">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
+               </c:forEach>
             </div>
         </div>
     </section>
