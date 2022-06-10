@@ -57,5 +57,10 @@
 	<select id="couponTotal" resultType="int" parameterType="String">
 		select count(*)cunpon_total from cupon where member_id = #{ id }
 	</select>
+	
+	<insert id="write_inquiry" parameterType="QuestionVO">
+		insert into question(question_no, member_id, title, type, contents)
+		values(question_NO.NEXTVAL, #{ member_id }, #{ title }, #{ type }, #{contents})
+	</insert>
 
 </mapper>

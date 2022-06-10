@@ -11,16 +11,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.rocketkurly.admin.domain.CouponDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
+import kr.co.rocketkurly.admin.vo.InquiryVO;
 import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.service.MemberService;
 import kr.co.rocketkurly.cust.service.MyPageService;
 import kr.co.rocketkurly.cust.vo.MemberVO;
+import kr.co.rocketkurly.cust.vo.QuestionVO;
 
 @Controller
 public class MyPageController {
@@ -178,11 +181,27 @@ public class MyPageController {
 
 	}// inquiry
 
+	
 	@RequestMapping(value = "/write-inquiry.do", method = { GET, POST })
 	public String writeInquiryPage() {
-
+		
+		
 		return "write-inquiry";
-
+		
 	}// inquiry
+	
+	@RequestMapping(value = "/write-inquiry1.do", method = { GET, POST })
+	public String writeInquiry(QuestionVO qVO,HttpServletRequest request) {
+		
+		HttpSession session =  request.getSession();
+		
+		qVO.setMember_id((String)session.getAttribute("custID"));
+		
+		mps.writeInquiry(qVO);
+		System.out.println(qVO);
+		return "redirect:inquiry.do";
+		
+	}// inquiry
+	
 
 }

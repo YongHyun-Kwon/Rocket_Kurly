@@ -10,10 +10,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import kr.co.rocketkurly.admin.domain.CouponDomain;
+import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
+import kr.co.rocketkurly.admin.vo.InquiryVO;
 import kr.co.rocketkurly.cust.dao.MyPageDAO;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
+import kr.co.rocketkurly.cust.vo.QuestionVO;
 
 @Component
 public class MyPageService {
@@ -237,5 +240,19 @@ public class MyPageService {
 		int pageScale = 10;
 		return pageScale;
 	}
+	
+public void writeInquiry(QuestionVO qVO) {
+		
+		try {
+
+			myDAO.writeInquiry(qVO);
+
+		} catch (PersistenceException pe) {
+
+			pe.printStackTrace();
+
+		} // end catch
+
+	}// enrollProduct
 
 }

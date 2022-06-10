@@ -34,6 +34,40 @@ span{font-weight: bold;}
 
 		   
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function () {
+
+
+$("#write_inq").click(function() {
+	if($("#title").val() == ""){
+		alert("제목을 입력해 주세요.")
+		$("#title").focus();
+		event.preventDefault();
+		return;
+	}
+	if($("#type").val() == "문의유형"){
+		alert("문의유형을 선택해주세요.")
+		event.preventDefault();
+		return;
+	}
+	if($("#contents").val() == ""){
+		alert("문의 내용을 입력해 주세요.")
+		$("#contents").focus();
+		event.preventDefault();
+		return;
+	}
+	
+	
+$("#writeInquiry").submit();
+ alert("문의가 등록되었습니다.");
+})
+
+
+})
+</script>
+
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -42,7 +76,7 @@ span{font-weight: bold;}
 
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-<form action="setting.do" id="frm" method="post">
+<form action="write-inquiry1.do" method="post" id="writeInquiry" name="writeInquiry">
 <div class="site-wrap">
     <div class="site-section">
         <div class="container">
@@ -55,16 +89,16 @@ span{font-weight: bold;}
                                 <div style="width: 700px; border: 1px soild #dfdfdf;"  >
                                 	<label style="font-weight: bold">문의 제목</label>
                                 <div >
-                                <input id="board_title" name="board_title" type="text" placeholder="제목을 입력해주세요" style="width: 500px; border: 1px solid #dfdfdf; margin-bottom: 30px;">
+                                <input id="title" name="title" type="text" placeholder="제목을 입력해주세요" style="width: 500px; border: 1px solid #dfdfdf; margin-bottom: 30px;">
                                 <div style="float:right; ">
-							    	<select id="category_select" name="category_select" style="width:400px; border: 1px solid #dfdfdf; height: 30px; ">
-							    	<option value="inquiry">문의 유형</option>
-							    	<option value="el">주문/결제/반품/교환문의</option>
-							    	<option value="ho">이벤트/쿠폰 문의</option>
-							    	<option value="fo">상품 문의</option>
-							    	<option value="pe">배송 문의</option>
-							    	<option value="be">상품 누락 문의</option>
-							    	<option value="fu">기타 문의</option>
+							    	<select id="type" name="type" style="width:400px; border: 1px solid #dfdfdf; height: 30px; ">
+							    	<option value="문의 유형">문의 유형</option>
+							    	<option value="주문/결제/반품/교환문의">주문/결제/반품/교환문의</option>
+							    	<option value="이벤트/쿠폰 문의">이벤트/쿠폰 문의</option>
+							    	<option value="상품 문의">상품 문의</option>
+							    	<option value="배송 문의">배송 문의</option>
+							    	<option value="상품 누락 문의">상품 누락 문의</option>
+							    	<option value="기타 문의">기타 문의</option>
 							    	</select>
                                 </div>
                                 </div>
@@ -72,11 +106,11 @@ span{font-weight: bold;}
                                 </div>
                                 </div>
                                 <div>
-                                <textarea id="board_content" name="board_content" placeholder="내용을 입력해주세요" style="border: 1px solid #dfdfdf; width:700px; height:500px; margin-top: 10px;"></textarea>
+                                <textarea id="contents" name="contents" placeholder="내용을 입력해주세요" style="border: 1px solid #dfdfdf; width:700px; height:500px; margin-top: 10px;"></textarea>
                                 </div>
                                 </div>
                                 <div style="text-align: right;">
-                                <a href="inquiry.do"><input type="button" value="작성하기" ></a>
+                                <input type="submit" id="write_inq" value="작성하기" >
                                 </div>
                             </div>
                         </div>
