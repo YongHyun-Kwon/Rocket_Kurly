@@ -6,15 +6,15 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import kr.co.rocketkurly.cust.dao.mainPageDAO;
+import kr.co.rocketkurly.cust.dao.MainPageDAO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
 
 
 @Component
-public class mainPageService {
+public class MainPageService {
 	
 	@Autowired(required = false)
-	private mainPageDAO mDAO;
+	private MainPageDAO mDAO;
 	
 	public List<ItemVO> selectRecommend() {
 		
@@ -47,5 +47,22 @@ public class mainPageService {
 		return list;
 	}
 	
+	public List<ItemVO> selectHotItem() {
+		
+		List<ItemVO> list= null;
+		
+		try {
+			
+			list=mDAO.selectHotItem();
+			
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		
+		return list;
+	}
+	
+
 
 }
