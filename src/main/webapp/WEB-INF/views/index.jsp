@@ -157,7 +157,7 @@
                </c:forEach>
             </div>
         </div>
-    </section>
+    </section> 
     
     <!-- 가장 핫한 상품 section -->
     

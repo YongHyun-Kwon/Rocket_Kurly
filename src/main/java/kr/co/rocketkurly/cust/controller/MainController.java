@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.rocketkurly.cust.service.MainPageService;
-import kr.co.rocketkurly.cust.vo.ItemVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
