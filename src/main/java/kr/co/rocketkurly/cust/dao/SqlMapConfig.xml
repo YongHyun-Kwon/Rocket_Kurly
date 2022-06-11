@@ -17,6 +17,7 @@
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.OrderItemTempVO" alias="OrderItemTempVO"/>
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.WishVO" alias="WishVO"/>
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.OrderingVO" alias="orderingVO"/>
+	 <typeAlias type="kr.co.rocketkurly.cust.vo.OrderHistoryVO" alias="orderhistoryVO"/>
 	 
 	 
 	<typeAlias type="kr.co.rocketkurly.admin.domain.CategoriesDomain" alias="CategoriesDomain"/>

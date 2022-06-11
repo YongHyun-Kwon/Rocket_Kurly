@@ -78,8 +78,6 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="item/${recommendList.main_img}">
                             <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -111,8 +109,6 @@
 	                    <div class="featured__item">
 	                        <div class="featured__item__pic set-bg" data-setbg="item/${lowestList.main_img}">
 	                            <ul class="featured__item__pic__hover">
-	                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-	                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
 	                            </ul>
 	                        </div>
 	                        <div class="featured__item__text">
@@ -144,8 +140,6 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="item/${hotList.main_img}">
                             <ul class="featured__item__pic__hover">
-                                <li><a href="favorite.do"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="shoping-cart.do"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">

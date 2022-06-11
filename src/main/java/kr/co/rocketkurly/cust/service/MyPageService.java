@@ -17,6 +17,7 @@ import kr.co.rocketkurly.cust.dao.MyPageDAO;
 import kr.co.rocketkurly.cust.domain.WishDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
+import kr.co.rocketkurly.cust.vo.OrderHistoryVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
 import kr.co.rocketkurly.cust.vo.WishVO;
 
@@ -263,66 +264,83 @@ public class MyPageService {
 		return pageScale;
 	}
 	
-public void writeInquiry(QuestionVO qVO) {
+	public void writeInquiry(QuestionVO qVO) {
+			
+			try {
+	
+				myDAO.writeInquiry(qVO);
+	
+			} catch (PersistenceException pe) {
+	
+				pe.printStackTrace();
+	
+			} // end catch
+	
+		}// enrollProduct
+	
+	
+	public String addWish(WishVO wVO) {
+		String msg="";
+		int cnt = 0;
+		try {
+	
+			cnt = myDAO.wishConfirm(wVO);
+			if(cnt==1) {
+				myDAO.deleteWish(wVO);
+				msg="찜목록에서 삭제되었습니다.";
+			}else {
+				myDAO.insertWish(wVO);
+				msg="찜목록에 추가되었습니다.";
+				
+			}
+	
+		} catch (PersistenceException pe) {
+	
+			pe.printStackTrace();
+	
+		} // end catch
+	
+	
+		return msg;
+	
+	}// addWish
+	
+	public int totalCount() {
+		int totalCnt=0;
+		try {
+		totalCnt=myDAO.selectTotalCount();
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return totalCnt;
+	}//totalCount
+	
+	public List<WishDomain> searchWish(BoardVO bVO) {
+		List<WishDomain> list=null;
+		try {
+			list=myDAO.selectWish(bVO);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return list;
+	}//searchWish
+	
+	public List<OrderHistoryVO> searchOrderhistory(String id){
+	
+		List<OrderHistoryVO> list = null;
 		
 		try {
-
-			myDAO.writeInquiry(qVO);
-
-		} catch (PersistenceException pe) {
-
-			pe.printStackTrace();
-
-		} // end catch
-
-	}// enrollProduct
-
-
-public String addWish(WishVO wVO) {
-	String msg="";
-	int cnt = 0;
-	try {
-
-		cnt = myDAO.wishConfirm(wVO);
-		if(cnt==1) {
-			myDAO.deleteWish(wVO);
-			msg="찜목록에서 삭제되었습니다.";
-		}else {
-			myDAO.insertWish(wVO);
-			msg="찜목록에 추가되었습니다.";
+			list=myDAO.selectOrderHistory(id);
+		}catch (PersistenceException e) {
 			
+			e.printStackTrace();			
 		}
-
-	} catch (PersistenceException pe) {
-
-		pe.printStackTrace();
-
-	} // end catch
-
-
-	return msg;
-
-}// addWish
-
-public int totalCount() {
-	int totalCnt=0;
-	try {
-	totalCnt=myDAO.selectTotalCount();
-	}catch (PersistenceException e) {
+		return list;
 		
-		e.printStackTrace();			
-	}
-	return totalCnt;
-}//totalCount
-public List<WishDomain> searchWish(BoardVO bVO) {
-	List<WishDomain> list=null;
-	try {
-		list=myDAO.selectWish(bVO);
-	}catch (PersistenceException e) {
-		
-		e.printStackTrace();			
-	}
-	return list;
-}//searchWish
+	}//searchOrderhistory
+
+
 
 }

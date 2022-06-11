@@ -13,6 +13,7 @@ import kr.co.rocketkurly.admin.vo.InquiryVO;
 import kr.co.rocketkurly.cust.domain.WishDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
+import kr.co.rocketkurly.cust.vo.OrderHistoryVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
 import kr.co.rocketkurly.cust.vo.WishVO;
 
@@ -278,6 +279,22 @@ public class MyPageDAO {
 		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.selectWish",bVO);
 		
 		if(ss!=null) {
+			ss.close();
+		}
+		
+		return list;
+	}
+	
+	public List<OrderHistoryVO> selectOrderHistory(String id) throws PersistenceException{
+		
+		List<OrderHistoryVO> list = null;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.orderHistory", id);
+		
+		if(ss!=null) {
+			
 			ss.close();
 		}
 		

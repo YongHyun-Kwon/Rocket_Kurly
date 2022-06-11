@@ -68,6 +68,7 @@ span{font-weight: bold;}
                                 	<c:if test="${ not empty inquiryList }">
                                 		<c:forEach var="inquiry" items="${ inquiryList }">
                                 			<tr>
+                                				<td><a href="inquiry-detail.do?qno=${ inquiry.question_no }"><c:out value="${ inquiry.title }"/></a></td>
                                 				<td><a href="inquiry-detail.do?question_no=${ inquiry.question_no }"><c:out value="${ inquiry.title }"/></a></td>
                                 				<td><c:out value="${ inquiry.type }"/></td>
                                 				<td><fmt:formatDate value="${ inquiry.reg_dt }" pattern="yyyy-MM-dd"/>

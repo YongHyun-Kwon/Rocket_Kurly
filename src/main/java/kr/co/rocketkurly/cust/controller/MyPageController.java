@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import kr.co.rocketkurly.admin.domain.CouponDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.admin.service.ItemService;
@@ -25,6 +27,7 @@ import kr.co.rocketkurly.cust.service.MemberService;
 import kr.co.rocketkurly.cust.service.MyPageService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
+import kr.co.rocketkurly.cust.vo.OrderHistoryVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
 import kr.co.rocketkurly.cust.vo.WishVO;
 
@@ -125,8 +128,19 @@ public class MyPageController {
 	}// pwFindProcess
 
 	@RequestMapping(value = "/orderhistory.do", method = { GET, POST })
-	public String orderhistoryPage() {
+	public String orderhistoryPage(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
 
+		String id = (String) session.getAttribute("custID");
+
+		List<OrderHistoryVO> historyList = mps.searchOrderhistory(id);
+		
+		OrderHistoryVO ohVO = new OrderHistoryVO();
+		
+		model.addAttribute("historyList", historyList);
+		
+			
 		return "orderhistory";
 
 	}// orderhistoryPage
