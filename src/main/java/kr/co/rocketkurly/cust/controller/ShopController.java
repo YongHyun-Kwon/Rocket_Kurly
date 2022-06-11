@@ -2,6 +2,10 @@ package kr.co.rocketkurly.cust.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +27,28 @@ public class ShopController {
 	private CategoriesSevice cs;
 	
 	@RequestMapping(value = "/shop-details.do", method = GET)
-	public String shopDetailsPage(Model model,BoardVO bVO, ItemVO iVO) {
+	public String shopDetailsPage(Model model, ItemVO iVO) {
+		
+		
 		model.addAttribute("productData",is.searchDetail(iVO.getItem_no()));
+		
+		String cate=is.searchCategory(iVO.getItem_no());
+		int startNum = is.searchStartCate(cate);
+		int endNum = is.searchEndCate(cate);
+		
+		System.out.println(cate);
+		System.out.println(startNum);
+		System.out.println(endNum);
+		
+		Random ran = new Random();
+		List<Integer>list= new ArrayList<Integer>();
+		
+		for(int i=0;i<4;i++) {
+			list.add(ran.nextInt(endNum - startNum + 1) + startNum);
+		}
+		System.out.println(list);
+		model.addAttribute("relevantData",is.relevantData(list));
+		
 		
 		return "shop-details";
 		

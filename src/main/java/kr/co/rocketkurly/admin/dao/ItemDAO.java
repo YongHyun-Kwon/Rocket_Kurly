@@ -138,5 +138,54 @@ public class ItemDAO {
 		}
 		return item;
 	}
+	public String selectCategory(int item_no )throws PersistenceException{
+		String cate="";
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		cate=ss.selectOne("kr.co.rocketkurly.admin.dao.selectCategory",item_no);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+		return cate;
+	}
+	public int selectStartCate(String cate)throws PersistenceException{
+		int cnt=0;
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		cnt=ss.selectOne("kr.co.rocketkurly.admin.dao.selectStartCate",cate);
+		//MyBatis handler 종로
+		if(ss!=null) {
+			ss.close();
+		}
+		return cnt;
+	}
+	public int selectEndCate(String cate)throws PersistenceException{
+		int cnt=0;
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		cnt=ss.selectOne("kr.co.rocketkurly.admin.dao.selectEndCate",cate);
+		//MyBatis handler 종로
+		if(ss!=null) {
+			ss.close();
+		}
+		return cnt;
+	}
+	public ItemDomain relevantSelect(int item_no)throws PersistenceException{
+		ItemDomain id=null;
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		id=ss.selectOne("kr.co.rocketkurly.admin.dao.relevantSelect",item_no);
+		//MyBatis handler 종로
+		if(ss!=null) {
+			ss.close();
+		}
+		return id;
+	}
 
 }

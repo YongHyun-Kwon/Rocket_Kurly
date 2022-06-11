@@ -97,6 +97,11 @@ $(function () {
 		  
 })//ready
 function clw(item) {
+	
+	if($("#hid").val()==null){
+		alert("로그인을해주세요")
+		return
+	}
 	$.ajax({
 		url : "http://localhost/rocketkurly/addCart.do",
 		type : "GET",
@@ -117,6 +122,11 @@ function clw(item) {
 	}) // ajax
 }
 function wish(item) {
+	
+	if($("#hid").val()==null){
+		alert("로그인을해주세요")
+		return
+	}
 	$.ajax({
 		url : "http://localhost/rocketkurly/addwish.do",
 		type : "GET",
