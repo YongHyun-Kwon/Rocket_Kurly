@@ -56,18 +56,22 @@
 			})// click
 			
 		})
-function add() {
+function add(item) {
 	if($("#qu").val()==0){
 		
 		alert("수량은 0개일 수 가없습니다.")
+		return
+	}
+	if($("#hid").val()==null){
+		alert("로그인을해주세요")
 		return
 	}
 	$.ajax({
 		url : "http://localhost/rocketkurly/addCart.do",
 		type : "GET",
 		data : {
-			 item_no : $("input[name=itemNo]").val(),
-			 member_id : '<c:out value="${custID}"/>',
+			 item_no : item,
+			 member_id : $("#hid").val(),
 			 quantity : $("#qu").val()
 		},
 		async : true,
@@ -85,25 +89,55 @@ function add() {
 			
 }
 function wish(item) {
-			$.ajax({
-				url : "http://localhost/rocketkurly/addwish.do",
-				type : "GET",
-				data : {
-					 item_no : $("input[name=itemNo]").val(),
-					 member_id : '<c:out value="${custID}"/>',
-				},
-				async : true,
-				dataType : 'text',
-				error : function(xhr) {
-					alert(xhr.text + "/" + xhr.status);
-				},
-				success : function( data ) {
-					alert(data)
-					
-				},
-				
-			}) // ajax
-		}
+	if($("#hid").val()==null){
+		alert("로그인을해주세요")
+		return
+	}
+	$.ajax({
+		url : "http://localhost/rocketkurly/addwish.do",
+		type : "GET",
+		data : {
+			 item_no : item,
+			 member_id : $("#hid").val(),
+		},
+		async : true,
+		dataType : 'text',
+		error : function(xhr) {
+			alert(xhr.text + "/" + xhr.status);
+		},
+		success : function( data ) {
+			alert(data)
+			
+		},
+		
+	}) // ajax
+}
+
+function clw(item) {
+	
+	if($("#hid").val()==null){
+		alert("로그인을해주세요")
+		return
+	}
+	$.ajax({
+		url : "http://localhost/rocketkurly/addCart.do",
+		type : "GET",
+		data : {
+			 item_no : item,
+			 member_id : $("#hid").val()
+		},
+		async : true,
+		dataType : 'text',
+		error : function(xhr) {
+			alert(xhr.text + "/" + xhr.status);
+		},
+		success : function( data ) {
+			alert(data)
+			
+		},
+		
+	}) // ajax
+}
 		
 	</script>
 </head>
@@ -120,6 +154,9 @@ function wish(item) {
    	<!-- 메뉴  -->
    	<%@ include file="/WEB-INF/views/include/menu.jsp" %>
     
+    <c:if test="${not empty custID}">
+    <input type="hidden" value="${custID}" id="hid"> 
+    </c:if>
 
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
@@ -166,10 +203,10 @@ function wish(item) {
                                 </div>
                             </div>
                         </div>
-                        <a href="javascript:add()" class="primary-btn">장바구니에 넣기</a>
+                        <a href="javascript:add(${productData.item_no })" class="primary-btn">장바구니에 넣기</a>
                         <a href="javascript:void(0)" id="order" class="primary-btn">구매</a>
                         <!-- <a href="#" class="primary-btn">취소</a> -->
-                        <a href="javascript:wish()" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <a href="javascript:wish(${productData.item_no })" class="heart-icon"><span class="icon_heart_alt"></span></a>
                      	<div>
                      		총 금액 : <span id="total"></span>원
                      		<input type="hidden" name="total"/>
@@ -273,66 +310,23 @@ function wish(item) {
                 </div>
             </div>
             <div class="row">
+            <c:forEach var="data" items="${relevantData }">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="http://localhost/rocketkurly/item/${data.main_img }">
                             <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+ 								<li><a href="javascript:wish(${data.item_no})"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="javascript:clw(${data.item_no})"><i class="fa fa-shopping-cart"></i></a></li>  
                             </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
+                            <h6><a href="shop-details.do?item_no=${data.item_no}">${data.name}</a></h6>
+                            <h5>${data.price}</h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                            <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-                            <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
-                            <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
+            </c:forEach>
+
             </div>
         </div>
     </section>
