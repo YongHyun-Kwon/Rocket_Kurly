@@ -1,5 +1,6 @@
 package kr.co.rocketkurly.admin.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -206,6 +207,49 @@ public void enrollImg(ImgVO imgVO) {
 		} // end catch
 
 	}// enrollImg
+
+public String searchCategory(int item_no) {
+	String cate="";
+	try {
+		cate=iDAO.selectCategory(item_no);
+	}catch (PersistenceException e) {
+		
+		e.printStackTrace();			
+	}
+	return cate;
+}
+public int searchStartCate(String cate) {
+	int cnt=0;
+	try {
+		cnt=iDAO.selectStartCate(cate);
+	}catch (PersistenceException e) {
+		
+		e.printStackTrace();			
+	}
+	return cnt;
+}
+public int searchEndCate(String cate) {
+	int cnt=0;
+	try {
+		cnt=iDAO.selectEndCate(cate);
+	}catch (PersistenceException e) {
+		
+		e.printStackTrace();			
+	}
+	return cnt;
+}
+public List<ItemDomain> relevantData(List<Integer> ran) {
+	List<ItemDomain> list=new ArrayList<ItemDomain>();
+	try {
+		for(int i=0;i<4;i++) {
+			list.add(iDAO.relevantSelect(ran.get(i)==0?1:ran.get(i)));
+		}
+	}catch (PersistenceException e) {
+		
+		e.printStackTrace();			
+	}
+	return list;
+}
 	
 	
 }

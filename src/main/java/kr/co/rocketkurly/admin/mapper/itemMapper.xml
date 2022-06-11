@@ -15,6 +15,7 @@
 select ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
 from ITEM
 where ITEM_NO between #{StartNum} and #{endNum}
+order by item_no
 </select>
 	
 	
@@ -100,5 +101,33 @@ where  C_CATEGORY_ID = #{keyword}
 order by item_no)
 where filter between #{StartNum} and #{endNum}
  </select>
+ 
+<select id="selectCategory" resultType="String" parameterType="int">
+select C_CATEGORY_ID 
+from ITEM
+where item_no=#{item_no}
+</select>
 
+<select id="selectStartCate" resultType="int" parameterType="String">
+select item_no
+from(select item_no
+from item
+where C_CATEGORY_ID=#{cate}
+order by item_no)
+where rownum=1;
+</select>
+
+<select id="selectEndCate" resultType="int" parameterType="String">
+select item_no
+from(select item_no,C_CATEGORY_ID
+from item
+where C_CATEGORY_ID=#{cate}
+order by item_no desc)
+where rownum=1
+</select>
+<select id="relevantSelect" resultType="itemDomain" parameterType="int">
+select item_no, name, price, main_img
+from ITEM
+where ITEM_NO=#{item_no}
+</select>
 </mapper>

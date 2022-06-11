@@ -109,6 +109,26 @@ public class MyPageService {
 		return list;
 
 	}// inquiry
+	
+	/**
+	 * 1:1 문의 조회 Service method
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public QuestionDomain myInquiry(int no) {
+		
+		QuestionDomain list = null;
+		
+		try {
+			list = myDAO.selectMyQuestion(no);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		} // end catch
+		
+		return list;
+		
+	}// inquiry
 
 	/**
 	 * 쿠폰조회 Service method
