@@ -5,9 +5,11 @@
 <mapper namespace="kr.co.rocketkurly.Order.dao">
 
 	<select id="selectOrder" resultType="OrderDomain">
-	select	order_no, price, request, order_state, order_date, member_id
-	from	ordering
-	order by order_no desc
+	select	filter, order_no, price, request, order_state, order_date, member_id
+	from (select rownum filter, order_no, price, request, order_state, order_date, member_id
+	from ordering
+	order by order_no desc)
+	where filter between #{StartNum} and #{endNum}
 	</select>
 	
 	<update id="editOrderStat" parameterType="OrderDomain">

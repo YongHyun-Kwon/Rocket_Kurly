@@ -104,6 +104,30 @@ public class MyPageDAO {
 	}// selectQuestion
 	
 	/**
+	 * 1:1 문의 조회 method
+	 * @param id
+	 * @return
+	 * @throws PersistenceException
+	 */
+	public QuestionDomain selectMyQuestion(int no) throws PersistenceException {
+		
+		QuestionDomain list = null;
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		list = ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.myInquiry",no);
+		
+		if( ss != null ) {
+			
+			ss.close();
+			
+		}// end if
+		
+		return list;
+		
+	}// selectQuestion
+	
+	/**
 	 * 쿠폰 조회 method
 	 * @param id
 	 * @return

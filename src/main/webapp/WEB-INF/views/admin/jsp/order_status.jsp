@@ -228,14 +228,14 @@ function editStatus(orderNo){
                               <ul class="pagination">
                              <c:if test="${10 lt currentPage}"> 
                             <li class="page-item first">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage-10}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage-10}"
                                 ><i class="tf-icon bx bx-chevrons-left"></i
                               ></a>
                             </li>
                             </c:if>
                             <c:if test="${1 ne currentPage}">
                             <li class="page-item prev">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage-1}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage-1}"
                                 ><i class="tf-icon bx bx-chevron-left"></i
                               ></a>
                             </li>
@@ -246,7 +246,7 @@ function editStatus(orderNo){
          					<c:when test="${i eq currentPage }">
 							
 							<li class="page-item active">
-                              <a class="page-link" href="customer.do?currentPage=${i}">
+                              <a class="page-link" href="order_status.do?currentPage=${i}">
                               <c:out value="${i}"/>
                               </a>
                             </li>
@@ -254,7 +254,7 @@ function editStatus(orderNo){
                             <c:otherwise>
                             
                             <li class="page-item">
-                              <a class="page-link" href="customer.do?currentPage=${i}">
+                              <a class="page-link" href="order_status.do?currentPage=${i}">
                               <c:out value="${i}"/>
                               </a>
                             </li>
@@ -264,14 +264,14 @@ function editStatus(orderNo){
          				</c:forEach>
          				<c:if test="${pageCnt gt currentPage}">
          				  <li class="page-item next">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage+1}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage+1}"
                                 ><i class="tf-icon bx bx-chevron-right"></i
                               ></a>
                             </li>
                             </c:if>
                            <c:if test="${pageCnt gt currentPage+10}">
                             <li class="page-item last">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage+10}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage+10}"
                                 ><i class="tf-icon bx bx-chevrons-right"></i
                               ></a>
                             </li>
@@ -283,14 +283,14 @@ function editStatus(orderNo){
          				    <c:if test="${10 lt currentPage}"> 
          				     
                             <li class="page-item first">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage-10}&&keyword=${keyword}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage-10}&&keyword=${keyword}"
                                 ><i class="tf-icon bx bx-chevrons-left"></i
                               ></a>
                             </li>
                             </c:if>
                             <c:if test="${1 ne currentPage}">
                             <li class="page-item prev">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage-1}&&keyword=${keyword}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage-1}&&keyword=${keyword}"
                                 ><i class="tf-icon bx bx-chevron-left"></i
                               ></a>
                             </li>
@@ -300,7 +300,7 @@ function editStatus(orderNo){
          					<c:when test="${i eq currentPage }">
 							
 							<li class="page-item active">
-                              <a class="page-link" href="customer2.do?currentPage=${i}&&keyword=${keyword}">
+                              <a class="page-link" href="order_status2.do?currentPage=${i}&&keyword=${keyword}">
                               <c:out value="${i}"/>
                               </a>
                             </li>
@@ -308,7 +308,7 @@ function editStatus(orderNo){
                             <c:otherwise>
                             
                             <li class="page-item">
-                              <a class="page-link" href="customer2.do?currentPage=${i}&&keyword=${keyword}">
+                              <a class="page-link" href="order_status2.do?currentPage=${i}&&keyword=${keyword}">
                               <c:out value="${i}"/>
                               </a>
                             </li>
@@ -319,14 +319,14 @@ function editStatus(orderNo){
          				</c:forEach>
          				<c:if test="${pageCnt gt currentPage}">
          				  <li class="page-item next">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage+1}&&keyword=${keyword}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage+1}&&keyword=${keyword}"
                                 ><i class="tf-icon bx bx-chevron-right"></i
                               ></a>
                             </li>
                             </c:if>
                            <c:if test="${pageCnt gt currentPage+10}">
                             <li class="page-item last">
-                              <a class="page-link" href="customer.do?currentPage=${currentPage+10}&&keyword=${keyword}"
+                              <a class="page-link" href="order_status.do?currentPage=${currentPage+10}&&keyword=${keyword}"
                                 ><i class="tf-icon bx bx-chevrons-right"></i
                               ></a>
                             </li>
