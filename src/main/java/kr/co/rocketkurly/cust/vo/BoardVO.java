@@ -4,7 +4,7 @@ public class BoardVO {
 
 	private int StartNum,endNum;//시작번호 끝번호 현재 페이지 번호
 	private int startPage,endPage,currentPage;
-	private String keyword , current_category;
+	private String keyword , current_category,member_id;
 	
 	
 	public BoardVO() {
@@ -82,19 +82,24 @@ public class BoardVO {
 	}
 
 
+	public String getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
+
 	@Override
 	public String toString() {
 		return "BoardVO [StartNum=" + StartNum + ", endNum=" + endNum + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", currentPage=" + currentPage + ", keyword=" + keyword + ", current_category="
-				+ current_category + "]";
+				+ current_category + ", member_id=" + member_id + "]";
 	}
-
-
-
 	
-
-
-
+	
 
 	
 	

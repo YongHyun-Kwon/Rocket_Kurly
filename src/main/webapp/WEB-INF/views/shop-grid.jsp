@@ -116,6 +116,26 @@ function clw(item) {
 		
 	}) // ajax
 }
+function wish(item) {
+	$.ajax({
+		url : "http://localhost/rocketkurly/addwish.do",
+		type : "GET",
+		data : {
+			 item_no : item,
+			 member_id : $("#hid").val()
+		},
+		async : true,
+		dataType : 'text',
+		error : function(xhr) {
+			alert(xhr.text + "/" + xhr.status);
+		},
+		success : function( data ) {
+			alert(data)
+			
+		},
+		
+	}) // ajax
+}
 
 </script>
 
@@ -198,14 +218,14 @@ function clw(item) {
                                 <div class="product__item__pic set-bg" data-setbg="http://localhost/rocketkurly/item/${item.main_img }">
                                     <ul class="product__item__pic__hover">
                                         <c:if test="${not empty custID}">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="javascript:wish(${item.item_no})"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="javascript:clw(${item.item_no})"><i class="fa fa-shopping-cart"></i></a></li>  
                                         <input type="hidden" value="${custID}" id="${item.item_no}">                                     
                                         </c:if>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="shop-details.do?current_category=${currentCategory}&&item_no=${item.item_no}">${item.name }</a></h6>
+                                    <h6><a href="shop-details.do?item_no=${item.item_no}">${item.name }</a></h6>
                                     <h5>${item.price}원</h5>
                                 </div>
                             </div>
@@ -214,6 +234,12 @@ function clw(item) {
 
                     </div>
                     <div class="product__pagination">
+                    
+                      <c:if test="${currentPage > 10}">
+                       <a href="shop-grid.do?currentPage=${currentPage-10}&&current_category=${currentCategory}&&p_category_id=${p_categoryID}"><i class="fa fa-long-arrow-left"></i></a>
+                      </c:if>
+                    
+                    
                     <c:forEach var="i" begin="${startPage}" end="${endPage}">
                      <c:choose>
          					<c:when test="${i eq currentPage }">

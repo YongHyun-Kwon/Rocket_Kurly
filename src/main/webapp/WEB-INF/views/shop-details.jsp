@@ -84,6 +84,26 @@ function add() {
 	
 			
 }
+function wish(item) {
+			$.ajax({
+				url : "http://localhost/rocketkurly/addwish.do",
+				type : "GET",
+				data : {
+					 item_no : $("input[name=itemNo]").val(),
+					 member_id : '<c:out value="${custID}"/>',
+				},
+				async : true,
+				dataType : 'text',
+				error : function(xhr) {
+					alert(xhr.text + "/" + xhr.status);
+				},
+				success : function( data ) {
+					alert(data)
+					
+				},
+				
+			}) // ajax
+		}
 		
 	</script>
 </head>
@@ -149,7 +169,7 @@ function add() {
                         <a href="javascript:add()" class="primary-btn">장바구니에 넣기</a>
                         <a href="javascript:void(0)" id="order" class="primary-btn">구매</a>
                         <!-- <a href="#" class="primary-btn">취소</a> -->
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <a href="javascript:wish()" class="heart-icon"><span class="icon_heart_alt"></span></a>
                      	<div>
                      		총 금액 : <span id="total"></span>원
                      		<input type="hidden" name="total"/>
