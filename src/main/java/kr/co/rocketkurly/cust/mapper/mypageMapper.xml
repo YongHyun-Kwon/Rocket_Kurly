@@ -94,6 +94,15 @@
 	where filter between #{StartNum} and #{endNum}
 	
 	 </select>
+	 
+	 <select id="orderHistory" resultType="orderhistoryVO" parameterType="String">
+	 
+	 	SELECT MEMBER_ID, ORDER_NO, ORDER_DATE, PRICE, ORDER_STATE, ITEM_NO, REVIEW_STATE, ITEMNAME, QUANTITY
+	 	FROM ORDERHISTORY_VIEW 
+	 	WHERE MEMBER_ID = #{id}
+	 	ORDER BY ORDER_DATE DESC 
+	 
+	 </select>
 	
 	
 </mapper>

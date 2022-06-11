@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -26,10 +27,12 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 </head>
 <style type="text/css">
-th{padding: 3px; }
+th{padding: 3px;}
 td{padding: 5px;}
-table{width: 700px;}
-
+table{min-width: 800px; table-layout: fixed;
+	  word-break:break-all;
+	  height:auto
+	  }
 
 		   
 </style>
@@ -47,8 +50,8 @@ table{width: 700px;}
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-9 order-2">
-                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: 500px">
-                        <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                    <div class="bg-white shadow rounded-lg d-block d-sm-flex" style="height: auto; width: auto; min-width: 900px;">
+                        <div class="tab-content p-4 p-md-5" id="v-pills-tabContent" style="width: auto; height: auto; min-width: 900px;">
                             <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                                 <h1 class="mb-4">주문 내역 조회</h1>
                                 <table>
@@ -58,32 +61,30 @@ table{width: 700px;}
                                 		<th>주문 번호</th>
                                 		<th>주문 금액(수량)</th>
                                 		<th>주문 상태</th>
+                                		<th>리뷰 여부</th>
+                                		<th></th>
                                 	</tr>
+                                	<c:if test="${ empty historyList }">
+                                		<tr>
+                                			<td colspan="4">작성하신 문의가 없습니다.</td>
+                                		</tr>
+                                	</c:if>
+                               <c:if test="${ not empty historyList }">
+                                <c:forEach var="historyList" items="${historyList}">
                                 	<tr style="border-top: 1px solid #dfdfdf;">
-                                		<td>바나나</td>
-                                		<td>2022-05-23</td>
-                                		<td>12345</td>
-                                		<td>1500원(1)</td>
-                                		<td>배송중</td>
+                                		<td><a href="shop-details.do?item_no=${historyList.item_no}">${historyList.itemName}</a></td>
+                                		<td><fmt:formatDate value="${historyList.order_date}" pattern="yyyy-MM-dd"/></td>
+                                		<td>${historyList.order_no}</td>
+                                		<td>${historyList.price}(${historyList.quantity})</td>
+                                		<td>${historyList.order_state}</td>
+                                		<td>${'n' eq historyList.review_state ? '미작성' : '작성'}</td>
                                 		<td><a href="write-inquiry.do"><input type="button" value="1:1문의"/></a></td>
+                                	<c:if test="${'n' eq historyList.review_state}">
+                                		<td><a href="write-review.do"><input type="button" value="리뷰작성"/></a></td>
+                                	</c:if>
                                 	</tr>
-                                	<tr>
-                                	<td>토마호크 스테이크</td>
-                                		<td>2022-05-23</td>
-                                		<td>12346</td>
-                                		<td>30000원(1)</td>
-                                		<td>배송완료</td>
-                                		<td><input type="button" value="1:1문의"/></td>
-                                		<td><a href="write-review.do"><input type="button" value="리뷰쓰기"/></a></td>
-                                	</tr>
-                                	<tr>
-                                	<td>닭강정</td>
-                                		<td>2022-05-24</td>
-                                		<td>12347</td>
-                                		<td>9800원(1)</td>
-                                		<td>배송준비중</td>
-                                		<td><a href="write-inquiry.do"><input type="button" value="1:1문의"/></a></td>
-                                	</tr>
+                                </c:forEach>
+                               </c:if>
                                 </table>
                                 </div>
                             </div>
