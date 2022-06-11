@@ -44,6 +44,10 @@
 	
 	<select id="inquiry" resultType="questionDomain" parameterType="String">
 		select * from question where member_id = #{ id }
+	</select>
+		
+	<select id="myInquiry" resultType="questionDomain" parameterType="int">
+		select * from question where question_no = #{ question_no }
 	</select>	
 	
 	<select id="coupon" resultType="couponDomain" parameterType="String">

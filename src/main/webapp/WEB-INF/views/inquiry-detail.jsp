@@ -55,16 +55,17 @@ span{font-weight: bold;}
                                 <div style="width: 700px; border: 1px soild #dfdfdf;"  >
                                 	<label style="font-weight: bold">문의 제목</label>
                                 <div >
-                                <input id="board_title" name="board_title" type="text" value="제목" style="width: 500px; border: 0px" readonly="readonly">
+                                <input id="title" name="title" type="text" value="${inq.title}" style="width: 500px; border: 0px" readonly="readonly">
                                 <div>
 							    	<label style="font-weight: bold; margin-top: 10px" >문의 유형</label>
-							    	 상품/반품/결제/환불 문의
+							    	 <div>${inq.type }</div>
                                 </div>
                                 </div>
                                 <div>
                                 </div>
                                 </div>
                                 <div style="border: 1px solid #dfdfdf; width:700px; height:300px; margin-top: 10px;">
+                                ${inq.contents }
                                 </div>
                                 <div style="border-top: 1px solid #dfdfdf; margin-top: 30px;"></div>
                                 </div>
@@ -72,6 +73,7 @@ span{font-weight: bold;}
                                 <label style="font-weight: bold; margin-top: 10px;">문의 답변</label>
                                 </div>
                                 <div style="border: 1px solid #dfdfdf; width:700px; height:300px; margin-top: 10px;">
+                                ${inq.answer}
                                 </div>
                                 <div style="text-align: right; margin-top: 10px;">
                                 <a href="inquiry.do"><input type="button" value="돌아가기" ></a>
