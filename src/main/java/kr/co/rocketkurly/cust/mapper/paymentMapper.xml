@@ -32,4 +32,13 @@
 		delete from cupon where coupon_no = #{ couponNo }
 	</delete>
 	
+	<insert id="payment" parameterType="int">
+		insert into payment(pay_no, order_no, state, datetime)
+			values( 'p'||PRO3.PAY_NO.NEXTVAL, #{ order_no }, 'y', sysdate)
+	</insert>
+	
+	<delete id="buyCart" parameterType="String">
+		delete from cart where member_id = #{ id }
+	</delete> 
+	
 </mapper>

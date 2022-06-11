@@ -49,6 +49,7 @@
 			
 			discount = subTotal * discount;  
 			
+			$("#di").val(discount);
 			$("#discount").html(Math.floor(discount) + " 원");
 			$("#total").html(Math.floor(subTotal - discount) + " 원")
 			
@@ -187,7 +188,7 @@
             </div>
             <div class="checkout__form">
                 <h4>구매자 정보</h4>
-                <form action="orderpro.do" id="frm" method="post">
+                <form action="payment.do" id="frm" method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
@@ -272,6 +273,9 @@
                                 <input type="hidden" id="cn" name="couponNo">
                                 <input type="hidden" id="tt" name="price">
                                 <input type="hidden" id="id" name="id">
+                                
+                                <input type="hidden" id="di" name="discount" value="0">
+                                <input type="hidden" id="sp" name="subPrice" value="${ subTotal }">
                                    
                                 <a href="javascript:void(0)" id="payment" class="site-btn">결제하기</a>
                             </div>

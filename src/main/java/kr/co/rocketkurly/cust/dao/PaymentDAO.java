@@ -130,5 +130,52 @@ public class PaymentDAO {
 		return cnt;
 
 	}// deleteCoupon
+	
+	public int insertPayment(int orderNo) throws PersistenceException {
+
+		int cnt = 0;
+
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+
+		cnt = ss.insert("kr.co.rocketkurly.cust.payment.dao.payment", orderNo);
+
+		if (cnt == 1) {
+
+			ss.commit();
+
+		} // end if
+
+		if (ss != null) {
+
+			ss.close();
+
+		} // end if
+
+		return cnt;
+
+	}// insertPayment
+	
+	public int deleteCart(String id) throws PersistenceException {
+
+		int cnt = 0;
+
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+
+		cnt = ss.delete("kr.co.rocketkurly.cust.payment.dao.buyCart", id);
+
+		if (cnt != 0) {
+
+			ss.commit();
+
+		} // end if
+
+		if (ss != null) {
+
+			ss.close();
+
+		} // end if
+		return cnt;
+
+	}// deleteCart
 
 }

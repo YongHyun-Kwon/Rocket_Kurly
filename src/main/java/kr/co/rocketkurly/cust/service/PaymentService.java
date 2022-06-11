@@ -21,6 +21,7 @@ public class PaymentService {
 	public int ordering(OrderingVO oVO, OrderItemVO oiVO) {
 		
 		int cnt = 0;
+		int orderNo = 0;
 		
 		try {
 			
@@ -34,7 +35,7 @@ public class PaymentService {
 		
 		if( cnt == 1) {
 			
-			int orderNo = pDAO.selectOrderNo();
+			orderNo = pDAO.selectOrderNo();
 			List<OrderItemTempVO> orderItemList = new ArrayList<OrderItemTempVO>(); 
 			
 			OrderItemTempVO otVO = null; 
@@ -50,6 +51,12 @@ public class PaymentService {
 			
 			int itemCnt = pDAO.insertOrderItem(orderItemList);
 			
+			
+			if( itemCnt > 1) {
+				int cartCnt = pDAO.deleteCart(oVO.getId());
+			}
+			
+			
 			if(oVO.getFlag().equals("n")) { 
 				
 				oVO.setOrderNo(orderNo);
@@ -63,9 +70,11 @@ public class PaymentService {
 				
 			}
 			
+			int payCnt = pDAO.insertPayment(orderNo);
+			
 		}
 		
-		return cnt;
+		return orderNo;
 		
 	}// ordering
 	

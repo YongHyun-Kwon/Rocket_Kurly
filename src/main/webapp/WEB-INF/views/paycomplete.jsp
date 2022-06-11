@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Ogani Template">
@@ -23,6 +25,24 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+  	<!-- jQuery CDN -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+		
+			const today = new Date();   
+
+			const year = today.getFullYear(); // 년도
+			const month = today.getMonth() + 1;  // 월
+			const date = today.getDate();  // 날짜
+
+			const dDay = year + '/' + month + '/' + date;
+			
+			$("#day").html("주문일자 :" + dDay)
+			
+		})
+		
+	</script>
 </head>
 <style type="text/css">
 #msg{
@@ -79,9 +99,9 @@
                    		 <span >주문 내용 및 배송에 관한 안내는 주문 조회를 통하여 확인 가능합니다.</span><br/>
                    		 </div>
                    		 <div id="order">
-                   		 <span style="text-align: left;">주문번호 : </span><br/>
+                   		 <span style="text-align: left;">주문번호 : <c:out value="${ orderNo }"/> </span><br/>
                    		 <br/>
-                   		 <span style="text-align: left;">주문일자 : </span>
+                   		 <span id="day" style="text-align: left;"></span>
                    		 </div>
                     </div>
                     	

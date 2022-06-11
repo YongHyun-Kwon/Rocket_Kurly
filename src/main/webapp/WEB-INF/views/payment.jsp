@@ -71,6 +71,19 @@ $(function () {
 		
 		
 		});//accountClick
+		
+		$("#send").click(function() {
+		
+			var checked = $('#flag').is(':checked');
+				
+			if(!checked){
+				alert("동의하지 않으면 결제가 불가능 합니다.")
+			}// end if
+			
+			$("#frm").submit();
+			
+		})
+		
 	
 })//ready
 
@@ -150,20 +163,16 @@ a{
                             <div style="border-bottom: 3px solid #dfdfdf;">
                             <h5>개인정보 수집/제공 </h5>
                             </div>
-                            <form action="#">
                             <div style="margin-top: 20px;">
-                            <input type="checkbox" style="width: 20px; height: 20px; vertical-align: sub;"/>
+                            <input type="checkbox" id="flag" style="width: 20px; height: 20px; vertical-align: sub;"/>
                             개인 정보 수집/이용과 결제 대행 서비스에 동의하시겠습니까?
                             </div>
-                            </form>
                             <div style="border-bottom: 3px solid #dfdfdf; margin-top: 20px;">
                             <h5>결제 수단</h5>
                             </div>
                             <div style="margin-bottom: 10px; margin-top: 30px;">
-                            <form action="#">
                             <input type="button" value="신용카드" id="card" class="payBtn" />
                             <input type="button" value="무통장입금" id="account" class="payBtn"/>
-                            </form>
                             </div>
                         </div>
                     </div>
@@ -171,12 +180,30 @@ a{
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>상품 총합</h5>
+               			<form action="paypro.do" method="post" id="frm">
+	                        <input type="hidden" name="flag" value="${ orVO.flag }">
+	                        <input type="hidden" name=id value="${ orVO.id }">
+	                        <input type="hidden" name="name" value="${ orVO.name }">
+	                        <input type="hidden" name="email" value="${ orVO.email }">
+	                        <input type="hidden" name="tel" value="${ orVO.tel }">
+	                        <input type="hidden" name="zipcode" value="${ orVO.zipcode }">
+	                        <input type="hidden" name="address" value="${ orVO.address }">
+	                        <input type="hidden" name="couponNo" value="${ orVO.couponNo }">
+	                        <input type="hidden" name="price" value="${ orVO.price }">
+	                        <input type="hidden" name="subPrice" value="${ orVO.subPrice }">
+	                        <input type="hidden" name="discount" value="${ orVO.discount }">
+	                        <c:forEach var="oiVO" items="${ oiVO }">
+	                        	<input type="hidden" name="itemName" value="${ oiVO.itemName }">
+	                        	<input type="hidden" name="itemNo" value="${ oiVO.itemNo }">
+	                        	<input type="hidden" name="quantity" value="${ oiVO.quantity }">
+	                        </c:forEach>
+						</form>
                         <ul>
-                            <li>소계 <span>$454.98</span></li>
-                            <li>할인 <span>$454.98</span></li>
-                            <li>결제 예정 금액 <span>$454.98</span></li>
+                            <li>소계 <span><c:out value="${ orVO.subPrice }"/> 원</span></li>
+                            <li>할인 <span><c:out value="${ orVO.discount }"/> 원</span></li>
+                            <li>결제 예정 금액 <span><c:out value="${ orVO.price }"/> 원</span></li>
                         </ul>
-                        <a href="paycomplete.do" class="primary-btn">결제완료</a>
+                        <a href="javascript:void(0)" id="send" class="primary-btn">결제완료</a>
                     </div>
                 </div>
             </div>
