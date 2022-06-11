@@ -14,9 +14,11 @@ import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.admin.vo.InquiryVO;
 import kr.co.rocketkurly.cust.dao.MyPageDAO;
+import kr.co.rocketkurly.cust.domain.WishDomain;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
+import kr.co.rocketkurly.cust.vo.WishVO;
 
 @Component
 public class MyPageService {
@@ -254,5 +256,53 @@ public void writeInquiry(QuestionVO qVO) {
 		} // end catch
 
 	}// enrollProduct
+
+
+public String addWish(WishVO wVO) {
+	String msg="";
+	int cnt = 0;
+	try {
+
+		cnt = myDAO.wishConfirm(wVO);
+		if(cnt==1) {
+			myDAO.deleteWish(wVO);
+			msg="찜목록에서 삭제되었습니다.";
+		}else {
+			myDAO.insertWish(wVO);
+			msg="찜목록에 추가되었습니다.";
+			
+		}
+
+	} catch (PersistenceException pe) {
+
+		pe.printStackTrace();
+
+	} // end catch
+
+
+	return msg;
+
+}// addWish
+
+public int totalCount() {
+	int totalCnt=0;
+	try {
+	totalCnt=myDAO.selectTotalCount();
+	}catch (PersistenceException e) {
+		
+		e.printStackTrace();			
+	}
+	return totalCnt;
+}//totalCount
+public List<WishDomain> searchWish(BoardVO bVO) {
+	List<WishDomain> list=null;
+	try {
+		list=myDAO.selectWish(bVO);
+	}catch (PersistenceException e) {
+		
+		e.printStackTrace();			
+	}
+	return list;
+}//searchWish
 
 }

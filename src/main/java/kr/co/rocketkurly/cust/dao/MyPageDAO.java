@@ -10,8 +10,11 @@ import kr.co.rocketkurly.admin.domain.CouponDomain;
 import kr.co.rocketkurly.admin.domain.PCategoriesDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.admin.vo.InquiryVO;
+import kr.co.rocketkurly.cust.domain.WishDomain;
+import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
+import kr.co.rocketkurly.cust.vo.WishVO;
 
 @Component
 public class MyPageDAO {
@@ -172,6 +175,89 @@ public class MyPageDAO {
 			ss.close();
 		}
 	
+	}
+	
+	
+	public int wishConfirm(WishVO wVO)throws PersistenceException {
+		
+		int rowCnt = 0;
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		rowCnt = ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.wishConfirm", wVO);
+		
+		
+		if (ss != null) {
+			
+			ss.close();
+			
+		} // end if
+		
+		return rowCnt;
+		
+	}// wishConfirm
+	
+	public void insertWish(WishVO wVO)throws PersistenceException {
+		
+		int cnt=0;
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		cnt=ss.insert("kr.co.rocketkurly.cust.mypage.dao.insertWish", wVO);
+		if(cnt==1) {
+			ss.commit();
+		}
+		
+		if (ss != null) {
+			
+			ss.close();
+			
+		} // end if
+		
+		
+	}// insertWish
+	
+	public void deleteWish(WishVO wVO)throws PersistenceException {
+		
+		int cnt=0;
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		cnt=ss.delete("kr.co.rocketkurly.cust.mypage.dao.deleteWish", wVO);
+		
+		if(cnt==1) {
+			ss.commit();
+		}
+		
+		if (ss != null) {
+			
+			ss.close();
+			
+		} // end if
+		
+		
+	}// deleteWish
+	
+	
+	public int selectTotalCount() throws PersistenceException{
+		int totalCnt = 0;
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		totalCnt=ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.wishCnt");
+		if(ss!=null) {
+			ss.close();
+		}
+		
+		return totalCnt;
+	}
+	public List<WishDomain> selectWish(BoardVO bVO) throws PersistenceException{
+		List<WishDomain>list=null;
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.selectWish",bVO);
+		
+		if(ss!=null) {
+			ss.close();
+		}
+		
+		return list;
 	}
 	
 

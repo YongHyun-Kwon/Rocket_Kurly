@@ -62,5 +62,38 @@
 		insert into question(question_no, member_id, title, type, contents)
 		values(question_NO.NEXTVAL, #{ member_id }, #{ title }, #{ type }, #{contents})
 	</insert>
+	
+	
+	<select id="wishConfirm" resultType="int" parameterType="WishVO">
+		 select count(item_no) cnt
+		 from WISHITEM
+		 where MEMBER_ID=#{member_id} and item_no=#{item_no}
+	</select>
 
+	<insert id="insertWish" parameterType="WishVO">
+		insert into WISHITEM(WISH_NO, ITEM_NO, MEMBER_ID)
+		values(PRO3.WISH_NO.NEXTVAL,#{item_no},#{member_id})
+	</insert>
+	
+	<delete id="deleteWish" parameterType="WishVO">
+		delete from WISHITEM
+		where ITEM_NO=#{item_no} and member_id=#{member_id}
+	</delete>
+	
+	<select id="wishCnt" resultType="int" >
+	 select count(*) cnt
+	 from WISHITEM
+	 </select>
+	 
+	<select id="selectWish" resultType="WishDomain" parameterType="boardVO">
+	select item_no, member_id ,price,name,main_img
+	from(select rownum filter , w.ITEM_NO, w.MEMBER_ID,i.PRICE,i.NAME,i.MAIN_IMG
+	from WISHITEM w , ITEM i
+	where (w.ITEM_NO = i.item_no) and MEMBER_ID=#{member_id}
+	order by WISH_DATE)
+	where filter between #{StartNum} and #{endNum}
+	
+	 </select>
+	
+	
 </mapper>

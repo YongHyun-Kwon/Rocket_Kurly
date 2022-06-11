@@ -18,12 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.rocketkurly.admin.domain.CouponDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
+import kr.co.rocketkurly.admin.service.ItemService;
 import kr.co.rocketkurly.admin.vo.InquiryVO;
 import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.service.MemberService;
 import kr.co.rocketkurly.cust.service.MyPageService;
+import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
+import kr.co.rocketkurly.cust.vo.WishVO;
 
 @Controller
 public class MyPageController {
@@ -33,6 +36,10 @@ public class MyPageController {
 
 	@Autowired(required = false)
 	private MemberService ms;
+	
+	@Autowired(required = false)
+	private ItemService is;
+	
 
 	@RequestMapping(value = "/mypage.do", method = { GET, POST })
 	public String myPage(HttpServletRequest request, Model model) {
@@ -138,12 +145,6 @@ public class MyPageController {
 
 	}// review
 
-	@RequestMapping(value = "/favorite.do", method = { GET, POST })
-	public String favoritePage() {
-
-		return "favorite";
-
-	}// favorite
 
 	@RequestMapping(value = "/inquiry.do", method = { GET, POST })
 	public String inquiryPage(Model model, HttpServletRequest request) {
@@ -202,6 +203,54 @@ public class MyPageController {
 		return "redirect:inquiry.do";
 		
 	}// inquiry
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/addwish.do", method = { GET, POST } , produces = "application/json;charset=UTF-8")
+	public String addWish(WishVO wVO) {
+		String msg = "";
+		msg=mps.addWish(wVO);
+		
+		return msg;
+		
+	}// addWish
+	
+	@RequestMapping(value = "/favorite.do", method = { GET, POST })
+	public String favoritePage(HttpServletRequest request,Model model, BoardVO bVO) {
+		
+		
+		HttpSession session =  request.getSession();
+		
+		bVO.setMember_id((String)session.getAttribute("custID"));
+		
+		//전체 레코드의 수
+		int totalCnt=mps.totalCount();
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = is.userPageScale();
+		//3. 총 페이지 수
+		int pageCnt = is.pageCnt(totalCnt, pageScale);
+		//4. 시작번호
+		int startNum = is.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = is.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =is.numScale(); 
+		//제일 마지막 페이지 계산
+		//시작 , 끝 페이지 계산
+		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
+		
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+		model.addAttribute("wishList",mps.searchWish(bVO));
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+		model.addAttribute("pageCnt",pageCnt);
+		
+		
+		return "favorite";
+
+	}// favorite
 	
 
 }
