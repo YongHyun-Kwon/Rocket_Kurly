@@ -8,6 +8,7 @@
 	<typeAlias type="kr.co.rocketkurly.cust.vo.MemberVO" alias="MemberVO"/>
 	<typeAlias type="kr.co.rocketkurly.cust.vo.ItemVO" alias="itemVO"/>
 	<typeAlias type="kr.co.rocketkurly.cust.vo.BoardVO" alias="boardVO"/>
+	<typeAlias type="kr.co.rocketkurly.cust.vo.ReviewVO" alias="reviewVO"/>
 	<typeAlias type="kr.co.rocketkurly.cust.vo.ImgVO" alias="ImgVO"/>
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.QuestionVO" alias="QuestionVO"/>
 	 <typeAlias type="kr.co.rocketkurly.cust.vo.CategoriesVO" alias="CategoriesVO"/>

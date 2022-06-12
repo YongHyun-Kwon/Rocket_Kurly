@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -57,21 +59,20 @@ table{width:700px;}
                                 		<th>주문 상품</th>
                                 		<th>작성일자</th>
                                 	</tr>
-                                	<tr>
-                                		<td>친환경 바나나 후기</td>
-                                		<td>바나나</td>
-                                		<td>2022-05-24</td>
-                                	</tr>
-                                	<tr >
-                                		<td>친환경 바나나 후기</td>
-                                		<td>바나나</td>
-                                		<td>2022-05-24</td>
-                                	</tr>
-                                	<tr >
-                                		<td>친환경 바나나 후기</td>
-                                		<td>바나나</td>
-                                		<td>2022-05-24</td>
-                                	</tr>
+                                	<c:if test="${ empty reviewList }">
+                                		<tr>
+                                			<td colspan="4">작성하신 리뷰가 없습니다.</td>
+                                		</tr>
+                                	</c:if>
+                               <c:if test="${ not empty reviewList }">
+                                <c:forEach var="reviewList" items="${reviewList}">
+                                	<tr style="border-top: 1px solid #dfdfdf;">
+                                		<td><a href="shop-details.do?item_no=${reviewList.item_no}">${reviewList.title}</a></td>
+                                		<td>${reviewList.name}</td>
+                                		<td><fmt:formatDate value="${reviewList.reg_dt}" pattern="yyyy-MM-dd"/></td>
+                                		</tr>
+                                </c:forEach>
+                                	</c:if>
                                 </table>
                                 </div>
                                 </div>
