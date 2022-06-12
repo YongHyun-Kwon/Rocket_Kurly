@@ -11,6 +11,7 @@ import kr.co.rocketkurly.cust.dao.MyBatisFramework;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
+import kr.co.rocketkurly.cust.vo.ReviewVO;
 
 
 @Component
@@ -181,6 +182,19 @@ public class ItemDAO {
 		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
 		//쿼리문실행
 		id=ss.selectOne("kr.co.rocketkurly.admin.dao.relevantSelect",item_no);
+		//MyBatis handler 종로
+		if(ss!=null) {
+			ss.close();
+		}
+		return id;
+	}
+	
+	public List<ReviewVO> reviewSelect(int item_no)throws PersistenceException{
+		List<ReviewVO> id=null;
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		id=ss.selectList("kr.co.rocketkurly.admin.dao.selectItemReview",item_no);
 		//MyBatis handler 종로
 		if(ss!=null) {
 			ss.close();

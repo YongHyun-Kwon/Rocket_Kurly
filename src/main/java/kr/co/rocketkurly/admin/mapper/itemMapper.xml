@@ -84,6 +84,20 @@ where ITEM_NO=#{ITEM_NO}
  
  </select>
  
+ 
+ 
+<select id="selectItemReview" resultType="reviewVO" parameterType="int">
+select r.title, r.contents, r.reg_dt, m.nickname
+from review r, member m
+where r.member_id = m.member_id and r.item_no=#{item_no}
+ 
+ </select>
+ 
+ 
+ 
+ 
+ 
+ 
  <select id="selectUserItem" resultType="itemDomain" parameterType="boardVO">
 select  filter,ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
 from(select rownum filter, ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
