@@ -15,6 +15,7 @@ import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 import kr.co.rocketkurly.cust.vo.OrderHistoryVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
+import kr.co.rocketkurly.cust.vo.ReviewVO;
 import kr.co.rocketkurly.cust.vo.WishVO;
 
 @Component
@@ -301,5 +302,48 @@ public class MyPageDAO {
 		return list;
 	}
 	
+	public void writeReview(ReviewVO rVO)throws PersistenceException{
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		ss.selectList("kr.co.rocketkurly.cust.mypage.dao.writeReview",rVO);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+		}
+	
+	}
+	
+	public void updateReviewState(ReviewVO rVO)throws PersistenceException{
+		//MyBatis handler 얻기
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		//쿼리문실행
+		ss.selectList("kr.co.rocketkurly.cust.mypage.dao.updateReviewState",rVO);
+		//MyBatis handler 종로
+		
+		if(ss!=null) {
+			ss.close();
+	}
+	
 
-}
+	}
+	
+public List<ReviewVO> selectMyReview(String id) throws PersistenceException{
+		
+		List<ReviewVO> list = null;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.myReview", id);
+		
+		if(ss!=null) {
+			
+			ss.close();
+		}
+		
+		return list;
+	}
+	
+	
+	}

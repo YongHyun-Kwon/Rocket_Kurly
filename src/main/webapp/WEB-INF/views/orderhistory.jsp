@@ -80,7 +80,7 @@ table{min-width: 800px; table-layout: fixed;
                                 		<td>${'n' eq historyList.review_state ? '미작성' : '작성'}</td>
                                 		<td><a href="write-inquiry.do"><input type="button" value="1:1문의"/></a></td>
                                 	<c:if test="${'n' eq historyList.review_state}">
-                                		<td><a href="write-review.do"><input type="button" value="리뷰작성"/></a></td>
+                                		<td><a href="write-review.do?item_no=${historyList.item_no}&&order_no=${historyList.order_no}"><input type="button" value="리뷰작성"/></a></td>
                                 	</c:if>
                                 	</tr>
                                 </c:forEach>

@@ -29,6 +29,7 @@ import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 import kr.co.rocketkurly.cust.vo.OrderHistoryVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
+import kr.co.rocketkurly.cust.vo.ReviewVO;
 import kr.co.rocketkurly.cust.vo.WishVO;
 
 @Controller
@@ -146,18 +147,43 @@ public class MyPageController {
 	}// orderhistoryPage
 
 	@RequestMapping(value = "/review.do", method = { GET, POST })
-	public String reviewPage() {
+	public String reviewPage(Model model, HttpServletRequest request) {
 
+
+		HttpSession session = request.getSession();
+
+		String id = (String) session.getAttribute("custID");
+
+		List<ReviewVO> reviewList = mps.selectMyReview(id);
+		
+		model.addAttribute("reviewList", reviewList);
+		
+			
 		return "review";
 
 	}// review
 
 	@RequestMapping(value = "/write-review.do", method = { GET, POST })
-	public String writeReviewPage() {
-
+	public String writeReview(Model model, ReviewVO rVO) {
+		
+		model.addAttribute("review",rVO);	
 		return "write-review";
+		
+	}// review
+	
+	@RequestMapping(value = "/write-review1.do", method = { GET, POST })
+	public String writeReviewPage(ReviewVO rVO,HttpServletRequest request) {
+
+		HttpSession session =  request.getSession();
+		
+		rVO.setMember_id((String)session.getAttribute("custID"));
+		mps.writeReview(rVO);
+		mps.updateReviewState(rVO);
+		
+		return "redirect:review.do";
 
 	}// review
+	
 
 
 	@RequestMapping(value = "/inquiry.do", method = { GET, POST })
@@ -215,7 +241,6 @@ public class MyPageController {
 		qVO.setMember_id((String)session.getAttribute("custID"));
 		
 		mps.writeInquiry(qVO);
-		System.out.println(qVO);
 		return "redirect:inquiry.do";
 		
 	}// inquiry
@@ -267,6 +292,8 @@ public class MyPageController {
 		return "favorite";
 
 	}// favorite
+	
+	
 	
 
 }

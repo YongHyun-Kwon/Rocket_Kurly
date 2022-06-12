@@ -34,6 +34,39 @@ span{font-weight: bold;}
 
 		   
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+//Tnumbnail function
+$(function () {
+
+
+	$("#write").click(function() {
+		if($("#title").val() == ""){
+			alert("제목을 입력해주세요.")
+			$("#title").focus();
+			event.preventDefault();
+			return;
+		}
+		if($("#contents").val() == ""){
+			alert("내용을 입력해주세요.")
+			$("#contents").focus();
+			event.preventDefault();
+			return;
+		}
+		
+		
+	$("#writeFrm").submit();
+	
+	})
+	
+	
+	
+	
+})//ready
+</script>
+
+
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
@@ -42,7 +75,7 @@ span{font-weight: bold;}
 
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-<form action="setting.do" id="frm" method="post">
+<form action="write-review1.do" id="writeFrm" method="post">
 <div class="site-wrap">
     <div class="site-section">
         <div class="container">
@@ -55,21 +88,23 @@ span{font-weight: bold;}
                                 <div style="width: 700px; border: 1px soild #dfdfdf;"  >
                                 	<label style="font-weight: bold">후기 제목</label>
                                 <div>
-                                <input id="board_title" name="board_title" type="text" placeholder="제목을 입력해주세요" style="width: 500px; border: 1px solid #dfdfdf;"><br/>
+								<input type="text" value="${review.item_no}" name="item_no" style="display: none;">
+								<input type="text" value="${review.order_no}" name="order_no"  style="display: none;">
+                                <input id="title" name="title" type="text" placeholder="제목을 입력해주세요" style="width: 500px; border: 1px solid #dfdfdf;"><br/>
                                 </div>
                                 <div style="margin-top: 10px;">
-                                 	<label style="font-weight: bold">사진 첨부 |</label>
+                                 	<label style="font-weight: bold">사진 첨부 | </label>
                                 	<input type="file">
                                 </div>
                                 <div>
                                 </div>
                                 </div>
                                 <div>
-                                <textarea id="board_content" name="board_content" placeholder="내용을 입력해주세요" style="border: 1px solid #dfdfdf; width:700px; height:500px; margin-top: 10px;"></textarea>
+                                <textarea id="contents" name="contents" placeholder="내용을 입력해주세요" style="border: 1px solid #dfdfdf; width:700px; height:500px; margin-top: 10px;"></textarea>
                                 </div>
                                 </div>
                                 <div style="text-align: right;">
-                                <a href="inquiry.do"><input type="button" value="작성하기" ></a>
+								<button style="margin-top: 30px; float: right;" class="btn btn-dark" id="write">리뷰 작성</button>
                                 </div>
                             </div>
                         </div>

@@ -19,6 +19,7 @@ import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
 import kr.co.rocketkurly.cust.vo.OrderHistoryVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
+import kr.co.rocketkurly.cust.vo.ReviewVO;
 import kr.co.rocketkurly.cust.vo.WishVO;
 
 @Component
@@ -341,6 +342,47 @@ public class MyPageService {
 		
 	}//searchOrderhistory
 
+	
+	public void writeReview(ReviewVO rVO) {
+		
+		try {
 
+			myDAO.writeReview(rVO);
+
+		} catch (PersistenceException pe) {
+
+			pe.printStackTrace();
+
+		} // end catch
+
+	}// enrollProduct
+
+	public void updateReviewState(ReviewVO rVO) {
+		
+		try {
+			
+			myDAO.updateReviewState(rVO);
+			
+		} catch (PersistenceException pe) {
+			
+			pe.printStackTrace();
+			
+		} // end catch
+		
+	}// enrollProduct
+	
+	public List<ReviewVO> selectMyReview(String id){
+		
+		List<ReviewVO> list = null;
+		
+		try {
+			list=myDAO.selectMyReview(id);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return list;
+		
+	}//searchOrderhistory
 
 }

@@ -107,6 +107,27 @@
 	 	ORDER BY ORDER_DATE DESC 
 	 
 	 </select>
+	 
+	 <insert id="writeReview" parameterType="reviewVO">
+		insert into review(REVIEW_NO,title,contents,IMAGE,read_cnt,item_no,member_id)
+		values(PRO3.REVIEW_NO.NEXTVAL,#{title},#{contents},'image','0',#{item_no},#{member_id})
+	</insert>
+	
+	<update id="updateReviewState"  parameterType="reviewVO">
+		update orderhistory_view
+		set review_state='y'
+		where member_id=#{member_id} and order_no = #{order_no} and item_no=#{item_no}
+		
+	</update>
+	
+	<select id="myReview" resultType="reviewVO" parameterType="String">
+	 
+	 	select r.title, i.name, r.reg_dt, r.item_no
+		from review r, item i
+		where r.item_no = i.item_no and r.member_id=#{member_id}
+		
+	 </select>
+	
 	
 	
 </mapper>
