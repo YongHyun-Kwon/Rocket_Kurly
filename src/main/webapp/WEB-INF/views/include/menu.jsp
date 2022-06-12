@@ -67,6 +67,7 @@ $(function () {
 		    })//click
 		
 })//ready
+
 </script>
      <!-- Hero Section Begin -->
     <section class="hero hero-normal">
@@ -79,7 +80,7 @@ $(function () {
                             <span>전체 카테고리</span>
                         </div>
                         <ul id="p-category">
-                            <li><a href="#" id="vegi" >채소</a></li>
+                            <li><a href="#" id="vegi" >${test}</a></li>
                             <li><a href="#" id="crops">과일·견과·쌀</a></li>
                             <li><a href="#" id="seafood">수산·해산·건어물</a></li>
                             <li><a href="#" id="livestock">정육·계란</a></li>

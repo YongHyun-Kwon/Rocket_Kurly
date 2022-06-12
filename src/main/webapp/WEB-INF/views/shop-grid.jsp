@@ -158,8 +158,7 @@ function wish(item) {
     
    	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-    <%@ include file="/WEB-INF/views/include/menu.jsp" %>
-
+    <%@ include file="/WEB-INF/views/include/menu.jsp" %> 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
@@ -184,7 +183,6 @@ function wish(item) {
     <h3 class="title">채소</h3>
     <div class="list">
     	<ul class="list_on">
-    		<li><a href="#">전체보기 ${category.c_category_id }</a></li>
     		<c:forEach var="category" items="${categoryData}">
 			<c:choose>
 				<c:when test="${category.c_category_id  eq currentCategory }">

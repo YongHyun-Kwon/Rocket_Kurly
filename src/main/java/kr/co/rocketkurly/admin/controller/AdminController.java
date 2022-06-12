@@ -86,8 +86,8 @@ public class AdminController {
 				model.addAttribute("currentPage",bVO.getCurrentPage());
 				model.addAttribute("pageCnt",pageCnt);
 				/* model.addAttribute("orderList",os.selectOrder()); */
-		model.addAttribute("order_no",oVO.getOrder_no());
-		os.modifyOrderStat(oVO);
+				model.addAttribute("order_no",oVO.getOrder_no());
+				os.modifyOrderStat(oVO);
 		return "admin/jsp/order_status";
 		
 	}// selectOrder

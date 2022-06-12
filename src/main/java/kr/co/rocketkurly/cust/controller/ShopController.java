@@ -37,9 +37,6 @@ public class ShopController {
 		int startNum = is.searchStartCate(cate);
 		int endNum = is.searchEndCate(cate);
 		
-		System.out.println(cate);
-		System.out.println(startNum);
-		System.out.println(endNum);
 		
 		Random ran = new Random();
 		List<Integer>list= new ArrayList<Integer>();
@@ -47,7 +44,6 @@ public class ShopController {
 		for(int i=0;i<4;i++) {
 			list.add(ran.nextInt(endNum - startNum + 1) + startNum);
 		}
-		System.out.println(list);
 		model.addAttribute("relevantData",is.relevantData(list));
 		
 		model.addAttribute("reviewList",is.searchReview(iVO.getItem_no()));
