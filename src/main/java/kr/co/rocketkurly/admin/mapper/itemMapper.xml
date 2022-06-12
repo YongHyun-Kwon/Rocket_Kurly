@@ -128,7 +128,7 @@ from(select item_no
 from item
 where C_CATEGORY_ID=#{cate}
 order by item_no)
-where rownum=1;
+where rownum=1
 </select>
 
 <select id="selectEndCate" resultType="int" parameterType="String">
