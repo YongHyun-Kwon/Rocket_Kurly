@@ -15,6 +15,7 @@ import kr.co.rocketkurly.cust.vo.CategoriesVO;
 import kr.co.rocketkurly.cust.vo.ImgVO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
+import kr.co.rocketkurly.cust.vo.ReviewVO;
 
 @Component
 public class ItemService {
@@ -101,6 +102,17 @@ public class ItemService {
 			e.printStackTrace();			
 		}
 		return item;
+	}
+	
+	public List<ReviewVO> searchReview(int item_no) {
+		List<ReviewVO> list= null;
+		try {
+			list=iDAO.reviewSelect(item_no);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return list;
 	}
 	
 	

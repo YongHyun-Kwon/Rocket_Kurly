@@ -16,6 +16,7 @@ import kr.co.rocketkurly.admin.service.ItemService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.CategoriesVO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
+import kr.co.rocketkurly.cust.vo.ReviewVO;
 
 @Controller
 public class ShopController {
@@ -27,7 +28,7 @@ public class ShopController {
 	private CategoriesSevice cs;
 	
 	@RequestMapping(value = "/shop-details.do", method = GET)
-	public String shopDetailsPage(Model model, ItemVO iVO) {
+	public String shopDetailsPage(Model model, ItemVO iVO, ReviewVO rVO) {
 		
 		
 		model.addAttribute("productData",is.searchDetail(iVO.getItem_no()));
@@ -48,6 +49,8 @@ public class ShopController {
 		}
 		System.out.println(list);
 		model.addAttribute("relevantData",is.relevantData(list));
+		
+		model.addAttribute("reviewList",is.searchReview(iVO.getItem_no()));
 		
 		
 		return "shop-details";

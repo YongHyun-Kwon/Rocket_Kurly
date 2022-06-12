@@ -4,8 +4,16 @@ import java.sql.Date;
 
 public class ReviewVO {
 	private int review_no,item_no, read_cnt;
-	private String member_id, title, contents, image,order_no, name;
+	private String member_id, title, contents, image,order_no, name, nickname;
 	private Date reg_dt;
+	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getReview_no() {
 		return review_no;
 	}
@@ -70,7 +78,7 @@ public class ReviewVO {
 	public String toString() {
 		return "ReviewVO [review_no=" + review_no + ", item_no=" + item_no + ", read_cnt=" + read_cnt + ", member_id="
 				+ member_id + ", title=" + title + ", contents=" + contents + ", image=" + image + ", order_no="
-				+ order_no + ", name=" + name + ", reg_dt=" + reg_dt + "]";
+				+ order_no + ", name=" + name + ", nickname=" + nickname + ", reg_dt=" + reg_dt + "]";
 	}
 	
 

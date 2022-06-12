@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -329,6 +331,35 @@ function clw(item) {
 
             </div>
         </div>
+        
+        <div class="card">
+             <div class="section-title related__product__title">
+                        <h2>리뷰</h2>
+                    </div>
+             <table>
+             <c:if test="${ empty reviewList }">
+             		<tr>
+             			<td colspan="4" style="text-align: center;">아직 리뷰가 없습니다.</td>
+             		</tr>
+             	</c:if>
+             	<c:if test="${ not empty reviewList }">
+             <c:forEach var="reviewList" items="${reviewList}">
+             	<tr style="border-top: 1px solid #333">
+             		<th style="width:1600px;height: 200px;vertical-align: baseline ;padding: 15px">
+             		<span style="font-weight:bold;font-size: 20px">제목 : ${reviewList.title }</span>
+             		<span style="color: gray;font-weight: lighter;font-size: 13px">${reviewList.nickname }|<fmt:formatDate value="${reviewList.reg_dt}" pattern="yyyy-MM-dd"/></span><br>
+             		<div style="padding: 10px"> ${reviewList.contents }</div>
+             		</th>
+             		<th>
+             			<div style="height: 180px;width: 200px;border: 1px solid #333">img</div>
+             		</th>
+             	</tr>
+             	</c:forEach>
+            </c:if>
+            </table>
+            </div>
+             	
+        
     </section>
     <!-- Related Product Section End -->
 
