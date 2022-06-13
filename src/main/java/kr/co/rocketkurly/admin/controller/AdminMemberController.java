@@ -60,8 +60,8 @@ public class AdminMemberController {
 		
 	}// allMember
 	
-	@RequestMapping(value = "/admin/jsp/customer1.do", method = GET)
-	public String filterMember(Model model , BoardVO bVO) {
+	@RequestMapping(value = "/admin/jsp/customer2.do", method = {GET,POST})
+	public String filterMember(Model model , BoardVO bVO,MemberDomain mVO) {
 		
 		//전체 레코드의 수
 		int totalCnt=ams.searchKeywordCount(bVO);
@@ -88,6 +88,10 @@ public class AdminMemberController {
 		model.addAttribute("endPage",bVO.getEndPage());
 		model.addAttribute("keyword",bVO.getKeyword());
 		model.addAttribute("currentPage",bVO.getCurrentPage());
+		model.addAttribute("memberData",ams.searchMDetail(mVO.getMember_id()));
+		model.addAttribute("member_id",mVO.getMember_id());
+
+
 		
 		return "admin/jsp/customer";
 		

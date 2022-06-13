@@ -101,7 +101,7 @@ public class AdminController {
 	}// addRecipe
 	
 	
-	@RequestMapping(value = "/admin/jsp/order_status1.do", method = GET)
+	@RequestMapping(value = "/admin/jsp/order_status2.do", method = GET)
 	public String filterOrder(Model model , BoardVO bVO) {
 		
 		//전체 레코드의 수

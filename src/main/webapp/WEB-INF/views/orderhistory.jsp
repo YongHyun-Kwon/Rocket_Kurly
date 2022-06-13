@@ -44,7 +44,7 @@ table{min-width: 800px; table-layout: fixed;
 
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-<form action="setting.do" id="frm" method="post">
+<form action="orderhistory2.do" id="frm" method="post">
 <div class="site-wrap">
     <div class="site-section">
         <div class="container">

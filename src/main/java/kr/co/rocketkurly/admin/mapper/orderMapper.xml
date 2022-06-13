@@ -38,7 +38,7 @@
 	<select id="keywordOCnt" resultType="int" parameterType="OrderDomain">
 	 select count(*) cnt 
 	from ordering
-	where  MEMBER_ID like '%' || #{keyword} || '%'
+	where  MEMBER_ID like '%' || #{keyword, jdbcType=NUMERIC} || '%'
 	 </select>
 	
 

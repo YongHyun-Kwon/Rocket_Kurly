@@ -5,10 +5,10 @@
 <mapper namespace="kr.co.rocketkurly.admin.dao">
 	
 	<select id="selectMember" resultType="MemberDomain" parameterType="MemberVO">
-	select filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT,sum_price	
+	select filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT,sum_price
 	from (select rownum filter, m.MEMBER_ID,m.EMAIL,m.PW,m.NAME,m.NICKNAME,m.TEL,m.ADDR,m.ADDRESS,m.STATUS,m.REG_DT,m.MOD_DT,s.sum_price
 			from MEMBER m, sum_order s
-			where m.member_id = s.member_id
+			where m.member_id = s.member_id(+)
 			order by MEMBER_ID)
 	where filter between #{StartNum} and #{endNum}
 
@@ -22,10 +22,10 @@
 	 
 	<select id="selectKeywordMember" resultType="MemberDomain" parameterType="MemberVO">
 
-	select  filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT
-	from(select rownum filter, MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT
-	from MEMBER
-	where  MEMBER_ID like '%' || #{keyword} || '%'
+	select  filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT,sum_price
+	from (select rownum filter, m.MEMBER_ID,m.EMAIL,m.PW,m.NAME,m.NICKNAME,m.TEL,m.ADDR,m.ADDRESS,m.STATUS,m.REG_DT,m.MOD_DT,s.sum_price
+			from MEMBER m, sum_order s
+	where  m.member_id like '%' || #{keyword} || '%' and m.member_id = s.member_id(+)
 	order by MEMBER_ID)
 	where filter between #{StartNum} and #{endNum}
 
@@ -41,7 +41,7 @@
 	<select id="selectMDetail" resultType="MemberDomain" parameterType="String" >
 	select m.member_id,m.email,m.pw,m.name,m.nickname,m.tel,m.addr,m.address,m.status,m.reg_dt,m.mod_dt,s.sum_price
 	from member m, sum_order s
-	where m.member_id=#{member_id,jdbcType=VARCHAR} and m.member_id=s.member_id
+	where m.member_id=#{member_id,jdbcType=VARCHAR} and m.member_id=s.member_id(+)
  	</select>
  	
  	<update id="editStatus" parameterType="MemberDomain">
