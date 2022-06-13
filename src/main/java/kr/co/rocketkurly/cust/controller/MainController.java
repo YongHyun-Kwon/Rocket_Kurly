@@ -25,9 +25,7 @@ public class MainController {
 		
 		HttpSession session = request.getSession();
 		
-		
-		System.out.println(ms.searchC());
-		
+			
 		session.setAttribute("cateP",ms.searchP());
 		session.setAttribute("cateC",ms.searchC());
 		

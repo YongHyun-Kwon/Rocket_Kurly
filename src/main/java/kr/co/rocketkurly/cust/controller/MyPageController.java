@@ -129,17 +129,39 @@ public class MyPageController {
 	}// pwFindProcess
 
 	@RequestMapping(value = "/orderhistory.do", method = { GET, POST })
-	public String orderhistoryPage(Model model, HttpServletRequest request) {
+	public String orderhistoryPage(Model model,BoardVO bVO ,HttpServletRequest request) {
+
 		
 		HttpSession session = request.getSession();
 
-		String id = (String) session.getAttribute("custID");
+		bVO.setMember_id((String) session.getAttribute("custID"));
+		
+		//전체 레코드의 수
+		int totalCnt=mps.searchOrderCnt(bVO.getMember_id());
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = mps.myPageScale();
+		//3. 총 페이지 수
+		int pageCnt = is.pageCnt(totalCnt, pageScale)-1;
+		//4. 시작번호
+		int startNum = is.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = is.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =is.numScale(); 
 
-		List<OrderHistoryVO> historyList = mps.searchOrderhistory(id);
+		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
 		
-		OrderHistoryVO ohVO = new OrderHistoryVO();
 		
-		model.addAttribute("historyList", historyList);
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+
+		model.addAttribute("historyList", mps.searchOrderhistory(bVO));
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+		model.addAttribute("pageCnt",pageCnt);
+		
+		
 		
 			
 		return "orderhistory";

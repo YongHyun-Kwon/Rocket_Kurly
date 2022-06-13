@@ -286,13 +286,13 @@ public class MyPageDAO {
 		return list;
 	}
 	
-	public List<OrderHistoryVO> selectOrderHistory(String id) throws PersistenceException{
+	public List<OrderHistoryVO> selectOrderHistory(BoardVO bVO) throws PersistenceException{
 		
 		List<OrderHistoryVO> list = null;
 		
 		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
 		
-		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.orderHistory", id);
+		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.orderHistory", bVO);
 		
 		if(ss!=null) {
 			
@@ -344,6 +344,21 @@ public List<ReviewVO> selectMyReview(String id) throws PersistenceException{
 		
 		return list;
 	}
-	
-	
+	public int selectOrderCnt(String id) throws PersistenceException{
+		
+		int cnt=0;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		cnt=ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.selectOrderCnt", id);
+		
+		if(ss!=null) {
+			
+			ss.close();
+		}
+		
+		return cnt;
 	}
+	
+	
+}

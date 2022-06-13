@@ -128,7 +128,7 @@ function wish(item) {
                     <c:forEach var="i" begin="${startPage}" end="${endPage}">
                      <c:choose>
          					<c:when test="${i eq currentPage }">
-         					<a class="page-link" style="color: red;" href="shop-grid.do?currentPage=${i}">
+         					<a class="page-link" style="color: red;" href="favorite.do?currentPage=${i}">
                              <c:out value="${i}"/></a>
          					</c:when>
          					<c:otherwise>
