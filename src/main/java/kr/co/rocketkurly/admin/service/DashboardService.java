@@ -133,4 +133,21 @@ public class DashboardService {
 		
 	}// notice
 	
+	public int writeNotice(String notice) {
+		
+		int cnt = 0;
+		
+		try {
+			
+			cnt = dashDAO.insertNotice(notice);
+			
+		} catch (PersistenceException pe) {
+			
+			pe.printStackTrace();
+		}
+		
+		return cnt;
+		
+	}// writeNotice
+	
 }// class

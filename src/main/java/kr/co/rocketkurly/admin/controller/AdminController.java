@@ -5,11 +5,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.rocketkurly.admin.domain.MemberRegCntDomain;
 import kr.co.rocketkurly.admin.domain.NoticeDomain;
@@ -18,161 +22,196 @@ import kr.co.rocketkurly.admin.domain.OrderDomain;
 import kr.co.rocketkurly.admin.domain.QuestionCntDomain;
 import kr.co.rocketkurly.admin.domain.RevenueDomain;
 import kr.co.rocketkurly.admin.domain.UserHistoryDomain;
+import kr.co.rocketkurly.admin.service.AdminService;
 import kr.co.rocketkurly.admin.service.CouponService;
 import kr.co.rocketkurly.admin.service.DashboardService;
 import kr.co.rocketkurly.admin.service.OrderService;
+import kr.co.rocketkurly.admin.vo.AdminVO;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.CouponVO;
 
 @Controller
 public class AdminController {
-	
+
 	@Autowired(required = false)
 	DashboardService dashService;
-	
+
 	@Autowired(required = false)
 	CouponService cs;
-	
+
 	@Autowired(required = false)
 	private OrderService os;
-	
+
+	@Autowired(required = false)
+	private AdminService as;
+
 	@RequestMapping(value = "/admin/jsp/index.do", method = RequestMethod.GET)
 	public String mainPage(Model model) {
-		
+
 		List<UserHistoryDomain> visitList = dashService.visitCount();
 		List<MemberRegCntDomain> regCntList = dashService.memberRegCount();
 		List<OrderCntDomain> orderCntList = dashService.orderCount();
 		List<QuestionCntDomain> questionCntList = dashService.questionCount();
 		List<RevenueDomain> revenueList = dashService.revenue();
 		List<NoticeDomain> noticeList = dashService.notice();
-		
+
 		model.addAttribute("visitList", visitList);
 		model.addAttribute("regCntList", regCntList);
 		model.addAttribute("orderCntList", orderCntList);
 		model.addAttribute("questionCntList", questionCntList);
 		model.addAttribute("revenueList", revenueList);
 		model.addAttribute("noticeList", noticeList);
-		
+
 		return "admin/jsp/index";
-		
+
 	}// mainPage
-	
-	
-	@RequestMapping(value = "/admin/jsp/order_status.do", method = {GET,POST})
+
+	@RequestMapping(value = "/admin/jsp/order_status.do", method = { GET, POST })
 	public String selectOrder(Model model, OrderDomain oVO, BoardVO bVO) {
-		
-		//ÀüÃ¼ ·¹ÄÚµåÀÇ ¼ö
-				int totalCnt=os.searchTotalCount();
-				//2. ÇÑÈ­¸é¿¡ º¸¿©ÁÙ °Ô½Ã¹°ÀÇ ¼ö
-				int pageScale = os.pageScale();
-				//3. ÃÑ ÆäÀÌÁö ¼ö
-				int pageCnt = os.pageCnt(totalCnt, pageScale);
-				//4. ½ÃÀÛ¹øÈ£
-				int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-				//5. ³¡¹øÈ£
-				int endNum = os.endNum(startNum, pageScale);
-				//ÅäÅ» ½ºÄÉÀÏ
-				int totalScale =os.numScale(); 
-				//Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
-				//½ÃÀÛ , ³¡ ÆäÀÌÁö °è»ê
-				bVO=os.calcStartEndPage(bVO, totalScale,pageCnt );
-				
-				bVO.setStartNum(startNum);
-				bVO.setEndNum(endNum);
-				
-				model.addAttribute("orderList",os.searchMember(bVO));
-				model.addAttribute("startPage",bVO.getStartPage());
-				model.addAttribute("endPage",bVO.getEndPage());
-				model.addAttribute("currentPage",bVO.getCurrentPage());
-				model.addAttribute("pageCnt",pageCnt);
-				/* model.addAttribute("orderList",os.selectOrder()); */
-				model.addAttribute("order_no",oVO.getOrder_no());
-				os.modifyOrderStat(oVO);
+
+		// ì „ì²´ ë ˆì½”ë“œì˜ ìˆ˜
+		int totalCnt = os.searchTotalCount();
+		// 2. í•œí™”ë©´ì— ë³´ì—¬ì¤„ ê²Œì‹œë¬¼ì˜ ìˆ˜
+		int pageScale = os.pageScale();
+		// 3. ì´ í˜ì´ì§€ ìˆ˜
+		int pageCnt = os.pageCnt(totalCnt, pageScale);
+		// 4. ì‹œì‘ë²ˆí˜¸
+		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
+		// 5. ëë²ˆí˜¸
+		int endNum = os.endNum(startNum, pageScale);
+		// í† íƒˆ ìŠ¤ì¼€ì¼
+		int totalScale = os.numScale();
+		// ì œì¼ ë§ˆì§€ë§‰ í˜ì´ì§€ ê³„ì‚°
+		// ì‹œì‘ , ë í˜ì´ì§€ ê³„ì‚°
+		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
+
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+
+		model.addAttribute("orderList", os.searchMember(bVO));
+		model.addAttribute("startPage", bVO.getStartPage());
+		model.addAttribute("endPage", bVO.getEndPage());
+		model.addAttribute("currentPage", bVO.getCurrentPage());
+		model.addAttribute("pageCnt", pageCnt);
+		/* model.addAttribute("orderList",os.selectOrder()); */
+		model.addAttribute("order_no", oVO.getOrder_no());
+		os.modifyOrderStat(oVO);
 		return "admin/jsp/order_status";
-		
+
 	}// selectOrder
-	
-	
+
 	@RequestMapping(value = "/admin/jsp/add_recipe.do", method = GET)
 	public String addRecipe() {
-		
+
 		return "admin/jsp/add_recipe";
-		
+
 	}// addRecipe
+
 	
 	
 	@RequestMapping(value = "/admin/jsp/order_status2.do", method = GET)
 	public String filterOrder(Model model , BoardVO bVO) {
 		
-		//ÀüÃ¼ ·¹ÄÚµåÀÇ ¼ö
+		//ì „ì²´ ë ˆì½”ë“œì˜ ìˆ˜
 		int totalCnt=os.searchKeywordCount(bVO);
-		//2. ÇÑÈ­¸é¿¡ º¸¿©ÁÙ °Ô½Ã¹°ÀÇ ¼ö
+		//2. í•œí™”ë©´ì— ë³´ì—¬ì¤„ ê²Œì‹œë¬¼ì˜ ìˆ˜
+
 		int pageScale = os.pageScale();
-		//3. ÃÑ ÆäÀÌÁö ¼ö
+		// 3. ì´ í˜ì´ì§€ ìˆ˜
 		int pageCnt = os.pageCnt(totalCnt, pageScale);
-		//4. ½ÃÀÛ¹øÈ£
+		// 4. ì‹œì‘ë²ˆí˜¸
 		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-		//5. ³¡¹øÈ£
+		// 5. ëë²ˆí˜¸
 		int endNum = os.endNum(startNum, pageScale);
-		//ÅäÅ» ½ºÄÉÀÏ
-		int totalScale =os.numScale(); 
-		//Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
-		//½ÃÀÛ , ³¡ ÆäÀÌÁö °è»ê
-		bVO=os.calcStartEndPage(bVO, totalScale,pageCnt);
-		
-		
+		// í† íƒˆ ìŠ¤ì¼€ì¼
+		int totalScale = os.numScale();
+		// ì œì¼ ë§ˆì§€ë§‰ í˜ì´ì§€ ê³„ì‚°
+		// ì‹œì‘ , ë í˜ì´ì§€ ê³„ì‚°
+		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
+
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
-		
-		model.addAttribute("orderList",os.searchKeyword(bVO));
-		model.addAttribute("startPage",bVO.getStartPage());
-		model.addAttribute("endPage",bVO.getEndPage());
-		model.addAttribute("keyword",bVO.getKeyword());
-		model.addAttribute("currentPage",bVO.getCurrentPage());
-		
-		return "admin/jsp/order_status";
-		
-	}// filterMember 
-	
-	
-	
 
-	
-	@RequestMapping(value = "/admin/jsp/create_coupon.do", method = { GET,POST })
+		model.addAttribute("orderList", os.searchKeyword(bVO));
+		model.addAttribute("startPage", bVO.getStartPage());
+		model.addAttribute("endPage", bVO.getEndPage());
+		model.addAttribute("keyword", bVO.getKeyword());
+		model.addAttribute("currentPage", bVO.getCurrentPage());
+
+		return "admin/jsp/order_status";
+
+	}// filterMember
+
+	@RequestMapping(value = "/admin/jsp/create_coupon.do", method = { GET, POST })
 	public String createCoupon(Model model, CouponVO cVO) {
 		return "admin/jsp/create_coupon";
-		
+
 	}// createCoupon
-	
-	@RequestMapping(value = "/admin/jsp/createProcess.do", method = { GET,POST })
+
+	@RequestMapping(value = "/admin/jsp/createProcess.do", method = { GET, POST })
 	public String createProcess(Model model, CouponVO cVO) {
-		
+
 		cs.addCoupon(cVO);
-		
+
 		return "redirect:create_coupon.do";
-		
+
 	}// createProcess
-	
+
 	@RequestMapping(value = "/admin/jsp/customer_grade.do", method = GET)
 	public String customerGrade() {
-		
+
 		return "admin/jsp/customer_grade";
-		
+
 	}// customerGrade
-	
+
 //	@RequestMapping(value = "/admin/jsp/customer1.do", method = GET)
 //	public String customer() {
 //		
 //		return "admin/jsp/customer";
 //		
 //	}// customer
-	
-	
+
 	@RequestMapping(value = "/admin/jsp/login.do", method = GET)
 	public String login() {
-		
+
 		return "admin/jsp/login";
-		
+
 	}// login
+
+	@RequestMapping(value = "/admin/jsp/logincheck.do", method = POST)
+	public ModelAndView loginCheck(AdminVO aVO, HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+
+		ModelAndView mav = new ModelAndView();
+
+		String aID = as.loginCheck(aVO);
+
+		if (!aID.equals("fail")) {
+
+			session.setAttribute("aID", aID);
+			mav.setViewName("redirect:/admin/jsp/index.do");
+
+		} else {
+
+			mav.setViewName("redirect:/admin/jsp/login.do");
+			mav.addObject("aID", aID);
+
+		} // end else
+
+		return mav;
+
+	}// loginCheck
+	
+	@RequestMapping(value = "/admin/jsp/logout.do", method = GET)
+	public String logoutProcess(HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+
+		session.invalidate();
+
+		return "redirect:/admin/jsp/login.do";
+
+	}// logoutProcess
 
 }// class

@@ -6,6 +6,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.co.rocketkurly.admin.domain.CategoriesDomain;
 import kr.co.rocketkurly.cust.dao.MainPageDAO;
 import kr.co.rocketkurly.cust.vo.ItemVO;
 
@@ -54,6 +55,37 @@ public class MainPageService {
 		try {
 			
 			list=mDAO.selectHotItem();
+			
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		
+		return list;
+	}
+	
+	public List<CategoriesDomain> searchP() {
+		
+		List<CategoriesDomain> list= null;
+		
+		try {
+			
+			list=mDAO.selectP();
+			
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		
+		return list;
+	}
+	public List<CategoriesDomain> searchC() {
+		
+		List<CategoriesDomain> list= null;
+		
+		try {
+			
+			list=mDAO.selectC();
 			
 		}catch (PersistenceException e) {
 			

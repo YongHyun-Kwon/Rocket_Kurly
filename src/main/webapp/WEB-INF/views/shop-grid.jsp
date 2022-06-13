@@ -30,7 +30,7 @@
 .list{
 	border: 1px solid #dfdfdf;
 	width: 850px; 
-	height: 151px; 
+	height: 171px; 
 	margin: 0px auto; 
 	margin-bottom: 10px;"
 	box-sizing: border-box;

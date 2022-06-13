@@ -87,13 +87,13 @@ public class MyPageDAO {
 	 * @return
 	 * @throws PersistenceException
 	 */
-	public List<QuestionDomain> selectQuestion(String id) throws PersistenceException {
+	public List<QuestionDomain> selectQuestion(BoardVO bVO) throws PersistenceException {
 		
 		List<QuestionDomain> list = null;
 		
 		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
 		
-		list = ss.selectList("kr.co.rocketkurly.cust.mypage.dao.inquiry", id);
+		list = ss.selectList("kr.co.rocketkurly.cust.mypage.dao.inquiry", bVO);
 		
 		if( ss != null ) {
 			
@@ -142,6 +142,23 @@ public class MyPageDAO {
 		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
 		
 		list = ss.selectList("kr.co.rocketkurly.cust.mypage.dao.coupon", id);
+		
+		if( ss != null ) {
+			
+			ss.close();
+			
+		}// end if
+		
+		return list;
+		
+	}// selectCoupon
+	public List<CouponDomain> selectCouponBoard(BoardVO bVO) throws PersistenceException {
+		
+		List<CouponDomain> list = null;
+		
+		SqlSession ss = MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		list = ss.selectList("kr.co.rocketkurly.cust.mypage.dao.couponBoard", bVO);
 		
 		if( ss != null ) {
 			
@@ -286,13 +303,13 @@ public class MyPageDAO {
 		return list;
 	}
 	
-	public List<OrderHistoryVO> selectOrderHistory(String id) throws PersistenceException{
+	public List<OrderHistoryVO> selectOrderHistory(BoardVO bVO) throws PersistenceException{
 		
 		List<OrderHistoryVO> list = null;
 		
 		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
 		
-		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.orderHistory", id);
+		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.orderHistory", bVO);
 		
 		if(ss!=null) {
 			
@@ -329,13 +346,13 @@ public class MyPageDAO {
 
 	}
 	
-public List<ReviewVO> selectMyReview(String id) throws PersistenceException{
+public List<ReviewVO> selectMyReview(BoardVO bVO) throws PersistenceException{
 		
 		List<ReviewVO> list = null;
 		
 		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
 		
-		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.myReview", id);
+		list=ss.selectList("kr.co.rocketkurly.cust.mypage.dao.myReview", bVO);
 		
 		if(ss!=null) {
 			
@@ -344,6 +361,66 @@ public List<ReviewVO> selectMyReview(String id) throws PersistenceException{
 		
 		return list;
 	}
-	
-	
+	public int selectOrderCnt(String id) throws PersistenceException{
+		
+		int cnt=0;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		cnt=ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.selectOrderCnt", id);
+		
+		if(ss!=null) {
+			
+			ss.close();
+		}
+		
+		return cnt;
 	}
+	public int selectReviewCnt(String id) throws PersistenceException{
+		
+		int cnt=0;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		cnt=ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.selectReviewCnt", id);
+		
+		if(ss!=null) {
+			
+			ss.close();
+		}
+		
+		return cnt;
+	}
+	public int selectInquiryCnt(String id) throws PersistenceException{
+		
+		int cnt=0;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		cnt=ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.selectInquiryCnt", id);
+		
+		if(ss!=null) {
+			
+			ss.close();
+		}
+		
+		return cnt;
+	}
+	public int selectCouponCnt(String id) throws PersistenceException{
+		
+		int cnt=0;
+		
+		SqlSession ss= MyBatisFramework.getInstance().getMyBatisHandler();
+		
+		cnt=ss.selectOne("kr.co.rocketkurly.cust.mypage.dao.selectCouponCnt", id);
+		
+		if(ss!=null) {
+			
+			ss.close();
+		}
+		
+		return cnt;
+	}
+	
+	
+}

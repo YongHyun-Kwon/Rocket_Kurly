@@ -37,6 +37,7 @@
 	<typeAlias type="kr.co.rocketkurly.admin.domain.UserHistoryDomain" alias="userHistoryDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.NoticeDomain" alias="noticeDomain"/>
 	<typeAlias type="kr.co.rocketkurly.admin.domain.CouponDomain" alias="couponDomain"/>
+	<typeAlias type="kr.co.rocketkurly.admin.vo.AdminVO" alias="adminVO"/>
 	
 </typeAliases>
   <environments default="development">
@@ -65,6 +66,7 @@
      <mapper resource="kr/co/rocketkurly/admin/mapper/questionMapper.xml"/>
      <mapper resource="kr/co/rocketkurly/admin/mapper/couponMapper.xml"/>
      <mapper resource="kr/co/rocketkurly/admin/mapper/dashboardMapper.xml"/>
+     <mapper resource="kr/co/rocketkurly/admin/mapper/adminMapper.xml"/>
     
   </mappers>
 </configuration>

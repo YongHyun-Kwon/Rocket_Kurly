@@ -11,23 +11,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import kr.co.rocketkurly.admin.domain.CouponDomain;
 import kr.co.rocketkurly.admin.domain.QuestionDomain;
 import kr.co.rocketkurly.admin.service.ItemService;
-import kr.co.rocketkurly.admin.vo.InquiryVO;
 import kr.co.rocketkurly.cust.domain.MemberDomain;
 import kr.co.rocketkurly.cust.service.MemberService;
 import kr.co.rocketkurly.cust.service.MyPageService;
 import kr.co.rocketkurly.cust.vo.BoardVO;
 import kr.co.rocketkurly.cust.vo.MemberVO;
-import kr.co.rocketkurly.cust.vo.OrderHistoryVO;
 import kr.co.rocketkurly.cust.vo.QuestionVO;
 import kr.co.rocketkurly.cust.vo.ReviewVO;
 import kr.co.rocketkurly.cust.vo.WishVO;
@@ -129,17 +124,42 @@ public class MyPageController {
 	}// pwFindProcess
 
 	@RequestMapping(value = "/orderhistory.do", method = { GET, POST })
-	public String orderhistoryPage(Model model, HttpServletRequest request) {
+	public String orderhistoryPage(Model model,BoardVO bVO ,HttpServletRequest request) {
+
 		
 		HttpSession session = request.getSession();
 
-		String id = (String) session.getAttribute("custID");
+		bVO.setMember_id((String) session.getAttribute("custID"));
+		
+		//전체 레코드의 수
+		int totalCnt=mps.searchOrderCnt(bVO.getMember_id());
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = mps.myPageScale();
+		//3. 총 페이지 수
+		int pageCnt = is.pageCnt(totalCnt, pageScale)-1;
+		//4. 시작번호
+		int startNum = is.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = is.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =is.numScale(); 
 
-		List<OrderHistoryVO> historyList = mps.searchOrderhistory(id);
+		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
 		
-		OrderHistoryVO ohVO = new OrderHistoryVO();
 		
-		model.addAttribute("historyList", historyList);
+		if(bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+
+		model.addAttribute("historyList", mps.searchOrderhistory(bVO));
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+		model.addAttribute("pageCnt",pageCnt);
+		
+		
 		
 			
 		return "orderhistory";
@@ -147,16 +167,43 @@ public class MyPageController {
 	}// orderhistoryPage
 
 	@RequestMapping(value = "/review.do", method = { GET, POST })
-	public String reviewPage(Model model, HttpServletRequest request) {
+	public String reviewPage(Model model,BoardVO bVO ,HttpServletRequest request) {
 
 
 		HttpSession session = request.getSession();
 
-		String id = (String) session.getAttribute("custID");
-
-		List<ReviewVO> reviewList = mps.selectMyReview(id);
 		
-		model.addAttribute("reviewList", reviewList);
+		bVO.setMember_id((String) session.getAttribute("custID"));
+		
+		//전체 레코드의 수
+		int totalCnt=mps.searchReviewCnt(bVO.getMember_id());
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = mps.myPageScale();
+		//3. 총 페이지 수
+		int pageCnt = is.pageCnt(totalCnt, pageScale)-1;
+		//4. 시작번호
+		int startNum = is.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = is.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =is.numScale(); 
+
+		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
+		
+		
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+		if(bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
+
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+		model.addAttribute("pageCnt",pageCnt);
+		
+		
+		model.addAttribute("reviewList", mps.selectMyReview(bVO));
 		
 			
 		return "review";
@@ -187,14 +234,43 @@ public class MyPageController {
 
 
 	@RequestMapping(value = "/inquiry.do", method = { GET, POST })
-	public String inquiryPage(Model model, HttpServletRequest request) {
+	public String inquiryPage(Model model,BoardVO bVO,HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
+		
+		
+		bVO.setMember_id((String) session.getAttribute("custID"));
+		
+		//전체 레코드의 수
+		int totalCnt=mps.searchInquiryCnt(bVO.getMember_id());
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = mps.myPageScale();
+		//3. 총 페이지 수
+		int pageCnt = is.pageCnt(totalCnt, pageScale)-1;
+		//4. 시작번호
+		int startNum = is.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = is.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =is.numScale(); 
 
-		String id = (String) session.getAttribute("custID");
+		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
+		
+		
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+		
+		if(bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
 
-		List<QuestionDomain> inquiryList = mps.inquiry(id);
-		model.addAttribute("inquiryList", inquiryList);
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+		model.addAttribute("pageCnt",pageCnt);
+		
+
+		model.addAttribute("inquiryList", mps.inquiry(bVO));
 
 		return "inquiry";
 
@@ -210,15 +286,41 @@ public class MyPageController {
 	}// inquiry
 
 	@RequestMapping(value = "/coupon.do", method = { GET, POST })
-	public String couponPage(Model model, HttpServletRequest request) {
+	public String couponPage(Model model,BoardVO bVO,HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 
-		String id = (String) session.getAttribute("custID");
+		bVO.setMember_id((String) session.getAttribute("custID"));
+		
+		//전체 레코드의 수
+		int totalCnt=mps.searchCouponCnt(bVO.getMember_id());
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = mps.myPageScale();
+		//3. 총 페이지 수
+		int pageCnt = is.pageCnt(totalCnt, pageScale)-1;
+		//4. 시작번호
+		int startNum = is.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = is.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =is.numScale(); 
 
-		List<CouponDomain> couponList = mps.coupon(id);
+		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
+		
+		
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+		
+		if(bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
 
-		model.addAttribute("couponList", couponList);
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+		model.addAttribute("pageCnt",pageCnt);
+
+		model.addAttribute("couponList", mps.SearchCouponBoard(bVO));
 
 		return "coupon";
 
@@ -282,6 +384,10 @@ public class MyPageController {
 		
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
+		
+		if(bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
 		model.addAttribute("wishList",mps.searchWish(bVO));
 		model.addAttribute("startPage",bVO.getStartPage());
 		model.addAttribute("endPage",bVO.getEndPage());

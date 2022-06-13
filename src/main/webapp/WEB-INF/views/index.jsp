@@ -48,7 +48,9 @@
    	<!-- 메뉴  -->
    	<%@ include file="/WEB-INF/views/include/menu.jsp" %>
     
+
     <section class="hero hero-normal">
+
         <div class="container">
 	 <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
                         <div class="hero__text">
@@ -68,6 +70,7 @@
                 <div class="col-lg-12">
                     <div class="section-title">
                         <h2>이 상품 어때요?</h2>
+                       
                     </div>
                    
                 </div>
