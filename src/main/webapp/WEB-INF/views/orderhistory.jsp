@@ -87,7 +87,8 @@ table{min-width: 800px; table-layout: fixed;
                                </c:if>
                                 </table>
                                 </div>
-                                 				<div class="product__pagination">
+                                
+                    <div class="product__pagination">
  				
  				      <c:if test="${currentPage ne 1}">
                        <a href="orderhistory.do?currentPage=${currentPage-1}"><i class="fa fa-long-arrow-left"></i></a>

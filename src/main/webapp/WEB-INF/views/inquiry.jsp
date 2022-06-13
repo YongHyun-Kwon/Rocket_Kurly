@@ -85,6 +85,35 @@ span{font-weight: bold;}
                                 <div align="right" style="padding: 5px">
                                <a href="write-inquiry.do"><input type="button" value="문의 작성"></a>
                                 </div>
+                                
+                                            
+                    <div class="product__pagination">
+ 				
+ 				      <c:if test="${currentPage ne 1}">
+                       <a href="inquiry.do?currentPage=${currentPage-1}"><i class="fa fa-long-arrow-left"></i></a>
+                      </c:if>
+ 				
+ 				
+                    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                     <c:choose>
+         					<c:when test="${i eq currentPage }">
+         					<a class="page-link" style="color: red;" href="inquiry.do?currentPage=${i}">
+                             <c:out value="${i}"/></a>
+         					</c:when>
+         					<c:otherwise>
+         					<a class="page-link" href="inquiry.do?currentPage=${i}">
+                              <c:out value="${i}"/></a>
+         					
+         					</c:otherwise>
+      
+                        </c:choose>
+                       </c:forEach>
+                        <c:if test="${pageCnt ge currentPage+1}">
+                       <a href="inquiry.do?currentPage=${currentPage+1}"><i class="fa fa-long-arrow-right"></i></a>
+                         </c:if>
+                      
+              </div>
+                                
                             </div>
                         </div>
                     </div>

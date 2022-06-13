@@ -75,6 +75,11 @@ public class ShopController {
 		
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
+		
+		if(bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
+		
 		model.addAttribute("currentCategory",bVO.getCurrent_category());
 		model.addAttribute("itemList",is.searchUserItem(bVO));
 		model.addAttribute("startPage",bVO.getStartPage());

@@ -97,12 +97,12 @@ public class MyPageService {
 	 * @param id
 	 * @return
 	 */
-	public List<QuestionDomain> inquiry(String id) {
+	public List<QuestionDomain> inquiry(BoardVO bVO) {
 
 		List<QuestionDomain> list = null;
 
 		try {
-			list = myDAO.selectQuestion(id);
+			list = myDAO.selectQuestion(bVO);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
 		} // end catch
@@ -137,18 +137,31 @@ public class MyPageService {
 	 * @param id
 	 * @return
 	 */
-	public List<CouponDomain> coupon(String id) {
+	public List<CouponDomain> SearchCouponBoard(BoardVO bVO) {
 
 		List<CouponDomain> list = null;
 
 		try {
-			list = myDAO.selectCoupon(id);
+			list = myDAO.selectCouponBoard(bVO);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
 		} // end catch
 
 		return list;
 
+	}// coupon
+	public List<CouponDomain> coupon(String id) {
+		
+		List<CouponDomain> list = null;
+		
+		try {
+			list = myDAO.selectCoupon(id);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		} // end catch
+		
+		return list;
+		
 	}// coupon
 
 	public int questionTotal(String id) {
@@ -371,12 +384,12 @@ public class MyPageService {
 		
 	}// enrollProduct
 	
-	public List<ReviewVO> selectMyReview(String id){
+	public List<ReviewVO> selectMyReview(BoardVO bVO){
 		
 		List<ReviewVO> list = null;
 		
 		try {
-			list=myDAO.selectMyReview(id);
+			list=myDAO.selectMyReview(bVO);
 		}catch (PersistenceException e) {
 			
 			e.printStackTrace();			
@@ -396,6 +409,36 @@ public class MyPageService {
 		int totalCnt=0;
 		try {
 		totalCnt=myDAO.selectOrderCnt(id);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return totalCnt;
+	}
+	public int searchReviewCnt(String id) {
+		int totalCnt=0;
+		try {
+			totalCnt=myDAO.selectReviewCnt(id);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return totalCnt;
+	}
+	public int searchInquiryCnt(String id) {
+		int totalCnt=0;
+		try {
+			totalCnt=myDAO.selectInquiryCnt(id);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return totalCnt;
+	}
+	public int searchCouponCnt(String id) {
+		int totalCnt=0;
+		try {
+			totalCnt=myDAO.selectCouponCnt(id);
 		}catch (PersistenceException e) {
 			
 			e.printStackTrace();			
