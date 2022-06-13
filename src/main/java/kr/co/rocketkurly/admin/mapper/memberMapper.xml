@@ -37,10 +37,10 @@
 	where  MEMBER_ID like '%' || #{keyword} || '%'
 	 </select>
 	
-	<select id="selectMDetail" resultType="MemberDomain" parameterType="String">
+	<select id="selectMDetail" resultType="MemberDomain" parameterType="String" >
 	select member_id,email,pw,name,nickname,tel,addr,address,status,reg_dt,mod_dt
 	from member
-	where member_id=#{member_id}
+	where member_id=#{member_id,jdbcType=VARCHAR}
  	</select>
  	
  	<update id="editStatus" parameterType="MemberDomain">

@@ -14,8 +14,8 @@
 	
 	<update id="editOrderStat" parameterType="OrderDomain">
 		update ordering
-		set order_state=#{order_state}
-		where order_no=#{order_no}
+		set order_state=#{order_state , jdbcType=VARCHAR}
+		where order_no=#{order_no , jdbcType=NUMERIC}
 	</update>
 	
 	<select id="orderCnt" resultType="int" >
