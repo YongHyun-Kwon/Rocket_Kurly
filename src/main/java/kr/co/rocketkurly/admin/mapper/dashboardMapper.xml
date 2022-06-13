@@ -43,5 +43,10 @@
 		where rownum <= 8 order by sign_date desc
 		]]>
 	</select>
+	
+	<insert id="writeNotice" parameterType="String">
+	insert into announcement(notice_num, notice_main, sign_date, update_date)
+	values( 'n'||pro3.NOTICE_NO.NEXTVAL, #{ notice }, sysdate, sysdate)
+	</insert>
 
 </mapper>

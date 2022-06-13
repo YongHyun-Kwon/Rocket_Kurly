@@ -38,5 +38,14 @@ public class DashboardController {
 		
 	}// salesVolumeProcess
 	
+	@RequestMapping(value = "/admin/jsp/notice.do", method = GET)
+	public String noticeProcess(String notice) {
+		
+		int cnt = dashService.writeNotice(notice);
+		
+		return "redirect:index.do";
+		
+	}
+	
 
 }
