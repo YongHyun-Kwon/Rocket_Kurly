@@ -69,20 +69,20 @@ public class AdminController {
 	@RequestMapping(value = "/admin/jsp/order_status.do", method = { GET, POST })
 	public String selectOrder(Model model, OrderDomain oVO, BoardVO bVO) {
 
-		// ÀüÃ¼ ·¹ÄÚµåÀÇ ¼ö
+		// ì „ì²´ ë ˆì½”ë“œì˜ ìˆ˜
 		int totalCnt = os.searchTotalCount();
-		// 2. ÇÑÈ­¸é¿¡ º¸¿©ÁÙ °Ô½Ã¹°ÀÇ ¼ö
+		// 2. í•œí™”ë©´ì— ë³´ì—¬ì¤„ ê²Œì‹œë¬¼ì˜ ìˆ˜
 		int pageScale = os.pageScale();
-		// 3. ÃÑ ÆäÀÌÁö ¼ö
+		// 3. ì´ í˜ì´ì§€ ìˆ˜
 		int pageCnt = os.pageCnt(totalCnt, pageScale);
-		// 4. ½ÃÀÛ¹øÈ£
+		// 4. ì‹œì‘ë²ˆí˜¸
 		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-		// 5. ³¡¹øÈ£
+		// 5. ëë²ˆí˜¸
 		int endNum = os.endNum(startNum, pageScale);
-		// ÅäÅ» ½ºÄÉÀÏ
+		// í† íƒˆ ìŠ¤ì¼€ì¼
 		int totalScale = os.numScale();
-		// Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
-		// ½ÃÀÛ , ³¡ ÆäÀÌÁö °è»ê
+		// ì œì¼ ë§ˆì§€ë§‰ í˜ì´ì§€ ê³„ì‚°
+		// ì‹œì‘ , ë í˜ì´ì§€ ê³„ì‚°
 		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
 
 		bVO.setStartNum(startNum);
@@ -107,23 +107,26 @@ public class AdminController {
 
 	}// addRecipe
 
-	@RequestMapping(value = "/admin/jsp/order_status1.do", method = GET)
-	public String filterOrder(Model model, BoardVO bVO) {
+	
+	
+	@RequestMapping(value = "/admin/jsp/order_status2.do", method = GET)
+	public String filterOrder(Model model , BoardVO bVO) {
+		
+		//ì „ì²´ ë ˆì½”ë“œì˜ ìˆ˜
+		int totalCnt=os.searchKeywordCount(bVO);
+		//2. í•œí™”ë©´ì— ë³´ì—¬ì¤„ ê²Œì‹œë¬¼ì˜ ìˆ˜
 
-		// ÀüÃ¼ ·¹ÄÚµåÀÇ ¼ö
-		int totalCnt = os.searchKeywordCount(bVO);
-		// 2. ÇÑÈ­¸é¿¡ º¸¿©ÁÙ °Ô½Ã¹°ÀÇ ¼ö
 		int pageScale = os.pageScale();
-		// 3. ÃÑ ÆäÀÌÁö ¼ö
+		// 3. ì´ í˜ì´ì§€ ìˆ˜
 		int pageCnt = os.pageCnt(totalCnt, pageScale);
-		// 4. ½ÃÀÛ¹øÈ£
+		// 4. ì‹œì‘ë²ˆí˜¸
 		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-		// 5. ³¡¹øÈ£
+		// 5. ëë²ˆí˜¸
 		int endNum = os.endNum(startNum, pageScale);
-		// ÅäÅ» ½ºÄÉÀÏ
+		// í† íƒˆ ìŠ¤ì¼€ì¼
 		int totalScale = os.numScale();
-		// Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
-		// ½ÃÀÛ , ³¡ ÆäÀÌÁö °è»ê
+		// ì œì¼ ë§ˆì§€ë§‰ í˜ì´ì§€ ê³„ì‚°
+		// ì‹œì‘ , ë í˜ì´ì§€ ê³„ì‚°
 		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
 
 		bVO.setStartNum(startNum);
