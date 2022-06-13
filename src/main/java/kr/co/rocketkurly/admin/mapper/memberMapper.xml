@@ -5,10 +5,11 @@
 <mapper namespace="kr.co.rocketkurly.admin.dao">
 	
 	<select id="selectMember" resultType="MemberDomain" parameterType="MemberVO">
-	select filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT	
-	from (select rownum filter, MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT
-	from MEMBER
-	order by MEMBER_ID)
+	select filter,MEMBER_ID,EMAIL,PW,NAME,NICKNAME,TEL,ADDR,ADDRESS,STATUS,REG_DT,MOD_DT,sum_price	
+	from (select rownum filter, m.MEMBER_ID,m.EMAIL,m.PW,m.NAME,m.NICKNAME,m.TEL,m.ADDR,m.ADDRESS,m.STATUS,m.REG_DT,m.MOD_DT,s.sum_price
+			from MEMBER m, sum_order s
+			where m.member_id = s.member_id
+			order by MEMBER_ID)
 	where filter between #{StartNum} and #{endNum}
 
 
@@ -38,9 +39,9 @@
 	 </select>
 	
 	<select id="selectMDetail" resultType="MemberDomain" parameterType="String" >
-	select member_id,email,pw,name,nickname,tel,addr,address,status,reg_dt,mod_dt
-	from member
-	where member_id=#{member_id,jdbcType=VARCHAR}
+	select m.member_id,m.email,m.pw,m.name,m.nickname,m.tel,m.addr,m.address,m.status,m.reg_dt,m.mod_dt,s.sum_price
+	from member m, sum_order s
+	where m.member_id=#{member_id,jdbcType=VARCHAR} and m.member_id=s.member_id
  	</select>
  	
  	<update id="editStatus" parameterType="MemberDomain">

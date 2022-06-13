@@ -92,10 +92,22 @@
 $(function () {
 	$("#editStatus").click(function() {
 		
+		if($("#status").val()=="상태 변경" && $("#nick").val() != null){
+			alert("상태를 선택해 주세요.");
+			event.preventDefault();
+			return;
+		}
 		$("#editStatusFrm").submit();
+		if($("#nick").val() == ""){
+			alert("회원을 선택해 주세요.");
+			event.preventDefault();
+			return;
+		}else{
 			alert("회원상태가 변경되었습니다.");
-			
+		}
 		})
+		
+		
 		 if (self.name != 'reload') {
 	         self.name = 'reload';
 	         self.location.reload(true);
@@ -156,7 +168,7 @@ $(function () {
 										<tr>
 											<td><a href="customer.do?member_id=${mem.member_id}"><c:out value="${mem.member_id}"/></a></td>
 											<td><c:out value="${mem.nickname}"/></td>
-											<td><c:out value="3000원"/></td>
+											<td><c:out value="${mem.sum_price }원"/></td>
 											<td><c:out value="${mem.status}"/></td>
 										</tr>
 									</c:forEach>
@@ -164,48 +176,8 @@ $(function () {
 								</table>
 							</div>
 						</div>
-						<!-- 회원 상세 조회 -->
-                      <div class="card" style="margin-top: 30px;height: 400px">
-                        <!-- Search -->
-                            <div>
-                                <h5 class="card-header" style="height:30px; display: inline-block">회원 상세 정보</h5>
-                            </div>
-                        <!-- /Search -->
-                       <div style="width: 800px;">
-                                <div class="customer-lin" style="display: inline-block ;margin: 10px;width: 250px">
-                                    <div class="customer-info">닉네임 : ${memberData.nickname }</div>
-                                    <div class="customer-info">아이디 : ${memberData.member_id }</div>
-                                    <div class="customer-info">이름 : ${memberData.name }</div>
-                                    <div class="customer-info">이메일 : ${memberData.email }</div>
-                                    <div class="customer-info">가입일 : ${memberData.reg_dt }</div>
-                                </div>
-                                <div class="customer-line" style="float:right; ;padding-right:100px;width: 500px">
-                                    <div class="customer-info">우편번호 : ${memberData.addr }</div>
-                                    <div class="customer-info">주소 : ${memberData.address }</div>
-                                    <div class="customer-info">전화번호 : ${memberData.tel }</div>
-                                    <div class="customer-info">구매금액 : </div>
-                                    <div class="customer-info">방문 수 : </div>
-                                    <div class="customer-info">회원상태 : ${memberData.status }</div>
-                                    <form action="http://localhost/rocketkurly/admin/jsp/customer.do?member_id=${memberData.member_id}" method="post" id="editStatusFrm" name="editStatusFrm">
-									<select name="status" style="width: 150px;display: inline-block;"  class="form-select" id="status">
-									<option selected>상태 변경</option>
-										<option value="활동"><c:out value="활동"/></option>
-										<option value="휴면" ><c:out value="휴면"/></option>
-										<option value="탈퇴" ><c:out value="탈퇴"/></option>
-								</select>
-								<button style="margin-left:20px ;display: inline-block; ;" class="btn btn-dark" id="editStatus" name="editStatus">상태 변경</button>
-								</form>
-                        </div>
-                    </div>
-                      
-                      
-                 
-                    <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <div class="demo-inline-spacing">
-                        <!-- Basic Pagination -->
-                        <nav aria-label="Page navigation">
+						
+						<nav aria-label="Page navigation" style="margin-top: 30px">
                         
                             <c:choose>
                             <c:when test="${empty keyword}">
@@ -320,6 +292,51 @@ $(function () {
 						</c:choose>
                         
                         </nav>
+						
+						
+						
+						
+						<!-- 회원 상세 조회 -->
+                      <div class="card" style="margin-top: 30px;height: 400px">
+                        <!-- Search -->
+                            <div>
+                                <h5 class="card-header" style="height:30px; display: inline-block">회원 상세 정보</h5>
+                            </div>
+                        <!-- /Search -->
+                       <div style="width: 800px;">
+                                <div class="customer-lin" style="display: inline-block ;margin: 10px;width: 250px">
+                                <div class="customer-info">닉네임 :<input id="nick" type="text" style="width: 100px;margin-left: 10px" value="${memberData.nickname }" readonly="readonly" /> </div>
+                                    <div class="customer-info">아이디 : ${memberData.member_id }</div>
+                                    <div class="customer-info">이름 : ${memberData.name }</div>
+                                    <div class="customer-info">이메일 : ${memberData.email }</div>
+                                    <div class="customer-info">가입일 : ${memberData.reg_dt }</div>
+                                </div>
+                                <div class="customer-line" style="float:right; ;padding-right:100px;width: 500px">
+                                    <div class="customer-info">우편번호 : ${memberData.addr }</div>
+                                    <div class="customer-info">주소 : ${memberData.address }</div>
+                                    <div class="customer-info">전화번호 : ${memberData.tel }</div>
+                                    <div class="customer-info">구매금액 : ${memberData.sum_price }</div>
+                                    <div class="customer-info">회원상태 : ${memberData.status }</div>
+                                    <form action="http://localhost/rocketkurly/admin/jsp/customer.do?member_id=${memberData.member_id}" method="post" id="editStatusFrm" name="editStatusFrm">
+									<select id="status" name="status" style="width: 150px;display: inline-block;"  class="form-select" id="status">
+									<option selected>상태 변경</option>
+										<option value="활동"><c:out value="활동"/></option>
+										<option value="휴면" ><c:out value="휴면"/></option>
+										<option value="탈퇴" ><c:out value="탈퇴"/></option>
+								</select>
+								<input type="button" style="margin-left:20px ;display: inline-block;" value="상태변경" class="btn btn-dark" id="editStatus" name="editStatus"/>
+								</form>
+                        </div>
+                    </div>
+                      
+                      
+                 
+                    <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <div class="demo-inline-spacing">
+                        <!-- Basic Pagination -->
+                        
                         <!--/ Basic Pagination -->
                       </div>
                     </div>

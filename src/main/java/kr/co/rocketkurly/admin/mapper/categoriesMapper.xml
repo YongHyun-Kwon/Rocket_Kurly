@@ -65,14 +65,14 @@
 	
 	<update id="editPcatName" parameterType="PCategoriesDomain">
 		update p_category
-		set p_category_name=#{p_category_name}
-		where p_category_name=#{p_category_name_before}
+		set p_category_name=#{p_category_name,jdbcType=VARCHAR}
+		where p_category_name=#{p_category_name_before,jdbcType=VARCHAR}
 	</update>
 	
 	<update id="editCcatName" parameterType="CCategoriesDomain">
 		update sub_category
-		set sub_name=#{c_category_name}, sub_id=#{c_category_name}
-		where sub_name=#{subCat}
+		set sub_name=#{c_category_name,jdbcType=VARCHAR}, sub_id=#{c_category_name,jdbcType=VARCHAR}
+		where sub_name=#{subCat,jdbcType=VARCHAR}
 	</update>
 
 </mapper>
