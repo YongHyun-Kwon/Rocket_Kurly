@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -421,7 +422,7 @@
     		  },
     		  success : function( salesVolume ) {
     			  
-    			  $("#salesVolume").html(salesVolume + "개");
+    			  $("#salesVolume").html(salesVolume + "건");
     			  
     		  },
     		  
@@ -539,7 +540,7 @@
                                <label style="margin-top: 15px;">시작일</label><input class="form-control" id="rStartDate" type="date" id="html5-date-input"/>
                                <label style="margin-top: 10px;">종료일</label><input class="form-control" id="rEndDate" type="date" id="html5-date-input" style="margin-top: 10px;"/>
                                 <div class="input-group" style="margin-top: 20px">
-                                    <span style="width: 400px" id="revenue" class="input-group-text" >0원</span>
+                                    <span style="width: 400px" id="revenue" class="input-group-text" >0 원</span>
                                 </div>
                                 <button type="button" id="rvBtn" class="btn btn-info" style="margin-top: 15px;">매출액 조회</button>
                             </div>
@@ -548,7 +549,7 @@
                                 <label style="margin-top: 15px;">시작일</label><input class="form-control" id="sStartDate" type="date" id="html5-date-input" />
                                 <label style="margin-top: 10px;">종료일</label><input class="form-control" id="sEndDate" type="date" id="html5-date-input" style="margin-top: 10px;"/>
                                 <div class="input-group" style="margin-top: 15px">
-                                    <span style="width: 400px" id="salesVolume" class="input-group-text" >0개</span>
+                                    <span style="width: 400px" id="salesVolume" class="input-group-text" >0 건</span>
                                 </div>
                                 <button type="button" id="svBtn" class="btn btn-info" style="margin-top: 15px;">주문량 조회</button>
                             </div>

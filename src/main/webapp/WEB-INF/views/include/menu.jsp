@@ -83,9 +83,9 @@ $(function () {
                         </div>
                         <ul id="p-category">
                         <c:forEach var="cate" items="${cateP}">
-                            <li><a href="shop-grid.do?p_category_id=${cate.p_category_id}&&c_category_id=${fn:substring(cate.p_category_id,0,2)}0&&current_category=${fn:substring(cate.p_category_id,0,2)}0">
+                            <li><a href="shop-grid.do?p_category_id=${cate.p_category_id}&&p_category_name=${cate.p_category_name}&&c_category_id=${fn:substring(cate.p_category_id,0,2)}0&&current_category=${fn:substring(cate.p_category_id,0,2)}0">
                             ${cate.p_category_name}</a></li>
-                        </c:forEach>
+                        </c:forEach> 
                             <li><a href="#"></a></li>
                         </ul>
                     </div>
@@ -96,9 +96,8 @@ $(function () {
                 	<div class="hero__categories"  id="vegi-menu">
                		<ul class="c-category">
                   		<c:forEach var="c" items="${cateC}">
-                
 							<c:if test = "${fn:contains(c.c_category_id,fn:substring(p.p_category_id,0,2))}">
-                      			<li><a href="shop-grid.do?p_category_id=${p.p_category_id}&&c_category_id=${c.c_category_id}&&current_category=${c.c_category_id}">
+                      			<li><a href="shop-grid.do?p_category_id=${p.p_category_id}&&p_category_name=${p.p_category_name}&&c_category_id=${c.c_category_id}&&current_category=${c.c_category_id}">
                           				 ${c.sub_name}</a></li>
 							</c:if>
                    		</c:forEach>

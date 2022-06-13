@@ -192,6 +192,7 @@ a{
 	                        <input type="hidden" name="price" value="${ orVO.price }">
 	                        <input type="hidden" name="subPrice" value="${ orVO.subPrice }">
 	                        <input type="hidden" name="discount" value="${ orVO.discount }">
+	                        <input type="hidden" name="cartFlag" value="${ orVO.cartFlag }">
 	                        <c:forEach var="oiVO" items="${ oiVO }">
 	                        	<input type="hidden" name="itemName" value="${ oiVO.itemName }">
 	                        	<input type="hidden" name="itemNo" value="${ oiVO.itemNo }">

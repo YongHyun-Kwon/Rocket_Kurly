@@ -180,19 +180,19 @@ function wish(item) {
     <section class="product spad">
     
     <!--중분류 카테고리 -->
-    <h3 class="title">채소</h3>
+    <h3 class="title"><c:out value="${p_categoryName}"/></h3>
     <div class="list">
     	<ul class="list_on">
     		<c:forEach var="category" items="${categoryData}">
 			<c:choose>
 				<c:when test="${category.c_category_id  eq currentCategory }">
     				<li><a style="color: red;" 
-    				href="shop-grid.do?c_category_id=${category.c_category_id}&&p_category_id=${p_categoryID}&&current_category=${category.c_category_id}">${category.sub_name }</a></li>
+    				href="shop-grid.do?c_category_id=${category.c_category_id}&&p_category_id=${p_categoryID}&&p_category_name=${p_categoryName}&&current_category=${category.c_category_id}">${category.sub_name }</a></li>
 				
 				</c:when>
 				<c:otherwise>
 				
-    				<li><a href="shop-grid.do?c_category_id=${category.c_category_id}&&p_category_id=${p_categoryID}&&current_category=${category.c_category_id}">${category.sub_name }</a></li>
+    				<li><a href="shop-grid.do?c_category_id=${category.c_category_id}&&p_category_id=${p_categoryID}&&p_category_name=${p_categoryName}&&current_category=${category.c_category_id}">${category.sub_name }</a></li>
 				
 				</c:otherwise>
 			</c:choose>

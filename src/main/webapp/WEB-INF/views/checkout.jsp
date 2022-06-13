@@ -276,6 +276,8 @@
                                 
                                 <input type="hidden" id="di" name="discount" value="0">
                                 <input type="hidden" id="sp" name="subPrice" value="${ subTotal }">
+                                
+                                <input type="hidden" name="cartFlag" value="${ cartFlag }">  
                                    
                                 <a href="javascript:void(0)" id="payment" class="site-btn">결제하기</a>
                             </div>
