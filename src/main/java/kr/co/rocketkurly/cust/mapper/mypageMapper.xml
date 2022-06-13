@@ -42,8 +42,11 @@
 
 	</update>
 	
-	<select id="inquiry" resultType="questionDomain" parameterType="String">
-		select * from question where member_id = #{ id }
+	<select id="inquiry" resultType="questionDomain" parameterType="boardVO">
+	select question_no, member_id, order_no, title, type, contents, answer, reg_dt
+	from(select rownum ro,QUESTION_NO, MEMBER_ID, ORDER_NO, TITLE, TYPE, CONTENTS, ANSWER, REG_DT
+	from question where member_id = #{member_id})
+	where ro between #{StartNum} and #{endNum}
 	</select>
 		
 	<select id="myInquiry" resultType="questionDomain" parameterType="int">
@@ -52,6 +55,12 @@
 	
 	<select id="coupon" resultType="couponDomain" parameterType="String">
 		select * from cupon where member_id = #{ id }	
+	</select>
+	<select id="couponBoard" resultType="couponDomain" parameterType="String">
+	  select coupon_no, member_id, coupon_name, p_date, e_date, discount
+	 from(select rownum ro,COUPON_NO, MEMBER_ID, COUPON_NAME, P_DATE, E_DATE, DISCOUNT 
+	 from cupon where member_id = #{member_id})
+	 where ro between #{StartNum} and #{endNum}
 	</select>
 	
 	<select id="inquiryTotal" resultType="int" parameterType="String">
@@ -123,17 +132,40 @@
 		
 	</update>
 	
-	<select id="myReview" resultType="reviewVO" parameterType="String">
+	<select id="myReview" resultType="reviewVO" parameterType="boardVO">
 	 
-	 	select r.title, i.name, r.reg_dt, r.item_no
+	 	select title, name, reg_dt, item_no
+		from(select rownum ro,r.title, i.name, r.reg_dt, r.item_no
 		from review r, item i
-		where r.item_no = i.item_no and r.member_id=#{member_id}
+		where r.item_no = i.item_no and r.member_id=#{member_id})
+    	where ro between #{StartNum} and #{endNum}
 		
 	 </select>
 	<select id="selectOrderCnt" resultType="int" parameterType="String">
 	 
 	 	SELECT count(*) cnt
 	 	FROM ORDERHISTORY_VIEW
+	 	WHERE MEMBER_ID = #{id}
+		
+	 </select>
+	<select id="selectReviewCnt" resultType="int" parameterType="String">
+	 
+	 	SELECT count(*) cnt
+	 	FROM review
+	 	WHERE MEMBER_ID = #{id}
+		
+	 </select>
+	<select id="selectInquiryCnt" resultType="int" parameterType="String">
+	 
+	 	SELECT count(*) cnt
+	 	FROM question
+	 	WHERE MEMBER_ID = #{id}
+		
+	 </select>
+	<select id="selectCouponCnt" resultType="int" parameterType="String">
+	 
+	 	SELECT count(*) cnt
+	 	FROM cupon
 	 	WHERE MEMBER_ID = #{id}
 		
 	 </select>
