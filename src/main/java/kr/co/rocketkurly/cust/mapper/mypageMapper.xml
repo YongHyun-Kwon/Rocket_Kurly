@@ -99,12 +99,15 @@
 	
 	 </select>
 	 
-	 <select id="orderHistory" resultType="orderhistoryVO" parameterType="String">
+	 <select id="orderHistory" resultType="orderhistoryVO" parameterType="boardVO">
 	 
-	 	SELECT MEMBER_ID, ORDER_NO, ORDER_DATE, PRICE, ORDER_STATE, ITEM_NO, REVIEW_STATE, ITEMNAME, QUANTITY
-	 	FROM ORDERHISTORY_VIEW 
-	 	WHERE MEMBER_ID = #{id}
-	 	ORDER BY ORDER_DATE DESC 
+	 	
+	 	select member_id, order_no, order_date, price, order_state, item_no, review_state, itemname, quantity
+	 	from(SELECT rownum ro,MEMBER_ID, ORDER_NO, ORDER_DATE, PRICE, ORDER_STATE, ITEM_NO, REVIEW_STATE, ITEMNAME, QUANTITY
+	 	FROM ORDERHISTORY_VIEW
+	 	WHERE MEMBER_ID = #{member_id}
+	 	ORDER BY ORDER_DATE DESC)
+		where ro between #{StartNum} and #{endNum}
 	 
 	 </select>
 	 
@@ -125,6 +128,13 @@
 	 	select r.title, i.name, r.reg_dt, r.item_no
 		from review r, item i
 		where r.item_no = i.item_no and r.member_id=#{member_id}
+		
+	 </select>
+	<select id="selectOrderCnt" resultType="int" parameterType="String">
+	 
+	 	SELECT count(*) cnt
+	 	FROM ORDERHISTORY_VIEW
+	 	WHERE MEMBER_ID = #{id}
 		
 	 </select>
 	

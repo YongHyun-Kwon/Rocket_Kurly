@@ -328,12 +328,12 @@ public class MyPageService {
 		return list;
 	}//searchWish
 	
-	public List<OrderHistoryVO> searchOrderhistory(String id){
+	public List<OrderHistoryVO> searchOrderhistory(BoardVO bVO){
 	
 		List<OrderHistoryVO> list = null;
 		
 		try {
-			list=myDAO.selectOrderHistory(id);
+			list=myDAO.selectOrderHistory(bVO);
 		}catch (PersistenceException e) {
 			
 			e.printStackTrace();			
@@ -384,5 +384,26 @@ public class MyPageService {
 		return list;
 		
 	}//searchOrderhistory
+	
+	
+	public int myPageScale() {
+		int pageScale=8;
+		return pageScale;
+	}//myPageScale
+	
+	
+	public int searchOrderCnt(String id) {
+		int totalCnt=0;
+		try {
+		totalCnt=myDAO.selectOrderCnt(id);
+		}catch (PersistenceException e) {
+			
+			e.printStackTrace();			
+		}
+		return totalCnt;
+	}
+	
+	
+	
 
 }
