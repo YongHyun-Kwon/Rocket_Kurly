@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -52,6 +53,33 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+    		
+    		$("#login").click(function() {
+    			
+    			if($("#id").val() == ""){
+    				
+    				alert("아이디는 필수 입력입니다.")
+    				$("#id").focus(); 
+    				return
+    				
+    			}
+    			
+    			if($("#pass").val() == ""){
+    				
+    				alert("비밀번호는 필수 입력입니다.")
+    				$("#pass").focus();
+    				return
+    			}
+    			
+    			$("#frm").submit();
+    			
+    		})// click
+    		
+    	})// ready
+    </script>
   </head>
 
   <body>
@@ -67,14 +95,14 @@
               <img src="../assets/img/logo.png"/>
               <!-- /Logo -->
 
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form id="frm" class="mb-3" action="logincheck.do" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">아이디</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="email"
-                    name="email-username"
+                    id="id"
+                    name="id"
                     placeholder="아이디를 입력해주세요."
                     autofocus
                   />
@@ -87,18 +115,21 @@
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
-                      id="password"
+                      id="pass"
                       class="form-control"
-                      name="password"
+                      name="pass"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
+                    <c:if test="${ msg == 'fail' }">
+                        	<div style="color: red;">아이디 비밀번호를 확인해주세요</div>
+                    </c:if>
                   </div>
                 </div>
                 <div class="mb-3">
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
+                  <button class="btn btn-primary d-grid w-100" id="login" type="button">Login</button>
                 </div>
               </form>
 

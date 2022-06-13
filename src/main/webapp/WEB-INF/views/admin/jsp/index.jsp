@@ -429,6 +429,19 @@
     	  
       })// click
       
+      $("#sendNotice").click(function() {
+    	  
+    	  if($("#notice").val() == "") {
+    		  
+    		  alert("공지를 작성 후 작성 가능 합니다.");
+    		  return;
+    		  
+    	  }// end if
+    	  
+    	  location.href="http://localhost/rocketkurly/admin/jsp/notice.do?notice=" + $("#notice").val();
+    	  
+      })// click
+      
    });// ready
    
     </script>
@@ -552,10 +565,11 @@
 	                               	<input type="text" class="form-control" readonly="readonly" style="width: 450px; background-color: #ffffff" value="${ notice.notice_main }">
 	                                <span style="margin-top: 10px; font-size: 10px;">${ notice.sign_date }</span>
 	                            </div>
-							</c:forEach>                           
-						
-                            <button style="float: right" class="btn-dark">전송</button>
-
+							</c:forEach>  
+							
+							 <input type="text" style="float: left; margin-left: 15px; margin-top: 25px; width: 350px" class="form-control" id="notice"  name="notice" placeholder="공지를 입력해주세요." autofocus/>  
+                             <button style="float: right; margin-top: 25px;" id="sendNotice" class="btn-dark">작성</button> 
+ 
                         </div>
                     </div>
 
