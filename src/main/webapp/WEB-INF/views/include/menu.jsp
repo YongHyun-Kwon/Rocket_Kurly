@@ -1,4 +1,6 @@
     <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="js/jquery-3.3.1.min.js"></script>
 <style type="text/css">
 #vegi:hover{
@@ -80,63 +82,30 @@ $(function () {
                             <span>전체 카테고리</span>
                         </div>
                         <ul id="p-category">
-                            <li><a href="#" id="vegi" >${test}</a></li>
-                            <li><a href="#" id="crops">과일·견과·쌀</a></li>
-                            <li><a href="#" id="seafood">수산·해산·건어물</a></li>
-                            <li><a href="#" id="livestock">정육·계란</a></li>
+                        <c:forEach var="cate" items="${cateP}">
+                            <li><a href="shop-grid.do?p_category_id=${cate.p_category_id}&&c_category_id=${fn:substring(cate.p_category_id,0,2)}0&&current_category=${fn:substring(cate.p_category_id,0,2)}0">
+                            ${cate.p_category_name}</a></li>
+                        </c:forEach>
+                            <li><a href="#"></a></li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- 중분류 메뉴 -->
-                <div class="hero__categories"  id="vegi-menu">
-                     <ul class="c-category">
-                           <li><a href="#" id="" >친환경</a></li>
-                           <li><a href="#" id="">고구마·감자·당근</a></li>
-                           <li><a href="#" id="">시금치·쌈채소·나물</a></li>
-                           <li><a href="#" id="">브로콜리·파프리카·양배추</a></li>
-                           <li><a href="#" id="">양파·대파·마늘·배추</a></li>
-                           <li><a href="#" id="">오이·호박·고추</a></li>
-                           <li><a href="#" id="">냉동·이색·간편채소</a></li>
-                           <li><a href="#" id="">콩나물·버섯</a></li>
-                    </ul>
-                </div>
-                <div class="hero__categories"  id="crops-menu">
-                     <ul class="c-category">
-                           <li><a href="#" id="" >친환경</a></li>
-                           <li><a href="#" id="">제철과일</a></li>
-                           <li><a href="#" id="">국산과일</a></li>
-                           <li><a href="#" id="">수입과일</a></li>
-                           <li><a href="#" id="">간편과일</a></li>
-                           <li><a href="#" id="">냉동·건과일</a></li>
-                           <li><a href="#" id="">견과류</a></li>
-                           <li><a href="#" id="">쌀·잡곡</a></li>
-                    </ul>
-                </div>
-                <div class="hero__categories"  id="sea-menu">
-                     <ul class="c-category">
-                           <li><a href="#" id="" >제철수산</a></li>
-                           <li><a href="#" id="">생선류</a></li>
-                           <li><a href="#" id="">굴비·반건류 </a></li>
-                           <li><a href="#" id="">오징어·낙지·문어</a></li>
-                           <li><a href="#" id="">새우·게·랍스터 </a></li>
-                           <li><a href="#" id="">해산물·조개류 </a></li>
-                           <li><a href="#" id="">수산가공품 </a></li>
-                           <li><a href="#" id="">김·미역·해조류</a></li>
-                           <li><a href="#" id="">건어물·다시팩</a></li>
-                    </ul>
-                </div>
-                <div class="hero__categories"  id="live-menu">
-                     <ul class="c-category">
-                           <li><a href="#" id="" >국내산 소고기</a></li>
-                           <li><a href="#" id="">수입산 소고기</a></li>
-                           <li><a href="#" id="">돼지고기</a></li>
-                           <li><a href="#" id="">계란류</a></li>
-                           <li><a href="#" id="">닭·오리고기</a></li>
-                           <li><a href="#" id="">양념육·돈까스</a></li>
-                           <li><a href="#" id="">양고기</a></li>
-                    </ul>
-                </div>
+                <c:forEach var="p" items="${cateP}">
+                	<div class="hero__categories"  id="vegi-menu">
+               		<ul class="c-category">
+                  		<c:forEach var="c" items="${cateC}">
+                
+							<c:if test = "${fn:contains(c.c_category_id,fn:substring(p.p_category_id,0,2))}">
+                      			<li><a href="shop-grid.do?p_category_id=${p.p_category_id}&&c_category_id=${c.c_category_id}&&current_category=${c.c_category_id}">
+                          				 ${c.sub_name}</a></li>
+							</c:if>
+                   		</c:forEach>
+                	</ul>
+                	</div>
+                </c:forEach>
+
                 <!-- 중분류 메뉴 끝 -->
                 
                 <!--검색 영역  -->
