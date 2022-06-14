@@ -57,6 +57,11 @@
     <script type="text/javascript">
     	$(function() {
     		
+			const aID = "${ aID }"
+			if(aID == "fail") {
+				alert("아이디와 비밀번호를 확인해주세요.");
+			}// end if
+    		
     		$("#login").click(function() {
     			
     			if($("#id").val() == ""){
@@ -121,9 +126,6 @@
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
-                    <c:if test="${ msg == 'fail' }">
-                        	<div style="color: red;">아이디 비밀번호를 확인해주세요</div>
-                    </c:if>
                   </div>
                 </div>
                 <div class="mb-3">

@@ -6,7 +6,7 @@
 
 	<select id="loginCheck" resultType="String" parameterType="adminVO">
 	
-		select a_id from admin where a_id=#{ id } and a_pass=${ pass }
+		select a_id from admin where a_id=#{ id } and a_pass=#{ pass }
 	
 	</select>
 	

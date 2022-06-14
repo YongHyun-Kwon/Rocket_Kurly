@@ -49,6 +49,9 @@ public class AdminController {
 	public String mainPage(Model model) {
 
 		List<UserHistoryDomain> visitList = dashService.visitCount();
+		
+		System.out.println(visitList);
+		
 		List<MemberRegCntDomain> regCntList = dashService.memberRegCount();
 		List<OrderCntDomain> orderCntList = dashService.orderCount();
 		List<QuestionCntDomain> questionCntList = dashService.questionCount();
@@ -69,20 +72,12 @@ public class AdminController {
 	@RequestMapping(value = "/admin/jsp/order_status.do", method = { GET, POST })
 	public String selectOrder(Model model, OrderDomain oVO, BoardVO bVO) {
 
-		// �쟾泥� �젅肄붾뱶�쓽 �닔
 		int totalCnt = os.searchTotalCount();
-		// 2. �븳�솕硫댁뿉 蹂댁뿬以� 寃뚯떆臾쇱쓽 �닔
 		int pageScale = os.pageScale();
-		// 3. 珥� �럹�씠吏� �닔
 		int pageCnt = os.pageCnt(totalCnt, pageScale);
-		// 4. �떆�옉踰덊샇
 		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-		// 5. �걹踰덊샇
 		int endNum = os.endNum(startNum, pageScale);
-		// �넗�깉 �뒪耳��씪
 		int totalScale = os.numScale();
-		// �젣�씪 留덉�留� �럹�씠吏� 怨꾩궛
-		// �떆�옉 , �걹 �럹�씠吏� 怨꾩궛
 		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
 
 		bVO.setStartNum(startNum);
@@ -112,21 +107,13 @@ public class AdminController {
 	@RequestMapping(value = "/admin/jsp/order_status2.do", method = GET)
 	public String filterOrder(Model model , BoardVO bVO) {
 		
-		//�쟾泥� �젅肄붾뱶�쓽 �닔
 		int totalCnt=os.searchKeywordCount(bVO);
-		//2. �븳�솕硫댁뿉 蹂댁뿬以� 寃뚯떆臾쇱쓽 �닔
 
 		int pageScale = os.pageScale();
-		// 3. 珥� �럹�씠吏� �닔
 		int pageCnt = os.pageCnt(totalCnt, pageScale);
-		// 4. �떆�옉踰덊샇
 		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-		// 5. �걹踰덊샇
 		int endNum = os.endNum(startNum, pageScale);
-		// �넗�깉 �뒪耳��씪
 		int totalScale = os.numScale();
-		// �젣�씪 留덉�留� �럹�씠吏� 怨꾩궛
-		// �떆�옉 , �걹 �럹�씠吏� 怨꾩궛
 		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
 
 		bVO.setStartNum(startNum);
@@ -151,7 +138,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/jsp/createProcess.do", method = { GET, POST })
 	public String createProcess(Model model, CouponVO cVO) {
 		
-		System.out.println("쿠폰코드값>>>>>"+cVO.getCoupon_no());
 		cs.addCoupon(cVO);
 
 		return "redirect:create_coupon.do";
@@ -179,7 +165,7 @@ public class AdminController {
 
 	}// login
 
-	@RequestMapping(value = "/admin/jsp/logincheck.do", method = POST)
+	@RequestMapping(value = "/admin/jsp/logincheck.do", method = { GET, POST })
 	public ModelAndView loginCheck(AdminVO aVO, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
@@ -195,8 +181,8 @@ public class AdminController {
 
 		} else {
 
-			mav.setViewName("redirect:/admin/jsp/login.do");
 			mav.addObject("aID", aID);
+			mav.setViewName("admin/jsp/login");
 
 		} // end else
 

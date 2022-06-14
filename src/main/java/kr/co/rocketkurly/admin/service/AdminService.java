@@ -15,7 +15,7 @@ public class AdminService {
 	
 	public String loginCheck(AdminVO aVO) {
 		
-		String aID = "fail";
+		String aID = "";
 		
 		try {
 			aID = aDAO.selectLoginCheck(aVO);
@@ -24,6 +24,12 @@ public class AdminService {
 			pe.printStackTrace();
 			
 		}// end catch
+		
+		if(aID == null) {
+			
+			aID = "fail";
+			
+		}
 		
 		return aID;
 		
