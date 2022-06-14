@@ -278,7 +278,6 @@ public class MyPageController {
 
 	@RequestMapping(value = "/inquiry-detail.do", method = { GET, POST })
 	public String inquiryDetailPage(Model model, QuestionVO qVO) {
-		System.out.println(qVO);
 		model.addAttribute("inq",mps.myInquiry(qVO.getQuestion_no()));
 		
 		return "inquiry-detail";

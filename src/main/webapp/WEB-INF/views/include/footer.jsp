@@ -3,7 +3,7 @@
     <footer class="footer spad">
         <div class="container">
         <div align="right" >
-         <a href="#" class="primary-btn" >1:1 채팅하기</a>
+        <!--  <a href="#" class="primary-btn" >1:1 채팅하기</a> -->
         </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
