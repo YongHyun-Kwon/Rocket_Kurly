@@ -113,7 +113,7 @@ $(function () {
                         <div class="hero__search__form">
                             <form action="search-result.do">
                                 <input type="text" placeholder="검색어를 입력해주세요" id="keyword3"
-                          		name="keyword3">
+                          		name="keyword">
                                 <button type="submit" class="site-btn" id="searchBtn">검색</button>
                             </form>
                         </div>

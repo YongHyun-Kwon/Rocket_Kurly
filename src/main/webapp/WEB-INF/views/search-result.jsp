@@ -203,23 +203,23 @@ function wish(item) {
                         </div>
                     </div>
                    <div class="row">
-                        <c:forEach var="searchList" items="searchList">
+                        <c:forEach var="searchItem" items="${searchList}">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="http://localhost/rocketkurly/item/<%-- ${searchList.main_img } --%>">
+                                <div class="product__item__pic set-bg" data-setbg="http://localhost/rocketkurly/item/${searchItem.main_img }">
                                     <ul class="product__item__pic__hover">
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="shop-details.do?item_no=${searchList.item_no}">${searchList.name }</a></h6>
-                                    <h5>${searchList.price}원</h5>
+                                    <h6><a href="shop-details.do?item_no=${searchItem.item_no}">${searchItem.name}</a></h6>
+                                    <h5>${searchItem.price}원</h5>
                                 </div>
                             </div>
                         </div>
                         </c:forEach>
 
                     </div> 
-                 <%--    <div class="product__pagination">
+                 <div class="product__pagination">
                     
                       <c:if test="${currentPage > 10}">
                        <a href="shop-grid.do?currentPage=${currentPage-10}&&current_category=${currentCategory}&&p_category_id=${p_categoryID}"><i class="fa fa-long-arrow-left"></i></a>
@@ -243,7 +243,7 @@ function wish(item) {
                         <c:if test="${pageCnt gt currentPage+10}">
                        <a href="shop-grid.do?currentPage=${currentPage+10}&&current_category=${currentCategory}&&p_category_id=${p_categoryID}"><i class="fa fa-long-arrow-right"></i></a>
                             </c:if>
-                    </div> --%>
+                    </div>
                 </div>
             </div>
         </div>

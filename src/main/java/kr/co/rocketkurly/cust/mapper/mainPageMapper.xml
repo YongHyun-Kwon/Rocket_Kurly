@@ -85,7 +85,7 @@
 		   select  filter,ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
 			from(select rownum filter, ITEM_NO, NAME, PRICE, DETAIL, MAIN_IMG, SALES
 			from ITEM
-			where  NAME like '%' || #{keyword jdbcType=VARCHAR} || '%'
+			where  NAME like '%' || #{keyword, jdbcType=VARCHAR} || '%'
 			order by item_no)
 			where filter between #{StartNum} and #{endNum}
 

@@ -46,31 +46,30 @@ public class MainController {
 		
 		
 		//전체 레코드의 수
-				int totalCnt=ms.searchKeywordCount(bVO);
-				//2. 한화면에 보여줄 게시물의 수
-				int pageScale = ms.pageScale();
-				//3. 총 페이지 수
-				int pageCnt = ms.pageCnt(totalCnt, pageScale);
-				//4. 시작번호
-				int startNum = ms.StartNum(bVO.getCurrentPage(), pageScale);
-				//5. 끝번호
-				int endNum = ms.endNum(startNum, pageScale);
-				//토탈 스케일
-				int totalScale =ms.numScale(); 
-				//제일 마지막 페이지 계산
-				//시작 , 끝 페이지 계산
-				bVO=ms.calcStartEndPage(bVO, totalScale,pageCnt);
-				
-				
-				bVO.setStartNum(startNum);
-				bVO.setEndNum(endNum);
-				
-				model.addAttribute("searchList",ms.searchKeyword(bVO));
-				model.addAttribute("startPage",bVO.getStartPage());
-				model.addAttribute("endPage",bVO.getEndPage());
-				model.addAttribute("keyword3",bVO.getKeyword());
-				model.addAttribute("currentPage",bVO.getCurrentPage());
+		int totalCnt=ms.searchKeywordCount(bVO);
+		//2. 한화면에 보여줄 게시물의 수
+		int pageScale = ms.pageScale();
+		//3. 총 페이지 수
+		int pageCnt = ms.pageCnt(totalCnt, pageScale);
+		//4. 시작번호
+		int startNum = ms.StartNum(bVO.getCurrentPage(), pageScale);
+		//5. 끝번호
+		int endNum = ms.endNum(startNum, pageScale);
+		//토탈 스케일
+		int totalScale =ms.numScale(); 
+		//제일 마지막 페이지 계산
+		//시작 , 끝 페이지 계산
+		bVO=ms.calcStartEndPage(bVO, totalScale,pageCnt);
 		
+		
+		bVO.setStartNum(startNum);
+		bVO.setEndNum(endNum);
+		model.addAttribute("searchList",ms.searchKeyword(bVO));
+		model.addAttribute("startPage",bVO.getStartPage());
+		model.addAttribute("endPage",bVO.getEndPage());
+		model.addAttribute("keyword3",bVO.getKeyword());
+		model.addAttribute("currentPage",bVO.getCurrentPage());
+
 		
 		
 		return "search-result";
