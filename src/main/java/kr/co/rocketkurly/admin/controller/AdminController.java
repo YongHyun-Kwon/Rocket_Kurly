@@ -69,20 +69,20 @@ public class AdminController {
 	@RequestMapping(value = "/admin/jsp/order_status.do", method = { GET, POST })
 	public String selectOrder(Model model, OrderDomain oVO, BoardVO bVO) {
 
-		// ÀüÃ¼ ·¹ÄÚµåÀÇ ¼ö
+		// ï¿½ìŸ¾ï§£ï¿½ ï¿½ì …è‚„ë¶¾ë±¶ï¿½ì“½ ï¿½ë‹”
 		int totalCnt = os.searchTotalCount();
-		// 2. ÇÑÈ­¸é¿¡ º¸¿©ÁÙ °Ô½Ã¹°ÀÇ ¼ö
+		// 2. ï¿½ë¸³ï¿½ì†•ï§ŽëŒë¿‰ è¹‚ëŒë¿¬ä»¥ï¿½ å¯ƒëš¯ë–†è‡¾ì‡±ì“½ ï¿½ë‹”
 		int pageScale = os.pageScale();
-		// 3. ÃÑ ÆäÀÌÁö ¼ö
+		// 3. ç¥ï¿½ ï¿½ëŸ¹ï¿½ì” ï§žï¿½ ï¿½ë‹”
 		int pageCnt = os.pageCnt(totalCnt, pageScale);
-		// 4. ½ÃÀÛ¹øÈ£
+		// 4. ï¿½ë–†ï¿½ì˜‰è¸°ëŠìƒ‡
 		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-		// 5. ³¡¹øÈ£
+		// 5. ï¿½ê±¹è¸°ëŠìƒ‡
 		int endNum = os.endNum(startNum, pageScale);
-		// ÅäÅ» ½ºÄÉÀÏ
+		// ï¿½ë„—ï¿½ê¹‰ ï¿½ë’ªè€³ï¿½ï¿½ì”ª
 		int totalScale = os.numScale();
-		// Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
-		// ½ÃÀÛ , ³¡ ÆäÀÌÁö °è»ê
+		// ï¿½ì £ï¿½ì”ª ï§ë‰ï¿½ï§ï¿½ ï¿½ëŸ¹ï¿½ì” ï§žï¿½ æ€¨ê¾©ê¶›
+		// ï¿½ë–†ï¿½ì˜‰ , ï¿½ê±¹ ï¿½ëŸ¹ï¿½ì” ï§žï¿½ æ€¨ê¾©ê¶›
 		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
 
 		bVO.setStartNum(startNum);
@@ -107,23 +107,26 @@ public class AdminController {
 
 	}// addRecipe
 
-	@RequestMapping(value = "/admin/jsp/order_status1.do", method = GET)
-	public String filterOrder(Model model, BoardVO bVO) {
+	
+	
+	@RequestMapping(value = "/admin/jsp/order_status2.do", method = GET)
+	public String filterOrder(Model model , BoardVO bVO) {
+		
+		//ï¿½ìŸ¾ï§£ï¿½ ï¿½ì …è‚„ë¶¾ë±¶ï¿½ì“½ ï¿½ë‹”
+		int totalCnt=os.searchKeywordCount(bVO);
+		//2. ï¿½ë¸³ï¿½ì†•ï§ŽëŒë¿‰ è¹‚ëŒë¿¬ä»¥ï¿½ å¯ƒëš¯ë–†è‡¾ì‡±ì“½ ï¿½ë‹”
 
-		// ÀüÃ¼ ·¹ÄÚµåÀÇ ¼ö
-		int totalCnt = os.searchKeywordCount(bVO);
-		// 2. ÇÑÈ­¸é¿¡ º¸¿©ÁÙ °Ô½Ã¹°ÀÇ ¼ö
 		int pageScale = os.pageScale();
-		// 3. ÃÑ ÆäÀÌÁö ¼ö
+		// 3. ç¥ï¿½ ï¿½ëŸ¹ï¿½ì” ï§žï¿½ ï¿½ë‹”
 		int pageCnt = os.pageCnt(totalCnt, pageScale);
-		// 4. ½ÃÀÛ¹øÈ£
+		// 4. ï¿½ë–†ï¿½ì˜‰è¸°ëŠìƒ‡
 		int startNum = os.StartNum(bVO.getCurrentPage(), pageScale);
-		// 5. ³¡¹øÈ£
+		// 5. ï¿½ê±¹è¸°ëŠìƒ‡
 		int endNum = os.endNum(startNum, pageScale);
-		// ÅäÅ» ½ºÄÉÀÏ
+		// ï¿½ë„—ï¿½ê¹‰ ï¿½ë’ªè€³ï¿½ï¿½ì”ª
 		int totalScale = os.numScale();
-		// Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
-		// ½ÃÀÛ , ³¡ ÆäÀÌÁö °è»ê
+		// ï¿½ì £ï¿½ì”ª ï§ë‰ï¿½ï§ï¿½ ï¿½ëŸ¹ï¿½ì” ï§žï¿½ æ€¨ê¾©ê¶›
+		// ï¿½ë–†ï¿½ì˜‰ , ï¿½ê±¹ ï¿½ëŸ¹ï¿½ì” ï§žï¿½ æ€¨ê¾©ê¶›
 		bVO = os.calcStartEndPage(bVO, totalScale, pageCnt);
 
 		bVO.setStartNum(startNum);
@@ -147,7 +150,8 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/jsp/createProcess.do", method = { GET, POST })
 	public String createProcess(Model model, CouponVO cVO) {
-
+		
+		System.out.println("ì¿ í°ì½”ë“œê°’>>>>>"+cVO.getCoupon_no());
 		cs.addCoupon(cVO);
 
 		return "redirect:create_coupon.do";

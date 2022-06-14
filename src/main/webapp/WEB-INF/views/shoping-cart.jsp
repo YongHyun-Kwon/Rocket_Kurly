@@ -139,6 +139,7 @@ function val(pri,qu,index) {
                                </c:forEach>
                             </tbody>
                         </table>
+                         <input type="hidden" name="cartFlag" value="y">
                          </form>
                     </div>
                 </div>

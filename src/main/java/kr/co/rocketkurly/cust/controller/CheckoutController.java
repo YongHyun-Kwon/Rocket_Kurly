@@ -40,7 +40,7 @@ public class CheckoutController {
 	private PaymentService ps;
 
 	@RequestMapping(value = "/checkout.do", method = { GET, POST })
-	public String checkoutPage(Model model, OrderItemVO oVO, HttpServletRequest request) {
+	public String checkoutPage(Model model, String cartFlag, OrderItemVO oVO, HttpServletRequest request) {
 
 		List<OrderItemTempVO> list = new ArrayList<OrderItemTempVO>();
 
@@ -66,6 +66,7 @@ public class CheckoutController {
 			List<CouponDomain> couponList = mps.coupon(id);
 			model.addAttribute("memberInfo", md);
 			model.addAttribute("couponList", couponList);
+			model.addAttribute("cartFlag", cartFlag);
 
 		} else {
 

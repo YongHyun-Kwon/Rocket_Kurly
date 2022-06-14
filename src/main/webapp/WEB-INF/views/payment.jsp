@@ -48,11 +48,15 @@ $(function () {
 		});
 		
 		$('#send').click(function(e){
-			e.preventDefault();
-			$('#testModal9').modal("hide");
+		e.preventDefault();
+		alert("입력이 완료되었습니다.");
+		$('#testModal9').modal("hide");
+		
 		});//sendBtnClick
 		
 		});//cardClick
+		
+		
 		
 		
 	$('#account').click(function(e){
@@ -122,7 +126,7 @@ a{
 	<!-- 헤더  -->
    	<%@ include file="/WEB-INF/views/include/header.jsp" %>
    	<!-- 메뉴  -->
-   	<%@ include file="/WEB-INF/views/include/menu.jsp" %>
+   <%-- 	<%@ include file="/WEB-INF/views/include/menu.jsp" %> --%>
 
       
     
@@ -192,6 +196,7 @@ a{
 	                        <input type="hidden" name="price" value="${ orVO.price }">
 	                        <input type="hidden" name="subPrice" value="${ orVO.subPrice }">
 	                        <input type="hidden" name="discount" value="${ orVO.discount }">
+	                        <input type="hidden" name="cartFlag" value="${ orVO.cartFlag }">
 	                        <c:forEach var="oiVO" items="${ oiVO }">
 	                        	<input type="hidden" name="itemName" value="${ oiVO.itemName }">
 	                        	<input type="hidden" name="itemNo" value="${ oiVO.itemNo }">

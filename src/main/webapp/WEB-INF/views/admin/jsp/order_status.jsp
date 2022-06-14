@@ -167,6 +167,7 @@ function editStatus(orderNo){
                 <!-- 상품 전체 조회 -->
                 <div style="padding-left: 50px ;width: 1100px;">
                     <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">주문 조회</label>
+                    <form action="order_status2.do" id="frm">
                     <div class="input-group input-group-merge" style="width: 200px;float: right;">
                         <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                         <input
@@ -175,9 +176,11 @@ function editStatus(orderNo){
                           placeholder="Search..."
                           aria-label="Search..."
                           aria-describedby="basic-addon-search31"
+                          id="keyword"
+                          name="keyword"
                         />
                       </div>
-                      
+                      </form>
                       <div class="container">
                       
                       
@@ -185,7 +188,7 @@ function editStatus(orderNo){
 							<div class="table" style="width: 1000px">
 										<div class="tr">
 											<span class="td">주문 번호</span>
-											<span class="td">회원 명</span>
+											<span class="td">회원 ID</span>
 											<span class="td">가격</span>
 											<span class="tdr">요청 사항</span>
 											<span class="td">주문 상태</span>

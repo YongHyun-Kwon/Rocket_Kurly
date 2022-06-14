@@ -132,7 +132,7 @@
     </li>
 
     <!-- 레시피 -->
-    <li class="menu-header small text-uppercase">
+    <!-- <li class="menu-header small text-uppercase">
       <span class="menu-header-text">레시피</span>
     </li>
     <li class="menu-item">
@@ -148,7 +148,7 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> -->
 
 
 
@@ -173,11 +173,11 @@
           <div data-i18n="Without menu">주문 조회</div>
         </a>
       </li>
-      <li class="menu-item">
+      <!-- <li class="menu-item">
         <a href="customer_grade.do" class="menu-link">
           <div data-i18n="Without navbar">등급 관리</div>
         </a>
-      </li>
+      </li> -->
       <li class="menu-item">
         <a href="inquiry.do" class="menu-link">
           <div data-i18n="Container">문의 조회</div>

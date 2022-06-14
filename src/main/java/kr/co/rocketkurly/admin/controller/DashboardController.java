@@ -22,7 +22,7 @@ public class DashboardController {
 	@RequestMapping(value = "/admin/jsp/revenue.do", method = GET)
 	public String revenueProcess(InquiryVO iVO) {
 		
-		String revenue = Integer.toString(dashService.salesInquiry(iVO));
+		String revenue = dashService.salesInquiry(iVO);
 		
 		return revenue;
 		
@@ -32,7 +32,7 @@ public class DashboardController {
 	@RequestMapping(value = "/admin/jsp/salesvolume.do", method = GET)
 	public String salesVolumeProcess(InquiryVO iVO) {
 		
-		String salesVolume = Integer.toString(dashService.salesVolumeInquiry(iVO));
+		String salesVolume = dashService.salesVolumeInquiry(iVO);
 		
 		return salesVolume;
 		

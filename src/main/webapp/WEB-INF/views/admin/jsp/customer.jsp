@@ -136,6 +136,7 @@ $(function () {
                 <!-- 상품 전체 조회 -->
                 <div style="padding-left: 50px ;width: 950px;">
                     <label style="font-size: 30px;font-weight: bold; padding-bottom: 30px">회원 조회</label>
+                    <form action="customer2.do" id="frm">
                     <div class="input-group input-group-merge" style="width: 200px;float: right;">
                         <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                         <input
@@ -148,7 +149,7 @@ $(function () {
                           name="keyword"
                         />
                       </div>
-                      
+                      </form>
                       <div class="container">
                       
                       
@@ -168,7 +169,12 @@ $(function () {
 										<tr>
 											<td><a href="customer.do?member_id=${mem.member_id}"><c:out value="${mem.member_id}"/></a></td>
 											<td><c:out value="${mem.nickname}"/></td>
-											<td><c:out value="${mem.sum_price }원"/></td>
+											<c:if test="${ empty mem.sum_price}">
+                                		<td><c:out value="0원"/></td>
+                                			</c:if>
+											<c:if test="${ not empty mem.sum_price}">
+                                		<td><c:out value="${mem.sum_price }원"/></td>
+                                			</c:if>
 											<td><c:out value="${mem.status}"/></td>
 										</tr>
 									</c:forEach>
@@ -176,8 +182,9 @@ $(function () {
 								</table>
 							</div>
 						</div>
+						<div style="width: 1000px"></div>
 						
-						<nav aria-label="Page navigation" style="margin-top: 30px">
+						<nav aria-label="Page navigation">
                         
                             <c:choose>
                             <c:when test="${empty keyword}">
@@ -296,6 +303,7 @@ $(function () {
 						
 						
 						
+						<div style="width: 1000px"></div>
 						<!-- 회원 상세 조회 -->
                       <div class="card" style="margin-top: 30px;height: 400px">
                         <!-- Search -->

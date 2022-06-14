@@ -59,13 +59,10 @@
 $(function () {
 	$("#couponBtn").click(function(){
 		
-		alert("click1");
-		
 		if($("#coupon_name").val() == "" || $("#coupon_date").val() == "" || $("#discount").val() == "" || $("#coupon_no").val() == "" ){
 			alert("모든 입력사항을 기재해주세요.");
 			return;
 		}else{
-			alert($("#coupon_name").val());
 			$("#addCouponFrm").submit();
 			
 			alert("쿠폰이 발행되었습니다.");

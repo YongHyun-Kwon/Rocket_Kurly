@@ -52,8 +52,10 @@ public class PaymentService {
 			int itemCnt = pDAO.insertOrderItem(orderItemList);
 			
 			
-			if( itemCnt > 1) {
+			if( oVO.getCartFlag().equals("y")) {
+				
 				int cartCnt = pDAO.deleteCart(oVO.getId());
+			
 			}
 			
 			

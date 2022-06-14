@@ -87,6 +87,7 @@ public class ShopController {
 		model.addAttribute("currentPage",bVO.getCurrentPage());
 		model.addAttribute("pageCnt",pageCnt);
 		model.addAttribute("p_categoryID",cVO.getP_category_id());
+		model.addAttribute("p_categoryName",cVO.getP_category_name());
 		
 		model.addAttribute("categoryData",cs.SearchCategory(cVO.getP_category_id()));
 		return "shop-grid";

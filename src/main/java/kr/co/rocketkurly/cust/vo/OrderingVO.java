@@ -2,7 +2,7 @@ package kr.co.rocketkurly.cust.vo;
 
 public class OrderingVO {
 
-	private String flag, id, name, email, tel, zipcode, address, couponNo;
+	private String flag, id, name, email, tel, zipcode, address, couponNo, cartFlag;
 	private int price, subPrice, discount, orderNo;
 
 	public String getFlag() {
@@ -69,6 +69,14 @@ public class OrderingVO {
 		this.couponNo = couponNo;
 	}
 
+	public String getCartFlag() {
+		return cartFlag;
+	}
+
+	public void setCartFlag(String cartFlag) {
+		this.cartFlag = cartFlag;
+	}
+
 	public int getPrice() {
 		return price;
 	}
@@ -104,8 +112,9 @@ public class OrderingVO {
 	@Override
 	public String toString() {
 		return "OrderingVO [flag=" + flag + ", id=" + id + ", name=" + name + ", email=" + email + ", tel=" + tel
-				+ ", zipcode=" + zipcode + ", address=" + address + ", couponNo=" + couponNo + ", price=" + price
-				+ ", subPirce=" + subPrice + ", discount=" + discount + ", orderNo=" + orderNo + "]";
+				+ ", zipcode=" + zipcode + ", address=" + address + ", couponNo=" + couponNo + ", cartFlag=" + cartFlag
+				+ ", price=" + price + ", subPrice=" + subPrice + ", discount=" + discount + ", orderNo=" + orderNo
+				+ "]";
 	}
 
 }
