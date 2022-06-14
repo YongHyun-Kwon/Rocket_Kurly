@@ -209,13 +209,13 @@ function wish(item) {
                     <div class="filter__item" style="border: 0px;">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
+                                <!-- <div class="filter__sort">
                                     <span>정렬</span>
                                     <select>
                                         <option value="0">가격순 정렬</option>
                                         <option value="0">이름순 정렬</option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

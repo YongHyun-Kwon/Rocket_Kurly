@@ -62,7 +62,7 @@
                                     <li><a href="blog-details.do">Blog Details</a></li>
                                 </ul> -->
                             </li> 
-                            <li><a href="blog.do">레시피</a></li>
+                            <!-- <li><a href="blog.do">레시피</a></li> -->
                         </ul>
                     </nav>
                 </div>
