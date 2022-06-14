@@ -111,9 +111,10 @@ $(function () {
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="검색어를 입력해주세요">
-                                <button type="submit" class="site-btn">검색</button>
+                            <form action="search-result.do">
+                                <input type="text" placeholder="검색어를 입력해주세요" id="keyword3"
+                          		name="keyword3">
+                                <button type="submit" class="site-btn" id="searchBtn">검색</button>
                             </form>
                         </div>
                     </div>
