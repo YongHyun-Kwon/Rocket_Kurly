@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="kr.co.rocketkurly.admin.domain.RevenueDomain"%>
 <%@page import="kr.co.rocketkurly.admin.domain.QuestionCntDomain"%>
 <%@page import="kr.co.rocketkurly.admin.domain.OrderCntDomain"%>
@@ -499,18 +500,19 @@
 										List<OrderCntDomain> orderCntList = (List<OrderCntDomain>)request.getAttribute("orderCntList");
 										List<QuestionCntDomain> questionCntList = (List<QuestionCntDomain>)request.getAttribute("questionCntList");
 										List<RevenueDomain> revenueList = (List<RevenueDomain>)request.getAttribute("revenueList");
+										DecimalFormat df = new DecimalFormat("###,###,###,###");
 										
 										int regCnt = 0;
 										int orderCnt = 0;
 										int queCnt = 0;
-										int revenu = 0;
+										String revenu = "";
 										
 										for(int i = 0; i < visitList.size(); i++){
 											date = visitList.get(i).getLogind_date();
 											regCnt = regCntList.get(i).getReg_cnt();
 											orderCnt = orderCntList.get(i).getOrder_cnt();
 											queCnt = questionCntList.get(i).getQue_cnt();
-											revenu = revenueList.get(i).getRevenue();
+											revenu = df.format(revenueList.get(i).getRevenue());
 										%>
 											<tr>
 												<td><%= date %></td>
