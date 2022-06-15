@@ -76,7 +76,7 @@ public class ShopController {
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
 		
-		if(bVO.getEndPage()==-1) {
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
 			bVO.setEndPage(1);
 		}
 		

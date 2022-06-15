@@ -44,6 +44,10 @@ public class AdminItemController {
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
 		
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
+		
 		model.addAttribute("itemList",is.searchItem(bVO));
 		model.addAttribute("startPage",bVO.getStartPage());
 		model.addAttribute("endPage",bVO.getEndPage());
@@ -76,6 +80,10 @@ public class AdminItemController {
 		
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
+		
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
+			bVO.setEndPage(1);
+		}
 		
 		model.addAttribute("itemList",is.searchKeyword(bVO));
 		model.addAttribute("startPage",bVO.getStartPage());
