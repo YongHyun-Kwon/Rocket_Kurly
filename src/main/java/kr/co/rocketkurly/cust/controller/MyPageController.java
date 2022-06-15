@@ -147,7 +147,7 @@ public class MyPageController {
 		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
 		
 		
-		if(bVO.getEndPage()==-1) {
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
 			bVO.setEndPage(1);
 		}
 		bVO.setStartNum(startNum);
@@ -193,7 +193,7 @@ public class MyPageController {
 		
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
-		if(bVO.getEndPage()==-1) {
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
 			bVO.setEndPage(1);
 		}
 
@@ -260,7 +260,7 @@ public class MyPageController {
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
 		
-		if(bVO.getEndPage()==-1) {
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
 			bVO.setEndPage(1);
 		}
 
@@ -305,15 +305,17 @@ public class MyPageController {
 		int totalScale =is.numScale(); 
 
 		bVO=is.calcStartEndPage(bVO, totalScale,pageCnt );
-		
+
 		
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
-		
-		if(bVO.getEndPage()==-1) {
+
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
 			bVO.setEndPage(1);
 		}
 
+		System.out.println(bVO.getStartPage());
+		System.out.println(bVO.getEndPage());
 		model.addAttribute("startPage",bVO.getStartPage());
 		model.addAttribute("endPage",bVO.getEndPage());
 		model.addAttribute("currentPage",bVO.getCurrentPage());
@@ -384,7 +386,7 @@ public class MyPageController {
 		bVO.setStartNum(startNum);
 		bVO.setEndNum(endNum);
 		
-		if(bVO.getEndPage()==-1) {
+		if(bVO.getEndPage()==0 || bVO.getEndPage()==-1) {
 			bVO.setEndPage(1);
 		}
 		model.addAttribute("wishList",mps.searchWish(bVO));

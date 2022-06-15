@@ -56,7 +56,7 @@
 	<select id="coupon" resultType="couponDomain" parameterType="String">
 		select * from cupon where member_id = #{ id }	
 	</select>
-	<select id="couponBoard" resultType="couponDomain" parameterType="String">
+	<select id="couponBoard" resultType="couponDomain" parameterType="boardVO">
 	  select coupon_no, member_id, coupon_name, p_date, e_date, discount
 	 from(select rownum ro,COUPON_NO, MEMBER_ID, COUPON_NAME, P_DATE, E_DATE, DISCOUNT 
 	 from cupon where member_id = #{member_id})
